@@ -1,0 +1,23 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+.env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# SQLite databases and transaction files
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Local secrets
+.env
+.env.*
+!.env.example
+requirements.txt
