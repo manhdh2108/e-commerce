@@ -20,4 +20,4 @@ __pycache__/
 .env
 .env.*
 !.env.example
-requirements.txt
+
