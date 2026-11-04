@@ -29,9 +29,10 @@ Thêm vào mục 4.1, ngay dưới Bảng 6:
 > (`order_date`) được lưu như một thuộc tính degenerate để tham chiếu, không
 > có vai trò dimension riêng do ngoài phạm vi giao vận thật."*
 
-Ở tầng nguồn OLTP, dùng cột `item_status` (`Fulfilled`, `Cancelled`,
-`Returned`) trên `order_items` làm điều kiện lọc: ETL chỉ nạp các dòng
-`Fulfilled` vào fact này.
+Ở tầng nguồn OLTP, dùng cột `item_status` trên `order_items` làm điều kiện lọc:
+ETL nạp các dòng `Fulfilled` và `Returned` của đơn `Completed`, bỏ dòng
+`Cancelled`. Hàng hoàn sau khi giao được ghi nhận riêng ở `Fact_Return`, nên
+doanh số đã bán không bị mất.
 
 ---
 

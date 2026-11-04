@@ -1,6 +1,6 @@
 # ERD — Mô hình OLTP sàn thương mại điện tử
 
-Sơ đồ khớp với [OLTP_SCHEMA.md](OLTP_SCHEMA.md): 26 bảng nghiệp vụ, không gồm 3
+Sơ đồ khớp với [OLTP_SCHEMA.md](OLTP_SCHEMA.md): 27 bảng nghiệp vụ, không gồm 3
 bảng hạ tầng crawler.
 
 Quy ước:
@@ -23,8 +23,10 @@ erDiagram
     categories ||--o{ seller_commission_rates : "áp phí"
     sellers ||--o{ seller_payouts : "đối soát"
     sellers |o--o{ promotions : "voucher shop"
+    products |o--o{ promotions : "voucher sản phẩm"
 
-    customers ||--o{ customer_addresses : "có"
+    customers |o--o{ customer_addresses : "có"
+    promotions |o--o{ orders : "freeship"
     customers |o--o{ orders : "đặt"
     sellers ||--o{ orders : "nhận đơn"
     channels ||--o{ orders : "qua kênh"
@@ -56,11 +58,13 @@ erDiagram
 
     warehouses ||--o{ inventory_levels : "tồn"
     warehouses ||--o{ inventory_movements : "nhập xuất"
+    warehouses ||--o{ inventory_daily_balance : "tồn cuối ngày"
     warehouses ||--o{ shipments : "xuất hàng"
     carriers ||--o{ shipments : "vận chuyển"
 
     products ||..o{ inventory_levels : "sku"
     products ||..o{ inventory_movements : "sku"
+    products ||..o{ inventory_daily_balance : "sku"
     orders ||..o{ shipments : "order_code"
     orders |o..o{ inventory_movements : "reference_code"
     channels ||..o{ marketing_campaigns : "target_channel_code"
@@ -94,7 +98,7 @@ erDiagram
         decimal rating_average
         int review_count
         varchar thumbnail_url
-        int category_id FK
+        int category_id FK "danh mục lá"
         varchar category_name
         int quantity_sold "lũy kế"
         date crawl_date
@@ -107,6 +111,8 @@ erDiagram
         text short_description
         varchar type
         decimal cost_price "mô phỏng"
+        timestamp created_at "ngày lên sàn"
+        timestamp updated_at
     }
     sellers {
         bigint id PK
@@ -138,12 +144,12 @@ erDiagram
     }
     customer_addresses {
         bigint id PK
-        bigint customer_id FK
+        bigint customer_id FK "nullable = khách vãng lai"
         varchar recipient_name
         varchar phone
         varchar address_detail
         varchar ward
-        varchar district
+        varchar district "nullable"
         varchar province
         boolean is_default
     }
@@ -171,6 +177,8 @@ erDiagram
         decimal total_gross_amount
         decimal total_discount_amount
         decimal shipping_fee
+        decimal shipping_discount_amount
+        bigint shipping_promotion_id FK "nullable, voucher freeship"
         decimal final_amount
         bigint shipping_address_id FK
         timestamp created_at
@@ -184,10 +192,11 @@ erDiagram
         int line_number
         bigint product_id FK
         int quantity
+        decimal list_price "giá niêm yết lúc mua"
         decimal unit_price
         decimal discount_amount
         decimal net_amount
-        varchar item_status "Fulfilled, Cancelled, Returned"
+        varchar item_status "Pending, Fulfilled, Cancelled, Returned"
     }
     payments {
         bigint id PK
@@ -222,12 +231,17 @@ erDiagram
         bigint id PK
         varchar promo_code
         varchar promo_name
-        varchar promo_type "Platform Voucher, Seller Voucher"
+        varchar promo_type "Platform Voucher, Seller Voucher, Freeship Voucher"
         bigint seller_id FK "nullable = voucher sàn"
-        varchar apply_level "Order, Item"
+        varchar apply_level "Order, Item, Shipping"
+        bigint product_id FK "nullable, bắt buộc khi Item"
+        varchar eligibility "All, New Customer, Gold+, Platinum, Livestream Only"
         varchar discount_type "Fixed Amount, Percentage"
         decimal discount_value
         decimal min_order_value
+        decimal max_discount_amount "nullable"
+        int usage_limit "nullable = không giới hạn"
+        int per_customer_limit
         timestamp start_date
         timestamp end_date
     }
@@ -264,6 +278,14 @@ erDiagram
         varchar reference_code "order_code, nullable"
         timestamp movement_date
     }
+    inventory_daily_balance {
+        bigint id PK
+        date balance_date "unique cùng warehouse_id, sku"
+        int warehouse_id FK
+        varchar sku "map sang products.sku"
+        int quantity_on_hand "tồn lúc 23:59:59"
+        int quantity_reserved
+    }
     carriers {
         int id PK
         varchar carrier_code
@@ -288,7 +310,7 @@ erDiagram
         int id PK
         varchar campaign_code
         varchar campaign_name
-        varchar campaign_type
+        varchar campaign_type "Mega Sale, Flash Sale, Brand Awareness, Retargeting, Livestream Show"
         varchar target_channel_code "WEB, MOBILE_APP, LIVE"
         decimal budget_amount
         date start_date
@@ -363,8 +385,10 @@ erDiagram
     categories ||--o{ seller_commission_rates : "category_id"
     sellers ||--o{ seller_payouts : "seller_id"
     sellers |o--o{ promotions : "seller_id"
+    products |o--o{ promotions : "product_id"
+    promotions |o--o{ orders : "shipping_promotion_id"
 
-    customers ||--o{ customer_addresses : "customer_id"
+    customers |o--o{ customer_addresses : "customer_id"
     customers |o--o{ orders : "customer_id"
     sellers ||--o{ orders : "seller_id"
     channels ||--o{ orders : "channel_id"
@@ -396,11 +420,13 @@ erDiagram
 
     warehouses ||--o{ inventory_levels : "warehouse_id"
     warehouses ||--o{ inventory_movements : "warehouse_id"
+    warehouses ||--o{ inventory_daily_balance : "warehouse_id"
     warehouses ||--o{ shipments : "warehouse_id"
     carriers ||--o{ shipments : "carrier_id"
 
     %% ===== Quan hệ logic qua mã nghiệp vụ (staging ánh xạ) =====
     products ||..o{ inventory_levels : "sku"
+    products ||..o{ inventory_daily_balance : "sku"
     products ||..o{ inventory_movements : "sku"
     orders ||..o{ shipments : "order_code"
     orders |o..o{ inventory_movements : "reference_code"
