@@ -92,3 +92,11 @@ Các hành động xử lý hệ quả phù hợp được hỗ trợ hai chế 
 **Trạng thái:** Người dùng xác nhận trong lượt triển khai ngày 05/11/2026.
 
 Giữ ID sản phẩm Tiki làm khóa. Nếu cùng ID có nhiều chào bán hoặc SKU trùng/thiếu thì báo lỗi rõ và bỏ qua bản ghi xung đột. Không đổi mã, tự cấp SKU thay thế hoặc ghi đè bản ghi cũ. Các giá trị nguồn không xung đột vẫn tuân thủ đồng bộ chỉ thêm mới.
+
+## Rule 07 — Chỉnh sửa trực tiếp cấu hình đã lưu
+
+**Trạng thái:** Đã chốt theo yêu cầu người dùng.
+
+Người dùng được chọn cấu hình đã lưu, chỉnh sửa và lưu thay đổi vào đúng cấu hình đó, không bắt buộc tạo cấu hình khác. Việc lưu chỉ cập nhật dữ liệu điều khiển, không tự chạy mock hoặc sửa dữ liệu nghiệp vụ.
+
+Mỗi kế hoạch giữ snapshot cấu hình. Khi cấu hình được sửa, phải preview lại trước khi tạo job mới từ kế hoạch cũ. Job đã xếp/đang chạy/tạm dừng và lịch sử vẫn giữ snapshot đã dùng, không đổi cấu hình giữa chừng. Các lần sửa được lưu nội bộ để đối chiếu. Khi có sửa đồng thời, phải báo xung đột thay vì ghi đè âm thầm.

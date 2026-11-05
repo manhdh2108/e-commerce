@@ -253,8 +253,8 @@ class Worker:
         return self.db.get("commands", id, {}).get("pause", False)
 
     def run(self, jid, job):
-        plan = self.db.get("plans", job["payload"]["plan"])
-        cfg = self.db.get("versions", plan["version"])["config"]
+        plan = self.s.execution_plan(job["payload"]["plan"])
+        cfg = plan["config_snapshot"]
         seed = self.s.setup().get("seed", 42)
         priority = {
             "GST-01": 0,

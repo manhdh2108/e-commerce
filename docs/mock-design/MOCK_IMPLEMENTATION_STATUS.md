@@ -73,3 +73,18 @@ Trước khi tuyên bố hoàn thành toàn bộ nghiệp vụ: cần chốt ph�
 Đã gửi người dùng ba đề xuất về điều kiện trả/hoàn tiền, đối soát theo tháng và cộng dồn/hoàn lượt voucher. Chưa nhận câu trả lời thì không tự bật các handler phụ thuộc các quyết định đó. Hai quyết định về xử lý tự động và SKU/chào bán đã được xác nhận tại Rule 05–06.
 
 Ngày đặc biệt trong UI hiện ghi đè số lần; chưa có override riêng toàn bộ tham số hành động theo ngày. Các form nâng cao và phần dữ liệu còn thiếu được nêu ở trên, chưa tuyên bố hoàn thành toàn bộ thiết kế nghiệp vụ.
+
+## Cập nhật cách trình bày cấu hình
+
+- Trang cấu hình có hai cách xem: **Tổng quan cấu hình** và **Chỉnh sửa bản nháp**.
+- Tổng quan phân biệt bản nháp và từng phiên bản đã lưu; hiển thị đủ 6 hệ thống, hành động bật/tắt, tác nhân, số thường/đặc biệt và tham số.
+- Tên hành động tiếng Việt là nội dung chính trong cấu hình, preview và tiến độ; mã nội bộ nằm sau phần chi tiết kỹ thuật.
+- Bảng tổng quan/preview chuyển thành khối thông tin có nhãn ở màn hẹp để đọc không cần nhớ các mã.
+- Kiểm tra JavaScript và bộ kiểm thử trình bày đạt; 10 test backend hiện có đạt. Lượt cập nhật này không chạy job hoặc sửa config/dữ liệu nghiệp vụ của người dùng.
+- Chưa xác minh trực quan trong browser do công cụ trình duyệt từ chối truy cập; không có ảnh UI mới được tạo trong lượt này.
+
+## Chỉnh sửa cấu hình đã lưu
+
+Đã thêm **Chỉnh sửa cấu hình này → Lưu thay đổi** trên UI và `PUT /api/versions/{id}`. Cập nhật cùng ID, có kiểm tra xung đột lần lưu và lưu lịch sử trong Control DB. Preview giữ config snapshot/revision; sửa cấu hình làm kế hoạch cũ không còn được tạo job mới. Worker đọc snapshot, kể cả job cũ trước cập nhật và job tạm dừng được tiếp tục.
+
+Kiểm thử bổ sung: sửa cùng ID, preview cũ hết hiệu lực, chống ghi đè đồng thời, queued job và pause/resume giữ cấu hình cũ. 13 test đạt trên SQLite, 1 test khóa hàng chỉ chạy PostgreSQL; 14 test đạt trên PostgreSQL. Bộ kiểm tra JavaScript riêng xác minh buffer chỉnh sửa không ghi đè bản nháp và giữ nội dung khi lưu bị xung đột. Chưa xác minh trực quan do quyền truy cập browser đang bị chặn.

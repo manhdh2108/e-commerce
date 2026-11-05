@@ -81,3 +81,19 @@ MOCK_TEST_POSTGRES='postgresql+psycopg://mock:local_mock_only@127.0.0.1:55432/mo
 Xem [trạng thái triển khai](../../docs/mock-design/MOCK_IMPLEMENTATION_STATUS.md). Các hành động chưa có quy tắc dữ liệu đầy đủ được giữ trên UI, tắt và giải thích lý do. Không coi có form là toàn bộ nghiệp vụ đã hoàn tất.
 
 Bản local chưa có authentication nhiều người dùng. Chỉ bind localhost, kiểm tra Host/Origin. Không mở cổng ứng dụng ra mạng công cộng. Bản đầu không có xóa/reset qua UI, distributed worker, sửa schema cũ tự động hoặc hiệu năng đã benchmark quy mô lớn.
+
+## Xem cấu hình bằng tên hành động
+
+Sau khi tải lại web, mở **Cấu hình kịch bản → Tổng quan cấu hình**. Chọn **Bản nháp đang chỉnh sửa** hoặc một phiên bản đã lưu trong ô **Bản cấu hình đang xem**. Màn này tổng hợp cả 6 hệ thống: người/tiến trình thực hiện, tên hành động, số ngày thường, từng ngày đặc biệt và các tham số mở rộng. Hành động tắt có mục riêng; mã nội bộ chỉ hiện khi mở **Chi tiết kỹ thuật**.
+
+Chọn cấu hình đã lưu rồi bấm **Chỉnh sửa cấu hình này** để sửa trực tiếp. Đổi hành động/tham số và bấm **Lưu thay đổi**: cập nhật đúng cấu hình đang chọn, giữ nguyên mã cấu hình, không bắt tạo một bản mới. Có thể **Hủy chỉnh sửa** nếu chưa muốn lưu. Bản nháp riêng không bị ghi đè. Nút **Lập kế hoạch với cấu hình này** chuyển đúng cấu hình đang xem sang bước lập kế hoạch. Xem/sửa cấu hình không tự chạy mô phỏng.
+
+Preview kế hoạch và kết quả chạy hiển thị tên hệ thống/nhóm/tên hành động thay cho chuỗi mã. Bộ kiểm tra hiển thị có thể chạy độc lập, không cần PostgreSQL và không khởi động browser:
+
+```bash
+node scripts/mock_platform/tests/test_presentation.cjs
+```
+
+### Sửa cấu hình đã dùng để chạy
+
+Mỗi kế hoạch giữ bản chụp cấu hình lúc xem trước. Sau khi lưu thay đổi, kế hoạch chưa được đưa vào job sẽ hết hiệu lực và phải xem trước lại. Job đã xếp, đang chạy hoặc đang tạm dừng vẫn sử dụng bản chụp cũ; tiếp tục job không đổi giữa chừng sang thông số mới. Lịch sử nội bộ giữ các lần sửa trong Control DB. Nếu hai cửa sổ cùng sửa một cấu hình, cửa sổ lưu sau phải tải lại để tránh đè mất thay đổi; nội dung đang nhập vẫn được giữ khi báo xung đột.

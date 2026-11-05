@@ -359,3 +359,144 @@ def test_initial_sale_status_is_explicit_not_source_visibility(platform):
     assert again["new"] == 0
     enqueue(s, w, "sync", preview=again["id"])
     assert s.data("products")[0]["is_active"] is False
+
+
+def test_edit_saved_config_in_place_invalidates_old_preview(platform):
+    from scripts.mock_platform.service import ConfigurationConflict
+
+    s, _, _ = platform
+    old_config = {
+        "GST-01": {"enabled": True, "count": 1, "params": {"province": "Hà Nội"}}
+    }
+    id = s.save_version({"name": "Cấu hình A", "config": old_config})["id"]
+    plan = s.plan({"version": id, "start": "2026-11-01", "end": "2026-11-01"})
+    changed = {
+        "GST-01": {"enabled": True, "count": 3, "params": {"province": "Hà Nội"}}
+    }
+    result = s.update_version(
+        id, {"revision": 1, "name": "Cấu hình đã sửa", "config": changed}
+    )
+    assert result == {"id": id, "revision": 2, "changed": True}
+    assert len(s.db.list("versions")) == 1
+    assert s.db.get("versions", id)["config"] == changed
+    assert s.db.get("version_history", f"{id}:1")["config"] == old_config
+    assert s.db.get("plans", plan["id"])["config_snapshot"] == old_config
+    with pytest.raises(ValueError, match="hết hiệu lực"):
+        s.newjob("run", {"request_key": "old-plan", "plan": plan["id"]})
+    with pytest.raises(ConfigurationConflict):
+        s.update_version(id, {"revision": 1, "name": "Đè cũ", "config": old_config})
+    with TestClient(create_app(s)) as client:
+        assert (
+            client.put(
+                f"/api/versions/{id}",
+                json={"revision": 1, "name": "Stale", "config": old_config},
+            ).status_code
+            == 409
+        )
+        assert (
+            client.put(
+                f"/api/versions/{id}",
+                json={"revision": 2, "name": "Cấu hình đã sửa", "config": changed},
+            ).json()["changed"]
+            is False
+        )
+    new = s.plan({"version": id, "start": "2026-11-01", "end": "2026-11-01"})
+    assert new["total"] == 3
+    assert new["version_revision"] == 2
+
+
+def test_edit_saved_config_does_not_change_queued_job(platform):
+    s, w, _ = platform
+    original = {
+        "GST-01": {"enabled": True, "count": 2, "params": {"province": "Hà Nội"}}
+    }
+    id = s.save_version({"name": "Chạy 2 khách", "config": original})["id"]
+    plan = s.plan({"version": id, "start": "2026-11-01", "end": "2026-11-01"})
+    # Exercise legacy plan migration too: old jobs used to hold only a version ID.
+    legacy = s.db.get("plans", plan["id"])
+    legacy.pop("config_snapshot")
+    legacy.pop("version_revision")
+    s.db.put("plans", plan["id"], legacy)
+    job = s.newjob("run", {"request_key": "queued-before-edit", "plan": plan["id"]})
+    s.update_version(
+        id,
+        {
+            "revision": 1,
+            "name": "Nay 5 khách",
+            "config": {
+                "GST-01": {
+                    "enabled": True,
+                    "count": 5,
+                    "params": {"province": "Hà Nội"},
+                }
+            },
+        },
+    )
+    w.tick()
+    assert s.db.get("jobs", job["id"])["status"] == "COMPLETE"
+    assert len(s.data("customers")) == 2
+    assert s.db.get("plans", plan["id"])["config_snapshot"] == original
+
+
+def test_paused_job_resumes_with_original_config_after_edit(platform, monkeypatch):
+    s, w, _ = platform
+    cfg = {"GST-01": {"enabled": True, "count": 3, "params": {"province": "Hà Nội"}}}
+    id = s.save_version({"name": "3 khách", "config": cfg})["id"]
+    p = s.plan({"version": id, "start": "2026-11-01", "end": "2026-11-01"})
+    j = s.newjob("run", {"request_key": "pause-edit", "plan": p["id"]})
+    original = w.paused
+    calls = 0
+
+    def pause_after_one(_):
+        nonlocal calls
+        calls += 1
+        return calls >= 3
+
+    monkeypatch.setattr(w, "paused", pause_after_one)
+    w.tick()
+    assert s.db.get("jobs", j["id"])["status"] == "PAUSED"
+    assert len(s.data("customers")) == 1
+    s.update_version(
+        id,
+        {
+            "revision": 1,
+            "name": "9 khách",
+            "config": {
+                "GST-01": {
+                    "enabled": True,
+                    "count": 9,
+                    "params": {"province": "Hà Nội"},
+                }
+            },
+        },
+    )
+    monkeypatch.setattr(w, "paused", original)
+    s.command(j["id"], "resume")
+    w.tick()
+    assert s.db.get("jobs", j["id"])["status"] == "COMPLETE"
+    assert len(s.data("customers")) == 3
+
+
+def test_concurrent_saved_config_updates_do_not_overwrite(platform):
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Barrier
+    from scripts.mock_platform.service import ConfigurationConflict
+
+    s, _, _ = platform
+    if s.db.control.dialect.name != "postgresql":
+        pytest.skip("Requires PostgreSQL row locking")
+    id = s.save_version({"name": "Initial", "config": {}})["id"]
+    gate = Barrier(2)
+
+    def change(name):
+        gate.wait()
+        try:
+            s.update_version(id, {"revision": 1, "name": name, "config": {}})
+            return "saved"
+        except ConfigurationConflict:
+            return "conflict"
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(change, ["Edit A", "Edit B"]))
+    assert sorted(results) == ["conflict", "saved"]
+    assert s.db.get("versions", id)["revision"] == 2

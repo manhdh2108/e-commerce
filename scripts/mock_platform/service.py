@@ -12,6 +12,10 @@ CATALOG = json.loads((Path(__file__).parent / "actions.json").read_text())
 ACTIONS = {a["code"]: {**a, "system": s["key"]} for s in CATALOG for a in s["actions"]}
 
 
+class ConfigurationConflict(ValueError):
+    """A saved configuration changed since it was opened."""
+
+
 def uid():
     return str(uuid.uuid4())
 
@@ -194,9 +198,104 @@ class PlatformService:
                 "name": p.get("name") or f"Kịch bản {stamp()}",
                 "config": cfg,
                 "created_at": stamp(),
+                "revision": 1,
             },
         )
-        return {"id": id}
+        return {"id": id, "revision": 1}
+
+    def update_version(self, id, p):
+        if "config" not in p:
+            raise ValueError("Thiếu nội dung cấu hình. Thay đổi chưa được lưu.")
+        cfg = clean(self.validate_config(p.get("config", {})))
+        expected = p.get("revision")
+        if type(expected) is not int:
+            raise ValueError(
+                "Thiếu thông tin lần lưu. Hãy tải lại cấu hình trước khi sửa."
+            )
+        with self.db.control.begin() as connection:
+            row = connection.execute(
+                select(self.db.records.c.data)
+                .where(self.db.records.c.kind == "versions", self.db.records.c.id == id)
+                .with_for_update()
+            ).first()
+            if not row:
+                raise ValueError("Không tìm thấy cấu hình đã lưu.")
+            old = row[0]
+            revision = old.get("revision", 1)
+            if expected != revision:
+                raise ConfigurationConflict(
+                    "Cấu hình đã được sửa ở nơi khác. Hãy tải lại bản mới nhất; thay đổi đang nhập chưa bị mất."
+                )
+            name = p.get("name", old["name"])
+            if not isinstance(name, str) or not name.strip():
+                raise ValueError("Tên cấu hình không được để trống.")
+            name = name.strip()
+            if name == old["name"] and cfg == old["config"]:
+                return {"id": id, "revision": revision, "changed": False}
+            # Freeze legacy plans before editing the shared saved configuration.
+            plans = connection.execute(
+                select(self.db.records).where(self.db.records.c.kind == "plans")
+            ).all()
+            for plan_row in plans:
+                plan = plan_row.data
+                if plan.get("version") == id and "config_snapshot" not in plan:
+                    self.db.put(
+                        "plans",
+                        plan_row.id,
+                        {
+                            **plan,
+                            "config_snapshot": old["config"],
+                            "version_revision": revision,
+                            "version_name": old["name"],
+                        },
+                        connection,
+                    )
+            self.db.put(
+                "version_history",
+                f"{id}:{revision}",
+                {**old, "revision": revision},
+                connection,
+            )
+            self.db.put(
+                "versions",
+                id,
+                {
+                    **old,
+                    "name": name,
+                    "config": cfg,
+                    "revision": revision + 1,
+                    "updated_at": stamp(),
+                },
+                connection,
+            )
+        return {"id": id, "revision": revision + 1, "changed": True}
+
+    def execution_plan(self, id):
+        """Read or freeze a legacy plan atomically with saved-config edits."""
+        with self.db.control.begin() as connection:
+            plan = self.db.get("plans", id, conn=connection)
+            if not plan:
+                raise ValueError("Không tìm thấy kế hoạch chạy.")
+            version_row = connection.execute(
+                select(self.db.records.c.data)
+                .where(
+                    self.db.records.c.kind == "versions",
+                    self.db.records.c.id == plan["version"],
+                )
+                .with_for_update()
+            ).first()
+            # An edit may have frozen this plan while we waited for its lock.
+            plan = self.db.get("plans", id, conn=connection)
+            if "config_snapshot" not in plan:
+                version = version_row[0]
+                plan = {
+                    **plan,
+                    "config_snapshot": version["config"],
+                    "version_revision": version.get("revision", 1),
+                    "version_name": version["name"],
+                }
+                self.db.put("plans", id, plan, connection)
+            return plan
 
     def draft(self, p):
         cfg = self.validate_config(p["config"])
@@ -256,6 +355,9 @@ class PlatformService:
         id = uid()
         plan = {
             "version": p["version"],
+            "version_revision": version.get("revision", 1),
+            "config_snapshot": clean(version["config"]),
+            "version_name": version["name"],
             "start": p["start"],
             "end": p["end"],
             "days": rows,
@@ -400,6 +502,8 @@ class PlatformService:
                     not plan
                     or plan["revision"] != self.db.get("revision", "main", 0)
                     or plan["start"] != self.summary()["next_day"]
+                    or plan.get("version_revision", 1)
+                    != self.db.get("versions", plan["version"], {}).get("revision", 1)
                 ):
                     raise ValueError("Kế hoạch hết hiệu lực; hãy preview lại.")
             if kind == "sync":

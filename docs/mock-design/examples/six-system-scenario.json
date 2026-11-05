@@ -1,0 +1,1001 @@
+{
+  "name": "Thử nghiệm 6 hệ thống · 10 checkout/ngày · sale ×3",
+  "version_id": "1fb0daf2-1ffa-44e9-8e93-8dc78841cc45",
+  "config": {
+    "SEL-01": {
+      "enabled": true,
+      "count": 1,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "value": ""
+      }
+    },
+    "SEL-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "value": ""
+      }
+    },
+    "SEL-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "province": "TP. Hồ Chí Minh"
+      }
+    },
+    "SEL-04": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "value": "",
+        "actor": ""
+      }
+    },
+    "SEL-05": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "value": "",
+        "actor": ""
+      }
+    },
+    "SEL-06": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát",
+        "actor": ""
+      }
+    },
+    "SEL-07": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát",
+        "actor": ""
+      }
+    },
+    "SEL-08": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "category": null,
+        "reason": "Thử nghiệm có kiểm soát",
+        "actor": ""
+      }
+    },
+    "CAT-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "CAT-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "CAT-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "CAT-04": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "value": ""
+      }
+    },
+    "MGR-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "tier": "Normal",
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "MGR-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "VIS-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "product": ""
+      }
+    },
+    "VIS-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "VIS-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "GST-01": {
+      "enabled": true,
+      "count": 5,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 15,
+        "2026-10-10": 15,
+        "2026-11-11": 15,
+        "2026-12-12": 15
+      },
+      "params": {
+        "province": "TP. Hồ Chí Minh"
+      }
+    },
+    "GST-02": {
+      "enabled": true,
+      "count": 2,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 6,
+        "2026-10-10": 6,
+        "2026-11-11": 6,
+        "2026-12-12": 6
+      },
+      "params": {
+        "quantity": 1,
+        "method": "COD",
+        "channel": "Web"
+      }
+    },
+    "GST-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "GST-04": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát",
+        "quantity": 1
+      }
+    },
+    "CUS-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "value": ""
+      }
+    },
+    "CUS-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "province": "TP. Hồ Chí Minh"
+      }
+    },
+    "CUS-03": {
+      "enabled": true,
+      "count": 3,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 9,
+        "2026-10-10": 9,
+        "2026-11-11": 9,
+        "2026-12-12": 9
+      },
+      "params": {
+        "target": "",
+        "province": "TP. Hồ Chí Minh",
+        "value": ""
+      }
+    },
+    "CUS-04": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "CUS-05": {
+      "enabled": true,
+      "count": 8,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 24,
+        "2026-10-10": 24,
+        "2026-11-11": 24,
+        "2026-12-12": 24
+      },
+      "params": {
+        "target": "",
+        "quantity": 1,
+        "method": "Momo",
+        "channel": "App"
+      }
+    },
+    "CUS-06": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "method": "COD"
+      }
+    },
+    "CUS-07": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "CUS-08": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát",
+        "quantity": 1
+      }
+    },
+    "CUS-09": {
+      "enabled": true,
+      "count": 3,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 9,
+        "2026-10-10": 9,
+        "2026-11-11": 9,
+        "2026-12-12": 9
+      },
+      "params": {
+        "target": "",
+        "rating": 5,
+        "value": "Đánh giá thử nghiệm sau mua hàng."
+      }
+    },
+    "ORD-01": {
+      "enabled": true,
+      "count": 0,
+      "mode": "all",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "ORD-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "ORD-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "SUP-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "SUP-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "PAY-01": {
+      "enabled": true,
+      "count": 0,
+      "mode": "all",
+      "special": {},
+      "params": {
+        "target": "",
+        "success_rate": 100
+      }
+    },
+    "PAY-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "SYS-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "days": 7
+      }
+    },
+    "SYS-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "days": 7
+      }
+    },
+    "SYS-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "new_tier": "Member"
+      }
+    },
+    "SYS-04": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "WH-01": {
+      "enabled": true,
+      "count": 3,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 9,
+        "2026-10-10": 9,
+        "2026-11-11": 9,
+        "2026-12-12": 9
+      },
+      "params": {
+        "warehouse": 1,
+        "product": "",
+        "quantity": 10
+      }
+    },
+    "WH-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "warehouse": 1,
+        "product": "",
+        "quantity": 1,
+        "reason": "Thử nghiệm có kiểm soát"
+      }
+    },
+    "WH-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "WH-04": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "DSP-01": {
+      "enabled": true,
+      "count": 0,
+      "mode": "all",
+      "special": {},
+      "params": {
+        "target": "",
+        "warehouse": 1,
+        "amount": 30000
+      }
+    },
+    "CAR-01": {
+      "enabled": true,
+      "count": 0,
+      "mode": "all",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "CAR-02": {
+      "enabled": true,
+      "count": 0,
+      "mode": "all",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "CAR-03": {
+      "enabled": true,
+      "count": 0,
+      "mode": "all",
+      "special": {},
+      "params": {
+        "target": "",
+        "success_rate": 100
+      }
+    },
+    "CAR-04": {
+      "enabled": true,
+      "count": 0,
+      "mode": "all",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "AUT-WH-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "AUT-WH-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "AUT-WH-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "warehouse": 1,
+        "product": "",
+        "quantity": 1
+      }
+    },
+    "AUT-WH-04": {
+      "enabled": true,
+      "count": 1,
+      "mode": "count",
+      "special": {},
+      "params": {}
+    },
+    "MKT-01": {
+      "enabled": true,
+      "count": 1,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "value": "Chiến dịch thử nghiệm 6 hệ thống",
+        "amount": 2000000,
+        "days": 7
+      }
+    },
+    "MKT-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "amount": 30000
+      }
+    },
+    "MKT-03": {
+      "enabled": true,
+      "count": 1,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "amount": 20000,
+        "min_order": 200000,
+        "limit": 100,
+        "days": 7
+      }
+    },
+    "MKT-04": {
+      "enabled": true,
+      "count": 1,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "amount": 15000,
+        "min_order": 150000,
+        "limit": 100,
+        "days": 7
+      }
+    },
+    "SHOP-MKT-01": {
+      "enabled": true,
+      "count": 1,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "amount": 10000,
+        "min_order": 100000,
+        "limit": 100,
+        "days": 7
+      }
+    },
+    "ADS-01": {
+      "enabled": true,
+      "count": 1,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "amount": 100000,
+        "quantity": 30
+      }
+    },
+    "AUT-MKT-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "AUT-MKT-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "AUT-MKT-03": {
+      "enabled": true,
+      "count": 1,
+      "mode": "count",
+      "special": {},
+      "params": {}
+    },
+    "GST-WEB-01": {
+      "enabled": true,
+      "count": 10,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 30,
+        "2026-10-10": 30,
+        "2026-11-11": 30,
+        "2026-12-12": 30
+      },
+      "params": {
+        "channel": "Web",
+        "device": "Mobile",
+        "traffic": "Organic"
+      }
+    },
+    "GST-WEB-02": {
+      "enabled": true,
+      "count": 10,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 30,
+        "2026-10-10": 30,
+        "2026-11-11": 30,
+        "2026-12-12": 30
+      },
+      "params": {
+        "target": "",
+        "value": "Sách nghệ thuật"
+      }
+    },
+    "GST-WEB-03": {
+      "enabled": true,
+      "count": 20,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 60,
+        "2026-10-10": 60,
+        "2026-11-11": 60,
+        "2026-12-12": 60
+      },
+      "params": {
+        "target": "",
+        "product": ""
+      }
+    },
+    "GST-WEB-04": {
+      "enabled": true,
+      "count": 4,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 12,
+        "2026-10-10": 12,
+        "2026-11-11": 12,
+        "2026-12-12": 12
+      },
+      "params": {
+        "target": "",
+        "product": "",
+        "quantity": 1
+      }
+    },
+    "GST-WEB-05": {
+      "enabled": true,
+      "count": 1,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 3,
+        "2026-10-10": 3,
+        "2026-11-11": 3,
+        "2026-12-12": 3
+      },
+      "params": {
+        "target": ""
+      }
+    },
+    "GST-WEB-06": {
+      "enabled": true,
+      "count": 2,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 6,
+        "2026-10-10": 6,
+        "2026-11-11": 6,
+        "2026-12-12": 6
+      },
+      "params": {
+        "target": ""
+      }
+    },
+    "AUT-WEB-01": {
+      "enabled": true,
+      "count": 0,
+      "mode": "all",
+      "special": {},
+      "params": {
+        "target": "",
+        "channel": "Web",
+        "device": "Mobile",
+        "traffic": "Organic"
+      }
+    },
+    "AUT-WEB-02": {
+      "enabled": true,
+      "count": 0,
+      "mode": "all",
+      "special": {},
+      "params": {
+        "target": "",
+        "product": "",
+        "quantity": 1
+      }
+    },
+    "AUT-WEB-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "product": "",
+        "quantity": 1
+      }
+    },
+    "EVT-WEB-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "channel": "Web",
+        "device": "Mobile",
+        "traffic": "Organic"
+      }
+    },
+    "EVT-WEB-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "product": "",
+        "quantity": 1
+      }
+    },
+    "CUS-WEB-01": {
+      "enabled": true,
+      "count": 20,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 60,
+        "2026-10-10": 60,
+        "2026-11-11": 60,
+        "2026-12-12": 60
+      },
+      "params": {
+        "target": "",
+        "channel": "App",
+        "device": "Mobile",
+        "traffic": "Direct"
+      }
+    },
+    "CUS-WEB-02": {
+      "enabled": true,
+      "count": 10,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 30,
+        "2026-10-10": 30,
+        "2026-11-11": 30,
+        "2026-12-12": 30
+      },
+      "params": {
+        "target": "",
+        "value": "Sách kiến trúc"
+      }
+    },
+    "CUS-WEB-03": {
+      "enabled": true,
+      "count": 40,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 120,
+        "2026-10-10": 120,
+        "2026-11-11": 120,
+        "2026-12-12": 120
+      },
+      "params": {
+        "target": "",
+        "product": ""
+      }
+    },
+    "CUS-WEB-04": {
+      "enabled": true,
+      "count": 8,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 24,
+        "2026-10-10": 24,
+        "2026-11-11": 24,
+        "2026-12-12": 24
+      },
+      "params": {
+        "target": "",
+        "product": "",
+        "quantity": 1
+      }
+    },
+    "CUS-WEB-05": {
+      "enabled": true,
+      "count": 2,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 6,
+        "2026-10-10": 6,
+        "2026-11-11": 6,
+        "2026-12-12": 6
+      },
+      "params": {
+        "target": ""
+      }
+    },
+    "CUS-WEB-06": {
+      "enabled": true,
+      "count": 6,
+      "mode": "count",
+      "special": {
+        "2026-08-08": 18,
+        "2026-10-10": 18,
+        "2026-11-11": 18,
+        "2026-12-12": 18
+      },
+      "params": {
+        "target": ""
+      }
+    },
+    "FIN-POL-01": {
+      "enabled": true,
+      "count": 0,
+      "mode": "count",
+      "special": {
+        "2026-01-01": 1
+      },
+      "params": {
+        "category": 9423,
+        "tier": "Normal",
+        "rate": 5,
+        "start": "2026-01-01",
+        "end": ""
+      }
+    },
+    "FIN-POL-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "rate": 5,
+        "start": "",
+        "end": ""
+      }
+    },
+    "FIN-REC-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": "",
+        "start": "",
+        "end": ""
+      }
+    },
+    "FIN-REC-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "FIN-PAY-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "FIN-SEL-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "AUT-FIN-01": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "AUT-FIN-02": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    },
+    "AUT-FIN-03": {
+      "enabled": false,
+      "count": 0,
+      "mode": "count",
+      "special": {},
+      "params": {
+        "target": ""
+      }
+    }
+  }
+}

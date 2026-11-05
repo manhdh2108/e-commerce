@@ -59,7 +59,7 @@ Thanh trạng thái chung: môi trường đang chọn, tên DB nghiệp vụ đ
 - Lịch ngày đặc biệt dùng chung một danh sách ngày, nhưng số lượng và tham số là riêng từng hành động. Ví dụ 11/11 tăng checkout không tự tăng khóa shop.
 - Ngay trên hành động hiển thị phụ thuộc, trạng thái sẵn sàng và lý do chưa hỗ trợ. Hiện nguồn điều khiển đối với hành động dùng chung để không sinh trùng ở hai tab.
 - “Lưu bản nháp”, “Kiểm tra cấu hình”, “Lưu phiên bản dùng để chạy”. Không tự chạy và không đổi Business DB khi lưu config.
-- Chỉnh sửa tạo phiên bản mới; không thay đổi phiên bản đã gắn vào job đang chạy hoặc lịch sử.
+- Cho chỉnh sửa trực tiếp cấu hình đã lưu theo Rule 07. Mỗi kế hoạch/job dùng snapshot riêng; sửa cấu hình không thay đổi job đã tạo hoặc lịch sử. Kế hoạch cũ phải preview lại trước khi tạo job mới.
 
 **Bên dưới:** kiểm tra schema config/quyền/phạm vi/các tỷ trọng → lưu Control DB. Các truy vấn chọn đối tượng chỉ đọc Business DB.
 
@@ -184,7 +184,7 @@ DBeaver có thể kết nối riêng cả hai, nhưng dữ liệu đầu ra cho 
 | Nhóm | Dữ liệu cần giữ |
 |---|---|
 | `environments`, `connection_profiles` | Môi trường, định danh nguồn/đích, trạng thái cấu trúc; lưu tham chiếu secret thay vì mật khẩu trong snapshot. |
-| `scenario_drafts`, `scenario_versions`, `action_configs`, `special_days` | Bản nháp, phiên bản bất biến và cấu hình từng hành động/ngày. |
+| `scenario_drafts`, `scenario_versions`, `action_configs`, `special_days` | Bản nháp, cấu hình đã lưu có thể sửa, lịch sử lần sửa và snapshot thực thi bất biến. |
 | `input_snapshots`, `sync_jobs`, `sync_items` | Snapshot nguồn, fingerprint, kết quả diff và bản ghi đã thêm/bỏ qua/lỗi. |
 | `bootstrap_jobs` | Kế hoạch và kết quả tạo dữ liệu nền. |
 | `plans`, `plan_days` | Khoảng chạy, version config/catalog/checkpoint, preview và thời hạn hiệu lực. |

@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, StreamingResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
-from .service import PlatformService, CATALOG
+from .service import PlatformService, CATALOG, ConfigurationConflict
 
 
 def create_app(service=None):
@@ -33,6 +33,14 @@ def create_app(service=None):
             return await call_next(request)
         except (ValueError, KeyError, TypeError) as exc:
             return JSONResponse({"error": str(exc)}, status_code=400)
+
+    @app.exception_handler(ConfigurationConflict)
+    async def configuration_conflict(request, exc):
+        return JSONResponse({"error": str(exc)}, status_code=409)
+
+    @app.put("/api/versions/{id}")
+    def update_version(id: str, p: dict):
+        return s.update_version(id, p)
 
     @app.get("/api/overview")
     def overview():
