@@ -36,3 +36,5 @@ Thư mục này tách riêng rule và các tài liệu đang chốt từ cuộc 
 
 - [Trạng thái thực tế và các giới hạn](MOCK_IMPLEMENTATION_STATUS.md).
 - [Khởi động và hướng dẫn sử dụng](../../scripts/mock_platform/README.md).
+
+- [Tổng quan OLTP, kích hoạt crawler và chạy lại từ đầu](MOCK_OVERVIEW_CONTROLS.md).

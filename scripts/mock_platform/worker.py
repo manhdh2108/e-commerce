@@ -17,6 +17,10 @@ class Worker:
 
     def finish(self, key, manifest):
         with self.db.control.begin() as c:
+            if manifest.get("reset"):
+                from .operations import DataOperations
+
+                DataOperations(self.s).finish_reset(c, key.split(":")[0])
             self.apply_effects(manifest.get("effects", []), c)
             self.db.put(
                 "receipts",
@@ -69,6 +73,7 @@ class Worker:
                 result = callback(u) or {}
                 manifest = {
                     "status": "PREPARED",
+                    "reset": result.get("reset", False),
                     "changes": u.changes,
                     "effects": result.get("effects", []),
                     "message": result.get("message", ""),
@@ -420,13 +425,20 @@ class Worker:
         job = jobs[0]
         jid = job.pop("id")
         with self.db.writer():
+            job = self.db.get("jobs", jid)
+            if job["status"] not in ["QUEUED", "RUNNING"]:
+                return False
             job["status"] = "RUNNING"
             job["heartbeat"] = stamp()
             self.db.put("jobs", jid, job)
             try:
                 kind = job["kind"]
+                from .operations import DataOperations
+
                 complete = (
-                    self.sync(jid, job)
+                    DataOperations(self.s).reset(self, jid, job)
+                    if kind == "reset"
+                    else self.sync(jid, job)
                     if kind == "sync"
                     else self.bootstrap(jid, job)
                     if kind == "bootstrap"

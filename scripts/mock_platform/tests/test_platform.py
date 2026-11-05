@@ -500,3 +500,244 @@ def test_concurrent_saved_config_updates_do_not_overwrite(platform):
         results = list(pool.map(change, ["Edit A", "Edit B"]))
     assert sorted(results) == ["conflict", "saved"]
     assert s.db.get("versions", id)["revision"] == 2
+
+
+def test_dashboard_and_source_check_are_read_only(platform):
+    from scripts.mock_platform.operations import DataOperations
+
+    s, w, source = platform
+    initialize(s, w)
+    op = DataOperations(s)
+    before = source.read_bytes()
+    counts = s.summary()["counts"]
+    check = op.check_source()
+    assert check["new"] == 0 and check["skipped"] == 1
+    assert check["last_sync"]["status"] == "COMPLETE"
+    dashboard = op.dashboard()
+    assert dashboard["on_hand"] == 10 and dashboard["reserved"] == 0
+    assert dashboard["order_amount"] == 0 and dashboard["daily_orders"] == []
+    assert source.read_bytes() == before
+    assert s.summary()["counts"] == counts
+    with TestClient(create_app(s)) as client:
+        assert client.get("/api/dashboard").status_code == 200
+        assert client.post("/api/source-check", json={}).json()["new"] == 0
+
+
+def test_reset_all_requires_confirmation_and_restores_initial_workflow(platform):
+    from scripts.mock_platform.operations import DataOperations
+
+    s, w, source = platform
+    initialize(s, w)
+    cfg = {"GST-01": {"enabled": True, "count": 2, "params": {}}}
+    version = s.save_version({"name": "Giữ cấu hình", "config": cfg})["id"]
+    plan = s.plan({"version": version, "start": "2026-11-01", "end": "2026-11-01"})
+    enqueue(s, w, "run", plan=plan["id"])
+    before = source.read_bytes()
+    settings = s.setup()
+    op = DataOperations(s)
+    preview = op.reset_preview()
+    assert preview["total"] == sum(s.summary()["counts"].values())
+    assert s.summary()["counts"]["products"] == 1
+    with pytest.raises(ValueError, match="XOA TOAN BO"):
+        s.newjob("reset", {"request_key": "bad-reset", "preview": preview["id"]})
+    enqueue(s, w, "reset", preview=preview["id"], confirmation="XOA TOAN BO")
+    assert all(n == 0 for n in s.summary()["counts"].values())
+    assert s.summary()["next_day"] == settings["start_date"]
+    assert s.summary()["last_day"] is None
+    assert s.db.get("bootstrap", "done") is None
+    assert s.db.get("runtime", "bootstrap_done") is None
+    assert s.db.list("daily") == []
+    assert s.setup() == settings
+    assert s.db.get("versions", version)["config"] == cfg
+    assert source.read_bytes() == before
+    assert op.sync_status()["last_sync"] is None
+    with pytest.raises(ValueError):
+        s.newjob("run", {"request_key": "old-plan", "plan": plan["id"]})
+    initialize(s, w)
+    newplan = s.plan({"version": version, "start": "2026-11-01", "end": "2026-11-01"})
+    enqueue(s, w, "run", plan=newplan["id"])
+    assert s.summary()["counts"]["customers"] == 5
+
+
+def test_reset_crash_after_target_commit_recovers_and_cancels_paused_jobs(
+    platform, monkeypatch
+):
+    from scripts.mock_platform.operations import DataOperations
+
+    s, w, source = platform
+    initialize(s, w)
+    old = s.newjob(
+        "bootstrap", {"request_key": "paused-bootstrap", "customers": 1, "stock": 1}
+    )
+    s.db.put("jobs", old["id"], {**s.db.get("jobs", old["id"]), "status": "PAUSED"})
+    preview = DataOperations(s).reset_preview()
+    reset = s.newjob(
+        "reset",
+        {
+            "request_key": "crash-reset",
+            "preview": preview["id"],
+            "confirmation": "XOA TOAN BO",
+        },
+    )
+    original = w.finish
+
+    def crash(key, manifest):
+        raise RuntimeError("Control unavailable after business commit")
+
+    monkeypatch.setattr(w, "finish", crash)
+    w.tick()
+    assert s.db.get("jobs", reset["id"])["status"] == "FAILED"
+    assert all(n == 0 for n in s.summary()["counts"].values())
+    assert s.db.get("bootstrap", "done") is True
+    # A fresh worker recovers the durable reset manifest instead of applying it blindly.
+    monkeypatch.setattr(w, "finish", original)
+    s.command(reset["id"], "resume")
+    Worker(s).tick()
+    assert s.db.get("jobs", reset["id"])["status"] == "COMPLETE"
+    assert s.db.get("jobs", old["id"])["status"] == "CANCELLED"
+    assert s.db.get("bootstrap", "done") is None
+    with pytest.raises(ValueError, match="chưa ở trạng thái"):
+        s.command(old["id"], "resume")
+
+
+def test_stale_reset_preview_and_running_job_are_blocked(platform):
+    from scripts.mock_platform.operations import DataOperations
+
+    s, w, _ = platform
+    preview = DataOperations(s).reset_preview()
+    initialize(s, w)
+    with pytest.raises(ValueError, match="thay đổi"):
+        s.newjob(
+            "reset",
+            {
+                "request_key": "stale-reset",
+                "preview": preview["id"],
+                "confirmation": "XOA TOAN BO",
+            },
+        )
+    job = s.newjob(
+        "sync", {"request_key": "pending-sync", "preview": s.source_preview({})["id"]}
+    )
+    preview = DataOperations(s).reset_preview()
+    with pytest.raises(ValueError, match="dang dở"):
+        s.newjob(
+            "reset",
+            {
+                "request_key": "blocked-reset",
+                "preview": preview["id"],
+                "confirmation": "XOA TOAN BO",
+            },
+        )
+    assert s.db.get("jobs", job["id"])["status"] == "QUEUED"
+
+
+def test_crawler_queue_uses_existing_cli_without_syncing(
+    platform, monkeypatch, tmp_path
+):
+    from scripts.mock_platform.crawler import CrawlerService, CrawlerWorker
+
+    s, w, source = platform
+    crawler = CrawlerService(s)
+    crawler.folder = tmp_path / "crawl-logs"
+    before = s.summary()["counts"]
+    job = crawler.start(
+        {
+            "request_key": "crawl-one",
+            "category_ids": [8322],
+            "delay_min": 4,
+            "delay_max": 8,
+        }
+    )
+    assert (
+        crawler.start({"request_key": "crawl-one", "category_ids": []})["id"]
+        == job["id"]
+    )
+    with pytest.raises(ValueError, match="Đã có"):
+        crawler.start({"request_key": "crawl-two"})
+    worker = CrawlerWorker(s)
+    worker.crawler = crawler
+    calls = []
+
+    class FakeProcess:
+        def __init__(self, args, **kwargs):
+            calls.append(args)
+            kwargs["stdout"].write(
+                b"crawl_run_id=12345678-1234-4234-8234-123456789abc\nDone.\n"
+            )
+
+        def poll(self):
+            return 0
+
+        def wait(self, **kwargs):
+            return 0
+
+    monkeypatch.setattr("scripts.mock_platform.crawler.subprocess.Popen", FakeProcess)
+    assert worker.tick()
+    result = s.db.get("crawl_jobs", job["id"])
+    assert result["status"] == "COMPLETE"
+    assert result["crawl_run_id"] == "12345678-1234-4234-8234-123456789abc"
+    assert calls[0][2].endswith("scripts/crawl_tiki.py")
+    assert "--db" in calls[0] and str(source) in calls[0]
+    assert "--category-ids" in calls[0] and "8322" in calls[0]
+    assert s.summary()["counts"] == before and not s.db.list("jobs")
+    cancelled = crawler.start({"request_key": "crawl-cancel"})
+    crawler.stop(cancelled["id"])
+    worker.tick()
+    assert s.db.get("crawl_jobs", cancelled["id"])["status"] == "CANCELLED"
+    assert len(calls) == 1
+
+
+def test_dashboard_money_and_reset_of_related_business_rows(platform):
+    from scripts.mock_platform.operations import DataOperations
+
+    s, w, _ = platform
+    test_end_to_end_and_special_day(platform)
+    op = DataOperations(s)
+    dashboard = op.dashboard()
+    assert dashboard["order_amount"] == dashboard["completed_amount"] == 300000
+    assert dashboard["paid_amount"] == 300000
+    assert dashboard["on_hand"] == 7
+    assert dashboard["orders"] == [{"status": "Completed", "count": 3}]
+    assert [r["orders"] for r in dashboard["daily_orders"]] == [1, 2]
+    preview = op.reset_preview()
+    enqueue(s, w, "reset", preview=preview["id"], confirmation="XOA TOAN BO")
+    assert all(n == 0 for n in s.summary()["counts"].values())
+    with pytest.raises(ValueError, match="đồng bộ sản phẩm"):
+        s.newjob(
+            "bootstrap",
+            {"request_key": "bootstrap-before-sync", "customers": 1, "stock": 10},
+        )
+
+
+def test_reset_delete_failure_rolls_back_every_business_table(platform):
+    from sqlalchemy import event
+    from scripts.mock_platform.operations import DataOperations
+
+    s, w, _ = platform
+    initialize(s, w)
+    counts = s.summary()["counts"]
+    preview = DataOperations(s).reset_preview()
+    job = s.newjob(
+        "reset",
+        {
+            "request_key": "rollback-reset",
+            "preview": preview["id"],
+            "confirmation": "XOA TOAN BO",
+        },
+    )
+
+    def fail_midway(connection, cursor, statement, parameters, context, executemany):
+        if statement.startswith("DELETE FROM products"):
+            raise RuntimeError("Simulated failure during deletion")
+
+    event.listen(s.db.business, "before_cursor_execute", fail_midway)
+    try:
+        w.tick()
+    finally:
+        event.remove(s.db.business, "before_cursor_execute", fail_midway)
+    assert s.db.get("jobs", job["id"])["status"] == "FAILED"
+    assert s.summary()["counts"] == counts
+    assert s.db.get("bootstrap", "done") is True
+    s.command(job["id"], "resume")
+    w.tick()
+    assert s.db.get("jobs", job["id"])["status"] == "COMPLETE"

@@ -100,3 +100,14 @@ Giữ ID sản phẩm Tiki làm khóa. Nếu cùng ID có nhiều chào bán ho�
 Người dùng được chọn cấu hình đã lưu, chỉnh sửa và lưu thay đổi vào đúng cấu hình đó, không bắt buộc tạo cấu hình khác. Việc lưu chỉ cập nhật dữ liệu điều khiển, không tự chạy mock hoặc sửa dữ liệu nghiệp vụ.
 
 Mỗi kế hoạch giữ snapshot cấu hình. Khi cấu hình được sửa, phải preview lại trước khi tạo job mới từ kế hoạch cũ. Job đã xếp/đang chạy/tạm dừng và lịch sử vẫn giữ snapshot đã dùng, không đổi cấu hình giữa chừng. Các lần sửa được lưu nội bộ để đối chiếu. Khi có sửa đồng thời, phải báo xung đột thay vì ghi đè âm thầm.
+
+## Rule 08 — Cào chủ động và xóa toàn bộ dữ liệu để chạy lại
+
+**Trạng thái:** Người dùng xác nhận khi nâng cấp Tổng quan.
+
+- Tổng quan có nút kích hoạt crawler Tiki hiện có. Crawler chỉ ghi SQLite nguồn; không tự đồng bộ OLTP. Người dùng chủ động sang tab Đồng bộ để kiểm tra và thực hiện nhập mới theo Rule 01.
+- Thao tác chạy lại bản này là **xóa toàn bộ dữ liệu trong 27 bảng OLTP**, gồm cả sản phẩm, danh mục, người bán đã đồng bộ và dữ liệu nền. Giữ cấu trúc bảng, cấu hình kịch bản, thiết lập môi trường và SQLite crawler.
+- Xóa checkpoint, trạng thái runtime, dấu đã tạo dữ liệu nền và thống kê ngày của đợt dữ liệu cũ. Giữ lịch sử lượt chạy để đối chiếu, đánh dấu thuộc dữ liệu cũ; hủy các lượt dang dở để không tiếp tục ghi từ lịch sử đã xóa. Kế hoạch/xem trước cũ hết hiệu lực.
+- Trước khi xóa, hiển thị số dòng từng bảng và yêu cầu nhập `XOA TOAN BO`. Chặn khi còn lượt ghi đang chạy/chờ. Không tự xóa chỉ vì khởi động web hoặc mở trang.
+- Chạy lại theo thứ tự: đồng bộ SQLite → OLTP, tạo dữ liệu nền, xem trước kế hoạch, chạy từ ngày bắt đầu đã thiết lập.
+- Chưa triển khai xóa từ ngày được chọn trở về trước: người dùng đồng ý dùng nút xóa toàn bộ thay thế vì dữ liệu các ngày sau có liên kết/phụ thuộc vào dữ liệu trước.

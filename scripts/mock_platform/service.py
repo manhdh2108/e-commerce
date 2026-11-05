@@ -99,7 +99,10 @@ class PlatformService:
         with self.db.writer():
             if self.setup() and self.setup().get("seed") != int(p.get("seed", 42)):
                 raise ValueError("Seed đã cố định cho môi trường này.")
-            if any(j["status"] != "COMPLETE" for j in self.db.list("jobs")):
+            if any(
+                j["status"] not in ["COMPLETE", "CANCELLED"]
+                for j in self.db.list("jobs")
+            ):
                 raise ValueError(
                     "Cần hoàn tất tác vụ còn dang dở trước khi đổi thiết lập."
                 )
@@ -369,7 +372,7 @@ class PlatformService:
         self.db.put("plans", id, plan)
         return {"id": id, **plan}
 
-    def source_preview(self, p):
+    def source_preview(self, p, persist=True):
         settings = self.setup()
         if not settings:
             raise ValueError("Chuẩn bị môi trường trước khi đồng bộ.")
@@ -456,11 +459,14 @@ class PlatformService:
             "deferred": deferred,
             "errors": errors,
             "source_count": len(products),
+            "source_existing": sum(prod["id"] in existing for prod in products),
+            "source_new": sum(prod["id"] not in existing for prod in products),
             "revision": self.db.get("revision", "main", 0),
             "created_at": stamp(),
         }
         id = uid()
-        self.db.put("sync_previews", id, snapshot)
+        if persist:
+            self.db.put("sync_previews", id, snapshot)
         return {
             "id": id,
             **{k: v for k, v in snapshot.items() if k != "products"},
@@ -483,13 +489,39 @@ class PlatformService:
         with self.db.writer():
             if any(
                 j["status"]
-                in ["QUEUED", "RUNNING", "PAUSING", "PAUSED", "FAILED", "INTERRUPTED"]
+                in (
+                    ["QUEUED", "RUNNING", "PAUSING"]
+                    if kind == "reset"
+                    else [
+                        "QUEUED",
+                        "RUNNING",
+                        "PAUSING",
+                        "PAUSED",
+                        "FAILED",
+                        "INTERRUPTED",
+                    ]
+                )
                 for j in self.db.list("jobs")
             ):
                 raise ValueError(
                     "Còn tác vụ đang chạy hoặc dang dở. Hãy hoàn tất/tiếp tục tác vụ đó trước khi tạo tác vụ mới."
                 )
+            if kind == "bootstrap" and self.db.get("lifecycle", "reset", False):
+                if not self.data("products"):
+                    raise ValueError(
+                        "Hãy đồng bộ sản phẩm từ SQLite trước khi tạo dữ liệu nền."
+                    )
+            if kind == "reset":
+                from .operations import DataOperations
+
+                DataOperations(self).validate_reset(p)
             if kind == "run":
+                if self.db.get("lifecycle", "reset", False) and not self.db.get(
+                    "bootstrap", "done"
+                ):
+                    raise ValueError(
+                        "Hãy đồng bộ catalog và tạo dữ liệu nền trước khi mô phỏng."
+                    )
                 delay = p.get("delay_ms", 0)
                 if (
                     not isinstance(delay, (int, float))
@@ -532,6 +564,10 @@ class PlatformService:
         if not job:
             raise ValueError("Không tìm thấy job.")
         if command == "pause":
+            if job["kind"] == "reset":
+                raise ValueError(
+                    "Xóa toàn bộ là một transaction; không hỗ trợ tạm dừng giữa chừng."
+                )
             if job["status"] not in ["RUNNING", "QUEUED"]:
                 raise ValueError("Chỉ tạm dừng job đang chạy/chờ.")
             self.db.put("commands", id, {"pause": True})

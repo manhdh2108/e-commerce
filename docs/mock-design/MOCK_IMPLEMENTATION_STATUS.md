@@ -5,7 +5,7 @@ Bản triển khai ngày 05/11/2026. Đây là báo cáo thực tế, không tha
 ## Đã triển khai
 
 - 7 trang UI với 6 tab cấu hình, trường riêng từng hành động, ngày thường/ngày đặc biệt, draft và phiên bản trong Control DB.
-- Hai database PostgreSQL riêng: điều khiển và nghiệp vụ; crawler chỉ đọc. Tạo cấu trúc nghiệp vụ theo thao tác chuẩn bị môi trường.
+- Hai database PostgreSQL riêng: điều khiển và nghiệp vụ; đồng bộ chỉ đọc SQLite crawler; chức năng cào chủ động ghi SQLite riêng. Tạo cấu trúc nghiệp vụ theo thao tác chuẩn bị môi trường.
 - API và worker là hai tiến trình; tiến độ SSE + polling fallback, job bền, pause/resume và chặn job ghi chồng nhau.
 - Đồng bộ append-only bằng snapshot nguồn; preview không ghi nghiệp vụ; báo trùng/thiếu SKU hoặc khác chào bán cùng ID.
 - Luồng đơn một shop/một sản phẩm → giữ hàng → thanh toán trả trước hoặc COD → xuất/giao/thu COD; một số hành động catalog, khách hàng, marketing và analytics.
@@ -88,3 +88,7 @@ Ngày đặc biệt trong UI hiện ghi đè số lần; chưa có override riê
 Đã thêm **Chỉnh sửa cấu hình này → Lưu thay đổi** trên UI và `PUT /api/versions/{id}`. Cập nhật cùng ID, có kiểm tra xung đột lần lưu và lưu lịch sử trong Control DB. Preview giữ config snapshot/revision; sửa cấu hình làm kế hoạch cũ không còn được tạo job mới. Worker đọc snapshot, kể cả job cũ trước cập nhật và job tạm dừng được tiếp tục.
 
 Kiểm thử bổ sung: sửa cùng ID, preview cũ hết hiệu lực, chống ghi đè đồng thời, queued job và pause/resume giữ cấu hình cũ. 13 test đạt trên SQLite, 1 test khóa hàng chỉ chạy PostgreSQL; 14 test đạt trên PostgreSQL. Bộ kiểm tra JavaScript riêng xác minh buffer chỉnh sửa không ghi đè bản nháp và giữ nội dung khi lưu bị xung đột. Chưa xác minh trực quan do quyền truy cập browser đang bị chặn.
+
+## Nâng cấp Tổng quan và điều khiển nguồn
+
+Đã thêm dashboard đọc OLTP, biểu đồ đơn theo ngày, kích hoạt/dừng crawler riêng, kiểm tra sản phẩm mới ở SQLite và thời điểm đồng bộ gần nhất. Xóa toàn bộ OLTP qua job có xem trước, xác nhận, kiểm tra stale preview, rollback transaction và phục hồi khi Control DB gián đoạn sau business commit. Giữ cấu hình/SQLite; checkpoint và dữ liệu nền được đặt lại. Không có xóa từng ngày. Chi tiết: [hướng dẫn điều khiển](MOCK_OVERVIEW_CONTROLS.md).

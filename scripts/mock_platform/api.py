@@ -46,6 +46,39 @@ def create_app(service=None):
     def overview():
         return s.summary()
 
+    from .operations import DataOperations
+    from .crawler import CrawlerService
+
+    operations, crawler = DataOperations(s), CrawlerService(s)
+
+    @app.get("/api/dashboard")
+    def dashboard():
+        return operations.dashboard()
+
+    @app.get("/api/sync-status")
+    def sync_status():
+        return operations.sync_status()
+
+    @app.post("/api/source-check")
+    def source_check():
+        return operations.check_source()
+
+    @app.post("/api/reset-previews")
+    def reset_preview():
+        return operations.reset_preview()
+
+    @app.get("/api/crawler")
+    def crawler_status():
+        return crawler.status()
+
+    @app.post("/api/crawler", status_code=202)
+    def crawler_start(p: dict):
+        return crawler.start(p)
+
+    @app.post("/api/crawler/{id}/stop")
+    def crawler_stop(id: str):
+        return crawler.stop(id)
+
     @app.get("/api/catalog")
     def catalog():
         return CATALOG
@@ -93,7 +126,7 @@ def create_app(service=None):
 
     @app.post("/api/jobs/{kind}", status_code=202)
     def jobs(kind: str, p: dict):
-        if kind not in ["run", "sync", "bootstrap"]:
+        if kind not in ["run", "sync", "bootstrap", "reset"]:
             raise ValueError("Loại job không hợp lệ.")
         if kind == "bootstrap":
             if not s.setup():

@@ -80,7 +80,7 @@ MOCK_TEST_POSTGRES='postgresql+psycopg://mock:local_mock_only@127.0.0.1:55432/mo
 
 Xem [trạng thái triển khai](../../docs/mock-design/MOCK_IMPLEMENTATION_STATUS.md). Các hành động chưa có quy tắc dữ liệu đầy đủ được giữ trên UI, tắt và giải thích lý do. Không coi có form là toàn bộ nghiệp vụ đã hoàn tất.
 
-Bản local chưa có authentication nhiều người dùng. Chỉ bind localhost, kiểm tra Host/Origin. Không mở cổng ứng dụng ra mạng công cộng. Bản đầu không có xóa/reset qua UI, distributed worker, sửa schema cũ tự động hoặc hiệu năng đã benchmark quy mô lớn.
+Bản local chưa có authentication nhiều người dùng. Chỉ bind localhost, kiểm tra Host/Origin. Không mở cổng ứng dụng ra mạng công cộng. Bản local chưa có distributed worker, sửa schema cũ tự động hoặc hiệu năng đã benchmark quy mô lớn. Xóa toàn bộ qua UI được mô tả trong hướng dẫn bên dưới.
 
 ## Xem cấu hình bằng tên hành động
 
@@ -97,3 +97,7 @@ node scripts/mock_platform/tests/test_presentation.cjs
 ### Sửa cấu hình đã dùng để chạy
 
 Mỗi kế hoạch giữ bản chụp cấu hình lúc xem trước. Sau khi lưu thay đổi, kế hoạch chưa được đưa vào job sẽ hết hiệu lực và phải xem trước lại. Job đã xếp, đang chạy hoặc đang tạm dừng vẫn sử dụng bản chụp cũ; tiếp tục job không đổi giữa chừng sang thông số mới. Lịch sử nội bộ giữ các lần sửa trong Control DB. Nếu hai cửa sổ cùng sửa một cấu hình, cửa sổ lưu sau phải tải lại để tránh đè mất thay đổi; nội dung đang nhập vẫn được giữ khi báo xung đột.
+
+## Tổng quan, cào Tiki và xóa để chạy lại
+
+Xem [hướng dẫn Tổng quan và điều khiển dữ liệu](../../docs/mock-design/MOCK_OVERVIEW_CONTROLS.md). Nút cào chỉ ghi SQLite; thao tác đồng bộ vẫn riêng. Xóa toàn bộ có bước xem trước/xác nhận và bao gồm cả catalog OLTP, giữ SQLite và cấu hình.
