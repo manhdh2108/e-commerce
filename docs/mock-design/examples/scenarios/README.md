@@ -1,15 +1,12 @@
-# Cấu hình kịch bản
+# Hai cấu hình kịch bản
 
-Nhập JSON trong tab **Cấu hình kịch bản**. Các file này không phải file thiết lập chính sách/hồ sơ.
+Nhập JSON trong tab **Cấu hình kịch bản**.
 
-| File | Mục đích |
+| File | Vai trò |
 |---|---|
-| [first-run-cod.json](first-run-cod.json) | Bài đầu nhỏ với 2 đơn COD, thuận tiện kiểm tra workflow. |
-| [six-system-scenario.json](six-system-scenario.json) | Ví dụ cấu hình sáu nhóm hệ thống ở giai đoạn thiết kế trước. |
-| [realistic-current-engine-2026.json](realistic-current-engine-2026.json) | Lịch 2026 kiểu đặt trực tiếp, giữ để đối chiếu với engine trước nâng cấp. |
-| [realistic-current-engine-2026.csv](realistic-current-engine-2026.csv) | Bảng tham khảo lịch của file trên, không phải file import. |
-| [upgraded-linked-2026.json](upgraded-linked-2026.json) | Mẫu mới: phiên–giỏ–checkout liên kết, profile trọng số, delay, voucher, trả/hoàn và đối soát. |
+| [first-run-cod.json](first-run-cod.json) | **Mẫu cơ bản:** 2 đơn COD, một ngày, thuận tiện kiểm tra workflow đầu tiên. |
+| [upgraded-linked-2026.json](upgraded-linked-2026.json) | **Bản đầy đủ mới nhất:** phiên–giỏ–checkout liên kết, profile trọng số, lịch 2026, delay, voucher, trả/hoàn và đối soát. |
 
-Lịch giữ nguyên năm 2026. Muốn dùng năm khác phải sửa/tạo lịch có chủ đích; import không tự đổi ngày hoặc chạy lại ngày đã qua checkpoint.
+Lịch giữ nguyên năm 2026. Import không tự đổi ngày hoặc chạy lại ngày đã qua checkpoint. Chọn đúng ngày chạy tiếp khi lập kế hoạch.
 
-Thiết lập dùng chung nằm ở [../settings/](../settings/).
+Chính sách/hồ sơ có hai file riêng ở [../settings/](../settings/).

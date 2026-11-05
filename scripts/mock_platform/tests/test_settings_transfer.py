@@ -169,5 +169,24 @@ def test_all_relocated_scenario_downloads_still_validate(platform):
                 ).status_code
                 == 200
             )
-    for name in ["first-run-cod.json", "six-system-scenario.json"]:
+    for name in ["first-run-cod.json", "upgraded-linked-2026.json"]:
         assert (ROOT / "docs/mock-design/examples/scenarios" / name).is_file()
+
+
+def test_examples_library_has_exactly_four_current_configs(platform):
+    s, _, _ = platform
+    folder = ROOT / "docs/mock-design/examples"
+    assert {p.relative_to(folder).as_posix() for p in folder.rglob("*.json")} == {
+        "scenarios/first-run-cod.json",
+        "scenarios/upgraded-linked-2026.json",
+        "settings/policy-only.json",
+        "settings/diverse-ecommerce.json",
+    }
+    assert not list(folder.rglob("*.csv"))
+    with TestClient(create_app(s)) as client:
+        response = client.get("/api/settings-template-basic")
+        assert response.status_code == 200
+        preview = client.post(
+            "/api/settings-imports/preview", json={"text": response.text}
+        )
+        assert preview.status_code == 200 and "entity_profile" not in preview.json()

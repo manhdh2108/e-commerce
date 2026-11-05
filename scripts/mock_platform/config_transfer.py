@@ -8,7 +8,7 @@ from .storage import ROOT
 
 MAX_CONFIG_BYTES = 2 * 1024 * 1024
 TEMPLATE = (
-    ROOT / "docs/mock-design/examples/scenarios/realistic-current-engine-2026.json"
+    ROOT / "docs/mock-design/examples/scenarios/first-run-cod.json"
 )
 
 

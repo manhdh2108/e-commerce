@@ -307,7 +307,7 @@ Mở **Cấu hình kịch bản → Nhập / Xuất cấu hình JSON**:
 4. Mở bảng xem hành động để đọc lại.
 5. Bấm **Lưu thành cấu hình mới**.
 
-Nút tải mẫu vận hành 2026 trên UI là bộ lịch lớn, **khác file nhỏ dùng cho lượt đầu**. Hãy chọn đúng `first-run-cod.json` ở bước này. Nếu đang chỉnh sửa một cấu hình đã lưu, lưu hoặc hủy chỉnh sửa trước khi lưu bản import.
+Trên UI, nút **Mẫu cơ bản: 2 đơn COD** tải đúng `first-run-cod.json`; nút hành trình liên kết 2026 là bản đầy đủ khác. Nếu đang chỉnh sửa một cấu hình đã lưu, lưu hoặc hủy chỉnh sửa trước khi lưu bản import.
 
 File này bật:
 
@@ -468,7 +468,7 @@ Nếu muốn làm lại từ đầu: **Tổng quan → Chạy lại từ đầu 
 
 ## 11. Sau lượt đầu: dùng bộ lịch có biến thiên
 
-Khi đã hiểu lượt COD nhỏ, có thể import [realistic-current-engine-2026.json](../examples/scenarios/realistic-current-engine-2026.json), hoặc tải mẫu từ UI. Xem [giả định và các giới hạn chi tiết](REALISTIC_CONFIG_CURRENT_ENGINE.md).
+Khi đã hiểu lượt COD nhỏ, có thể import [upgraded-linked-2026.json](../examples/scenarios/upgraded-linked-2026.json), hoặc tải bản đầy đủ từ UI. Xem [hướng dẫn và giới hạn v2](ENGINE_V2_UPGRADE_GUIDE.md).
 
 - Lịch năm 2026 có ngày thường, cuối tuần, kỳ lương giả định và 4 ngày sale. Không tự đổi năm khi import.
 - Có Analytics, Marketing, thanh toán trả trước và hủy quá hạn; số lượng lớn hơn bài thử đầu tiên.

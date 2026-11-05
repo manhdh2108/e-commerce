@@ -789,7 +789,7 @@ def test_import_preview_save_roundtrip_and_no_business_effects(platform):
         )
         assert (
             ConfigTransfer(s).preview({"text": template.text})["summary"]["enabled"]
-            > 20
+            == 9
         )
     assert s.summary()["counts"] == counts and source.read_bytes() == before
     assert not s.db.list("jobs") and s.db.get("draft", "main") is None
@@ -850,7 +850,7 @@ def test_realistic_calendar_template_fits_engine_and_monthly_plan_limit(platform
     s, _, _ = platform
     scenario = RealisticScenario()
     document = scenario.build()
-    assert document == json.loads(ConfigTransfer.template_path().read_text())
+    assert s.validate_config(document["config"]) == document["config"]
     assert len(scenario.schedule()) == 365
     cfg = document["config"]
     assert cfg["CAR-03"]["params"]["success_rate"] == 100

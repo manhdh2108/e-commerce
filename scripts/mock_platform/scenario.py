@@ -243,7 +243,8 @@ def main():
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("docs/mock-design/examples/scenarios/realistic-current-engine-2026.json"),
+        required=True,
+        help="Đường dẫn xuất tùy chọn cho generator lịch trực tiếp cũ; thư viện examples chỉ giữ hai mẫu kịch bản hiện hành.",
     )
     args = parser.parse_args()
     scenario = RealisticScenario(args.year, args.category_id)

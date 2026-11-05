@@ -74,4 +74,4 @@ Preview cho ngày đầu có 166 yêu cầu định lượng và 9 luồng xử 
 4. Vào **Lập kế hoạch & Chạy**, chọn phiên bản trên, chọn một ngày từ checkpoint.
 5. Xem trước rồi tự quyết định bấm chạy. Cấu hình này chưa phát lệnh chạy trên môi trường chính.
 
-[Bản JSON cấu hình](../examples/scenarios/six-system-scenario.json).
+Bản JSON ví dụ cũ đã được dọn; dùng [mẫu liên kết mới nhất](../examples/scenarios/upgraded-linked-2026.json). Nội dung tài liệu này là tham khảo thiết kế trước đây.

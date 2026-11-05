@@ -106,7 +106,7 @@ def create_app(service=None):
         return FileResponse(
             transfer.template_path(),
             media_type="application/json",
-            filename="realistic-current-engine-2026.json",
+            filename="first-run-cod.json",
         )
 
     from .settings_transfer import SettingsTransfer
@@ -114,6 +114,16 @@ def create_app(service=None):
     @app.post("/api/settings-imports/preview")
     def settings_import_preview(p: dict):
         return SettingsTransfer(s).preview(p)
+
+    @app.get("/api/settings-template-basic")
+    def settings_template_basic():
+        from .storage import ROOT
+
+        return FileResponse(
+            ROOT / "docs/mock-design/examples/settings/policy-only.json",
+            media_type="application/json",
+            filename="policy-only.json",
+        )
 
     @app.get("/api/settings-template")
     def settings_template():

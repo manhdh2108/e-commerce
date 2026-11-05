@@ -1,4 +1,6 @@
-# Nhập cấu hình và kịch bản vận hành trong phạm vi engine hiện tại
+# Tham khảo lịch vận hành trước nâng cấp
+
+> Tài liệu lịch sử cho generator đặt trực tiếp. Các file mẫu cũ đã được dọn theo yêu cầu; dùng [mẫu COD cơ bản](../examples/scenarios/first-run-cod.json) hoặc [kịch bản liên kết mới nhất](../examples/scenarios/upgraded-linked-2026.json) cho công việc hiện tại. Xem [hướng dẫn v2](ENGINE_V2_UPGRADE_GUIDE.md).
 
 ## 1. Mục tiêu và mức độ thực tế
 
@@ -8,8 +10,7 @@ Không thể dùng cấu hình để bổ sung những nghiệp vụ engine chư
 
 ## 2. Các file sử dụng
 
-- [Cấu hình JSON để import](../examples/scenarios/realistic-current-engine-2026.json).
-- [Lịch ngày để xem bằng Excel hoặc công cụ đọc CSV](../examples/scenarios/realistic-current-engine-2026.csv). CSV là bảng tham khảo, **chưa phải định dạng import**.
+- JSON và CSV mẫu cũ đã được xóa khỏi thư viện. Có thể tạo lại ở thư mục riêng bằng generator bên dưới nếu cần nghiên cứu lịch cũ.
 - Bộ sinh cấu hình OOP Python: `scripts/mock_platform/scenario.py`.
 
 JSON có lịch riêng cho năm **2026**. Seed của môi trường vẫn điều khiển lựa chọn đối tượng/kết quả xử lý; lịch sản lượng đã được tính và ghi rõ trong JSON, không bị tính lại ngẫu nhiên mỗi lần chạy.
@@ -113,7 +114,7 @@ Ngoài năm 2026, `special` không còn áp dụng; engine sẽ quay về số n
 ```bash
 .venv/bin/python -m scripts.mock_platform.scenario \
   --year 2027 --category-id 9423 \
-  --output docs/mock-design/examples/scenarios/realistic-current-engine-2027.json
+  --output data/generated-scenarios/realistic-current-engine-2027.json
 ```
 
 Lệnh chỉ tạo file JSON và CSV, không nhập cấu hình hay ghi OLTP.
