@@ -2,6 +2,8 @@
 
 Ứng dụng local Python OOP, code dưới `scripts/mock_platform/`. Có 7 trang UI, 6 tab cấu hình, API và worker độc lập. Đầu ra PostgreSQL tách khỏi dữ liệu điều khiển.
 
+Người mới dùng: [Hướng dẫn đầy đủ từ pull đến lượt mock đầu tiên](../../docs/mock-design/FIRST_MOCK_RUN_GUIDE.md), có ảnh dashboard, cấu hình 2 đơn COD và hướng dẫn từng trang UI.
+
 ## Khởi động
 
 Chạy từ thư mục gốc repository:
@@ -14,14 +16,15 @@ scripts/start_mock.sh
 
 Mở [Mock Studio](http://127.0.0.1:8765/). Dừng ứng dụng bằng Ctrl+C; dữ liệu PostgreSQL vẫn được giữ trong Docker volume. Không dùng `down --volumes` nếu muốn giữ dữ liệu.
 
-Hai tiến trình có thể chạy riêng:
+Ba tiến trình có thể chạy riêng:
 
 ```bash
 .venv/bin/python -m scripts.mock_platform serve --port 8765
 .venv/bin/python -m scripts.mock_platform worker
+.venv/bin/python -m scripts.mock_platform crawl-worker
 ```
 
-Đổi kết nối bằng `MOCK_CONTROL_URL` và `MOCK_BUSINESS_URL` trước khi chạy cả hai tiến trình. Các URL phải trỏ hai database khác nhau. Mặc định local:
+Đổi kết nối bằng `MOCK_CONTROL_URL` và `MOCK_BUSINESS_URL` trước khi chạy các tiến trình. Các URL phải trỏ hai database khác nhau. Mặc định local:
 
 - Control: `127.0.0.1:55432/mock_control`.
 - Business: `127.0.0.1:55432/mock_oltp`.

@@ -2,6 +2,10 @@
 
 Thư mục này tách riêng rule và các tài liệu đang chốt từ cuộc trao đổi mới ngày 05/11/2026, theo yêu cầu phân biệt với tài liệu trước mốc 10h. Phân loại dựa trên nội dung cuộc trao đổi, không suy từ timestamp của file.
 
+## Chạy lần đầu trên máy mới
+
+Bắt đầu tại [Hướng dẫn từ pull code đến lượt mock đầu tiên](FIRST_MOCK_RUN_GUIDE.md): cài đặt, chuẩn bị nguồn SQLite, ý nghĩa từng trang UI, import cấu hình nhỏ, chạy 2 đơn COD, kiểm tra PostgreSQL và xử lý lỗi.
+
 ## Danh sách tài liệu
 
 | Tài liệu | Vai trò / trạng thái |

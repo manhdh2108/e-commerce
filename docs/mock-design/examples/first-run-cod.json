@@ -1,0 +1,22 @@
+{
+  "format": "mock-studio-config",
+  "format_version": 1,
+  "name": "Lượt đầu tiên · 2 đơn COD · 1 ngày",
+  "config": {
+    "CUS-05": {
+      "enabled": true,
+      "count": 2,
+      "mode": "count",
+      "special": {},
+      "params": {"quantity": 1, "method": "COD", "channel": "Web"}
+    },
+    "ORD-01": {"enabled": true, "count": 0, "mode": "all", "special": {}, "params": {}},
+    "DSP-01": {"enabled": true, "count": 0, "mode": "all", "special": {}, "params": {"warehouse": 1, "amount": 30000}},
+    "CAR-01": {"enabled": true, "count": 0, "mode": "all", "special": {}, "params": {}},
+    "CAR-02": {"enabled": true, "count": 0, "mode": "all", "special": {}, "params": {}},
+    "CAR-03": {"enabled": true, "count": 0, "mode": "all", "special": {}, "params": {"success_rate": 100}},
+    "CAR-04": {"enabled": true, "count": 0, "mode": "all", "special": {}, "params": {}},
+    "CUS-09": {"enabled": true, "count": 1, "mode": "count", "special": {}, "params": {"rating": 4}},
+    "AUT-WH-04": {"enabled": true, "count": 1, "mode": "count", "special": {}, "params": {}}
+  }
+}
