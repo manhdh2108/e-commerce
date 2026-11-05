@@ -1,0 +1,1211 @@
+{
+  "categories": [
+    {
+      "name": "id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "category_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "parent_id",
+      "type": "int",
+      "nullable": true
+    },
+    {
+      "name": "level",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "slug",
+      "type": "varchar",
+      "nullable": false
+    }
+  ],
+  "products": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "sku",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "url_key",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "price",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "original_price",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "discount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "discount_rate",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "brand_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "rating_average",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "review_count",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "thumbnail_url",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "category_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "category_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "quantity_sold",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "crawl_date",
+      "type": "date",
+      "nullable": false
+    },
+    {
+      "name": "is_active",
+      "type": "boolean",
+      "nullable": false
+    },
+    {
+      "name": "seller_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "seller_product_id",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "url_path",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "inventory_status",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "stock_item",
+      "type": "text",
+      "nullable": false
+    },
+    {
+      "name": "short_description",
+      "type": "text",
+      "nullable": false
+    },
+    {
+      "name": "type",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "cost_price",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": false
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "sellers": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "seller_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "shop_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "tier",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "province",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "city",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "email",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "phone",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "status",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": false
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "customers": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "full_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "email",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "phone_number",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "gender",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "date_of_birth",
+      "type": "date",
+      "nullable": false
+    },
+    {
+      "name": "province",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "city",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "membership_tier",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "registration_date",
+      "type": "timestamp",
+      "nullable": false
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "customer_addresses": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "customer_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "recipient_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "phone",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "address_detail",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "ward",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "district",
+      "type": "varchar",
+      "nullable": true
+    },
+    {
+      "name": "province",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "is_default",
+      "type": "boolean",
+      "nullable": false
+    }
+  ],
+  "channels": [
+    {
+      "name": "id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "channel_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "channel_type",
+      "type": "varchar",
+      "nullable": false
+    }
+  ],
+  "payment_methods": [
+    {
+      "name": "id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "method_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "method_group",
+      "type": "varchar",
+      "nullable": false
+    }
+  ],
+  "orders": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "order_code",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "customer_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "seller_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "channel_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "session_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "campaign_id",
+      "type": "int",
+      "nullable": true
+    },
+    {
+      "name": "order_status",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "total_gross_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "total_discount_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "shipping_fee",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "shipping_discount_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "shipping_promotion_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "final_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "shipping_address_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": false
+    },
+    {
+      "name": "completed_at",
+      "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "cancelled_at",
+      "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "order_items": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "order_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "line_number",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "product_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "quantity",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "list_price",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "unit_price",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "discount_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "net_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "item_status",
+      "type": "varchar",
+      "nullable": false
+    }
+  ],
+  "payments": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "order_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "payment_method_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "payment_status",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "paid_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "transaction_time",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "returns": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "order_item_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "quantity",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "return_reason",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "refund_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "status",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "requested_at",
+      "type": "timestamp",
+      "nullable": false
+    },
+    {
+      "name": "refunded_at",
+      "type": "timestamp",
+      "nullable": true
+    }
+  ],
+  "product_reviews": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "order_item_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "product_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "customer_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "rating",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "comment",
+      "type": "text",
+      "nullable": false
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "promotions": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "promo_code",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "promo_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "promo_type",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "seller_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "apply_level",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "product_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "eligibility",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "discount_type",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "discount_value",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "min_order_value",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "max_discount_amount",
+      "type": "decimal",
+      "nullable": true
+    },
+    {
+      "name": "usage_limit",
+      "type": "int",
+      "nullable": true
+    },
+    {
+      "name": "per_customer_limit",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "start_date",
+      "type": "timestamp",
+      "nullable": false
+    },
+    {
+      "name": "end_date",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "order_item_promotions": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "order_item_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "promotion_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "applied_discount_amount",
+      "type": "decimal",
+      "nullable": false
+    }
+  ],
+  "warehouses": [
+    {
+      "name": "id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "warehouse_code",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "warehouse_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "province",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "city",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "address",
+      "type": "text",
+      "nullable": false
+    }
+  ],
+  "inventory_levels": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "warehouse_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "sku",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "quantity_on_hand",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "quantity_reserved",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "updated_at",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "inventory_movements": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "warehouse_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "sku",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "movement_type",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "quantity_change",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "reference_code",
+      "type": "varchar",
+      "nullable": true
+    },
+    {
+      "name": "movement_date",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "inventory_daily_balance": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "balance_date",
+      "type": "date",
+      "nullable": false
+    },
+    {
+      "name": "warehouse_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "sku",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "quantity_on_hand",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "quantity_reserved",
+      "type": "int",
+      "nullable": false
+    }
+  ],
+  "carriers": [
+    {
+      "name": "id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "carrier_code",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "carrier_name",
+      "type": "varchar",
+      "nullable": false
+    }
+  ],
+  "shipments": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "order_code",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "warehouse_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "carrier_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "tracking_code",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "shipment_status",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "shipping_cost",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": false
+    },
+    {
+      "name": "picked_at",
+      "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "delivered_at",
+      "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "failed_at",
+      "type": "timestamp",
+      "nullable": true
+    }
+  ],
+  "marketing_campaigns": [
+    {
+      "name": "id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "campaign_code",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "campaign_name",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "campaign_type",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "target_channel_code",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "budget_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "start_date",
+      "type": "date",
+      "nullable": false
+    },
+    {
+      "name": "end_date",
+      "type": "date",
+      "nullable": false
+    }
+  ],
+  "ad_spend_logs": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "campaign_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "channel_code",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "log_date",
+      "type": "date",
+      "nullable": false
+    },
+    {
+      "name": "cost_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "impressions",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "clicks",
+      "type": "bigint",
+      "nullable": false
+    }
+  ],
+  "sessions": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "customer_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "channel_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "campaign_id",
+      "type": "int",
+      "nullable": true
+    },
+    {
+      "name": "traffic_source",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "device_type",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "started_at",
+      "type": "timestamp",
+      "nullable": false
+    },
+    {
+      "name": "ended_at",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "page_events": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "session_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "event_type",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "product_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "order_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "event_time",
+      "type": "timestamp",
+      "nullable": false
+    }
+  ],
+  "cart_items": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "session_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "customer_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "product_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "quantity",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "cart_status",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "added_at",
+      "type": "timestamp",
+      "nullable": false
+    },
+    {
+      "name": "closed_at",
+      "type": "timestamp",
+      "nullable": true
+    }
+  ],
+  "seller_commission_rates": [
+    {
+      "name": "id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "category_id",
+      "type": "int",
+      "nullable": false
+    },
+    {
+      "name": "seller_tier",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "commission_rate",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "effective_from",
+      "type": "date",
+      "nullable": false
+    },
+    {
+      "name": "effective_to",
+      "type": "date",
+      "nullable": true
+    }
+  ],
+  "seller_payouts": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "seller_id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "period_start",
+      "type": "date",
+      "nullable": false
+    },
+    {
+      "name": "period_end",
+      "type": "date",
+      "nullable": false
+    },
+    {
+      "name": "gross_sales",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "refund_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "commission_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "payout_amount",
+      "type": "decimal",
+      "nullable": false
+    },
+    {
+      "name": "payout_status",
+      "type": "varchar",
+      "nullable": false
+    },
+    {
+      "name": "paid_at",
+      "type": "timestamp",
+      "nullable": true
+    }
+  ]
+}

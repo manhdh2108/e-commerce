@@ -1,0 +1,18 @@
+services:
+  mock-postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: mock
+      POSTGRES_PASSWORD: ${MOCK_POSTGRES_PASSWORD:-local_mock_only}
+      POSTGRES_DB: mock_control
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - mock-platform-data:/var/lib/postgresql/data
+      - ./mock_platform/init-db.sql:/docker-entrypoint-initdb.d/02-business.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mock -d mock_control"]
+      interval: 3s
+      retries: 15
+volumes:
+  mock-platform-data:
