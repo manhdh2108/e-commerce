@@ -101,3 +101,7 @@ Mỗi kế hoạch giữ bản chụp cấu hình lúc xem trước. Sau khi lư
 ## Tổng quan, cào Tiki và xóa để chạy lại
 
 Xem [hướng dẫn Tổng quan và điều khiển dữ liệu](../../docs/mock-design/MOCK_OVERVIEW_CONTROLS.md). Nút cào chỉ ghi SQLite; thao tác đồng bộ vẫn riêng. Xóa toàn bộ có bước xem trước/xác nhận và bao gồm cả catalog OLTP, giữ SQLite và cấu hình.
+
+## Nhập / xuất cấu hình JSON
+
+Tại Cấu hình kịch bản, mở **Nhập / Xuất cấu hình JSON** để chọn file, kiểm tra/xem trước rồi lưu thành cấu hình mới. Có nút tải mẫu 2026 và xuất cấu hình đang xem. File tối đa 2 MiB. Import không tự chạy dữ liệu hoặc ghi đè cấu hình cũ. Xem [hướng dẫn, giả định và giới hạn của bộ mẫu](../../docs/mock-design/REALISTIC_CONFIG_CURRENT_ENGINE.md).

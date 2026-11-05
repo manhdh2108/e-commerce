@@ -32,6 +32,11 @@
     const rows = Object.entries(cfg.special || {}).sort(([a],[b]) => a.localeCompare(b));
     return rows.length ? rows.map(([d,n]) => `${day(d)}: ${number(n)} lần`).join('\n') : 'Giữ số lần của ngày thường';
   }
+  function specialCell(cfg) {
+    const entries=Object.keys(cfg.special||{});
+    const text=esc(specials(cfg));
+    return cfg.mode!=='all' && entries.length>7 ? `<details><summary>${entries.length} ngày có cấu hình riêng</summary><div class="schedule-details">${text}</div></details>`:text;
+  }
   function valueLabel(field, value) {
     if (field.key === 'amount' || field.key === 'min_order') return `${number(value)} đồng`;
     if (['rate','success_rate'].includes(field.key)) return `${number(value)}%`;
@@ -57,7 +62,7 @@
       const disabled = system.actions.filter(a => !config[a.code]?.enabled);
       return `<section class="card scenario-system"><div class="card-header"><h2>${esc(names[system.key] || system.title)}</h2><span class="badge ${active.length?'green':''}">${active.length} hành động bật</span></div>${active.length ? `<div class="tablewrap"><table class="readable-table"><thead><tr><th>Ai thực hiện?</th><th>Hành động</th><th>Ngày thường</th><th>Ngày đặc biệt</th></tr></thead><tbody>${active.map(a=>{
         const cfg=config[a.code], info=action(catalog,a.code), params=parameters(a,cfg);
-        return `<tr><td data-label="Ai thực hiện?">${esc(info.group)}</td><td data-label="Hành động"><strong>${esc(a.label)}</strong><small class="action-unit">Một lần: ${esc(a.unit)}</small>${params.length?`<details class="parameter-details"><summary>Xem ${params.length} tham số</summary><dl>${params.map(p=>`<dt>${esc(p.label)}</dt><dd>${esc(p.value)}</dd>`).join('')}</dl></details>`:'<small class="action-unit">Tự chọn đối tượng hợp lệ</small>'}${technical(a.code)}</td><td data-label="Ngày thường">${esc(count(cfg))}</td><td data-label="Ngày đặc biệt" class="special-lines">${esc(specials(cfg))}</td></tr>`;
+        return `<tr><td data-label="Ai thực hiện?">${esc(info.group)}</td><td data-label="Hành động"><strong>${esc(a.label)}</strong><small class="action-unit">Một lần: ${esc(a.unit)}</small>${params.length?`<details class="parameter-details"><summary>Xem ${params.length} tham số</summary><dl>${params.map(p=>`<dt>${esc(p.label)}</dt><dd>${esc(p.value)}</dd>`).join('')}</dl></details>`:'<small class="action-unit">Tự chọn đối tượng hợp lệ</small>'}${technical(a.code)}</td><td data-label="Ngày thường">${esc(count(cfg))}</td><td data-label="Ngày đặc biệt" class="special-lines">${specialCell(cfg)}</td></tr>`;
       }).join('')}</tbody></table></div>`:'<p>Chưa bật hành động cho hệ thống này.</p>'}<details class="disabled-actions"><summary>${disabled.length} hành động đang tắt</summary><ul>${disabled.map(a=>`<li>${esc(a.label)}${!a.available?` <span class="badge orange">Chưa hỗ trợ</span><small>${esc(a.unavailable_reason)}</small>`:''}</li>`).join('')}</ul></details></section>`;
     }).join('');
     return stats + sections;

@@ -38,3 +38,5 @@ Thư mục này tách riêng rule và các tài liệu đang chốt từ cuộc 
 - [Khởi động và hướng dẫn sử dụng](../../scripts/mock_platform/README.md).
 
 - [Tổng quan OLTP, kích hoạt crawler và chạy lại từ đầu](MOCK_OVERVIEW_CONTROLS.md).
+
+- [Nhập JSON và cấu hình vận hành theo khả năng engine hiện tại](REALISTIC_CONFIG_CURRENT_ENGINE.md).

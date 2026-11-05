@@ -79,6 +79,26 @@ def create_app(service=None):
     def crawler_stop(id: str):
         return crawler.stop(id)
 
+    from .config_transfer import ConfigTransfer
+
+    transfer = ConfigTransfer(s)
+
+    @app.post("/api/config-imports/preview")
+    def config_import_preview(p: dict):
+        return transfer.preview(p)
+
+    @app.post("/api/config-imports", status_code=201)
+    def config_import(p: dict):
+        return transfer.save(p)
+
+    @app.get("/api/config-template")
+    def config_template():
+        return FileResponse(
+            transfer.template_path(),
+            media_type="application/json",
+            filename="realistic-current-engine-2026.json",
+        )
+
     @app.get("/api/catalog")
     def catalog():
         return CATALOG

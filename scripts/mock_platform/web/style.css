@@ -18,3 +18,6 @@
 .daily-column small{font-size:10px;white-space:nowrap;color:#697386}
 .overview-shortcuts{flex-wrap:wrap;margin:0;justify-content:flex-end}
 @media(max-width:800px){.pagehead{flex-wrap:wrap}.overview-shortcuts{justify-content:flex-start}}
+.config-transfer>summary{font-weight:600;font-size:13px}.config-transfer .formgrid{align-items:start}
+.schedule-details{max-height:260px;overflow:auto;white-space:pre-line;padding-top:10px}
+#specials{max-height:360px;overflow:auto}

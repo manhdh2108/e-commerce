@@ -65,6 +65,7 @@ function configSwitches() {
   return `<div class="config-switches" role="group" aria-label="Cách xem cấu hình"><button class="btn ${configMode==='summary'?'':'secondary'}" id="show-config-summary">Tổng quan cấu hình</button><button class="btn ${configMode==='edit'?'':'secondary'}" id="show-config-editor">${editingSaved()||summarySource!=='draft'?'Chỉnh sửa cấu hình':'Chỉnh sửa bản nháp'}</button>${editingSaved()?'<button class="btn secondary" id="cancel-saved-edit">Hủy chỉnh sửa</button>':''}</div>`;
 }
 function wireConfigSwitches() {
+  mountConfigTransfer();
   $('#show-config-summary').onclick=()=>{captureAction();captureVersionName();configMode='summary';summarySource=editingVersionId||'draft';configPage()};
   $('#show-config-editor').onclick=()=>{
     captureVersionName();

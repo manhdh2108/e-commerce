@@ -741,3 +741,173 @@ def test_reset_delete_failure_rolls_back_every_business_table(platform):
     s.command(job["id"], "resume")
     w.tick()
     assert s.db.get("jobs", job["id"])["status"] == "COMPLETE"
+
+
+def test_import_preview_save_roundtrip_and_no_business_effects(platform):
+    import json
+    from scripts.mock_platform.config_transfer import ConfigTransfer
+
+    s, _, source = platform
+    counts, before = s.summary()["counts"], source.read_bytes()
+    config = {"GST-01": {"enabled": True, "count": 3, "params": {"province": "Hà Nội"}}}
+    text = json.dumps(
+        {
+            "format": "mock-studio-config",
+            "format_version": 1,
+            "name": "File thử",
+            "config": config,
+        }
+    )
+    with TestClient(create_app(s)) as client:
+        p = client.post("/api/config-imports/preview", json={"text": text})
+        assert p.status_code == 200, p.text
+        assert p.json()["summary"]["enabled"] == 1
+        assert not s.db.list("versions")
+        first = client.post("/api/config-imports", json={"text": text})
+        assert first.status_code == 201
+        second = client.post(
+            "/api/config-imports", json={"text": text, "name": "Bản khác"}
+        )
+        assert second.status_code == 201 and first.json()["id"] != second.json()["id"]
+        assert len(s.db.list("versions")) == 2
+        raw = ConfigTransfer(s).preview({"text": json.dumps(config)})
+        stored = s.db.get("versions", first.json()["id"])
+        assert raw["config"] == stored["config"]
+        blank = ConfigTransfer(s).preview(
+            {
+                "text": json.dumps(
+                    {
+                        "WH-01": {
+                            "enabled": True,
+                            "params": {"quantity": None, "warehouse": ""},
+                        }
+                    }
+                )
+            }
+        )
+        assert blank["config"]["WH-01"]["params"] == {}
+        assert stored["name"] == "File thử"
+        template = client.get("/api/config-template")
+        assert (
+            template.status_code == 200
+            and "attachment;" in template.headers["content-disposition"]
+        )
+        assert (
+            ConfigTransfer(s).preview({"text": template.text})["summary"]["enabled"]
+            > 20
+        )
+    assert s.summary()["counts"] == counts and source.read_bytes() == before
+    assert not s.db.list("jobs") and s.db.get("draft", "main") is None
+
+
+def test_import_rejects_malformed_or_unsupported_config_without_saving(platform):
+    import json
+
+    s, _, _ = platform
+    bad = [
+        "[]",
+        "{}",
+        "{",
+        '{"GST-01":{},"GST-01":{}}',
+        '{"GST-01":{"enabled":true,"params":{},"count":NaN}}',
+        json.dumps({"name": "x", "config": {}, "unexpected": True}),
+        json.dumps({"format_version": 2, "config": {}}),
+    ]
+    for code, cfg in [
+        ("MISSING", {}),
+        ("GST-01", {"enabled": "false"}),
+        ("GST-01", {"enabled": True, "count": -1}),
+        ("GST-01", {"special": []}),
+        ("GST-01", {"params": []}),
+        ("GST-01", {"special": {"2026-02-30": 1}}),
+        ("GST-01", {"special": {"20261101": 1}}),
+        ("GST-01", {"extra": 1}),
+        ("PAY-02", {"enabled": True}),
+        ("PAY-01", {"params": {"success_rate": 101}}),
+        ("CUS-05", {"params": {"quantity": 1.5}}),
+        ("WH-01", {"params": {"quantity": "10"}}),
+        ("GST-01", {"params": {"province": "Invalid"}}),
+        ("GST-01", {"params": {"value": "unknown"}}),
+        ("SEL-05", {"params": {"value": ["wrong"]}}),
+        ("GST-01", {"mode": "all"}),
+    ]:
+        bad.append(json.dumps({code: cfg}))
+    bad.append('{"PAY-01":{"params":{"success_rate":1e309}}}')
+    bad.append(json.dumps({"WH-01": {"params": {"quantity": 10**1000}}}))
+    with TestClient(create_app(s)) as client:
+        for text in bad:
+            response = client.post("/api/config-imports", json={"text": text})
+            assert response.status_code == 400, (text, response.text)
+        assert (
+            client.post(
+                "/api/config-imports", json={"text": " " * (2 * 1024 * 1024 + 1)}
+            ).status_code
+            == 400
+        )
+    assert not s.db.list("versions") and not s.db.list("jobs")
+
+
+def test_realistic_calendar_template_fits_engine_and_monthly_plan_limit(platform):
+    import json
+    from scripts.mock_platform.scenario import RealisticScenario
+    from scripts.mock_platform.config_transfer import ConfigTransfer
+
+    s, _, _ = platform
+    scenario = RealisticScenario()
+    document = scenario.build()
+    assert document == json.loads(ConfigTransfer.template_path().read_text())
+    assert len(scenario.schedule()) == 365
+    cfg = document["config"]
+    assert cfg["CAR-03"]["params"]["success_rate"] == 100
+    assert not cfg["PAY-02"]["enabled"] and not cfg["FIN-REC-01"]["enabled"]
+    assert not cfg["WH-03"]["enabled"]  # avoid a second stock issue path
+    assert not cfg["GST-WEB-06"]["enabled"]  # no fake purchase/session link
+    assert cfg["PAY-01"]["mode"] == "all" and cfg["SYS-01"]["mode"] == "all"
+    assert len({r["orders"] for r in scenario.schedule()}) > 10
+    assert all(row["count_actions"] < 100000 for row in scenario.monthly_stats())
+    imported = ConfigTransfer(s).save({"text": json.dumps(document)})
+    plan = s.plan(
+        {"version": imported["id"], "start": "2026-11-01", "end": "2026-11-30"}
+    )
+    assert plan["total"] == scenario.monthly_stats()[10]["count_actions"]
+    expected = next(
+        r["orders"] for r in scenario.schedule() if r["day"] == "2026-11-11"
+    )
+    day = next(d for d in plan["days"] if d["day"] == "2026-11-11")
+    assert (
+        sum(a["requested"] for a in day["actions"] if a["code"] in ["GST-02", "CUS-05"])
+        == expected
+        == 64
+    )
+
+
+def test_realistic_template_rehearsal_in_isolated_database(platform):
+    import json
+    from scripts.mock_platform.scenario import RealisticScenario
+    from scripts.mock_platform.config_transfer import ConfigTransfer
+    from scripts.mock_platform.validation import BusinessValidator
+
+    s, w, _ = platform
+    enqueue(s, w, "sync", preview=s.source_preview({})["id"])
+    enqueue(s, w, "bootstrap", customers=100, stock=200)
+    document = RealisticScenario().build()
+    # Synthetic fixture has category 625 and begins in November; match these inputs explicitly.
+    document["config"]["FIN-POL-01"]["params"]["category"] = 625
+    document["config"]["FIN-POL-01"]["special"] = {"2026-11-01": 1}
+    imported = ConfigTransfer(s).save({"text": json.dumps(document)})
+    plan = s.plan(
+        {"version": imported["id"], "start": "2026-11-01", "end": "2026-11-02"}
+    )
+    enqueue(s, w, "run", plan=plan["id"])
+    days = [
+        r
+        for r in RealisticScenario().schedule()
+        if r["day"] in ["2026-11-01", "2026-11-02"]
+    ]
+    assert s.summary()["counts"]["orders"] == sum(r["orders"] for r in days)
+    assert BusinessValidator(s.db).report()["ok"]
+    assert s.summary()["counts"]["seller_commission_rates"] == 1
+    assert s.summary()["counts"]["seller_payouts"] == 0
+    assert all(r["session_id"] is None for r in s.data("orders"))
+    assert all(r["total_discount_amount"] == 0 for r in s.data("orders"))
+    assert {r["order_status"] for r in s.data("orders")} <= {"Completed", "Pending"}

@@ -2,6 +2,7 @@ from datetime import date, datetime, timedelta
 from zoneinfo import ZoneInfo
 from collections import Counter
 import json
+import math
 from pathlib import Path
 import sqlite3
 import uuid
@@ -142,11 +143,26 @@ class PlatformService:
                 raise ValueError("Mã hành động không tồn tại.")
             if not isinstance(cfg, dict):
                 raise ValueError("Cấu hình hành động phải là object.")
+            unknown = set(cfg) - {"enabled", "count", "mode", "special", "params"}
+            if unknown:
+                raise ValueError(
+                    f"{code}: trường cấu hình không được hỗ trợ: {', '.join(sorted(unknown))}"
+                )
+            if type(cfg.get("enabled", False)) is not bool:
+                raise ValueError(f"{code}: enabled phải là true hoặc false.")
+            if not isinstance(cfg.get("special", {}), dict):
+                raise ValueError(f"{code}: special phải là object ngày → số lần.")
+            if not isinstance(cfg.get("params", {}), dict):
+                raise ValueError(f"{code}: params phải là object tham số.")
             for n in [cfg.get("count", 0), *cfg.get("special", {}).values()]:
                 if type(n) is not int or n < 0 or n > 10000:
                     raise ValueError("Số lần phải là số nguyên từ 0 tới 10.000.")
             for day in cfg.get("special", {}):
-                date.fromisoformat(day)
+                if (
+                    not isinstance(day, str)
+                    or date.fromisoformat(day).isoformat() != day
+                ):
+                    raise ValueError(f"{code}: ngày đặc biệt phải theo YYYY-MM-DD.")
             if cfg.get("enabled") and not ACTIONS[code]["available"]:
                 raise ValueError(f"{code}: {ACTIONS[code]['unavailable_reason']}")
             if cfg.get("enabled"):
@@ -173,12 +189,26 @@ class PlatformService:
                     or isinstance(value, bool)
                     or value < f.get("min", 0)
                     or value > f.get("max", 10**12)
+                    or not math.isfinite(value)
                 ):
                     raise ValueError(f"{code}: {f['label']} ngoài miền hợp lệ.")
+                if (
+                    f["type"] == "number"
+                    and key
+                    in {"quantity", "days", "limit", "warehouse", "category", "rating"}
+                    and value != int(value)
+                ):
+                    raise ValueError(f"{code}: {f['label']} phải là số nguyên.")
+                if f["type"] == "text" and not isinstance(value, str):
+                    raise ValueError(f"{code}: {f['label']} phải là chuỗi văn bản.")
                 if f["type"] == "select" and value not in f["options"]:
                     raise ValueError(f"{code}: lựa chọn không hợp lệ.")
                 if f["type"] == "date":
-                    date.fromisoformat(value)
+                    if (
+                        not isinstance(value, str)
+                        or date.fromisoformat(value).isoformat() != value
+                    ):
+                        raise ValueError(f"{code}: ngày phải theo YYYY-MM-DD.")
 
         def active(code):
             return config.get(code, {}).get("enabled", False)

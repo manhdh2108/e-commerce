@@ -92,3 +92,7 @@ Kiểm thử bổ sung: sửa cùng ID, preview cũ hết hiệu lực, chống 
 ## Nâng cấp Tổng quan và điều khiển nguồn
 
 Đã thêm dashboard đọc OLTP, biểu đồ đơn theo ngày, kích hoạt/dừng crawler riêng, kiểm tra sản phẩm mới ở SQLite và thời điểm đồng bộ gần nhất. Xóa toàn bộ OLTP qua job có xem trước, xác nhận, kiểm tra stale preview, rollback transaction và phục hồi khi Control DB gián đoạn sau business commit. Giữ cấu hình/SQLite; checkpoint và dữ liệu nền được đặt lại. Không có xóa từng ngày. Chi tiết: [hướng dẫn điều khiển](MOCK_OVERVIEW_CONTROLS.md).
+
+## Import cấu hình và bộ lịch 2026
+
+Đã có import JSON theo bước xem trước → lưu cấu hình mới, kiểm tra cấu trúc/kiểu dữ liệu/ngày/tham số và hành động được hỗ trợ. Có xuất cấu hình và tải mẫu lịch biến thiên 2026. Bộ mẫu chỉ dùng handler hiện có; không bổ sung hành vi tự dao động, delay nhiều ngày, attribution, áp voucher, hoàn tiền hoặc tạo đối soát. [Giả định và giới hạn](REALISTIC_CONFIG_CURRENT_ENGINE.md).
