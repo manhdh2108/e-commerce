@@ -1,0 +1,5 @@
+{
+  "return_window_days": 7,
+  "payout_hold_days": 10,
+  "max_delivery_attempts": 3
+}

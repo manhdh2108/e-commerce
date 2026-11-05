@@ -91,6 +91,16 @@ def create_app(service=None):
     def config_import(p: dict):
         return transfer.save(p)
 
+    @app.get("/api/config-template-v2")
+    def config_template_v2():
+        from .storage import ROOT
+
+        return FileResponse(
+            ROOT / "docs/mock-design/examples/scenarios/upgraded-linked-2026.json",
+            media_type="application/json",
+            filename="upgraded-linked-2026.json",
+        )
+
     @app.get("/api/config-template")
     def config_template():
         return FileResponse(
@@ -98,6 +108,36 @@ def create_app(service=None):
             media_type="application/json",
             filename="realistic-current-engine-2026.json",
         )
+
+    from .settings_transfer import SettingsTransfer
+
+    @app.post("/api/settings-imports/preview")
+    def settings_import_preview(p: dict):
+        return SettingsTransfer(s).preview(p)
+
+    @app.get("/api/settings-template")
+    def settings_template():
+        return FileResponse(
+            SettingsTransfer.TEMPLATE,
+            media_type="application/json",
+            filename="diverse-ecommerce-settings.json",
+        )
+
+    @app.get("/api/business-policy")
+    def business_policy():
+        return s.business_policy()
+
+    @app.put("/api/business-policy")
+    def save_business_policy(p: dict):
+        return s.save_business_policy(p)
+
+    @app.get("/api/entity-profile")
+    def entity_profile():
+        return s.entity_profile()
+
+    @app.put("/api/entity-profile")
+    def save_entity_profile(p: dict):
+        return s.save_entity_profile(p)
 
     @app.get("/api/catalog")
     def catalog():
@@ -173,7 +213,12 @@ def create_app(service=None):
             [r for r in s.db.list("action_results") if r.get("job") == id],
             key=lambda r: (r.get("at", ""), r.get("code", ""), r.get("order", 0)),
         )
-        return {"id": id, **j, "results": results[-100:]}
+        return {
+            "id": id,
+            **j,
+            "results": results[-100:],
+            "backlog": operations.backlog(),
+        }
 
     @app.get("/api/job/{id}/events")
     async def events(id: str, request: Request):

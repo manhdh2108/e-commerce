@@ -55,7 +55,7 @@ Registry hiện có **89 mã hành động**, **66 có handler được bật**.
 
 ## Sử dụng và kiểm thử
 
-[Hướng dẫn chạy và dùng](../../scripts/mock_platform/README.md). Crawler và `docs/database.md` của người dùng được giữ nguyên. Dữ liệu UI kiểm thử nằm trong database tách biệt, không tự nạp vào `mock_oltp`.
+[Hướng dẫn chạy và dùng](../../../scripts/mock_platform/README.md). Crawler và `docs/database.md` của người dùng được giữ nguyên. Dữ liệu UI kiểm thử nằm trong database tách biệt, không tự nạp vào `mock_oltp`.
 
 Trước khi tuyên bố hoàn thành toàn bộ nghiệp vụ: cần chốt phần dữ liệu còn thiếu rồi triển khai các handler bị khóa và mở rộng kiểm thử tương ứng. Hiện bản UI/điều khiển và các luồng thử được nêu trên đã chạy được, toàn bộ nghiệp vụ sàn chưa hoàn tất.
 
@@ -91,8 +91,8 @@ Kiểm thử bổ sung: sửa cùng ID, preview cũ hết hiệu lực, chống 
 
 ## Nâng cấp Tổng quan và điều khiển nguồn
 
-Đã thêm dashboard đọc OLTP, biểu đồ đơn theo ngày, kích hoạt/dừng crawler riêng, kiểm tra sản phẩm mới ở SQLite và thời điểm đồng bộ gần nhất. Xóa toàn bộ OLTP qua job có xem trước, xác nhận, kiểm tra stale preview, rollback transaction và phục hồi khi Control DB gián đoạn sau business commit. Giữ cấu hình/SQLite; checkpoint và dữ liệu nền được đặt lại. Không có xóa từng ngày. Chi tiết: [hướng dẫn điều khiển](MOCK_OVERVIEW_CONTROLS.md).
+Đã thêm dashboard đọc OLTP, biểu đồ đơn theo ngày, kích hoạt/dừng crawler riêng, kiểm tra sản phẩm mới ở SQLite và thời điểm đồng bộ gần nhất. Xóa toàn bộ OLTP qua job có xem trước, xác nhận, kiểm tra stale preview, rollback transaction và phục hồi khi Control DB gián đoạn sau business commit. Giữ cấu hình/SQLite; checkpoint và dữ liệu nền được đặt lại. Không có xóa từng ngày. Chi tiết: [hướng dẫn điều khiển](../guides/MOCK_OVERVIEW_CONTROLS.md).
 
 ## Import cấu hình và bộ lịch 2026
 
-Đã có import JSON theo bước xem trước → lưu cấu hình mới, kiểm tra cấu trúc/kiểu dữ liệu/ngày/tham số và hành động được hỗ trợ. Có xuất cấu hình và tải mẫu lịch biến thiên 2026. Bộ mẫu chỉ dùng handler hiện có; không bổ sung hành vi tự dao động, delay nhiều ngày, attribution, áp voucher, hoàn tiền hoặc tạo đối soát. [Giả định và giới hạn](REALISTIC_CONFIG_CURRENT_ENGINE.md).
+Đã có import JSON theo bước xem trước → lưu cấu hình mới, kiểm tra cấu trúc/kiểu dữ liệu/ngày/tham số và hành động được hỗ trợ. Có xuất cấu hình và tải mẫu lịch biến thiên 2026. Bộ mẫu chỉ dùng handler hiện có; không bổ sung hành vi tự dao động, delay nhiều ngày, attribution, áp voucher, hoàn tiền hoặc tạo đối soát. [Giả định và giới hạn](../guides/REALISTIC_CONFIG_CURRENT_ENGINE.md).

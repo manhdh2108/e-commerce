@@ -1,8 +1,8 @@
 # Cấu hình kịch bản mock — Web analytics
 
-> Đã chuyển sang triển khai theo yêu cầu người dùng. Nội dung dưới đây là thiết kế; xem [trạng thái thực tế](MOCK_IMPLEMENTATION_STATUS.md) để biết tính năng đã chạy và giới hạn. Không hiểu “đã có thiết kế” là toàn bộ nghiệp vụ đã hoàn thành.
+> Đã chuyển sang triển khai theo yêu cầu người dùng. Nội dung dưới đây là thiết kế; xem [trạng thái thực tế](../reviews/MOCK_IMPLEMENTATION_STATUS.md) để biết tính năng đã chạy và giới hạn. Không hiểu “đã có thiết kế” là toàn bộ nghiệp vụ đã hoàn thành.
 
-**Trạng thái:** Đề xuất danh sách hành động và form để chốt, chưa triển khai code/UI. Các rule chung đã xác nhận nằm trong [MOCK_SYSTEM_RULES.md](MOCK_SYSTEM_RULES.md). Schema/ERD cũ chỉ tham khảo, có thể sai; khoảng trống phải báo rõ, không tự bịa cột hoặc trạng thái.
+**Trạng thái:** Đề xuất danh sách hành động và form để chốt, chưa triển khai code/UI. Các rule chung đã xác nhận nằm trong [MOCK_SYSTEM_RULES.md](../MOCK_SYSTEM_RULES.md). Schema/ERD cũ chỉ tham khảo, có thể sai; khoảng trống phải báo rõ, không tự bịa cột hoặc trạng thái.
 
 ## Form chung và nguyên tắc cấu hình
 

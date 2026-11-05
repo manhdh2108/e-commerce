@@ -2,7 +2,11 @@
 
 Ứng dụng local Python OOP, code dưới `scripts/mock_platform/`. Có 7 trang UI, 6 tab cấu hình, API và worker độc lập. Đầu ra PostgreSQL tách khỏi dữ liệu điều khiển.
 
-Người mới dùng: [Hướng dẫn đầy đủ từ pull đến lượt mock đầu tiên](../../docs/mock-design/FIRST_MOCK_RUN_GUIDE.md), có ảnh dashboard, cấu hình 2 đơn COD và hướng dẫn từng trang UI.
+Người mới dùng: [Hướng dẫn đầy đủ từ pull đến lượt mock đầu tiên](../../docs/mock-design/guides/FIRST_MOCK_RUN_GUIDE.md), có ảnh dashboard, cấu hình 2 đơn COD và hướng dẫn từng trang UI.
+
+## Nâng cấp engine v2
+
+Xem [hướng dẫn v2](../../docs/mock-design/guides/ENGINE_V2_UPGRADE_GUIDE.md) trước khi chạy trên DB cũ: preview/apply migration, giữ dữ liệu lịch sử, cấu hình mới và các giả định chính sách. Mẫu mới tải trong tab Cấu hình hoặc [file JSON](../../docs/mock-design/examples/scenarios/upgraded-linked-2026.json).
 
 ## Khởi động
 
@@ -30,7 +34,7 @@ Ba tiến trình có thể chạy riêng:
 - Business: `127.0.0.1:55432/mock_oltp`.
 - User: `mock`; mật khẩu local mặc định trong compose là `local_mock_only`. Nếu đổi `MOCK_POSTGRES_PASSWORD` lúc tạo volume, cập nhật cả hai URL tương ứng. Đổi biến môi trường không đổi mật khẩu của volume đã được tạo.
 
-Database nghiệp vụ chưa tự tạo bảng khi chỉ mở ứng dụng. Người dùng chọn “Chuẩn bị môi trường” để tạo 27 bảng. Business DB chỉ có bảng nghiệp vụ; config/checkpoint/job nằm ở `mock_control.control_records`, phân nhóm bằng `kind` và khóa `id`. Đây là thiết kế lưu tài liệu JSON cho bản local, chưa phải toàn bộ các bảng vật lý gợi ý trong kế hoạch.
+Database nghiệp vụ chưa tự tạo bảng khi chỉ mở ứng dụng. Người dùng chọn “Chuẩn bị môi trường” để tạo 33 bảng (27 bảng gốc và 6 bảng nghiệp vụ bổ sung). Business DB chỉ có bảng nghiệp vụ; config/checkpoint/job nằm ở `mock_control.control_records`, phân nhóm bằng `kind` và khóa `id`. Đây là thiết kế lưu tài liệu JSON cho bản local, chưa phải toàn bộ các bảng vật lý gợi ý trong kế hoạch.
 
 ## Dùng lần đầu
 
@@ -59,7 +63,7 @@ Sau khi đã có catalog và tồn đầu, đặt số ngày thường 2 cho m�
 
 Có thể chọn tự động xử lý cho các bước xử lý đơn/vận đơn. Cần có khách nền, sản phẩm đang bán và tồn kho. Lưu phiên bản rồi chạy một ngày. Nếu thiếu điều kiện, xem dòng kết quả bị từ chối; không có chuyện tăng tồn giả để đủ số đơn.
 
-Bản đầu một sản phẩm và một shop/checkout; phí khách trả 0, chưa áp voucher. Đơn trả trước có thể chọn phương thức khác COD rồi bật `PAY-01` trước `ORD-01`. Hủy chỉ hỗ trợ trước có vận đơn và chưa thanh toán thành công; không làm mất nghĩa vụ hoàn tiền của đơn đã thu.
+V2 giữ chế độ đặt trực tiếp và bổ sung checkout từ phiên/giỏ nhiều dòng, tách shop, phí giao có cấu hình, voucher và nghĩa vụ hoàn riêng. Hủy toàn bộ trước lấy hàng có thể tạo refund cho khoản đã thu. Mẫu COD tối thiểu vẫn dùng chế độ trực tiếp; mẫu mới và các chính sách nằm trong hướng dẫn v2.
 
 ## DBeaver
 
@@ -81,7 +85,7 @@ MOCK_TEST_POSTGRES='postgresql+psycopg://mock:local_mock_only@127.0.0.1:55432/mo
 
 ## Phần còn giới hạn
 
-Xem [trạng thái triển khai](../../docs/mock-design/MOCK_IMPLEMENTATION_STATUS.md). Các hành động chưa có quy tắc dữ liệu đầy đủ được giữ trên UI, tắt và giải thích lý do. Không coi có form là toàn bộ nghiệp vụ đã hoàn tất.
+Xem [trạng thái triển khai](../../docs/mock-design/reviews/MOCK_IMPLEMENTATION_STATUS.md). Các hành động chưa có quy tắc dữ liệu đầy đủ được giữ trên UI, tắt và giải thích lý do. Không coi có form là toàn bộ nghiệp vụ đã hoàn tất.
 
 Bản local chưa có authentication nhiều người dùng. Chỉ bind localhost, kiểm tra Host/Origin. Không mở cổng ứng dụng ra mạng công cộng. Bản local chưa có distributed worker, sửa schema cũ tự động hoặc hiệu năng đã benchmark quy mô lớn. Xóa toàn bộ qua UI được mô tả trong hướng dẫn bên dưới.
 
@@ -103,8 +107,8 @@ Mỗi kế hoạch giữ bản chụp cấu hình lúc xem trước. Sau khi lư
 
 ## Tổng quan, cào Tiki và xóa để chạy lại
 
-Xem [hướng dẫn Tổng quan và điều khiển dữ liệu](../../docs/mock-design/MOCK_OVERVIEW_CONTROLS.md). Nút cào chỉ ghi SQLite; thao tác đồng bộ vẫn riêng. Xóa toàn bộ có bước xem trước/xác nhận và bao gồm cả catalog OLTP, giữ SQLite và cấu hình.
+Xem [hướng dẫn Tổng quan và điều khiển dữ liệu](../../docs/mock-design/guides/MOCK_OVERVIEW_CONTROLS.md). Nút cào chỉ ghi SQLite; thao tác đồng bộ vẫn riêng. Xóa toàn bộ có bước xem trước/xác nhận và bao gồm cả catalog OLTP, giữ SQLite và cấu hình.
 
 ## Nhập / xuất cấu hình JSON
 
-Tại Cấu hình kịch bản, mở **Nhập / Xuất cấu hình JSON** để chọn file, kiểm tra/xem trước rồi lưu thành cấu hình mới. Có nút tải mẫu 2026 và xuất cấu hình đang xem. File tối đa 2 MiB. Import không tự chạy dữ liệu hoặc ghi đè cấu hình cũ. Xem [hướng dẫn, giả định và giới hạn của bộ mẫu](../../docs/mock-design/REALISTIC_CONFIG_CURRENT_ENGINE.md).
+Tại Cấu hình kịch bản, mở **Nhập / Xuất cấu hình JSON** để chọn file, kiểm tra/xem trước rồi lưu thành cấu hình mới. Có nút tải mẫu 2026 và xuất cấu hình đang xem. File tối đa 2 MiB. Import không tự chạy dữ liệu hoặc ghi đè cấu hình cũ. Xem [hướng dẫn, giả định và giới hạn của bộ mẫu](../../docs/mock-design/guides/REALISTIC_CONFIG_CURRENT_ENGINE.md).

@@ -52,8 +52,16 @@ class PlatformService:
         settings = self.setup()
         counts = {}
         ready = False
+        migration_required = False
         try:
-            ready = "products" in inspect(self.db.business).get_table_names()
+            inspector = inspect(self.db.business)
+            actual = set(inspector.get_table_names())
+            ready = actual == set(self.db.bm.tables) and all(
+                set(col["name"] for col in inspector.get_columns(name))
+                == set(table.c.keys())
+                for name, table in self.db.bm.tables.items()
+            )
+            migration_required = bool(actual) and not ready
             if ready:
                 with self.db.business.connect() as c:
                     for name, t in self.db.bm.tables.items():
@@ -61,7 +69,8 @@ class PlatformService:
                             select(__import__("sqlalchemy").func.count()).select_from(t)
                         ).scalar()
         except Exception:
-            pass
+            ready = False
+            counts = {}
         jobs = sorted(
             self.db.list("jobs"), key=lambda r: r.get("created_at", ""), reverse=True
         )
@@ -75,6 +84,8 @@ class PlatformService:
             "default_source": str(ROOT / "data/tiki_crawl.db"),
             "settings": {k: v for k, v in settings.items() if k != "password"},
             "ready": ready,
+            "migration_required": migration_required,
+            "engine_version": 2,
             "counts": counts,
             "last_day": last,
             "next_day": nextday,
@@ -130,10 +141,36 @@ class PlatformService:
                     "seed": int(p.get("seed", 42)),
                     "source": str(source),
                     "timezone": "Asia/Bangkok",
-                    "schema_version": 1,
+                    "schema_version": 2,
                 },
             )
         return self.summary()
+
+    def business_policy(self):
+        from .policies import DEFAULT_POLICY
+
+        return self.db.get("business_policy", "main", dict(DEFAULT_POLICY))
+
+    def save_business_policy(self, payload):
+        from .policies import BusinessPolicy
+
+        policy = BusinessPolicy.validate(payload)
+        with self.db.writer():
+            self.db.put("business_policy", "main", policy)
+        return policy
+
+    def entity_profile(self):
+        from .entities import DEFAULT_PROFILE
+
+        return self.db.get("entity_profile", "main", clean(DEFAULT_PROFILE))
+
+    def save_entity_profile(self, payload):
+        from .entities import EntityProfile
+
+        profile = EntityProfile.validate(payload)
+        with self.db.writer():
+            self.db.put("entity_profile", "main", profile)
+        return profile
 
     def validate_config(self, config):
         if not isinstance(config, dict):
@@ -143,11 +180,57 @@ class PlatformService:
                 raise ValueError("Mã hành động không tồn tại.")
             if not isinstance(cfg, dict):
                 raise ValueError("Cấu hình hành động phải là object.")
-            unknown = set(cfg) - {"enabled", "count", "mode", "special", "params"}
+            unknown = set(cfg) - {
+                "enabled",
+                "count",
+                "mode",
+                "special",
+                "params",
+                "variants",
+                "delay_days",
+            }
             if unknown:
                 raise ValueError(
                     f"{code}: trường cấu hình không được hỗ trợ: {', '.join(sorted(unknown))}"
                 )
+            if not isinstance(cfg.get("params", {}), dict):
+                raise ValueError(f"{code}: params phải là object tham số.")
+            if (
+                type(cfg.get("delay_days", 0)) is not int
+                or not 0 <= cfg.get("delay_days", 0) <= 365
+            ):
+                raise ValueError("Độ trễ phải là số ngày nguyên từ 0 đến 365.")
+            if cfg.get("delay_days") and code not in {
+                "PAY-01",
+                "ORD-01",
+                "DSP-01",
+                "CAR-01",
+                "CAR-02",
+                "CAR-03",
+                "CAR-04",
+                "CUS-09",
+                "SUP-01",
+                "SUP-02",
+                "WH-04",
+                "PAY-02",
+                "CAR-05",
+                "CAR-06",
+            }:
+                raise ValueError(f"{code}: chưa hỗ trợ độ trễ.")
+            if "variants" in cfg:
+                from .profiles import ParameterProfiles
+
+                ParameterProfiles.validate(cfg["variants"])
+                for variant in cfg["variants"]:
+                    merged = {**cfg.get("params", {}), **variant["params"]}
+                    self.validate_config(
+                        {
+                            code: {
+                                **{k: v for k, v in cfg.items() if k != "variants"},
+                                "params": merged,
+                            }
+                        }
+                    )
             if type(cfg.get("enabled", False)) is not bool:
                 raise ValueError(f"{code}: enabled phải là true hoặc false.")
             if not isinstance(cfg.get("special", {}), dict):
@@ -171,12 +254,23 @@ class PlatformService:
                     not params.get("target") or not str(params.get("value", "")).strip()
                 ):
                     raise ValueError("CAT-04: cần chọn ID danh mục và nhập tên mới.")
-                if code in ["SEL-08", "FIN-POL-01"] and not params.get("category"):
+                if (
+                    code == "SEL-08"
+                    or (code == "FIN-POL-01" and params.get("scope") != "all_leaf")
+                ) and not params.get("category"):
                     raise ValueError(f"{code}: cần nhập ID danh mục đích.")
             if cfg.get("mode", "count") not in ["count", "all"]:
                 raise ValueError("Chế độ xử lý không hợp lệ.")
             if cfg.get("mode") == "all" and not ACTIONS[code].get("supports_auto"):
                 raise ValueError(f"{code}: hành động không hỗ trợ chế độ theo đầu vào.")
+            if cfg.get("mode") == "all" and any(
+                set(v["params"])
+                - {"success_rate", "amount", "value", "reason", "rating"}
+                for v in cfg.get("variants", [])
+            ):
+                raise ValueError(
+                    f"{code}: chế độ toàn bộ đầu vào chỉ trộn tham số kết quả; giữ bộ lọc đối tượng cố định để không dừng sớm ở một nhóm hết đầu vào."
+                )
             allowed = {f["key"]: f for f in ACTIONS[code]["fields"]}
             for key, value in cfg.get("params", {}).items():
                 if key not in allowed:
@@ -195,7 +289,16 @@ class PlatformService:
                 if (
                     f["type"] == "number"
                     and key
-                    in {"quantity", "days", "limit", "warehouse", "category", "rating"}
+                    in {
+                        "quantity",
+                        "days",
+                        "limit",
+                        "warehouse",
+                        "category",
+                        "rating",
+                        "carrier",
+                        "impressions",
+                    }
                     and value != int(value)
                 ):
                     raise ValueError(f"{code}: {f['label']} phải là số nguyên.")
@@ -265,24 +368,7 @@ class PlatformService:
             name = name.strip()
             if name == old["name"] and cfg == old["config"]:
                 return {"id": id, "revision": revision, "changed": False}
-            # Freeze legacy plans before editing the shared saved configuration.
-            plans = connection.execute(
-                select(self.db.records).where(self.db.records.c.kind == "plans")
-            ).all()
-            for plan_row in plans:
-                plan = plan_row.data
-                if plan.get("version") == id and "config_snapshot" not in plan:
-                    self.db.put(
-                        "plans",
-                        plan_row.id,
-                        {
-                            **plan,
-                            "config_snapshot": old["config"],
-                            "version_revision": revision,
-                            "version_name": old["name"],
-                        },
-                        connection,
-                    )
+            # Legacy plans remain visibly incomplete; do not invent historical snapshots.
             self.db.put(
                 "version_history",
                 f"{id}:{revision}",
@@ -304,31 +390,12 @@ class PlatformService:
         return {"id": id, "revision": revision + 1, "changed": True}
 
     def execution_plan(self, id):
-        """Read or freeze a legacy plan atomically with saved-config edits."""
-        with self.db.control.begin() as connection:
-            plan = self.db.get("plans", id, conn=connection)
-            if not plan:
-                raise ValueError("Không tìm thấy kế hoạch chạy.")
-            version_row = connection.execute(
-                select(self.db.records.c.data)
-                .where(
-                    self.db.records.c.kind == "versions",
-                    self.db.records.c.id == plan["version"],
-                )
-                .with_for_update()
-            ).first()
-            # An edit may have frozen this plan while we waited for its lock.
-            plan = self.db.get("plans", id, conn=connection)
-            if "config_snapshot" not in plan:
-                version = version_row[0]
-                plan = {
-                    **plan,
-                    "config_snapshot": version["config"],
-                    "version_revision": version.get("revision", 1),
-                    "version_name": version["name"],
-                }
-                self.db.put("plans", id, plan, connection)
-            return plan
+        plan = self.db.get("plans", id)
+        if not plan or "config_snapshot" not in plan:
+            raise ValueError(
+                "Kế hoạch legacy thiếu snapshot; không đủ bằng chứng để resume. Lập kế hoạch mới."
+            )
+        return plan
 
     def draft(self, p):
         cfg = self.validate_config(p["config"])
@@ -385,11 +452,18 @@ class PlatformService:
             raise ValueError(
                 "Bản local giới hạn 100.000 hành động/lượt; chia nhỏ khoảng hoặc giảm số lượng."
             )
+        from .contracts import EngineContract
+
         id = uid()
         plan = {
+            "contract": EngineContract.snapshot(),
+            "business_policy": self.business_policy(),
+            "entity_profile": self.entity_profile(),
             "version": p["version"],
             "version_revision": version.get("revision", 1),
             "config_snapshot": clean(version["config"]),
+            "engine_version": 2,
+            "seed": self.setup().get("seed", 42),
             "version_name": version["name"],
             "start": p["start"],
             "end": p["end"],
@@ -536,6 +610,18 @@ class PlatformService:
                 raise ValueError(
                     "Còn tác vụ đang chạy hoặc dang dở. Hãy hoàn tất/tiếp tục tác vụ đó trước khi tạo tác vụ mới."
                 )
+            if kind == "bootstrap":
+                for name in ["customers", "stock"]:
+                    if (
+                        type(p.get(name, 0)) is not int
+                        or not 0 <= p.get(name, 0) <= 10000
+                    ):
+                        raise ValueError("Số lượng nền phải từ 0 tới 10.000.")
+                p = {
+                    **p,
+                    "entity_profile": self.entity_profile(),
+                    "seed": self.setup().get("seed", 42),
+                }
             if kind == "bootstrap" and self.db.get("lifecycle", "reset", False):
                 if not self.data("products"):
                     raise ValueError(
@@ -560,6 +646,12 @@ class PlatformService:
                 ):
                     raise ValueError("Độ chậm phải từ 0 tới 1.000 ms.")
                 plan = self.db.get("plans", p.get("plan"))
+                if plan:
+                    from .contracts import EngineContract
+
+                    EngineContract.verify(plan)
+                if plan and plan.get("engine_version", 1) != 2:
+                    raise ValueError("Kế hoạch thuộc engine cũ; hãy lập kế hoạch mới.")
                 if (
                     not plan
                     or plan["revision"] != self.db.get("revision", "main", 0)

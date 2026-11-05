@@ -44,7 +44,7 @@ Kiểm tra commit đã có các file cần thiết:
 ```bash
 ls scripts/start_mock.sh scripts/requirements-mock.txt scripts/compose.mock.yaml
 ls scripts/mock_platform/config_transfer.py scripts/mock_platform/web/config-transfer.js
-ls docs/mock-design/examples/first-run-cod.json
+ls docs/mock-design/examples/scenarios/first-run-cod.json
 ```
 
 Nếu thiếu file, kiểm tra lại branch/commit hoặc hỏi người đẩy code. Lệnh pull chỉ lấy nội dung đã được commit và push.
@@ -301,7 +301,7 @@ Bước này còn tạo các kênh bán, phương thức thanh toán, một kho 
 
 Mở **Cấu hình kịch bản → Nhập / Xuất cấu hình JSON**:
 
-1. Chọn file [examples/first-run-cod.json](examples/first-run-cod.json) từ repository trên máy.
+1. Chọn file [examples/scenarios/first-run-cod.json](../examples/scenarios/first-run-cod.json) từ repository trên máy.
 2. Tên mới có thể để trống, dùng tên trong file: **Lượt đầu tiên · 2 đơn COD · 1 ngày**.
 3. Bấm **Kiểm tra & xem trước**.
 4. Mở bảng xem hành động để đọc lại.
@@ -397,7 +397,7 @@ Trên database mới, đủ điều kiện như hướng dẫn và không có h�
 
 Giá trị tiền lấy từ sản phẩm thật được chọn, không có tổng tiền cố định cho bài thử. Phiên truy cập vẫn là 0 vì bài thử này chưa bật Analytics. Marketing, voucher, hoàn tiền và đối soát không được tạo chỉ để lấp đầy mọi bảng.
 
-![Dashboard OLTP đọc dữ liệu nghiệp vụ](screenshots/oltp-dashboard.png)
+![Dashboard OLTP đọc dữ liệu nghiệp vụ](../screenshots/oltp-dashboard.png)
 
 *Ảnh dashboard thật được cung cấp trong phiên làm việc, minh họa cách đọc giao diện. Ảnh chụp một môi trường đã có 310 đơn; đây không phải kết quả mong đợi của lượt thử 2 đơn trên máy mới.*
 
@@ -468,7 +468,7 @@ Nếu muốn làm lại từ đầu: **Tổng quan → Chạy lại từ đầu 
 
 ## 11. Sau lượt đầu: dùng bộ lịch có biến thiên
 
-Khi đã hiểu lượt COD nhỏ, có thể import [realistic-current-engine-2026.json](examples/realistic-current-engine-2026.json), hoặc tải mẫu từ UI. Xem [giả định và các giới hạn chi tiết](REALISTIC_CONFIG_CURRENT_ENGINE.md).
+Khi đã hiểu lượt COD nhỏ, có thể import [realistic-current-engine-2026.json](../examples/scenarios/realistic-current-engine-2026.json), hoặc tải mẫu từ UI. Xem [giả định và các giới hạn chi tiết](REALISTIC_CONFIG_CURRENT_ENGINE.md).
 
 - Lịch năm 2026 có ngày thường, cuối tuần, kỳ lương giả định và 4 ngày sale. Không tự đổi năm khi import.
 - Có Analytics, Marketing, thanh toán trả trước và hủy quá hạn; số lượng lớn hơn bài thử đầu tiên.
@@ -504,8 +504,8 @@ Khi đã hiểu lượt COD nhỏ, có thể import [realistic-current-engine-20
 
 ## 13. Các tài liệu liên quan
 
-- [Rule đã chốt](MOCK_SYSTEM_RULES.md).
+- [Rule đã chốt](../MOCK_SYSTEM_RULES.md).
 - [Tổng quan, crawler và chức năng xóa dữ liệu](MOCK_OVERVIEW_CONTROLS.md).
 - [Import JSON, lịch 2026 và giới hạn nghiệp vụ](REALISTIC_CONFIG_CURRENT_ENGINE.md).
-- [Trạng thái triển khai](MOCK_IMPLEMENTATION_STATUS.md).
-- [README kỹ thuật](../../scripts/mock_platform/README.md).
+- [Trạng thái triển khai](../reviews/MOCK_IMPLEMENTATION_STATUS.md).
+- [README kỹ thuật](../../../scripts/mock_platform/README.md).

@@ -71,6 +71,32 @@ class DataOperations:
                 }
             )
 
+    def backlog(self):
+        if not self.s.summary()["ready"]:
+            return []
+        stages = [
+            ("payments", "payment_status", "Pending", "Chờ kết quả thanh toán"),
+            ("orders", "order_status", "Pending", "Đơn chờ thanh toán / xác nhận"),
+            ("orders", "order_status", "Processing", "Đơn đã xác nhận"),
+            ("shipments", "shipment_status", "In Transit", "Đang giao"),
+            ("shipments", "shipment_status", "Failed", "Giao thất bại chờ xử lý"),
+            ("returns", "status", "Requested", "Chờ xét yêu cầu trả"),
+            ("returns", "status", "Approved", "Chờ nhận hàng trả"),
+            ("refunds", "refund_status", "Pending", "Chờ hoàn tiền"),
+        ]
+        with self.db.business.connect() as c:
+            return [
+                {
+                    "label": label,
+                    "count": c.execute(
+                        select(func.count())
+                        .select_from(self.db.bm.tables[table])
+                        .where(self.db.bm.tables[table].c[field] == status)
+                    ).scalar(),
+                }
+                for table, field, status, label in stages
+            ]
+
     def sync_status(self):
         jobs = sorted(
             [j for j in self.db.list("jobs") if j["kind"] == "sync"],

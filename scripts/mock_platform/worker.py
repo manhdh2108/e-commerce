@@ -17,6 +17,21 @@ class Worker:
 
     def finish(self, key, manifest):
         with self.db.control.begin() as c:
+            if self.db.get("receipts", key, None, c):
+                return
+            for effect in manifest.get("effects", []):
+                current = self.db.get("runtime", effect["key"], None, c)
+                before = manifest.get("effect_before", {}).get(effect["key"])
+                if (
+                    "effect_before" in manifest
+                    and current != before
+                    and current != effect["value"]
+                ):
+                    raise RuntimeError(
+                        "Runtime khác ảnh trước/sau của journal; không phục hồi mù."
+                    )
+            sequence = self.db.get("commit_sequence", "main", 0, c) + 1
+            self.db.put("commit_sequence", "main", sequence, c)
             if manifest.get("reset"):
                 from .operations import DataOperations
 
@@ -27,13 +42,19 @@ class Worker:
                 key,
                 {
                     "status": "DONE",
+                    "commit_sequence": sequence,
                     "message": manifest.get("message", ""),
                     "at": stamp(),
                     "changes": len(manifest["changes"]),
                 },
                 c,
             )
-            self.db.put("manifests", key, {**manifest, "status": "DONE"}, c)
+            self.db.put(
+                "manifests",
+                key,
+                {**manifest, "status": "DONE", "commit_sequence": sequence},
+                c,
+            )
             self.db.put(
                 "revision", "main", self.db.get("revision", "main", 0, c) + 1, c
             )
@@ -76,6 +97,10 @@ class Worker:
                     "reset": result.get("reset", False),
                     "changes": u.changes,
                     "effects": result.get("effects", []),
+                    "effect_before": {
+                        effect["key"]: self.db.get("runtime", effect["key"])
+                        for effect in result.get("effects", [])
+                    },
                     "message": result.get("message", ""),
                 }
                 self.db.put("manifests", key, manifest)
@@ -197,57 +222,42 @@ class Worker:
             ]:
                 if not any(r["method_name"] == name for r in u.rows("payment_methods")):
                     u.add("payment_methods", method_name=name, method_group=group)
-            if not u.rows("warehouses"):
-                u.add(
-                    "warehouses",
-                    warehouse_code="WH-DEMO",
-                    warehouse_name="Kho mô phỏng",
-                    province="TP. Hồ Chí Minh",
-                    city="TP. Hồ Chí Minh",
-                    address="Địa chỉ kho thử nghiệm",
-                )
-            if not u.rows("carriers"):
-                u.add(
-                    "carriers", carrier_code="DEMO", carrier_name="Vận chuyển mô phỏng"
-                )
+            from .entities import EntityGenerator
+
+            generator = EntityGenerator(p.get("entity_profile"), p.get("seed", 42))
+            for table in ["warehouses", "carriers"]:
+                code = "warehouse_code" if table == "warehouses" else "carrier_code"
+                for row in generator.p[table]:
+                    if not any(r[code] == row[code] for r in u.rows(table)):
+                        u.add(table, **row)
             for i in range(p.get("customers", 0)):
-                u.add(
-                    "customers",
-                    full_name=f"Khách nền {i + 1}",
-                    email=f"baseline.{jid}.{i}@example.com",
-                    phone_number="0900000000",
-                    province="TP. Hồ Chí Minh",
-                    city="TP. Hồ Chí Minh",
-                    membership_tier="Member",
-                    registration_date=at,
-                    updated_at=at,
-                )
+                u.add("customers", **generator.person(f"baseline:{i}", at))
             stock = int(p.get("stock", 0))
-            wh = u.rows("warehouses")[0]
             if stock:
-                for prod in u.rows("products"):
-                    if any(
-                        r["sku"] == prod["sku"] and r["warehouse_id"] == wh["id"]
-                        for r in u.rows("inventory_levels")
-                    ):
-                        continue
-                    u.add(
-                        "inventory_levels",
-                        warehouse_id=wh["id"],
-                        sku=prod["sku"],
-                        quantity_on_hand=stock,
-                        quantity_reserved=0,
-                        updated_at=at,
-                    )
-                    u.add(
-                        "inventory_movements",
-                        warehouse_id=wh["id"],
-                        sku=prod["sku"],
-                        movement_type="Import",
-                        quantity_change=stock,
-                        reference_code="INITIAL",
-                        movement_date=at,
-                    )
+                for wh in u.rows("warehouses"):
+                    for prod in u.rows("products"):
+                        if any(
+                            r["sku"] == prod["sku"] and r["warehouse_id"] == wh["id"]
+                            for r in u.rows("inventory_levels")
+                        ):
+                            continue
+                        u.add(
+                            "inventory_levels",
+                            warehouse_id=wh["id"],
+                            sku=prod["sku"],
+                            quantity_on_hand=stock,
+                            quantity_reserved=0,
+                            updated_at=at,
+                        )
+                        u.add(
+                            "inventory_movements",
+                            warehouse_id=wh["id"],
+                            sku=prod["sku"],
+                            movement_type="Import",
+                            quantity_change=stock,
+                            reference_code="INITIAL",
+                            movement_date=at,
+                        )
             return {"effects": [{"key": "bootstrap_done", "value": True}]}
 
         self.transact(f"{jid}:bootstrap", add)
@@ -259,8 +269,17 @@ class Worker:
 
     def run(self, jid, job):
         plan = self.s.execution_plan(job["payload"]["plan"])
+        from .contracts import EngineContract
+
+        EngineContract.verify(plan)
         cfg = plan["config_snapshot"]
-        seed = self.s.setup().get("seed", 42)
+        from .profiles import ENGINE_VERSION, ParameterProfiles
+
+        if plan.get("engine_version", 1) != ENGINE_VERSION:
+            raise ValueError(
+                "Job dùng engine cũ; cần hoàn tất bằng phiên bản cũ hoặc lập kế hoạch mới, không resume ngầm bằng engine mới."
+            )
+        seed = plan["seed"]
         priority = {
             "GST-01": 0,
             "WH-01": 1,
@@ -277,6 +296,17 @@ class Worker:
             "CAR-03": 9,
             "CAR-04": 10,
             "CUS-09": 11,
+            "GST-04": 11,
+            "CUS-08": 11,
+            "SUP-01": 12,
+            "SUP-02": 12,
+            "WH-04": 13,
+            "PAY-02": 14,
+            "CAR-05": 11,
+            "CAR-06": 11,
+            "FIN-REC-01": 12,
+            "FIN-REC-02": 13,
+            "FIN-PAY-01": 14,
             "AUT-WH-04": 15,
             "MKT-01": 0,
             "MKT-03": 0,
@@ -304,8 +334,7 @@ class Worker:
                 automatic = entry.get("mode") == "all"
                 count = entry.get("special", {}).get(day["day"], entry.get("count", 0))
                 requested += count if not automatic else 0
-                params = {f["key"]: f.get("default") for f in ACTIONS[code]["fields"]}
-                params.update(entry.get("params", {}))
+                defaults = {f["key"]: f.get("default") for f in ACTIONS[code]["fields"]}
                 index = 0
                 while automatic or index < count:
                     if self.paused(jid):
@@ -317,8 +346,32 @@ class Worker:
                     aid = hashlib.sha256(
                         f"{seed}:{day['day']}:{code}:{index}".encode()
                     ).hexdigest()[:32]
-                    at = day["day"] + f"T{8 + priority.get(code, 12):02}:00:00"
+                    # Stages preserve causality; stable within-stage spreading avoids one timestamp for all commands.
+                    from datetime import datetime, timedelta
+
+                    stage = (
+                        int(code[-2:]) - 1
+                        if code.startswith(("GST-WEB-", "CUS-WEB-"))
+                        else 0
+                    )
+                    second = int(aid[:8], 16) % (
+                        600 if code.startswith(("GST-WEB-", "CUS-WEB-")) else 3600
+                    )
+                    at = (
+                        datetime.fromisoformat(day["day"])
+                        + timedelta(
+                            hours=8 + priority.get(code, 12),
+                            minutes=stage * 10,
+                            seconds=second,
+                        )
+                    ).isoformat(timespec="seconds")
+                    params, profile = ParameterProfiles.resolve(
+                        entry, defaults, seed, aid
+                    )
+                    params["_delay_days"] = entry.get("delay_days", 0)
                     action = {
+                        "profile": profile,
+                        "seed": seed,
                         "id": aid,
                         "code": code,
                         "at": at,
@@ -353,7 +406,19 @@ class Worker:
                                     .where(self.db.records.c.kind == "runtime")
                                 )
                             }
-                        engine = DomainEngine(self.db, u, action, state)
+                        engine = DomainEngine(
+                            self.db,
+                            u,
+                            {
+                                **action,
+                                "entity_profile": plan.get("entity_profile"),
+                                "business_policy": plan.get("business_policy"),
+                                "schedule": {
+                                    k: v.get("delay_days", 0) for k, v in cfg.items()
+                                },
+                            },
+                            state,
+                        )
                         engine.execute()
                         return {"effects": engine.effects, "message": code}
 
@@ -394,7 +459,7 @@ class Worker:
                         time.sleep(min(pause, 1))
             from .validation import BusinessValidator
 
-            report = BusinessValidator(self.db).report()
+            report = BusinessValidator(self.db).report(job=jid)
             if not report["ok"]:
                 self.db.put("validation", jid, {"day": day["day"], **report})
                 raise RuntimeError(

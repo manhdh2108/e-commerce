@@ -8,7 +8,7 @@ function invalidateConfigImport(){
 }
 function mountConfigTransfer(){
   configImportText='';configImportPreview=null;configImportGeneration++;
-  $('#main .config-switches').insertAdjacentHTML('afterend',`<details class="card config-transfer"><summary>Nhập / Xuất cấu hình JSON</summary><p>Chọn file, kiểm tra rồi lưu thành cấu hình mới. Cấu hình đang có và dữ liệu OLTP được giữ nguyên.</p><div class="actions"><a class="btn secondary small" href="/api/config-template" download>Tải mẫu vận hành 2026</a><button class="btn secondary small" id="export-config">Xuất cấu hình đang xem</button></div><div class="formgrid" style="margin-top:16px"><div class="field"><label for="import-file">File JSON (tối đa 2 MiB)</label><input id="import-file" type="file" accept=".json,application/json"></div>${field('Tên cấu hình mới (trống: dùng tên trong file)','import-name','')}</div>${editingSaved()?'<div class="notice">Bạn còn cấu hình đang chỉnh sửa. Hãy lưu hoặc hủy chỉnh sửa trước khi lưu cấu hình nhập.</div>':''}<div class="actions"><button class="btn secondary" id="import-preview">Kiểm tra & xem trước</button><button class="btn" id="import-save" disabled>Lưu thành cấu hình mới</button></div><div id="import-feedback"></div><div id="import-result"></div></details>`);
+  $('#main .config-switches').insertAdjacentHTML('afterend',`<details class="card config-transfer"><summary>Nhập / Xuất cấu hình JSON</summary><p>Chọn file, kiểm tra rồi lưu thành cấu hình mới. Cấu hình đang có và dữ liệu OLTP được giữ nguyên.</p><div class="actions"><a class="btn secondary small" href="/api/config-template-v2" download>Tải mẫu mới: hành trình liên kết 2026</a><a class="btn secondary small" href="/api/config-template" download>Mẫu cũ: đặt trực tiếp</a><button class="btn secondary small" id="export-config">Xuất cấu hình đang xem</button></div><div class="formgrid" style="margin-top:16px"><div class="field"><label for="import-file">File JSON (tối đa 2 MiB)</label><input id="import-file" type="file" accept=".json,application/json"></div>${field('Tên cấu hình mới (trống: dùng tên trong file)','import-name','')}</div>${editingSaved()?'<div class="notice">Bạn còn cấu hình đang chỉnh sửa. Hãy lưu hoặc hủy chỉnh sửa trước khi lưu cấu hình nhập.</div>':''}<div class="actions"><button class="btn secondary" id="import-preview">Kiểm tra & xem trước</button><button class="btn" id="import-save" disabled>Lưu thành cấu hình mới</button></div><div id="import-feedback"></div><div id="import-result"></div></details>`);
   $('#import-file').onchange=async()=>{
     invalidateConfigImport();configImportText='';
     const file=$('#import-file').files[0];if(!file)return;
@@ -39,7 +39,7 @@ function mountConfigTransfer(){
     const saved=versions.find(v=>v.id===summarySource);
     const config=editingSaved()?editingConfig:saved?saved.config:draft;
     const name=editingSaved()?versionName:saved?saved.name:versionName||'Bản nháp';
-    const blob=new Blob([JSON.stringify({format:'mock-studio-config',format_version:1,name,config},null,2)],{type:'application/json'});
+    const blob=new Blob([JSON.stringify({format:'mock-studio-config',format_version:Object.values(config).some(c=>c.variants?.length)?2:1,name,config},null,2)],{type:'application/json'});
     const link=document.createElement('a'),url=URL.createObjectURL(blob);
     link.href=url;link.download='mock-studio-config.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   };

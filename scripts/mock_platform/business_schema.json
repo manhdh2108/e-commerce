@@ -453,6 +453,16 @@
       "name": "updated_at",
       "type": "timestamp",
       "nullable": false
+    },
+    {
+      "name": "checkout_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "cancellation_reason",
+      "type": "text",
+      "nullable": true
     }
   ],
   "order_items": [
@@ -505,6 +515,21 @@
       "name": "item_status",
       "type": "varchar",
       "nullable": false
+    },
+    {
+      "name": "commission_rate",
+      "type": "decimal",
+      "nullable": true
+    },
+    {
+      "name": "commission_category_id",
+      "type": "int",
+      "nullable": true
+    },
+    {
+      "name": "commission_seller_tier",
+      "type": "varchar",
+      "nullable": true
     }
   ],
   "payments": [
@@ -578,6 +603,26 @@
     {
       "name": "refunded_at",
       "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "received_at",
+      "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "warehouse_id",
+      "type": "int",
+      "nullable": true
+    },
+    {
+      "name": "approved_at",
+      "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "decision_reason",
+      "type": "text",
       "nullable": true
     }
   ],
@@ -720,6 +765,11 @@
       "name": "applied_discount_amount",
       "type": "decimal",
       "nullable": false
+    },
+    {
+      "name": "funded_by",
+      "type": "varchar",
+      "nullable": true
     }
   ],
   "warehouses": [
@@ -927,6 +977,16 @@
       "name": "failed_at",
       "type": "timestamp",
       "nullable": true
+    },
+    {
+      "name": "in_transit_at",
+      "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "returned_at",
+      "type": "timestamp",
+      "nullable": true
     }
   ],
   "marketing_campaigns": [
@@ -1080,6 +1140,11 @@
       "name": "event_time",
       "type": "timestamp",
       "nullable": false
+    },
+    {
+      "name": "search_keyword",
+      "type": "text",
+      "nullable": true
     }
   ],
   "cart_items": [
@@ -1204,6 +1269,208 @@
     },
     {
       "name": "paid_at",
+      "type": "timestamp",
+      "nullable": true
+    }
+  ],
+  "checkouts": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "checkout_code",
+      "type": "varchar",
+      "nullable": true
+    },
+    {
+      "name": "session_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "customer_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": true
+    }
+  ],
+  "checkout_lines": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "checkout_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "cart_item_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "order_item_id",
+      "type": "bigint",
+      "nullable": true
+    }
+  ],
+  "refunds": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "order_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "return_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "amount",
+      "type": "decimal",
+      "nullable": true
+    },
+    {
+      "name": "reason",
+      "type": "varchar",
+      "nullable": true
+    },
+    {
+      "name": "refund_status",
+      "type": "varchar",
+      "nullable": true
+    },
+    {
+      "name": "requested_at",
+      "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "completed_at",
+      "type": "timestamp",
+      "nullable": true
+    }
+  ],
+  "promotion_usages": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "promotion_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "order_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "customer_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "discount_amount",
+      "type": "decimal",
+      "nullable": true
+    },
+    {
+      "name": "usage_status",
+      "type": "varchar",
+      "nullable": true
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": true
+    },
+    {
+      "name": "released_at",
+      "type": "timestamp",
+      "nullable": true
+    }
+  ],
+  "seller_payout_items": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "seller_payout_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "order_item_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "gross_amount",
+      "type": "decimal",
+      "nullable": true
+    },
+    {
+      "name": "refund_amount",
+      "type": "decimal",
+      "nullable": true
+    },
+    {
+      "name": "commission_amount",
+      "type": "decimal",
+      "nullable": true
+    },
+    {
+      "name": "net_amount",
+      "type": "decimal",
+      "nullable": true
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp",
+      "nullable": true
+    }
+  ],
+  "delivery_attempts": [
+    {
+      "name": "id",
+      "type": "bigint",
+      "nullable": false
+    },
+    {
+      "name": "shipment_id",
+      "type": "bigint",
+      "nullable": true
+    },
+    {
+      "name": "attempt_number",
+      "type": "int",
+      "nullable": true
+    },
+    {
+      "name": "result",
+      "type": "varchar",
+      "nullable": true
+    },
+    {
+      "name": "attempted_at",
       "type": "timestamp",
       "nullable": true
     }

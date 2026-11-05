@@ -549,6 +549,59 @@
               "Livestream"
             ],
             "default": "Web"
+          },
+          {
+            "key": "warehouse",
+            "label": "ID kho giữ hàng (0: tự chọn đủ tồn)",
+            "type": "number",
+            "min": 0,
+            "max": 100000,
+            "default": 0
+          },
+          {
+            "key": "checkout_mode",
+            "label": "Nguồn yêu cầu đặt hàng",
+            "type": "select",
+            "options": [
+              "direct",
+              "linked"
+            ],
+            "default": "direct"
+          },
+          {
+            "key": "session",
+            "label": "ID phiên (chế độ liên kết; trống: tự chọn)",
+            "type": "text",
+            "default": ""
+          },
+          {
+            "key": "shipping_fee",
+            "label": "Phí khách trả mỗi đơn (VND)",
+            "type": "number",
+            "min": 0,
+            "default": 0
+          },
+          {
+            "key": "voucher_mode",
+            "label": "Áp ưu đãi",
+            "type": "select",
+            "options": [
+              "none",
+              "auto"
+            ],
+            "default": "none"
+          },
+          {
+            "key": "order_voucher",
+            "label": "ID voucher hàng (trống: tự chọn tốt nhất)",
+            "type": "text",
+            "default": ""
+          },
+          {
+            "key": "shipping_voucher",
+            "label": "ID voucher phí ship (trống: tự chọn tốt nhất)",
+            "type": "text",
+            "default": ""
           }
         ],
         "available": true,
@@ -588,7 +641,7 @@
         "label": "Yêu cầu trả hàng của khách vãng lai",
         "group": "1. Khách vãng lai",
         "unit": "Một yêu cầu trả cho một dòng hàng đã giao",
-        "help": "Chọn đối tượng hợp lệ tự động hoặc chỉ định ID. Các ô bên dưới là những tùy chọn hiện được hỗ trợ; không tự tạo thêm đầu vào ở hệ thống khác.",
+        "help": "Thực thi theo đầu vào hợp lệ và chính sách mô phỏng đã snapshot; không tự tạo đầu vào.",
         "fields": [
           {
             "key": "target",
@@ -611,8 +664,8 @@
             "default": 1
           }
         ],
-        "available": false,
-        "unavailable_reason": "Cần chốt quy trình trả hàng và phạm vi số lượng.",
+        "available": true,
+        "unavailable_reason": "",
         "mode": "count",
         "supports_auto": false,
         "design_note": "Cách chọn dòng; cửa sổ trả hàng; toàn bộ/một phần; lý do; số lượng hoặc khoảng số lượng hợp lệ."
@@ -775,6 +828,59 @@
               "Livestream"
             ],
             "default": "Web"
+          },
+          {
+            "key": "warehouse",
+            "label": "ID kho giữ hàng (0: tự chọn đủ tồn)",
+            "type": "number",
+            "min": 0,
+            "max": 100000,
+            "default": 0
+          },
+          {
+            "key": "checkout_mode",
+            "label": "Nguồn yêu cầu đặt hàng",
+            "type": "select",
+            "options": [
+              "direct",
+              "linked"
+            ],
+            "default": "direct"
+          },
+          {
+            "key": "session",
+            "label": "ID phiên (chế độ liên kết; trống: tự chọn)",
+            "type": "text",
+            "default": ""
+          },
+          {
+            "key": "shipping_fee",
+            "label": "Phí khách trả mỗi đơn (VND)",
+            "type": "number",
+            "min": 0,
+            "default": 0
+          },
+          {
+            "key": "voucher_mode",
+            "label": "Áp ưu đãi",
+            "type": "select",
+            "options": [
+              "none",
+              "auto"
+            ],
+            "default": "none"
+          },
+          {
+            "key": "order_voucher",
+            "label": "ID voucher hàng (trống: tự chọn tốt nhất)",
+            "type": "text",
+            "default": ""
+          },
+          {
+            "key": "shipping_voucher",
+            "label": "ID voucher phí ship (trống: tự chọn tốt nhất)",
+            "type": "text",
+            "default": ""
           }
         ],
         "available": true,
@@ -801,13 +907,12 @@
             "label": "Phương thức thanh toán",
             "type": "select",
             "options": [
-              "COD",
               "Momo",
               "ZaloPay",
               "Credit Card",
               "Bank Transfer"
             ],
-            "default": "COD"
+            "default": "Momo"
           }
         ],
         "available": true,
@@ -847,7 +952,7 @@
         "label": "Yêu cầu trả hàng",
         "group": "2. Khách đã đăng ký",
         "unit": "Một yêu cầu trả cho một dòng hàng đã giao",
-        "help": "Chọn đối tượng hợp lệ tự động hoặc chỉ định ID. Các ô bên dưới là những tùy chọn hiện được hỗ trợ; không tự tạo thêm đầu vào ở hệ thống khác.",
+        "help": "Thực thi theo đầu vào hợp lệ và chính sách mô phỏng đã snapshot; không tự tạo đầu vào.",
         "fields": [
           {
             "key": "target",
@@ -870,8 +975,8 @@
             "default": 1
           }
         ],
-        "available": false,
-        "unavailable_reason": "Cần chốt quy trình trả hàng và phạm vi số lượng.",
+        "available": true,
+        "unavailable_reason": "",
         "mode": "count",
         "supports_auto": false,
         "design_note": "Cửa sổ trả; lý do `Damaged`, `Wrong Item`, `Not As Described`, `Changed Mind`; toàn bộ/một phần; khoảng số lượng."
@@ -987,7 +1092,7 @@
         "label": "Chấp thuận yêu cầu trả hàng",
         "group": "4. Nhân viên chăm sóc khách hàng / xử lý sau bán",
         "unit": "Một yêu cầu đang chờ được chấp thuận",
-        "help": "Chọn đối tượng hợp lệ tự động hoặc chỉ định ID. Các ô bên dưới là những tùy chọn hiện được hỗ trợ; không tự tạo thêm đầu vào ở hệ thống khác.",
+        "help": "Thực thi theo đầu vào hợp lệ và chính sách mô phỏng đã snapshot; không tự tạo đầu vào.",
         "fields": [
           {
             "key": "target",
@@ -996,10 +1101,10 @@
             "default": ""
           }
         ],
-        "available": false,
-        "unavailable_reason": "Phụ thuộc quy trình trả hàng sẽ chốt ở bước dữ liệu.",
+        "available": true,
+        "unavailable_reason": "",
         "mode": "count",
-        "supports_auto": false,
+        "supports_auto": true,
         "design_note": "Cách chọn yêu cầu; thời gian xử lý; nhóm lý do/đối tượng được áp dụng. Không tự chọn lại yêu cầu đã từ chối."
       },
       {
@@ -1007,7 +1112,7 @@
         "label": "Từ chối yêu cầu trả hàng",
         "group": "4. Nhân viên chăm sóc khách hàng / xử lý sau bán",
         "unit": "Một yêu cầu đang chờ bị từ chối",
-        "help": "Chọn đối tượng hợp lệ tự động hoặc chỉ định ID. Các ô bên dưới là những tùy chọn hiện được hỗ trợ; không tự tạo thêm đầu vào ở hệ thống khác.",
+        "help": "Thực thi theo đầu vào hợp lệ và chính sách mô phỏng đã snapshot; không tự tạo đầu vào.",
         "fields": [
           {
             "key": "target",
@@ -1022,8 +1127,8 @@
             "default": "Thử nghiệm có kiểm soát"
           }
         ],
-        "available": false,
-        "unavailable_reason": "Phụ thuộc quy trình trả hàng.",
+        "available": true,
+        "unavailable_reason": "",
         "mode": "count",
         "supports_auto": false,
         "design_note": "Cách chọn yêu cầu; khoảng trễ; lý do từ chối mẫu/nhập riêng."
@@ -1061,7 +1166,7 @@
         "label": "Trả kết quả hoàn tiền",
         "group": "5. Dịch vụ thanh toán mô phỏng",
         "unit": "Một yêu cầu hoàn tiền được hoàn tất",
-        "help": "Chọn đối tượng hợp lệ tự động hoặc chỉ định ID. Các ô bên dưới là những tùy chọn hiện được hỗ trợ; không tự tạo thêm đầu vào ở hệ thống khác.",
+        "help": "Thực thi theo đầu vào hợp lệ và chính sách mô phỏng đã snapshot; không tự tạo đầu vào.",
         "fields": [
           {
             "key": "target",
@@ -1070,10 +1175,10 @@
             "default": ""
           }
         ],
-        "available": false,
-        "unavailable_reason": "Cần chốt hoàn tiền một phần, thu hồi và chính sách đủ điều kiện.",
+        "available": true,
+        "unavailable_reason": "",
         "mode": "count",
-        "supports_auto": false,
+        "supports_auto": true,
         "design_note": "Phạm vi yêu cầu hợp lệ; khoảng trễ theo phương thức; cách chọn cũ nhất/chỉ định. Chưa tự thêm enum hoàn tiền thất bại vào schema."
       },
       {
@@ -1247,9 +1352,9 @@
           },
           {
             "key": "quantity",
-            "label": "Số lượng mỗi lần",
+            "label": "Điều chỉnh số lượng (+ nhập thêm, − giảm tồn)",
             "type": "number",
-            "min": 1,
+            "min": -100000,
             "max": 100000,
             "default": 1
           },
@@ -1291,7 +1396,7 @@
         "label": "Nhận lại hàng trả",
         "group": "Nhân viên kho",
         "unit": "Một yêu cầu nhận lại gắn dòng hàng và số lượng",
-        "help": "Chọn đối tượng hợp lệ tự động hoặc chỉ định ID. Các ô bên dưới là những tùy chọn hiện được hỗ trợ; không tự tạo thêm đầu vào ở hệ thống khác.",
+        "help": "Thực thi theo đầu vào hợp lệ và chính sách mô phỏng đã snapshot; không tự tạo đầu vào.",
         "fields": [
           {
             "key": "target",
@@ -1300,10 +1405,10 @@
             "default": ""
           }
         ],
-        "available": false,
-        "unavailable_reason": "Cần chốt kiểm tra tình trạng hàng hoàn và tái nhập.",
+        "available": true,
+        "unavailable_reason": "",
         "mode": "count",
-        "supports_auto": false,
+        "supports_auto": true,
         "design_note": "Nguồn: trả sau giao/giao thất bại; kho nhận; thời gian; số lượng; tình trạng hàng; có thể tái nhập bán hay cách ly. Hàng cách ly chưa có mô hình riêng, xem giới hạn."
       },
       {
@@ -1321,10 +1426,10 @@
           },
           {
             "key": "warehouse",
-            "label": "ID kho",
+            "label": "ID kho đã giữ hàng (0: tự chọn đơn hợp lệ)",
             "type": "number",
-            "min": 1,
-            "default": 1
+            "min": 0,
+            "default": 0
           },
           {
             "key": "amount",
@@ -1332,6 +1437,14 @@
             "type": "number",
             "min": 0,
             "default": 30000
+          },
+          {
+            "key": "carrier",
+            "label": "ID đơn vị vận chuyển (0: tự chọn)",
+            "type": "number",
+            "min": 0,
+            "max": 100000,
+            "default": 0
           }
         ],
         "available": true,
@@ -1521,6 +1634,56 @@
         "mode": "count",
         "supports_auto": false,
         "design_note": "Phạm vi kho–SKU hoạt động; giờ chốt. Đây là một lượt chạy, không phải một lượt trên mỗi dòng số dư. Mỗi ngày tối đa một kết quả hiệu lực cho cùng kho–SKU."
+      },
+      {
+        "code": "CAR-05",
+        "label": "Nhận hàng giao thất bại trả về kho",
+        "group": "Đơn vị vận chuyển mô phỏng",
+        "unit": "một vận đơn đủ điều kiện",
+        "help": "Giao lại trong giới hạn số lần hoặc nhận thực tế hàng trả về kho; không tự nhập lại khi vừa báo giao thất bại.",
+        "fields": [
+          {
+            "key": "target",
+            "label": "ID vận đơn (trống: tự chọn)",
+            "type": "text",
+            "default": ""
+          },
+          {
+            "key": "return_policy",
+            "label": "Nhận hàng trả về",
+            "type": "select",
+            "options": [
+              "all_failed",
+              "attempts_exhausted"
+            ],
+            "default": "all_failed"
+          }
+        ],
+        "available": true,
+        "unavailable_reason": "",
+        "mode": "count",
+        "supports_auto": true,
+        "design_note": "Chọn đơn COD đã giao đủ điều kiện; độ trễ báo thu; số tiền theo nghĩa vụ đơn, không nhập tiền tùy ý. Không coi COD giao thất bại là đã thu."
+      },
+      {
+        "code": "CAR-06",
+        "label": "Xếp giao lại đơn thất bại",
+        "group": "Đơn vị vận chuyển mô phỏng",
+        "unit": "một vận đơn đủ điều kiện",
+        "help": "Giao lại trong giới hạn số lần hoặc nhận thực tế hàng trả về kho; không tự nhập lại khi vừa báo giao thất bại.",
+        "fields": [
+          {
+            "key": "target",
+            "label": "ID vận đơn (trống: tự chọn)",
+            "type": "text",
+            "default": ""
+          }
+        ],
+        "available": true,
+        "unavailable_reason": "",
+        "mode": "count",
+        "supports_auto": true,
+        "design_note": "Chọn đơn COD đã giao đủ điều kiện; độ trễ báo thu; số tiền theo nghĩa vụ đơn, không nhập tiền tùy ý. Không coi COD giao thất bại là đã thu."
       }
     ]
   },
@@ -1555,6 +1718,23 @@
             "min": 1,
             "max": 366,
             "default": 7
+          },
+          {
+            "key": "campaign_type",
+            "label": "Loại chiến dịch mô phỏng",
+            "type": "text",
+            "default": "Brand Awareness"
+          },
+          {
+            "key": "campaign_channel",
+            "label": "Mã kênh đích",
+            "type": "select",
+            "options": [
+              "WEB",
+              "APP",
+              "LIVESTREAM"
+            ],
+            "default": "WEB"
           }
         ],
         "available": true,
@@ -1625,6 +1805,12 @@
             "min": 1,
             "max": 366,
             "default": 7
+          },
+          {
+            "key": "value",
+            "label": "Tên ưu đãi (trống: dùng mẫu)",
+            "type": "text",
+            "default": ""
           }
         ],
         "available": true,
@@ -1668,6 +1854,12 @@
             "min": 1,
             "max": 366,
             "default": 7
+          },
+          {
+            "key": "value",
+            "label": "Tên ưu đãi (trống: dùng mẫu)",
+            "type": "text",
+            "default": ""
           }
         ],
         "available": true,
@@ -1717,6 +1909,12 @@
             "min": 1,
             "max": 366,
             "default": 7
+          },
+          {
+            "key": "value",
+            "label": "Tên ưu đãi (trống: dùng mẫu)",
+            "type": "text",
+            "default": ""
           }
         ],
         "available": true,
@@ -1752,6 +1950,14 @@
             "min": 1,
             "max": 100000,
             "default": 1
+          },
+          {
+            "key": "impressions",
+            "label": "Lượt hiển thị (0: dùng mẫu clicks × 100)",
+            "type": "number",
+            "min": 0,
+            "max": 1000000000,
+            "default": 0
           }
         ],
         "available": true,
@@ -1859,6 +2065,12 @@
               "Email"
             ],
             "default": "Organic"
+          },
+          {
+            "key": "campaign",
+            "label": "ID chiến dịch (auto: chọn chiến dịch đúng kênh; trống: không gắn)",
+            "type": "text",
+            "default": ""
           }
         ],
         "available": true,
@@ -2011,34 +2223,37 @@
             "label": "Kênh",
             "type": "select",
             "options": [
+              "",
               "Web",
               "App",
               "Livestream"
             ],
-            "default": "Web"
+            "default": ""
           },
           {
             "key": "device",
             "label": "Thiết bị",
             "type": "select",
             "options": [
+              "",
               "Mobile",
               "Desktop",
               "Tablet"
             ],
-            "default": "Mobile"
+            "default": ""
           },
           {
             "key": "traffic",
             "label": "Nguồn truy cập",
             "type": "select",
             "options": [
+              "",
               "Organic",
               "Direct",
               "Social",
               "Email"
             ],
-            "default": "Organic"
+            "default": ""
           }
         ],
         "available": true,
@@ -2068,11 +2283,11 @@
           },
           {
             "key": "quantity",
-            "label": "Số lượng mỗi lần",
+            "label": "Lọc số lượng giỏ (0: mọi số lượng)",
             "type": "number",
-            "min": 1,
+            "min": 0,
             "max": 100000,
-            "default": 1
+            "default": 0
           }
         ],
         "available": true,
@@ -2249,6 +2464,12 @@
               "Email"
             ],
             "default": "Organic"
+          },
+          {
+            "key": "campaign",
+            "label": "ID chiến dịch (auto: chọn chiến dịch đúng kênh; trống: không gắn)",
+            "type": "text",
+            "default": ""
           }
         ],
         "available": true,
@@ -2433,12 +2654,22 @@
             "label": "Ngày kết thúc hiệu lực / cuối kỳ",
             "type": "date",
             "default": ""
+          },
+          {
+            "key": "scope",
+            "label": "Phạm vi danh mục",
+            "type": "select",
+            "options": [
+              "category",
+              "all_leaf"
+            ],
+            "default": "category"
           }
         ],
         "available": true,
         "unavailable_reason": "",
         "mode": "count",
-        "supports_auto": false,
+        "supports_auto": true,
         "design_note": "Danh mục; hạng Normal/Preferred/Mall; tỷ lệ; ngày bắt đầu/kết thúc; chọn từng cặp hoặc mẫu áp nhiều cặp, preview số chính sách sẽ tạo."
       },
       {
@@ -2475,8 +2706,8 @@
             "default": ""
           }
         ],
-        "available": false,
-        "unavailable_reason": "Cần chốt khép khoảng chính sách và ảnh hưởng hợp đồng đã chốt.",
+        "available": true,
+        "unavailable_reason": "",
         "mode": "count",
         "supports_auto": false,
         "design_note": "Chính sách hiện tại; tỷ lệ mới; ngày hiệu lực tương lai; ngày kết thúc; kiểm tra không chồng khoảng. Không sửa tỷ lệ của giao dịch cũ."
@@ -2486,11 +2717,11 @@
         "label": "Lập đối soát seller",
         "group": "Nhân viên đối soát",
         "unit": "Một seller trong một kỳ được lập đối soát",
-        "help": "Chọn đối tượng hợp lệ tự động hoặc chỉ định ID. Các ô bên dưới là những tùy chọn hiện được hỗ trợ; không tự tạo thêm đầu vào ở hệ thống khác.",
+        "help": "Thực thi theo đầu vào hợp lệ và chính sách mô phỏng đã snapshot; không tự tạo đầu vào.",
         "fields": [
           {
             "key": "target",
-            "label": "ID đối tượng (để trống: tự chọn hợp lệ)",
+            "label": "ID seller (trống: tự chọn seller đủ điều kiện)",
             "type": "text",
             "default": ""
           },
@@ -2507,10 +2738,10 @@
             "default": ""
           }
         ],
-        "available": false,
-        "unavailable_reason": "Cần chốt giá trị hoa hồng và nghĩa vụ tại giao dịch.",
+        "available": true,
+        "unavailable_reason": "",
         "mode": "count",
-        "supports_auto": false,
+        "supports_auto": true,
         "design_note": "Seller/tập seller; lịch kỳ tuần/tháng/tùy chọn ngày đầu–cuối; độ trễ sau đóng kỳ; chính sách đơn đủ điều kiện, hoàn hàng và bên chịu voucher; ngưỡng trả tối thiểu nếu có."
       },
       {

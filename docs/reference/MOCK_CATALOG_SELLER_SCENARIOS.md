@@ -1,10 +1,10 @@
 # Thiết kế kịch bản mock — Catalog và người bán
 
-> **Cập nhật hướng cấu hình:** Xem [MOCK_CATALOG_SELLER_CONFIG.md](mock-design/MOCK_CATALOG_SELLER_CONFIG.md). Đồng bộ được tách ra màn chính; Catalog & Seller còn 4 nhóm nghiệp vụ. Danh sách hành động và form trong tài liệu mới thay thế phần cấu hình/số mặc định ở mục 8 dưới đây. Chi tiết tác động dữ liệu trong tài liệu này tiếp tục là đề xuất để bàn sau.
+> **Cập nhật hướng cấu hình:** Xem [MOCK_CATALOG_SELLER_CONFIG.md](../mock-design/configuration/MOCK_CATALOG_SELLER_CONFIG.md). Đồng bộ được tách ra màn chính; Catalog & Seller còn 4 nhóm nghiệp vụ. Danh sách hành động và form trong tài liệu mới thay thế phần cấu hình/số mặc định ở mục 8 dưới đây. Chi tiết tác động dữ liệu trong tài liệu này tiếp tục là đề xuất để bàn sau.
 
-**Trạng thái: Đề xuất để thảo luận, chưa triển khai.** Quyền và hành vi dưới đây chưa được coi là rule đã chốt. Rule đã chốt về đồng bộ append-only tại [MOCK_SYSTEM_RULES.md](mock-design/MOCK_SYSTEM_RULES.md) luôn được giữ nguyên.
+**Trạng thái: Đề xuất để thảo luận, chưa triển khai.** Quyền và hành vi dưới đây chưa được coi là rule đã chốt. Rule đã chốt về đồng bộ append-only tại [MOCK_SYSTEM_RULES.md](../mock-design/MOCK_SYSTEM_RULES.md) luôn được giữ nguyên.
 
-Cơ sở: [schema OLTP](OLTP_SCHEMA.md), [ERD](OLTP_ERD.md), [mapping Tiki](mock-design/TIKI_PRODUCT_FIELD_MAPPING.md), mục 5 và 15 của [bộ luật sinh dữ liệu cũ](DATA_GENERATION_RULES.md). Tần suất và giả định của bộ luật cũ là tài liệu tham khảo, chưa tự động áp dụng cho thiết kế mới.
+Cơ sở: [schema OLTP](../data-model/oltp/OLTP_SCHEMA.md), [ERD](../data-model/oltp/OLTP_ERD.md), [mapping Tiki](../mock-design/TIKI_PRODUCT_FIELD_MAPPING.md), mục 5 và 15 của [bộ luật sinh dữ liệu cũ](../data-model/oltp/DATA_GENERATION_RULES.md). Tần suất và giả định của bộ luật cũ là tài liệu tham khảo, chưa tự động áp dụng cho thiết kế mới.
 
 ## 1. Phạm vi và cách hiểu thực thể
 

@@ -41,14 +41,17 @@
     if (field.key === 'amount' || field.key === 'min_order') return `${number(value)} đồng`;
     if (['rate','success_rate'].includes(field.key)) return `${number(value)}%`;
     if (field.type === 'date') return day(value);
-    const words = {Web:'Website',App:'Ứng dụng',Livestream:'Phát trực tiếp',COD:'Thanh toán khi nhận hàng',Momo:'Ví MoMo','ZaloPay':'Ví ZaloPay','Credit Card':'Thẻ tín dụng','Bank Transfer':'Chuyển khoản',Mobile:'Điện thoại',Desktop:'Máy tính',Tablet:'Máy tính bảng',Organic:'Truy cập tự nhiên',Direct:'Truy cập trực tiếp','Normal':'Thông thường',Preferred:'Ưu tiên',Mall:'Gian hàng Mall',Member:'Thành viên',Silver:'Bạc',Gold:'Vàng',Platinum:'Bạch kim'};
+    const words = {direct:'Đặt trực tiếp',linked:'Từ phiên và giỏ hàng',none:'Không áp ưu đãi',auto:'Tự chọn hợp lệ',category:'Danh mục chỉ định',all_leaf:'Tất cả danh mục lá',all_failed:'Mọi vận đơn giao thất bại',attempts_exhausted:'Chỉ khi hết số lần giao lại',Web:'Website',App:'Ứng dụng',Livestream:'Phát trực tiếp',COD:'Thanh toán khi nhận hàng',Momo:'Ví MoMo','ZaloPay':'Ví ZaloPay','Credit Card':'Thẻ tín dụng','Bank Transfer':'Chuyển khoản',Mobile:'Điện thoại',Desktop:'Máy tính',Tablet:'Máy tính bảng',Organic:'Truy cập tự nhiên',Direct:'Truy cập trực tiếp','Normal':'Thông thường',Preferred:'Ưu tiên',Mall:'Gian hàng Mall',Member:'Thành viên',Silver:'Bạc',Gold:'Vàng',Platinum:'Bạch kim'};
     return words[value] || String(value);
   }
   function parameters(a, cfg) {
-    return a.fields.flatMap(field => {
+    const rows = a.fields.flatMap(field => {
       const value = cfg.params?.[field.key] ?? field.default;
       return value === '' || value === null || value === undefined ? [] : [{label:field.label.replace(/\s*\(trống:.*\)$/,''),value:valueLabel(field,value)}];
     });
+    if(cfg.delay_days)rows.push({label:'Độ trễ tối thiểu',value:cfg.delay_days+' ngày'});
+    if(cfg.variants?.length){const total=cfg.variants.reduce((n,r)=>n+r.weight,0);for(const row of cfg.variants){rows.push({label:'Nhóm '+row.name,value:`Trọng số ${row.weight}/${total}: `+parameters(a,{params:{...cfg.params,...row.params}}).map(p=>p.label+': '+p.value).join('; ')})}}
+    return rows;
   }
   function technical(code) {
     return `<details class="technical"><summary>Chi tiết kỹ thuật</summary><span>Mã nội bộ: <code>${esc(code)}</code></span></details>`;

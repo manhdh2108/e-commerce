@@ -14,17 +14,28 @@ class DomainEngine:
         self.code = action["code"]
         self.now = action["at"]
         self.r = random.Random(action["id"])
+        from .policies import DEFAULT_POLICY
+
+        self.policy = action.get("business_policy") or DEFAULT_POLICY
         self.effects = []
+        from .entities import EntityGenerator
+
+        self.entities = EntityGenerator(
+            action.get("entity_profile"), action.get("seed", 42)
+        )
 
     def choose(self, table, predicate=lambda r: True, target=None):
         target = target if target is not None else self.p.get("target")
         used_key = f"used:{self.now[:10]}:{self.code}:{table}"
         catalog_action = self.code.startswith(("SEL-", "CAT-", "MGR-"))
         used = self.getmeta(used_key, []) if catalog_action else []
+        from .selection import EligibleTargetSelector
+
         rows = [
             r
-            for r in self.u.rows(table)
+            for r in EligibleTargetSelector(self).rows(table, target)
             if predicate(r)
+            and self.due(table, r)
             and (not target or str(r["id"]) == str(target))
             and r["id"] not in used
             and (
@@ -40,6 +51,58 @@ class DomainEngine:
         if catalog_action:
             self.meta(used_key, used + [selected["id"]])
         return selected
+
+    def due(self, table, row):
+        delay = self.p.get("_delay_days", 0)
+        order = (
+            row
+            if table == "orders"
+            else self.u.one("orders", row["order_id"])
+            if table in ["payments", "order_items", "refunds"]
+            else next(
+                (
+                    o
+                    for o in self.u.rows("orders")
+                    if o["order_code"] == row["order_code"]
+                ),
+                None,
+            )
+            if table == "shipments"
+            else None
+        )
+        if table == "returns":
+            item = self.u.one("order_items", row["order_item_id"])
+            order = self.u.one("orders", item["order_id"]) if item else None
+        if order:
+            delay = (
+                self.getmeta(f"order:{order['id']}", {})
+                .get("schedule", {})
+                .get(self.code, delay)
+            )
+        if not delay:
+            return True
+        fields = {
+            ("PAY-01", "payments"): "transaction_time",
+            ("ORD-01", "orders"): "created_at",
+            ("DSP-01", "orders"): "updated_at",
+            ("CAR-01", "shipments"): "created_at",
+            ("CAR-02", "shipments"): "picked_at",
+            ("CAR-03", "shipments"): "in_transit_at",
+            ("CAR-04", "orders"): "completed_at",
+            ("SUP-01", "returns"): "requested_at",
+            ("SUP-02", "returns"): "requested_at",
+            ("WH-04", "returns"): "approved_at",
+            ("PAY-02", "refunds"): "requested_at",
+            ("CAR-05", "shipments"): "failed_at",
+            ("CAR-06", "shipments"): "failed_at",
+        }
+        field = fields.get((self.code, table))
+        at = row.get(field) if field else None
+        if self.code == "CUS-09" and table == "order_items":
+            at = self.u.one("orders", row["order_id"])["completed_at"]
+        return not at or datetime.fromisoformat(self.now) >= datetime.fromisoformat(
+            at
+        ) + timedelta(days=delay)
 
     def touch(self, table, row, **values):
         if "updated_at" in self.db.bm.tables[table].c:
@@ -64,6 +127,19 @@ class DomainEngine:
 
     def execute(self):
         c = self.code
+        if c in [
+            "GST-04",
+            "CUS-08",
+            "SUP-01",
+            "SUP-02",
+            "WH-04",
+            "PAY-02",
+            "CAR-05",
+            "CAR-06",
+        ]:
+            from .aftersales import AfterSalesWorkflow
+
+            return AfterSalesWorkflow(self).execute()
         if c.startswith("SEL-") or c.startswith("CAT-") or c.startswith("MGR-"):
             return self.catalog()
         if c in ["GST-01", "CUS-01", "CUS-02", "CUS-03", "CUS-04", "SYS-03"]:
@@ -205,14 +281,7 @@ class DomainEngine:
         if c == "GST-01":
             return self.u.add(
                 "customers",
-                full_name=f"Khách mô phỏng {self.a['id'][:6]}",
-                email=f"khach.{self.a['id']}@example.com",
-                phone_number="0900000000",
-                province=self.p["province"],
-                city=self.p["province"],
-                membership_tier="Member",
-                registration_date=self.now,
-                updated_at=self.now,
+                **self.entities.person(self.a["id"], self.now, self.p.get("province")),
             )
         row = self.choose("customers")
         if c == "CUS-01":
@@ -234,99 +303,32 @@ class DomainEngine:
                 "customer_addresses", lambda a: a["customer_id"] == row["id"], target=""
             )
             for a in self.u.rows("customer_addresses"):
-                if a["customer_id"] == row["id"]:
-                    self.touch(
-                        "customer_addresses", a, is_default=a["id"] == addr["id"]
-                    )
+                if a["customer_id"] == row["id"] and a["is_default"]:
+                    self.touch("customer_addresses", a, is_default=False)
+            self.touch("customer_addresses", addr, is_default=True)
 
     def address(self, customer=None):
-        return self.u.add(
-            "customer_addresses",
-            customer_id=customer,
-            recipient_name="Người nhận mô phỏng",
-            phone="0900000000",
-            address_detail=self.p.get("value") or "Địa chỉ thử nghiệm",
-            ward="Phường mô phỏng",
-            province=self.p.get("province", "TP. Hồ Chí Minh"),
-            is_default=False,
+        cust = self.u.one("customers", customer) if customer is not None else None
+        existing = [
+            r
+            for r in self.u.rows("customer_addresses")
+            if customer is not None and r["customer_id"] == customer
+        ]
+        values = self.entities.address(
+            self.a["id"],
+            cust,
+            self.p.get("province") or (cust or {}).get("province"),
+            self.p.get("value"),
         )
+        values["is_default"] = customer is not None and not any(
+            r["is_default"] for r in existing
+        )
+        return self.u.add("customer_addresses", **values)
 
     def checkout(self, guest):
-        prod = self.choose(
-            "products", self.saleable, target=self.p.get("product") or ""
-        )
-        inv = self.choose(
-            "inventory_levels",
-            lambda r: (
-                r["sku"] == prod["sku"]
-                and r["quantity_on_hand"] - r["quantity_reserved"]
-                >= int(self.p.get("quantity", 1))
-            ),
-            target="",
-        )
-        qty = int(self.p.get("quantity", 1))
-        cust = None if guest else self.choose("customers")["id"]
-        addr = self.address(cust)
-        channel = next(
-            r
-            for r in self.u.rows("channels")
-            if r["channel_name"] == self.p.get("channel", "Web")
-        )
-        amount = round(prod["price"]) * qty
-        order = self.u.add(
-            "orders",
-            order_code="OD" + self.a["id"].replace("-", "")[:20],
-            customer_id=cust,
-            seller_id=prod["seller_id"],
-            channel_id=channel["id"],
-            order_status="Pending",
-            total_gross_amount=amount,
-            total_discount_amount=0,
-            shipping_fee=0,
-            shipping_discount_amount=0,
-            final_amount=amount,
-            shipping_address_id=addr["id"],
-            created_at=self.now,
-            updated_at=self.now,
-        )
-        self.u.add(
-            "order_items",
-            order_id=order["id"],
-            line_number=1,
-            product_id=prod["id"],
-            quantity=qty,
-            list_price=prod["original_price"],
-            unit_price=prod["price"],
-            discount_amount=0,
-            net_amount=amount,
-            item_status="Pending",
-        )
-        self.touch(
-            "inventory_levels", inv, quantity_reserved=inv["quantity_reserved"] + qty
-        )
-        method = next(
-            r
-            for r in self.u.rows("payment_methods")
-            if r["method_name"] == self.p.get("method", "COD")
-        )
-        self.meta(
-            f"order:{order['id']}",
-            {
-                "warehouse": inv["warehouse_id"],
-                "method": method["id"],
-                "method_name": method["method_name"],
-                "reserved": True,
-            },
-        )
-        if method["method_name"] != "COD":
-            self.u.add(
-                "payments",
-                order_id=order["id"],
-                payment_method_id=method["id"],
-                payment_status="Pending",
-                paid_amount=0,
-                transaction_time=self.now,
-            )
+        from .purchase import PurchaseWorkflow
+
+        return PurchaseWorkflow(self).checkout(guest)
 
     def cancel(self):
         # Full cancellation before pickup. Paid obligations are not discarded.
@@ -340,15 +342,16 @@ class DomainEngine:
             if c == "CUS-07" and o["customer_id"] is None:
                 return False
             if any(
-                s["order_code"] == o["order_code"] for s in self.u.rows("shipments")
-            ):
-                return False
-            if any(
-                p["order_id"] == o["id"] and p["payment_status"] == "Success"
-                for p in self.u.rows("payments")
+                s["order_code"] == o["order_code"] and s["shipment_status"] != "Created"
+                for s in self.u.rows("shipments")
             ):
                 return False
             if c in ["SYS-01", "SYS-02"]:
+                if any(
+                    p["order_id"] == o["id"] and p["payment_status"] == "Success"
+                    for p in self.u.rows("payments")
+                ):
+                    return False
                 if datetime.fromisoformat(self.now) - datetime.fromisoformat(
                     o["created_at"]
                 ) < timedelta(days=self.p.get("days", 1)):
@@ -361,7 +364,20 @@ class DomainEngine:
             return True
 
         order = self.choose("orders", eligible)
-        self.touch("orders", order, order_status="Cancelled", cancelled_at=self.now)
+        self.touch(
+            "orders",
+            order,
+            order_status="Cancelled",
+            cancelled_at=self.now,
+            cancellation_reason=self.p.get("reason")
+            or (
+                "Hết hạn thanh toán"
+                if c == "SYS-01"
+                else "Quá hạn xử lý"
+                if c == "SYS-02"
+                else "Hủy trước lấy hàng"
+            ),
+        )
         meta = self.getmeta(f"order:{order['id']}", {})
         for item in self.u.rows("order_items"):
             if item["order_id"] != order["id"]:
@@ -382,7 +398,30 @@ class DomainEngine:
                     inv,
                     quantity_reserved=inv["quantity_reserved"] - item["quantity"],
                 )
+        for shipment in self.u.rows("shipments"):
+            if (
+                shipment["order_code"] == order["order_code"]
+                and shipment["shipment_status"] == "Created"
+            ):
+                self.touch("shipments", shipment, shipment_status="Cancelled")
         self.meta(f"order:{order['id']}", {**meta, "reserved": False})
+        from .aftersales import AfterSalesWorkflow
+        from .benefits import PromotionWorkflow
+
+        aftersales = AfterSalesWorkflow(self)
+        aftersales.refund(order, aftersales.paid(order), "Cancelled before pickup")
+        PromotionWorkflow(self).release(order)
+        for payment in self.u.rows("payments"):
+            if (
+                payment["order_id"] == order["id"]
+                and payment["payment_status"] == "Pending"
+            ):
+                self.touch(
+                    "payments",
+                    payment,
+                    payment_status="Failed",
+                    transaction_time=self.now,
+                )
 
     def order(self):
         c = self.code
@@ -503,6 +542,10 @@ class DomainEngine:
                     updated_at=self.now,
                 )
             qty = int(self.p.get("quantity", 1))
+            if inv["quantity_on_hand"] + qty < inv["quantity_reserved"]:
+                raise NotEligible(
+                    "Điều chỉnh làm tồn thấp hơn lượng đang giữ; không ghi ledger."
+                )
             self.touch(
                 "inventory_levels", inv, quantity_on_hand=inv["quantity_on_hand"] + qty
             )
@@ -538,6 +581,11 @@ class DomainEngine:
                 "orders",
                 lambda r: (
                     r["order_status"] == "Processing"
+                    and (
+                        not self.p.get("warehouse")
+                        or self.getmeta(f"order:{r['id']}", {}).get("warehouse")
+                        == self.p["warehouse"]
+                    )
                     and not any(
                         s["order_code"] == r["order_code"]
                         for s in self.u.rows("shipments")
@@ -547,7 +595,7 @@ class DomainEngine:
             meta = self.getmeta(f"order:{o['id']}", {})
             if not meta.get("reserved"):
                 raise NotEligible("Đơn chưa giữ hàng.")
-            carrier = self.choose("carriers", target="")
+            carrier = self.choose("carriers", target=self.p.get("carrier") or "")
             self.u.add(
                 "shipments",
                 order_code=o["order_code"],
@@ -601,13 +649,26 @@ class DomainEngine:
             return
         if c == "CAR-02":
             ship = self.choose("shipments", lambda r: r["shipment_status"] == "Picked")
-            self.touch("shipments", ship, shipment_status="In Transit")
+            self.touch(
+                "shipments", ship, shipment_status="In Transit", in_transit_at=self.now
+            )
             return
         if c == "CAR-03":
             ship = self.choose(
                 "shipments", lambda r: r["shipment_status"] == "In Transit"
             )
             ok = self.r.random() * 100 < float(self.p.get("success_rate", 95))
+            self.u.add(
+                "delivery_attempts",
+                shipment_id=ship["id"],
+                attempt_number=1
+                + sum(
+                    a["shipment_id"] == ship["id"]
+                    for a in self.u.rows("delivery_attempts")
+                ),
+                result="Delivered" if ok else "Failed",
+                attempted_at=self.now,
+            )
             self.touch(
                 "shipments",
                 ship,
@@ -659,8 +720,8 @@ class DomainEngine:
                 "marketing_campaigns",
                 campaign_code="CMP" + self.a["id"][:12],
                 campaign_name=self.p.get("value") or "Chiến dịch mô phỏng",
-                campaign_type="Brand Awareness",
-                target_channel_code="WEB",
+                campaign_type=self.p.get("campaign_type", "Brand Awareness"),
+                target_channel_code=self.p.get("campaign_channel", "WEB"),
                 budget_amount=self.p.get("amount", 30000),
                 start_date=self.now[:10],
                 end_date=(
@@ -691,7 +752,7 @@ class DomainEngine:
             return self.u.add(
                 "promotions",
                 promo_code="VC" + self.a["id"][:14],
-                promo_name="Voucher mô phỏng",
+                promo_name=self.p.get("value") or "Voucher mô phỏng",
                 promo_type="Seller Voucher"
                 if seller
                 else ("Freeship Voucher" if c == "MKT-04" else "Platform Voucher"),
@@ -728,6 +789,8 @@ class DomainEngine:
             )
             amount = self.p["amount"]
             clicks = int(self.p.get("quantity", 1))
+            if self.p.get("impressions") and self.p["impressions"] < clicks:
+                raise NotEligible("Lượt hiển thị không thể nhỏ hơn lượt click.")
             if amount + spent > campaign["budget_amount"]:
                 raise NotEligible("Chi quảng cáo vượt ngân sách.")
             return self.u.add(
@@ -736,7 +799,7 @@ class DomainEngine:
                 channel_code=campaign["target_channel_code"],
                 log_date=self.now[:10],
                 cost_amount=amount,
-                impressions=clicks * 100,
+                impressions=int(self.p.get("impressions") or clicks * 100),
                 clicks=clicks,
             )
         if c == "AUT-MKT-03":
@@ -782,18 +845,47 @@ class DomainEngine:
                 event_time=self.now,
             )
         if c in ["GST-WEB-01", "CUS-WEB-01"]:
-            cust = (
-                self.choose("customers", target="")["id"]
-                if c.startswith("CUS")
-                else None
-            )
+            cust = self.choose("customers")["id"] if c.startswith("CUS") else None
             channel = next(
                 r
                 for r in self.u.rows("channels")
                 if r["channel_name"] == self.p.get("channel", "Web")
             )
+            campaign = None
+            if self.p.get("campaign"):
+                if self.p["campaign"] == "auto":
+                    campaigns = [
+                        r
+                        for r in self.u.rows("marketing_campaigns")
+                        if r["start_date"] <= self.now[:10] <= r["end_date"]
+                        and r["target_channel_code"]
+                        == {"Web": "WEB", "App": "APP", "Livestream": "LIVESTREAM"}[
+                            channel["channel_name"]
+                        ]
+                    ]
+                    campaign = self.r.choice(campaigns) if campaigns else None
+                else:
+                    campaign = self.u.one(
+                        "marketing_campaigns", int(self.p["campaign"])
+                    )
+                if (not campaign and self.p["campaign"] != "auto") or (
+                    campaign
+                    and (
+                        not campaign["start_date"]
+                        <= self.now[:10]
+                        <= campaign["end_date"]
+                        or campaign["target_channel_code"]
+                        != {"Web": "WEB", "App": "APP", "Livestream": "LIVESTREAM"}[
+                            channel["channel_name"]
+                        ]
+                    )
+                ):
+                    raise NotEligible(
+                        "Chiến dịch attribution không hiệu lực hoặc khác kênh phiên."
+                    )
             return self.u.add(
                 "sessions",
+                campaign_id=campaign["id"] if campaign else None,
                 customer_id=cust,
                 channel_id=channel["id"],
                 traffic_source=self.p.get("traffic", "Organic"),
@@ -801,13 +893,38 @@ class DomainEngine:
                 started_at=self.now,
             )
         if c == "AUT-WEB-01":
-            s = self.choose("sessions", lambda r: not r["ended_at"])
+            s = self.choose(
+                "sessions",
+                lambda r: (
+                    not r["ended_at"]
+                    and (
+                        not self.p.get("device") or r["device_type"] == self.p["device"]
+                    )
+                    and (
+                        not self.p.get("traffic")
+                        or r["traffic_source"] == self.p["traffic"]
+                    )
+                    and (
+                        not self.p.get("channel")
+                        or self.u.one("channels", r["channel_id"])["channel_name"]
+                        == self.p["channel"]
+                    )
+                ),
+            )
             return self.touch("sessions", s, ended_at=self.now)
         if c == "AUT-WEB-02":
             cart = self.choose(
                 "cart_items",
                 lambda r: (
                     r["cart_status"] == "Active"
+                    and (
+                        not self.p.get("product")
+                        or str(r["product_id"]) == str(self.p["product"])
+                    )
+                    and (
+                        not self.p.get("quantity")
+                        or r["quantity"] == self.p["quantity"]
+                    )
                     and self.u.one("sessions", r["session_id"])["ended_at"] is not None
                 ),
             )
@@ -824,6 +941,7 @@ class DomainEngine:
                 "page_events",
                 session_id=s["id"],
                 event_type="search",
+                search_keyword=self.p.get("value") or None,
                 event_time=self.now,
             )
         if c.endswith("WEB-04"):
@@ -857,6 +975,15 @@ class DomainEngine:
                 lambda r: (
                     r["cart_status"] == "Active"
                     and not self.u.one("sessions", r["session_id"])["ended_at"]
+                    and user_matches(self.u.one("sessions", r["session_id"]))
+                    and (
+                        not c.endswith("06")
+                        or not any(
+                            ev["session_id"] == r["session_id"]
+                            and ev["event_type"] == "begin_checkout"
+                            for ev in self.u.rows("page_events")
+                        )
+                    )
                 ),
             )
             if c.endswith("05"):
@@ -875,55 +1002,6 @@ class DomainEngine:
         )
 
     def finance(self):
-        c = self.code
-        if c == "FIN-POL-01":
-            cat = self.u.one("categories", self.p.get("category"))
-            if not cat:
-                raise NotEligible("Cần chọn danh mục có thật.")
-            start = self.p.get("start") or self.now[:10]
-            end = self.p.get("end") or None
-            if end and end < start:
-                raise NotEligible("Ngày kết thúc trước ngày bắt đầu.")
-            for row in self.u.rows("seller_commission_rates"):
-                if (
-                    row["category_id"] == cat["id"]
-                    and row["seller_tier"] == self.p["tier"]
-                    and (not row["effective_to"] or row["effective_to"] >= start)
-                    and (not end or row["effective_from"] <= end)
-                ):
-                    raise NotEligible("Khoảng chính sách chồng lấn.")
-            return self.u.add(
-                "seller_commission_rates",
-                category_id=cat["id"],
-                seller_tier=self.p["tier"],
-                commission_rate=self.p["rate"] / 100,
-                effective_from=start,
-                effective_to=end,
-            )
-        if c == "FIN-SEL-01":
-            return self.choose("seller_payouts")
-        if c == "FIN-REC-02":
-            payout = self.choose(
-                "seller_payouts",
-                lambda r: (
-                    r["payout_status"] == "Pending"
-                    and not self.getmeta(f"approved:{r['id']}", False)
-                ),
-            )
-            self.meta(f"approved:{payout['id']}", True)
-            return
-        if c == "FIN-PAY-01":
-            payout = self.choose(
-                "seller_payouts",
-                lambda r: (
-                    r["payout_status"] == "Pending"
-                    and self.getmeta(f"approved:{r['id']}", False)
-                    and r["payout_amount"] > 0
-                ),
-            )
-            return self.touch(
-                "seller_payouts", payout, payout_status="Paid", paid_at=self.now
-            )
-        raise NotEligible(
-            "Đối soát cần chốt thuộc tính và nghĩa vụ tại giao dịch; chưa tính từ catalog hiện tại."
-        )
+        from .finance import FinanceWorkflow
+
+        return FinanceWorkflow(self).execute()

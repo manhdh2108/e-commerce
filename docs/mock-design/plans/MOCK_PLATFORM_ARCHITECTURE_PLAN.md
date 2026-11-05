@@ -1,10 +1,10 @@
 # Kế hoạch hệ thống mock — UI, workflow, backend và lưu trữ
 
-> Đã chuyển sang triển khai theo yêu cầu người dùng. Nội dung dưới đây là thiết kế; xem [trạng thái thực tế](MOCK_IMPLEMENTATION_STATUS.md) để biết tính năng đã chạy và giới hạn. Không hiểu “đã có thiết kế” là toàn bộ nghiệp vụ đã hoàn thành.
+> Đã chuyển sang triển khai theo yêu cầu người dùng. Nội dung dưới đây là thiết kế; xem [trạng thái thực tế](../reviews/MOCK_IMPLEMENTATION_STATUS.md) để biết tính năng đã chạy và giới hạn. Không hiểu “đã có thiết kế” là toàn bộ nghiệp vụ đã hoàn thành.
 
 **Trạng thái:** Kế hoạch kiến trúc để review; chưa triển khai. Phần cấu hình hành động của 6 hệ thống được dùng làm đầu vào thiết kế theo xác nhận của người dùng. Kế hoạch này không tự bổ sung hay thay đổi quyền nghiệp vụ.
 
-Các rule tại [MOCK_SYSTEM_RULES.md](MOCK_SYSTEM_RULES.md) được giữ nguyên. Tài liệu cũ ngoài `docs/mock-design/` chỉ tham khảo. Python triển khai theo OOP trong `scripts/`.
+Các rule tại [MOCK_SYSTEM_RULES.md](../MOCK_SYSTEM_RULES.md) được giữ nguyên. Tài liệu cũ ngoài `docs/mock-design/` chỉ tham khảo. Python triển khai theo OOP trong `scripts/`.
 
 ## 1. Mục tiêu và giới hạn
 

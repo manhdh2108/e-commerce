@@ -1,12 +1,12 @@
 # Kịch bản và màn cấu hình mock — Catalog & Seller
 
-> Đã chuyển sang triển khai theo yêu cầu người dùng. Nội dung dưới đây là thiết kế; xem [trạng thái thực tế](MOCK_IMPLEMENTATION_STATUS.md) để biết tính năng đã chạy và giới hạn. Không hiểu “đã có thiết kế” là toàn bộ nghiệp vụ đã hoàn thành.
+> Đã chuyển sang triển khai theo yêu cầu người dùng. Nội dung dưới đây là thiết kế; xem [trạng thái thực tế](../reviews/MOCK_IMPLEMENTATION_STATUS.md) để biết tính năng đã chạy và giới hạn. Không hiểu “đã có thiết kế” là toàn bộ nghiệp vụ đã hoàn thành.
 
 ## 1. Phạm vi đã xác định
 
 Tài liệu này mô tả người dùng chọn hành động và cấu hình sản lượng như thế nào. Chưa thiết kế cách ghi dữ liệu xuống các bảng, transaction hoặc giao tiếp nội bộ.
 
-Đây là hướng thiết kế mới theo yêu cầu người dùng, thay thế phần cấu hình và số lượng mặc định trong mục 8 của [tài liệu kịch bản trước](../MOCK_CATALOG_SELLER_SCENARIOS.md). Không coi các giá trị 1/100 từng đề xuất là cấu hình đã chốt.
+Đây là hướng thiết kế mới theo yêu cầu người dùng, thay thế phần cấu hình và số lượng mặc định trong mục 8 của [tài liệu kịch bản trước](../../reference/MOCK_CATALOG_SELLER_SCENARIOS.md). Không coi các giá trị 1/100 từng đề xuất là cấu hình đã chốt.
 
 Có 5 bên tác động trong tổng thể, nhưng **Catalog & Seller hiển thị 4 nhóm nghiệp vụ**. Tiến trình đồng bộ Tiki được tách ra ngoài màn chính vì cung cấp đầu vào cho nhiều hệ thống.
 
@@ -102,7 +102,7 @@ Hiện VIS-02/VIS-03 chưa có event chuyên biệt trong schema analytics. UI c
 
 ### 4.1. Giới hạn tác động
 
-Chức năng này chỉ có nhiệm vụ **bổ sung đầu vào mới** theo [Rule 01](MOCK_SYSTEM_RULES.md):
+Chức năng này chỉ có nhiệm vụ **bổ sung đầu vào mới** theo [Rule 01](../MOCK_SYSTEM_RULES.md):
 
 - Chỉ thêm sản phẩm, người bán và danh mục chưa tồn tại, đúng mapping và liên kết hợp lệ.
 - Không cập nhật giá, thông tin hoặc trạng thái của bản ghi đã có.

@@ -19,6 +19,8 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
     UniqueConstraint,
+    CheckConstraint,
+    Index,
     select,
     insert,
     update,
@@ -117,6 +119,36 @@ class Database:
             "channel_id": "channels.id",
             "payment_method_id": "payment_methods.id",
             "shipping_address_id": "customer_addresses.id",
+            "checkout_id": "checkouts.id",
+            "cart_item_id": "cart_items.id",
+            "return_id": "returns.id",
+            "shipment_id": "shipments.id",
+            "seller_payout_id": "seller_payouts.id",
+            "commission_category_id": "categories.id",
+        }
+        checks = {
+            "inventory_levels": [
+                "quantity_on_hand >= 0 AND quantity_reserved >= 0 AND quantity_reserved <= quantity_on_hand"
+            ],
+            "inventory_daily_balance": [
+                "quantity_on_hand >= 0 AND quantity_reserved >= 0 AND quantity_reserved <= quantity_on_hand"
+            ],
+            "order_items": [
+                "quantity > 0 AND unit_price >= 0 AND discount_amount >= 0 AND net_amount >= 0"
+            ],
+            "orders": [
+                "total_gross_amount >= 0 AND total_discount_amount >= 0 AND shipping_fee >= 0 AND shipping_discount_amount >= 0 AND final_amount >= 0"
+            ],
+            "payments": ["paid_amount >= 0"],
+            "returns": ["quantity > 0 AND refund_amount >= 0"],
+            "refunds": ["amount > 0"],
+            "product_reviews": ["rating >= 1 AND rating <= 5"],
+            "ad_spend_logs": [
+                "cost_amount >= 0 AND clicks >= 0 AND impressions >= clicks"
+            ],
+            "seller_commission_rates": [
+                "commission_rate >= 0 AND commission_rate <= 1"
+            ],
         }
         for name, cols in fields.items():
             self_table = []
@@ -135,7 +167,12 @@ class Database:
                 )
             unique = {
                 "products": [("sku",)],
+                "checkouts": [("checkout_code",)],
+                "delivery_attempts": [("shipment_id", "attempt_number")],
+                "checkout_lines": [("cart_item_id",), ("order_item_id",)],
+                "seller_payout_items": [("order_item_id",)],
                 "orders": [("order_code",)],
+                "order_items": [("order_id", "line_number")],
                 "shipments": [("tracking_code",), ("order_code",)],
                 "inventory_levels": [("warehouse_id", "sku")],
                 "inventory_daily_balance": [("balance_date", "warehouse_id", "sku")],
@@ -144,7 +181,19 @@ class Database:
                 "ad_spend_logs": [("campaign_id", "channel_code", "log_date")],
             }
             self_table += [UniqueConstraint(*cols) for cols in unique.get(name, [])]
-            Table(name, self.bm, *self_table)
+            self_table += [
+                CheckConstraint(expression, name=f"ck_mock_{name}_{i}")
+                for i, expression in enumerate(checks.get(name, []))
+            ]
+            table = Table(name, self.bm, *self_table)
+            if name == "customer_addresses":
+                Index(
+                    "uq_mock_customer_default",
+                    table.c.customer_id,
+                    unique=True,
+                    postgresql_where=text("is_default AND customer_id IS NOT NULL"),
+                    sqlite_where=text("is_default AND customer_id IS NOT NULL"),
+                )
         if b.drivername.startswith("sqlite"):
             from sqlalchemy import event
 
@@ -214,6 +263,7 @@ class UnitOfWork:
         self.db, self.conn = db, conn
         self.changes = []
         self.cache = {}
+        self.row_cache = {}
 
     def rows(self, name):
         if name not in self.cache:
@@ -227,14 +277,17 @@ class UnitOfWork:
     def one(self, name, id):
         if name in self.cache:
             return next((r for r in self.cache[name] if r["id"] == id), None)
-        t = self.db.bm.tables[name]
-        r = self.conn.execute(select(t).where(t.c.id == id)).mappings().first()
-        return clean(dict(r)) if r else None
+        if (name, id) not in self.row_cache:
+            t = self.db.bm.tables[name]
+            r = self.conn.execute(select(t).where(t.c.id == id)).mappings().first()
+            self.row_cache[name, id] = clean(dict(r)) if r else None
+        return self.row_cache[name, id]
 
     def refresh_row(self, name, id):
         t = self.db.bm.tables[name]
         r = self.conn.execute(select(t).where(t.c.id == id)).mappings().first()
         after = clean(dict(r)) if r else None
+        self.row_cache[name, id] = after
         if name in self.cache:
             self.cache[name] = [r for r in self.cache[name] if r["id"] != id]
             if after is not None:

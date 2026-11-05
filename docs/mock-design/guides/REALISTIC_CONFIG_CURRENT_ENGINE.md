@@ -8,8 +8,8 @@ Không thể dùng cấu hình để bổ sung những nghiệp vụ engine chư
 
 ## 2. Các file sử dụng
 
-- [Cấu hình JSON để import](examples/realistic-current-engine-2026.json).
-- [Lịch ngày để xem bằng Excel hoặc công cụ đọc CSV](examples/realistic-current-engine-2026.csv). CSV là bảng tham khảo, **chưa phải định dạng import**.
+- [Cấu hình JSON để import](../examples/scenarios/realistic-current-engine-2026.json).
+- [Lịch ngày để xem bằng Excel hoặc công cụ đọc CSV](../examples/scenarios/realistic-current-engine-2026.csv). CSV là bảng tham khảo, **chưa phải định dạng import**.
 - Bộ sinh cấu hình OOP Python: `scripts/mock_platform/scenario.py`.
 
 JSON có lịch riêng cho năm **2026**. Seed của môi trường vẫn điều khiển lựa chọn đối tượng/kết quả xử lý; lịch sản lượng đã được tính và ghi rõ trong JSON, không bị tính lại ngẫu nhiên mỗi lần chạy.
@@ -113,7 +113,7 @@ Ngoài năm 2026, `special` không còn áp dụng; engine sẽ quay về số n
 ```bash
 .venv/bin/python -m scripts.mock_platform.scenario \
   --year 2027 --category-id 9423 \
-  --output docs/mock-design/examples/realistic-current-engine-2027.json
+  --output docs/mock-design/examples/scenarios/realistic-current-engine-2027.json
 ```
 
 Lệnh chỉ tạo file JSON và CSV, không nhập cấu hình hay ghi OLTP.

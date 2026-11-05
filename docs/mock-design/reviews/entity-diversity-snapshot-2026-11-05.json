@@ -1,0 +1,3345 @@
+{
+  "at": "2026-11-05T22:35:18",
+  "read_only": true,
+  "tables": {
+    "categories": {
+      "rows": 6,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 6,
+          "top": [
+            {
+              "value": 8322,
+              "count": 1
+            },
+            {
+              "value": 625,
+              "count": 1
+            },
+            {
+              "value": 9423,
+              "count": 1
+            }
+          ]
+        },
+        "category_name": {
+          "null": 0,
+          "distinct_non_null": 6,
+          "top": [
+            {
+              "value": "Nhà Sách Tiki",
+              "count": 1
+            },
+            {
+              "value": "Architecture",
+              "count": 1
+            },
+            {
+              "value": "Photography",
+              "count": 1
+            }
+          ]
+        },
+        "parent_id": {
+          "null": 1,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 8322,
+              "count": 5
+            },
+            {
+              "value": null,
+              "count": 1
+            }
+          ]
+        },
+        "level": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 2,
+              "count": 5
+            },
+            {
+              "value": 1,
+              "count": 1
+            }
+          ]
+        },
+        "slug": {
+          "null": 0,
+          "distinct_non_null": 6,
+          "top": [
+            {
+              "value": "tiki-8322",
+              "count": 1
+            },
+            {
+              "value": "tiki-625",
+              "count": 1
+            },
+            {
+              "value": "tiki-9423",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "products": {
+      "rows": 149,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": 496238,
+              "count": 1
+            },
+            {
+              "value": 498823,
+              "count": 1
+            },
+            {
+              "value": 499002,
+              "count": 1
+            }
+          ]
+        },
+        "sku": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": "2333921952706",
+              "count": 1
+            },
+            {
+              "value": "2337631600346",
+              "count": 1
+            },
+            {
+              "value": "2332390033275",
+              "count": 1
+            }
+          ]
+        },
+        "name": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": "Sách Kyoto Garadens",
+              "count": 1
+            },
+            {
+              "value": "Sách Chinese Houses Of Southeast Asia - Paperback",
+              "count": 1
+            },
+            {
+              "value": "Sách 25 Tropical Houses In Singapore And Malaysia - Paperback",
+              "count": 1
+            }
+          ]
+        },
+        "url_key": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": "sach-kyoto-garadens-p496238",
+              "count": 1
+            },
+            {
+              "value": "sach-chinese-houses-of-southeast-asia-paperback-p498823",
+              "count": 1
+            },
+            {
+              "value": "sach-25-tropical-houses-in-singapore-and-malaysia-paperback-p499002",
+              "count": 1
+            }
+          ]
+        },
+        "price": {
+          "null": 0,
+          "distinct_non_null": 83,
+          "top": [
+            {
+              "value": 480000.0,
+              "count": 17
+            },
+            {
+              "value": 740000.0,
+              "count": 10
+            },
+            {
+              "value": 680000.0,
+              "count": 6
+            }
+          ]
+        },
+        "original_price": {
+          "null": 0,
+          "distinct_non_null": 79,
+          "top": [
+            {
+              "value": 480000.0,
+              "count": 19
+            },
+            {
+              "value": 740000.0,
+              "count": 10
+            },
+            {
+              "value": 680000.0,
+              "count": 6
+            }
+          ]
+        },
+        "discount": {
+          "null": 0,
+          "distinct_non_null": 9,
+          "top": [
+            {
+              "value": 0.0,
+              "count": 139
+            },
+            {
+              "value": 18000.0,
+              "count": 2
+            },
+            {
+              "value": 24000.0,
+              "count": 2
+            }
+          ]
+        },
+        "discount_rate": {
+          "null": 0,
+          "distinct_non_null": 4,
+          "top": [
+            {
+              "value": 0.0,
+              "count": 140
+            },
+            {
+              "value": 5.0,
+              "count": 5
+            },
+            {
+              "value": 15.0,
+              "count": 3
+            }
+          ]
+        },
+        "brand_name": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "",
+              "count": 149
+            }
+          ]
+        },
+        "rating_average": {
+          "null": 0,
+          "distinct_non_null": 3,
+          "top": [
+            {
+              "value": 0.0,
+              "count": 142
+            },
+            {
+              "value": 5.0,
+              "count": 6
+            },
+            {
+              "value": 2.5,
+              "count": 1
+            }
+          ]
+        },
+        "review_count": {
+          "null": 0,
+          "distinct_non_null": 4,
+          "top": [
+            {
+              "value": 0,
+              "count": 142
+            },
+            {
+              "value": 1,
+              "count": 5
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "thumbnail_url": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": "https://salt.tikicdn.com/cache/280x280/media/catalog/product/1/4/14.u335.d20160514.t110353.jpg",
+              "count": 1
+            },
+            {
+              "value": "https://salt.tikicdn.com/cache/280x280/media/catalog/product/6/1/61+ochjm2al._sx377_bo1,204,203,200_.u2487.d20160514.t114342.jpg",
+              "count": 1
+            },
+            {
+              "value": "https://salt.tikicdn.com/cache/280x280/ts/product/42/bb/d5/257342a049e63f49471beda26dfbe73d.jpg",
+              "count": 1
+            }
+          ]
+        },
+        "category_id": {
+          "null": 0,
+          "distinct_non_null": 5,
+          "top": [
+            {
+              "value": 9423,
+              "count": 49
+            },
+            {
+              "value": 625,
+              "count": 43
+            },
+            {
+              "value": 112,
+              "count": 37
+            }
+          ]
+        },
+        "category_name": {
+          "null": 0,
+          "distinct_non_null": 5,
+          "top": [
+            {
+              "value": "Photography",
+              "count": 49
+            },
+            {
+              "value": "Architecture",
+              "count": 43
+            },
+            {
+              "value": "Decorative Arts & Design",
+              "count": 37
+            }
+          ]
+        },
+        "quantity_sold": {
+          "null": 93,
+          "distinct_non_null": 10,
+          "top": [
+            {
+              "value": null,
+              "count": 93
+            },
+            {
+              "value": 1,
+              "count": 39
+            },
+            {
+              "value": 2,
+              "count": 5
+            }
+          ]
+        },
+        "crawl_date": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "2026-11-04",
+              "count": 149
+            }
+          ]
+        },
+        "is_active": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": true,
+              "count": 149
+            }
+          ]
+        },
+        "seller_id": {
+          "null": 0,
+          "distinct_non_null": 9,
+          "top": [
+            {
+              "value": 26789,
+              "count": 66
+            },
+            {
+              "value": 305,
+              "count": 50
+            },
+            {
+              "value": 229023,
+              "count": 21
+            }
+          ]
+        },
+        "seller_product_id": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": "677197",
+              "count": 1
+            },
+            {
+              "value": "669465",
+              "count": 1
+            },
+            {
+              "value": "680559",
+              "count": 1
+            }
+          ]
+        },
+        "url_path": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": "sach-kyoto-garadens-p496238.html?spid=677197",
+              "count": 1
+            },
+            {
+              "value": "sach-chinese-houses-of-southeast-asia-paperback-p498823.html?spid=669465",
+              "count": 1
+            },
+            {
+              "value": "sach-25-tropical-houses-in-singapore-and-malaysia-paperback-p499002.html?spid=680559",
+              "count": 1
+            }
+          ]
+        },
+        "inventory_status": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "",
+              "count": 149
+            }
+          ]
+        },
+        "stock_item": {
+          "null": 149,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 149
+            }
+          ]
+        },
+        "short_description": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": "",
+              "count": 146
+            },
+            {
+              "value": "Thông tin sản phẩm được người bán kiểm tra lại (mô phỏng).",
+              "count": 3
+            }
+          ]
+        },
+        "type": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "",
+              "count": 149
+            }
+          ]
+        },
+        "cost_price": {
+          "null": 149,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 149
+            }
+          ]
+        },
+        "created_at": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "2026-01-01T00:00:00",
+              "count": 149
+            }
+          ]
+        },
+        "updated_at": {
+          "null": 0,
+          "distinct_non_null": 4,
+          "top": [
+            {
+              "value": "2026-01-01T00:00:00",
+              "count": 146
+            },
+            {
+              "value": "2026-02-02T20:00:00",
+              "count": 1
+            },
+            {
+              "value": "2026-02-09T20:00:00",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "sellers": {
+      "rows": 9,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 9,
+          "top": [
+            {
+              "value": 1231,
+              "count": 1
+            },
+            {
+              "value": 229023,
+              "count": 1
+            },
+            {
+              "value": 53660,
+              "count": 1
+            }
+          ]
+        },
+        "seller_name": {
+          "null": 0,
+          "distinct_non_null": 9,
+          "top": [
+            {
+              "value": "Người bán mô phỏng 1231",
+              "count": 1
+            },
+            {
+              "value": "Người bán mô phỏng 229023",
+              "count": 1
+            },
+            {
+              "value": "Người bán mô phỏng 53660",
+              "count": 1
+            }
+          ]
+        },
+        "shop_name": {
+          "null": 0,
+          "distinct_non_null": 9,
+          "top": [
+            {
+              "value": "Shop 1231",
+              "count": 1
+            },
+            {
+              "value": "Shop 229023 · 4c5f · 4f7a",
+              "count": 1
+            },
+            {
+              "value": "Shop 53660 · 0067 · 69f1 · 863a · 2eb1 · d9e1 · a452",
+              "count": 1
+            }
+          ]
+        },
+        "tier": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Normal",
+              "count": 9
+            }
+          ]
+        },
+        "province": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "TP. Hồ Chí Minh",
+              "count": 9
+            }
+          ]
+        },
+        "city": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "TP. Hồ Chí Minh",
+              "count": 9
+            }
+          ]
+        },
+        "email": {
+          "null": 0,
+          "distinct_non_null": 9,
+          "top": [
+            {
+              "value": "seller1231@example.com",
+              "count": 1
+            },
+            {
+              "value": "seller229023@example.com",
+              "count": 1
+            },
+            {
+              "value": "seller53660@example.com",
+              "count": 1
+            }
+          ]
+        },
+        "phone": {
+          "null": 9,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 9
+            }
+          ]
+        },
+        "status": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Active",
+              "count": 9
+            }
+          ]
+        },
+        "created_at": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "2026-01-01T00:00:00",
+              "count": 9
+            }
+          ]
+        },
+        "updated_at": {
+          "null": 0,
+          "distinct_non_null": 9,
+          "top": [
+            {
+              "value": "2026-01-01T00:00:00",
+              "count": 1
+            },
+            {
+              "value": "2026-01-30T20:00:00",
+              "count": 1
+            },
+            {
+              "value": "2026-01-31T20:00:00",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "customers": {
+      "rows": 338,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 338,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "full_name": {
+          "null": 0,
+          "distinct_non_null": 338,
+          "top": [
+            {
+              "value": "Khách nền 1",
+              "count": 1
+            },
+            {
+              "value": "Khách nền 2",
+              "count": 1
+            },
+            {
+              "value": "Khách nền 3",
+              "count": 1
+            }
+          ]
+        },
+        "email": {
+          "null": 0,
+          "distinct_non_null": 338,
+          "top": [
+            {
+              "value": "baseline.9a6ca492-a293-4d85-803e-f32e9a60468e.0@example.com",
+              "count": 1
+            },
+            {
+              "value": "baseline.9a6ca492-a293-4d85-803e-f32e9a60468e.1@example.com",
+              "count": 1
+            },
+            {
+              "value": "baseline.9a6ca492-a293-4d85-803e-f32e9a60468e.2@example.com",
+              "count": 1
+            }
+          ]
+        },
+        "phone_number": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "0900000000",
+              "count": 338
+            }
+          ]
+        },
+        "gender": {
+          "null": 338,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 338
+            }
+          ]
+        },
+        "date_of_birth": {
+          "null": 338,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 338
+            }
+          ]
+        },
+        "province": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "TP. Hồ Chí Minh",
+              "count": 338
+            }
+          ]
+        },
+        "city": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "TP. Hồ Chí Minh",
+              "count": 338
+            }
+          ]
+        },
+        "membership_tier": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Member",
+              "count": 338
+            }
+          ]
+        },
+        "registration_date": {
+          "null": 0,
+          "distinct_non_null": 50,
+          "top": [
+            {
+              "value": "2026-01-01T00:00:00",
+              "count": 100
+            },
+            {
+              "value": "2026-02-07T08:00:00",
+              "count": 7
+            },
+            {
+              "value": "2026-02-14T08:00:00",
+              "count": 7
+            }
+          ]
+        },
+        "updated_at": {
+          "null": 0,
+          "distinct_non_null": 50,
+          "top": [
+            {
+              "value": "2026-01-01T00:00:00",
+              "count": 100
+            },
+            {
+              "value": "2026-02-07T08:00:00",
+              "count": 7
+            },
+            {
+              "value": "2026-02-14T08:00:00",
+              "count": 7
+            }
+          ]
+        }
+      }
+    },
+    "customer_addresses": {
+      "rows": 784,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 784,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "customer_id": {
+          "null": 159,
+          "distinct_non_null": 246,
+          "top": [
+            {
+              "value": null,
+              "count": 159
+            },
+            {
+              "value": 106,
+              "count": 9
+            },
+            {
+              "value": 18,
+              "count": 8
+            }
+          ]
+        },
+        "recipient_name": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Người nhận mô phỏng",
+              "count": 784
+            }
+          ]
+        },
+        "phone": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "0900000000",
+              "count": 784
+            }
+          ]
+        },
+        "address_detail": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Địa chỉ thử nghiệm",
+              "count": 784
+            }
+          ]
+        },
+        "ward": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Phường mô phỏng",
+              "count": 784
+            }
+          ]
+        },
+        "district": {
+          "null": 784,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 784
+            }
+          ]
+        },
+        "province": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "TP. Hồ Chí Minh",
+              "count": 784
+            }
+          ]
+        },
+        "is_default": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": false,
+              "count": 784
+            }
+          ]
+        }
+      }
+    },
+    "channels": {
+      "rows": 3,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 3,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "channel_name": {
+          "null": 0,
+          "distinct_non_null": 3,
+          "top": [
+            {
+              "value": "Web",
+              "count": 1
+            },
+            {
+              "value": "App",
+              "count": 1
+            },
+            {
+              "value": "Livestream",
+              "count": 1
+            }
+          ]
+        },
+        "channel_type": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Digital",
+              "count": 3
+            }
+          ]
+        }
+      }
+    },
+    "payment_methods": {
+      "rows": 5,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 5,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "method_name": {
+          "null": 0,
+          "distinct_non_null": 5,
+          "top": [
+            {
+              "value": "COD",
+              "count": 1
+            },
+            {
+              "value": "Momo",
+              "count": 1
+            },
+            {
+              "value": "ZaloPay",
+              "count": 1
+            }
+          ]
+        },
+        "method_group": {
+          "null": 0,
+          "distinct_non_null": 4,
+          "top": [
+            {
+              "value": "E-Wallet",
+              "count": 2
+            },
+            {
+              "value": "COD",
+              "count": 1
+            },
+            {
+              "value": "Card",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "orders": {
+      "rows": 688,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 688,
+          "top": [
+            {
+              "value": 13,
+              "count": 1
+            },
+            {
+              "value": 12,
+              "count": 1
+            },
+            {
+              "value": 11,
+              "count": 1
+            }
+          ]
+        },
+        "order_code": {
+          "null": 0,
+          "distinct_non_null": 688,
+          "top": [
+            {
+              "value": "OD7538564c4c0645c82eff",
+              "count": 1
+            },
+            {
+              "value": "OD83b92f353f2825e84eed",
+              "count": 1
+            },
+            {
+              "value": "OD9c15c30b84847254d54a",
+              "count": 1
+            }
+          ]
+        },
+        "customer_id": {
+          "null": 159,
+          "distinct_non_null": 238,
+          "top": [
+            {
+              "value": null,
+              "count": 159
+            },
+            {
+              "value": 106,
+              "count": 8
+            },
+            {
+              "value": 18,
+              "count": 7
+            }
+          ]
+        },
+        "seller_id": {
+          "null": 0,
+          "distinct_non_null": 9,
+          "top": [
+            {
+              "value": 26789,
+              "count": 289
+            },
+            {
+              "value": 305,
+              "count": 247
+            },
+            {
+              "value": 229023,
+              "count": 101
+            }
+          ]
+        },
+        "channel_id": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 2,
+              "count": 529
+            },
+            {
+              "value": 1,
+              "count": 159
+            }
+          ]
+        },
+        "session_id": {
+          "null": 688,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 688
+            }
+          ]
+        },
+        "campaign_id": {
+          "null": 688,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 688
+            }
+          ]
+        },
+        "order_status": {
+          "null": 0,
+          "distinct_non_null": 3,
+          "top": [
+            {
+              "value": "Completed",
+              "count": 667
+            },
+            {
+              "value": "Cancelled",
+              "count": 19
+            },
+            {
+              "value": "Pending",
+              "count": 2
+            }
+          ]
+        },
+        "total_gross_amount": {
+          "null": 0,
+          "distinct_non_null": 83,
+          "top": [
+            {
+              "value": 480000.0,
+              "count": 76
+            },
+            {
+              "value": 740000.0,
+              "count": 49
+            },
+            {
+              "value": 780000.0,
+              "count": 18
+            }
+          ]
+        },
+        "total_discount_amount": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 0.0,
+              "count": 688
+            }
+          ]
+        },
+        "shipping_fee": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 0.0,
+              "count": 688
+            }
+          ]
+        },
+        "shipping_discount_amount": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 0.0,
+              "count": 688
+            }
+          ]
+        },
+        "shipping_promotion_id": {
+          "null": 688,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 688
+            }
+          ]
+        },
+        "final_amount": {
+          "null": 0,
+          "distinct_non_null": 83,
+          "top": [
+            {
+              "value": 480000.0,
+              "count": 76
+            },
+            {
+              "value": 740000.0,
+              "count": 49
+            },
+            {
+              "value": 780000.0,
+              "count": 18
+            }
+          ]
+        },
+        "shipping_address_id": {
+          "null": 0,
+          "distinct_non_null": 688,
+          "top": [
+            {
+              "value": 16,
+              "count": 1
+            },
+            {
+              "value": 15,
+              "count": 1
+            },
+            {
+              "value": 14,
+              "count": 1
+            }
+          ]
+        },
+        "created_at": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-07T11:00:00",
+              "count": 30
+            },
+            {
+              "value": "2026-02-14T11:00:00",
+              "count": 30
+            },
+            {
+              "value": "2026-02-13T11:00:00",
+              "count": 24
+            }
+          ]
+        },
+        "completed_at": {
+          "null": 21,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-07T17:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-14T17:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-13T17:00:00",
+              "count": 23
+            }
+          ]
+        },
+        "cancelled_at": {
+          "null": 669,
+          "distinct_non_null": 13,
+          "top": [
+            {
+              "value": null,
+              "count": 669
+            },
+            {
+              "value": "2026-02-03T20:00:00",
+              "count": 2
+            },
+            {
+              "value": "2026-02-05T20:00:00",
+              "count": 2
+            }
+          ]
+        },
+        "updated_at": {
+          "null": 0,
+          "distinct_non_null": 63,
+          "top": [
+            {
+              "value": "2026-02-07T17:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-14T17:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-13T17:00:00",
+              "count": 23
+            }
+          ]
+        }
+      }
+    },
+    "order_items": {
+      "rows": 688,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 688,
+          "top": [
+            {
+              "value": 9,
+              "count": 1
+            },
+            {
+              "value": 10,
+              "count": 1
+            },
+            {
+              "value": 5,
+              "count": 1
+            }
+          ]
+        },
+        "order_id": {
+          "null": 0,
+          "distinct_non_null": 688,
+          "top": [
+            {
+              "value": 9,
+              "count": 1
+            },
+            {
+              "value": 10,
+              "count": 1
+            },
+            {
+              "value": 5,
+              "count": 1
+            }
+          ]
+        },
+        "line_number": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 688
+            }
+          ]
+        },
+        "product_id": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": 100365585,
+              "count": 11
+            },
+            {
+              "value": 279326487,
+              "count": 11
+            },
+            {
+              "value": 279329991,
+              "count": 10
+            }
+          ]
+        },
+        "quantity": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 688
+            }
+          ]
+        },
+        "list_price": {
+          "null": 0,
+          "distinct_non_null": 79,
+          "top": [
+            {
+              "value": 480000.0,
+              "count": 86
+            },
+            {
+              "value": 740000.0,
+              "count": 49
+            },
+            {
+              "value": 780000.0,
+              "count": 22
+            }
+          ]
+        },
+        "unit_price": {
+          "null": 0,
+          "distinct_non_null": 83,
+          "top": [
+            {
+              "value": 480000.0,
+              "count": 76
+            },
+            {
+              "value": 740000.0,
+              "count": 49
+            },
+            {
+              "value": 780000.0,
+              "count": 18
+            }
+          ]
+        },
+        "discount_amount": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 0.0,
+              "count": 688
+            }
+          ]
+        },
+        "net_amount": {
+          "null": 0,
+          "distinct_non_null": 83,
+          "top": [
+            {
+              "value": 480000.0,
+              "count": 76
+            },
+            {
+              "value": 740000.0,
+              "count": 49
+            },
+            {
+              "value": 780000.0,
+              "count": 18
+            }
+          ]
+        },
+        "item_status": {
+          "null": 0,
+          "distinct_non_null": 3,
+          "top": [
+            {
+              "value": "Fulfilled",
+              "count": 667
+            },
+            {
+              "value": "Cancelled",
+              "count": 19
+            },
+            {
+              "value": "Pending",
+              "count": 2
+            }
+          ]
+        }
+      }
+    },
+    "payments": {
+      "rows": 688,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 688,
+          "top": [
+            {
+              "value": 6,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "order_id": {
+          "null": 0,
+          "distinct_non_null": 688,
+          "top": [
+            {
+              "value": 6,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "payment_method_id": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 2,
+              "count": 529
+            },
+            {
+              "value": 1,
+              "count": 159
+            }
+          ]
+        },
+        "payment_status": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": "Success",
+              "count": 667
+            },
+            {
+              "value": "Failed",
+              "count": 21
+            }
+          ]
+        },
+        "paid_amount": {
+          "null": 0,
+          "distinct_non_null": 84,
+          "top": [
+            {
+              "value": 480000.0,
+              "count": 74
+            },
+            {
+              "value": 740000.0,
+              "count": 48
+            },
+            {
+              "value": 0.0,
+              "count": 21
+            }
+          ]
+        },
+        "transaction_time": {
+          "null": 0,
+          "distinct_non_null": 98,
+          "top": [
+            {
+              "value": "2026-02-07T12:00:00",
+              "count": 22
+            },
+            {
+              "value": "2026-02-14T12:00:00",
+              "count": 22
+            },
+            {
+              "value": "2026-02-13T12:00:00",
+              "count": 18
+            }
+          ]
+        }
+      }
+    },
+    "returns": {
+      "rows": 0,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "order_item_id": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "quantity": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "return_reason": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "refund_amount": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "status": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "requested_at": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "refunded_at": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        }
+      }
+    },
+    "product_reviews": {
+      "rows": 150,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 150,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "order_item_id": {
+          "null": 0,
+          "distinct_non_null": 150,
+          "top": [
+            {
+              "value": 6,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 1,
+              "count": 1
+            }
+          ]
+        },
+        "product_id": {
+          "null": 0,
+          "distinct_non_null": 95,
+          "top": [
+            {
+              "value": 275699607,
+              "count": 5
+            },
+            {
+              "value": 279326487,
+              "count": 4
+            },
+            {
+              "value": 138149636,
+              "count": 4
+            }
+          ]
+        },
+        "customer_id": {
+          "null": 0,
+          "distinct_non_null": 98,
+          "top": [
+            {
+              "value": 83,
+              "count": 4
+            },
+            {
+              "value": 90,
+              "count": 4
+            },
+            {
+              "value": 62,
+              "count": 3
+            }
+          ]
+        },
+        "rating": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 5,
+              "count": 93
+            },
+            {
+              "value": 4,
+              "count": 57
+            }
+          ]
+        },
+        "comment": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": "Đánh giá thử nghiệm sau mua hàng.",
+              "count": 93
+            },
+            {
+              "value": "Đánh giá thử nghiệm sau giao hàng",
+              "count": 57
+            }
+          ]
+        },
+        "created_at": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-07T19:00:00",
+              "count": 5
+            },
+            {
+              "value": "2026-02-14T19:00:00",
+              "count": 5
+            },
+            {
+              "value": "2026-02-13T19:00:00",
+              "count": 4
+            }
+          ]
+        }
+      }
+    },
+    "promotions": {
+      "rows": 96,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 96,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "promo_code": {
+          "null": 0,
+          "distinct_non_null": 96,
+          "top": [
+            {
+              "value": "VC7a5d7a634953ef",
+              "count": 1
+            },
+            {
+              "value": "VC35d044497b3c87",
+              "count": 1
+            },
+            {
+              "value": "VC9719a75086badf",
+              "count": 1
+            }
+          ]
+        },
+        "promo_name": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Voucher mô phỏng",
+              "count": 96
+            }
+          ]
+        },
+        "promo_type": {
+          "null": 0,
+          "distinct_non_null": 3,
+          "top": [
+            {
+              "value": "Platform Voucher",
+              "count": 32
+            },
+            {
+              "value": "Freeship Voucher",
+              "count": 32
+            },
+            {
+              "value": "Seller Voucher",
+              "count": 32
+            }
+          ]
+        },
+        "seller_id": {
+          "null": 64,
+          "distinct_non_null": 9,
+          "top": [
+            {
+              "value": null,
+              "count": 64
+            },
+            {
+              "value": 26789,
+              "count": 7
+            },
+            {
+              "value": 305,
+              "count": 5
+            }
+          ]
+        },
+        "apply_level": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": "Order",
+              "count": 64
+            },
+            {
+              "value": "Shipping",
+              "count": 32
+            }
+          ]
+        },
+        "product_id": {
+          "null": 96,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 96
+            }
+          ]
+        },
+        "eligibility": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "All",
+              "count": 96
+            }
+          ]
+        },
+        "discount_type": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Fixed Amount",
+              "count": 96
+            }
+          ]
+        },
+        "discount_value": {
+          "null": 0,
+          "distinct_non_null": 3,
+          "top": [
+            {
+              "value": 20000.0,
+              "count": 32
+            },
+            {
+              "value": 15000.0,
+              "count": 32
+            },
+            {
+              "value": 10000.0,
+              "count": 32
+            }
+          ]
+        },
+        "min_order_value": {
+          "null": 0,
+          "distinct_non_null": 3,
+          "top": [
+            {
+              "value": 200000.0,
+              "count": 32
+            },
+            {
+              "value": 150000.0,
+              "count": 32
+            },
+            {
+              "value": 100000.0,
+              "count": 32
+            }
+          ]
+        },
+        "max_discount_amount": {
+          "null": 96,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 96
+            }
+          ]
+        },
+        "usage_limit": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 100,
+              "count": 93
+            },
+            {
+              "value": 1000,
+              "count": 3
+            }
+          ]
+        },
+        "per_customer_limit": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 96
+            }
+          ]
+        },
+        "start_date": {
+          "null": 0,
+          "distinct_non_null": 32,
+          "top": [
+            {
+              "value": "2026-01-01T08:00:00",
+              "count": 3
+            },
+            {
+              "value": "2026-01-02T08:00:00",
+              "count": 3
+            },
+            {
+              "value": "2026-01-03T08:00:00",
+              "count": 3
+            }
+          ]
+        },
+        "end_date": {
+          "null": 0,
+          "distinct_non_null": 32,
+          "top": [
+            {
+              "value": "2026-01-08T08:00:00",
+              "count": 3
+            },
+            {
+              "value": "2026-01-09T08:00:00",
+              "count": 3
+            },
+            {
+              "value": "2026-01-10T08:00:00",
+              "count": 3
+            }
+          ]
+        }
+      }
+    },
+    "order_item_promotions": {
+      "rows": 0,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "order_item_id": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "promotion_id": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "applied_discount_amount": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        }
+      }
+    },
+    "warehouses": {
+      "rows": 1,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            }
+          ]
+        },
+        "warehouse_code": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "WH-DEMO",
+              "count": 1
+            }
+          ]
+        },
+        "warehouse_name": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Kho mô phỏng",
+              "count": 1
+            }
+          ]
+        },
+        "province": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "TP. Hồ Chí Minh",
+              "count": 1
+            }
+          ]
+        },
+        "city": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "TP. Hồ Chí Minh",
+              "count": 1
+            }
+          ]
+        },
+        "address": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Địa chỉ kho thử nghiệm",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "inventory_levels": {
+      "rows": 149,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": 36,
+              "count": 1
+            },
+            {
+              "value": 30,
+              "count": 1
+            },
+            {
+              "value": 66,
+              "count": 1
+            }
+          ]
+        },
+        "warehouse_id": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 149
+            }
+          ]
+        },
+        "sku": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": "1839436152133",
+              "count": 1
+            },
+            {
+              "value": "9015908328265",
+              "count": 1
+            },
+            {
+              "value": "1042373185741",
+              "count": 1
+            }
+          ]
+        },
+        "quantity_on_hand": {
+          "null": 0,
+          "distinct_non_null": 34,
+          "top": [
+            {
+              "value": 16,
+              "count": 14
+            },
+            {
+              "value": 14,
+              "count": 13
+            },
+            {
+              "value": 17,
+              "count": 13
+            }
+          ]
+        },
+        "quantity_reserved": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 0,
+              "count": 147
+            },
+            {
+              "value": 1,
+              "count": 2
+            }
+          ]
+        },
+        "updated_at": {
+          "null": 0,
+          "distinct_non_null": 38,
+          "top": [
+            {
+              "value": "2026-02-18T15:00:00",
+              "count": 19
+            },
+            {
+              "value": "2026-02-15T15:00:00",
+              "count": 19
+            },
+            {
+              "value": "2026-02-17T15:00:00",
+              "count": 15
+            }
+          ]
+        }
+      }
+    },
+    "inventory_movements": {
+      "rows": 927,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 927,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "warehouse_id": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 927
+            }
+          ]
+        },
+        "sku": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": "7459577204535",
+              "count": 14
+            },
+            {
+              "value": "8603064551918",
+              "count": 14
+            },
+            {
+              "value": "8000968335549",
+              "count": 13
+            }
+          ]
+        },
+        "movement_type": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": "Sale",
+              "count": 667
+            },
+            {
+              "value": "Import",
+              "count": 260
+            }
+          ]
+        },
+        "quantity_change": {
+          "null": 0,
+          "distinct_non_null": 3,
+          "top": [
+            {
+              "value": -1,
+              "count": 667
+            },
+            {
+              "value": 20,
+              "count": 167
+            },
+            {
+              "value": 10,
+              "count": 93
+            }
+          ]
+        },
+        "reference_code": {
+          "null": 111,
+          "distinct_non_null": 668,
+          "top": [
+            {
+              "value": "INITIAL",
+              "count": 149
+            },
+            {
+              "value": null,
+              "count": 111
+            },
+            {
+              "value": "OD8be1fb64c8af5333f3e1",
+              "count": 1
+            }
+          ]
+        },
+        "movement_date": {
+          "null": 0,
+          "distinct_non_null": 99,
+          "top": [
+            {
+              "value": "2026-01-01T00:00:00",
+              "count": 149
+            },
+            {
+              "value": "2026-02-07T15:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-14T15:00:00",
+              "count": 28
+            }
+          ]
+        }
+      }
+    },
+    "inventory_daily_balance": {
+      "rows": 7301,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 7301,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "balance_date": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-01-01",
+              "count": 149
+            },
+            {
+              "value": "2026-01-02",
+              "count": 149
+            },
+            {
+              "value": "2026-01-03",
+              "count": 149
+            }
+          ]
+        },
+        "warehouse_id": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 7301
+            }
+          ]
+        },
+        "sku": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": "2333921952706",
+              "count": 49
+            },
+            {
+              "value": "2337631600346",
+              "count": 49
+            },
+            {
+              "value": "2332390033275",
+              "count": 49
+            }
+          ]
+        },
+        "quantity_on_hand": {
+          "null": 0,
+          "distinct_non_null": 47,
+          "top": [
+            {
+              "value": 20,
+              "count": 1556
+            },
+            {
+              "value": 19,
+              "count": 1180
+            },
+            {
+              "value": 18,
+              "count": 716
+            }
+          ]
+        },
+        "quantity_reserved": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 0,
+              "count": 7259
+            },
+            {
+              "value": 1,
+              "count": 42
+            }
+          ]
+        }
+      }
+    },
+    "carriers": {
+      "rows": 1,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            }
+          ]
+        },
+        "carrier_code": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "DEMO",
+              "count": 1
+            }
+          ]
+        },
+        "carrier_name": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Vận chuyển mô phỏng",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "shipments": {
+      "rows": 667,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 667,
+          "top": [
+            {
+              "value": 30,
+              "count": 1
+            },
+            {
+              "value": 27,
+              "count": 1
+            },
+            {
+              "value": 29,
+              "count": 1
+            }
+          ]
+        },
+        "order_code": {
+          "null": 0,
+          "distinct_non_null": 667,
+          "top": [
+            {
+              "value": "OD9d761f6480103c51a3a8",
+              "count": 1
+            },
+            {
+              "value": "OD5c1d8e588a1e8b0f07f7",
+              "count": 1
+            },
+            {
+              "value": "OD9e18968c55dc77026516",
+              "count": 1
+            }
+          ]
+        },
+        "warehouse_id": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 667
+            }
+          ]
+        },
+        "carrier_id": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 667
+            }
+          ]
+        },
+        "tracking_code": {
+          "null": 0,
+          "distinct_non_null": 667,
+          "top": [
+            {
+              "value": "TR256010f9d89a255220ac",
+              "count": 1
+            },
+            {
+              "value": "TRb5072fae07eda72dd16d",
+              "count": 1
+            },
+            {
+              "value": "TR2fe32e6c6b3be1ba8512",
+              "count": 1
+            }
+          ]
+        },
+        "shipment_status": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Delivered",
+              "count": 667
+            }
+          ]
+        },
+        "shipping_cost": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 30000.0,
+              "count": 667
+            }
+          ]
+        },
+        "created_at": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-07T14:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-14T14:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-13T14:00:00",
+              "count": 23
+            }
+          ]
+        },
+        "picked_at": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-07T15:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-14T15:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-13T15:00:00",
+              "count": 23
+            }
+          ]
+        },
+        "delivered_at": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-07T17:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-14T17:00:00",
+              "count": 28
+            },
+            {
+              "value": "2026-02-13T17:00:00",
+              "count": 23
+            }
+          ]
+        },
+        "failed_at": {
+          "null": 667,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 667
+            }
+          ]
+        }
+      }
+    },
+    "marketing_campaigns": {
+      "rows": 32,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 32,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "campaign_code": {
+          "null": 0,
+          "distinct_non_null": 32,
+          "top": [
+            {
+              "value": "CMPd001962285cf",
+              "count": 1
+            },
+            {
+              "value": "CMP65f3e0321b73",
+              "count": 1
+            },
+            {
+              "value": "CMP927c9fe742aa",
+              "count": 1
+            }
+          ]
+        },
+        "campaign_name": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": "Chiến dịch thử nghiệm 6 hệ thống",
+              "count": 31
+            },
+            {
+              "value": "Nhận diện shop sách · mô phỏng",
+              "count": 1
+            }
+          ]
+        },
+        "campaign_type": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Brand Awareness",
+              "count": 32
+            }
+          ]
+        },
+        "target_channel_code": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "WEB",
+              "count": 32
+            }
+          ]
+        },
+        "budget_amount": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 2000000.0,
+              "count": 31
+            },
+            {
+              "value": 3000000.0,
+              "count": 1
+            }
+          ]
+        },
+        "start_date": {
+          "null": 0,
+          "distinct_non_null": 32,
+          "top": [
+            {
+              "value": "2026-01-01",
+              "count": 1
+            },
+            {
+              "value": "2026-01-02",
+              "count": 1
+            },
+            {
+              "value": "2026-01-03",
+              "count": 1
+            }
+          ]
+        },
+        "end_date": {
+          "null": 0,
+          "distinct_non_null": 32,
+          "top": [
+            {
+              "value": "2026-01-08",
+              "count": 1
+            },
+            {
+              "value": "2026-01-09",
+              "count": 1
+            },
+            {
+              "value": "2026-01-10",
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "ad_spend_logs": {
+      "rows": 49,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "campaign_id": {
+          "null": 0,
+          "distinct_non_null": 26,
+          "top": [
+            {
+              "value": 32,
+              "count": 13
+            },
+            {
+              "value": 2,
+              "count": 3
+            },
+            {
+              "value": 18,
+              "count": 3
+            }
+          ]
+        },
+        "channel_code": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "WEB",
+              "count": 49
+            }
+          ]
+        },
+        "log_date": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-01-01",
+              "count": 1
+            },
+            {
+              "value": "2026-01-02",
+              "count": 1
+            },
+            {
+              "value": "2026-01-03",
+              "count": 1
+            }
+          ]
+        },
+        "cost_amount": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 100000.0,
+              "count": 31
+            },
+            {
+              "value": 50000.0,
+              "count": 18
+            }
+          ]
+        },
+        "impressions": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 3000,
+              "count": 31
+            },
+            {
+              "value": 6000,
+              "count": 18
+            }
+          ]
+        },
+        "clicks": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 30,
+              "count": 31
+            },
+            {
+              "value": 60,
+              "count": 18
+            }
+          ]
+        }
+      }
+    },
+    "sessions": {
+      "rows": 6600,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 6600,
+          "top": [
+            {
+              "value": 11,
+              "count": 1
+            },
+            {
+              "value": 23,
+              "count": 1
+            },
+            {
+              "value": 6,
+              "count": 1
+            }
+          ]
+        },
+        "customer_id": {
+          "null": 3712,
+          "distinct_non_null": 331,
+          "top": [
+            {
+              "value": null,
+              "count": 3712
+            },
+            {
+              "value": 124,
+              "count": 21
+            },
+            {
+              "value": 60,
+              "count": 19
+            }
+          ]
+        },
+        "channel_id": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": 1,
+              "count": 3712
+            },
+            {
+              "value": 2,
+              "count": 2888
+            }
+          ]
+        },
+        "campaign_id": {
+          "null": 6600,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 6600
+            }
+          ]
+        },
+        "traffic_source": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": "Organic",
+              "count": 3712
+            },
+            {
+              "value": "Direct",
+              "count": 2888
+            }
+          ]
+        },
+        "device_type": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Mobile",
+              "count": 6600
+            }
+          ]
+        },
+        "started_at": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-07T10:00:00",
+              "count": 450
+            },
+            {
+              "value": "2026-02-14T10:00:00",
+              "count": 450
+            },
+            {
+              "value": "2026-02-13T10:00:00",
+              "count": 360
+            }
+          ]
+        },
+        "ended_at": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-07T22:00:00",
+              "count": 450
+            },
+            {
+              "value": "2026-02-14T22:00:00",
+              "count": 450
+            },
+            {
+              "value": "2026-02-13T22:00:00",
+              "count": 360
+            }
+          ]
+        }
+      }
+    },
+    "page_events": {
+      "rows": 18497,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 18497,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            },
+            {
+              "value": 2,
+              "count": 1
+            },
+            {
+              "value": 3,
+              "count": 1
+            }
+          ]
+        },
+        "session_id": {
+          "null": 0,
+          "distinct_non_null": 6154,
+          "top": [
+            {
+              "value": 68,
+              "count": 13
+            },
+            {
+              "value": 16,
+              "count": 11
+            },
+            {
+              "value": 161,
+              "count": 11
+            }
+          ]
+        },
+        "event_type": {
+          "null": 0,
+          "distinct_non_null": 5,
+          "top": [
+            {
+              "value": "view_product",
+              "count": 13200
+            },
+            {
+              "value": "search",
+              "count": 3450
+            },
+            {
+              "value": "add_to_cart",
+              "count": 1506
+            }
+          ]
+        },
+        "product_id": {
+          "null": 3450,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": null,
+              "count": 3450
+            },
+            {
+              "value": 279333278,
+              "count": 131
+            },
+            {
+              "value": 279383141,
+              "count": 131
+            }
+          ]
+        },
+        "order_id": {
+          "null": 18497,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 18497
+            }
+          ]
+        },
+        "event_time": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-07T10:00:00",
+              "count": 1215
+            },
+            {
+              "value": "2026-02-14T10:00:00",
+              "count": 1215
+            },
+            {
+              "value": "2026-02-13T10:00:00",
+              "count": 972
+            }
+          ]
+        }
+      }
+    },
+    "cart_items": {
+      "rows": 1506,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 1506,
+          "top": [
+            {
+              "value": 7,
+              "count": 1
+            },
+            {
+              "value": 6,
+              "count": 1
+            },
+            {
+              "value": 9,
+              "count": 1
+            }
+          ]
+        },
+        "session_id": {
+          "null": 0,
+          "distinct_non_null": 1349,
+          "top": [
+            {
+              "value": 68,
+              "count": 3
+            },
+            {
+              "value": 161,
+              "count": 3
+            },
+            {
+              "value": 384,
+              "count": 3
+            }
+          ]
+        },
+        "customer_id": {
+          "null": 577,
+          "distinct_non_null": 290,
+          "top": [
+            {
+              "value": null,
+              "count": 577
+            },
+            {
+              "value": 28,
+              "count": 8
+            },
+            {
+              "value": 99,
+              "count": 8
+            }
+          ]
+        },
+        "product_id": {
+          "null": 0,
+          "distinct_non_null": 149,
+          "top": [
+            {
+              "value": 279383141,
+              "count": 19
+            },
+            {
+              "value": 270527793,
+              "count": 18
+            },
+            {
+              "value": 275699607,
+              "count": 18
+            }
+          ]
+        },
+        "quantity": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 1506
+            }
+          ]
+        },
+        "cart_status": {
+          "null": 0,
+          "distinct_non_null": 2,
+          "top": [
+            {
+              "value": "Abandoned",
+              "count": 1413
+            },
+            {
+              "value": "Removed",
+              "count": 93
+            }
+          ]
+        },
+        "added_at": {
+          "null": 0,
+          "distinct_non_null": 49,
+          "top": [
+            {
+              "value": "2026-02-14T10:00:00",
+              "count": 90
+            },
+            {
+              "value": "2026-02-07T10:00:00",
+              "count": 90
+            },
+            {
+              "value": "2026-02-13T10:00:00",
+              "count": 72
+            }
+          ]
+        },
+        "closed_at": {
+          "null": 0,
+          "distinct_non_null": 80,
+          "top": [
+            {
+              "value": "2026-02-14T23:00:00",
+              "count": 90
+            },
+            {
+              "value": "2026-02-07T23:00:00",
+              "count": 90
+            },
+            {
+              "value": "2026-02-13T23:00:00",
+              "count": 72
+            }
+          ]
+        }
+      }
+    },
+    "seller_commission_rates": {
+      "rows": 1,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 1,
+              "count": 1
+            }
+          ]
+        },
+        "category_id": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 9423,
+              "count": 1
+            }
+          ]
+        },
+        "seller_tier": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "Normal",
+              "count": 1
+            }
+          ]
+        },
+        "commission_rate": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": 0.05,
+              "count": 1
+            }
+          ]
+        },
+        "effective_from": {
+          "null": 0,
+          "distinct_non_null": 1,
+          "top": [
+            {
+              "value": "2026-01-01",
+              "count": 1
+            }
+          ]
+        },
+        "effective_to": {
+          "null": 1,
+          "distinct_non_null": 0,
+          "top": [
+            {
+              "value": null,
+              "count": 1
+            }
+          ]
+        }
+      }
+    },
+    "seller_payouts": {
+      "rows": 0,
+      "columns": {
+        "id": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "seller_id": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "period_start": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "period_end": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "gross_sales": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "refund_amount": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "commission_amount": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "payout_amount": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "payout_status": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        },
+        "paid_at": {
+          "null": 0,
+          "distinct_non_null": 0,
+          "top": []
+        }
+      }
+    }
+  }
+}

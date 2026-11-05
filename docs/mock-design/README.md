@@ -4,7 +4,7 @@ Thư mục này tách riêng rule và các tài liệu đang chốt từ cuộc 
 
 ## Chạy lần đầu trên máy mới
 
-Bắt đầu tại [Hướng dẫn từ pull code đến lượt mock đầu tiên](FIRST_MOCK_RUN_GUIDE.md): cài đặt, chuẩn bị nguồn SQLite, ý nghĩa từng trang UI, import cấu hình nhỏ, chạy 2 đơn COD, kiểm tra PostgreSQL và xử lý lỗi.
+Bắt đầu tại [Hướng dẫn từ pull code đến lượt mock đầu tiên](guides/FIRST_MOCK_RUN_GUIDE.md): cài đặt, chuẩn bị nguồn SQLite, ý nghĩa từng trang UI, import cấu hình nhỏ, chạy 2 đơn COD, kiểm tra PostgreSQL và xử lý lỗi.
 
 ## Danh sách tài liệu
 
@@ -12,21 +12,21 @@ Bắt đầu tại [Hướng dẫn từ pull code đến lượt mock đầu ti�
 |---|---|
 | [MOCK_SYSTEM_RULES.md](MOCK_SYSTEM_RULES.md) | Các rule đã được xác nhận; nguồn ưu tiên cho những quyết định đã chốt. |
 | [TIKI_PRODUCT_FIELD_MAPPING.md](TIKI_PRODUCT_FIELD_MAPPING.md) | Mapping sản phẩm Tiki đã được dùng để trao đổi; các chỗ ghi cần kiểm tra vẫn chưa chốt. |
-| [MOCK_CATALOG_SELLER_CONFIG.md](MOCK_CATALOG_SELLER_CONFIG.md) | Thiết kế màn cấu hình Catalog & Seller; hướng cấu hình đã thống nhất, chi tiết hành động còn có thể chỉnh khi review. |
-| [MOCK_CUSTOMER_ORDER_CONFIG.md](MOCK_CUSTOMER_ORDER_CONFIG.md) | Đề xuất để chốt màn cấu hình Khách hàng & Đơn hàng. Chưa triển khai. |
+| [MOCK_CATALOG_SELLER_CONFIG.md](configuration/MOCK_CATALOG_SELLER_CONFIG.md) | Thiết kế màn cấu hình Catalog & Seller; hướng cấu hình đã thống nhất, chi tiết hành động còn có thể chỉnh khi review. |
+| [MOCK_CUSTOMER_ORDER_CONFIG.md](configuration/MOCK_CUSTOMER_ORDER_CONFIG.md) | Đề xuất để chốt màn cấu hình Khách hàng & Đơn hàng. Chưa triển khai. |
 
 ## Bốn hệ thống bổ sung — đang đề xuất để chốt
 
 | Tài liệu | Nội dung |
 |---|---|
-| [MOCK_WAREHOUSE_LOGISTICS_CONFIG.md](MOCK_WAREHOUSE_LOGISTICS_CONFIG.md) | Kho vận: nhập/điều chỉnh/xuất/nhận hoàn, vận đơn, giao hàng, COD, giữ hàng và số dư ngày. |
-| [MOCK_MARKETING_CONFIG.md](MOCK_MARKETING_CONFIG.md) | Marketing: chiến dịch, voucher sàn/shop/freeship, báo cáo quảng cáo và xử lý lượt dùng. |
-| [MOCK_WEB_ANALYTICS_CONFIG.md](MOCK_WEB_ANALYTICS_CONFIG.md) | Analytics: phiên, tìm kiếm, xem sản phẩm, giỏ, checkout và tiếp nhận kết quả mua. |
-| [MOCK_FINANCE_CONFIG.md](MOCK_FINANCE_CONFIG.md) | Tài chính: chính sách hoa hồng, đối soát, duyệt chi, chi trả và điều chỉnh. |
+| [MOCK_WAREHOUSE_LOGISTICS_CONFIG.md](configuration/MOCK_WAREHOUSE_LOGISTICS_CONFIG.md) | Kho vận: nhập/điều chỉnh/xuất/nhận hoàn, vận đơn, giao hàng, COD, giữ hàng và số dư ngày. |
+| [MOCK_MARKETING_CONFIG.md](configuration/MOCK_MARKETING_CONFIG.md) | Marketing: chiến dịch, voucher sàn/shop/freeship, báo cáo quảng cáo và xử lý lượt dùng. |
+| [MOCK_WEB_ANALYTICS_CONFIG.md](configuration/MOCK_WEB_ANALYTICS_CONFIG.md) | Analytics: phiên, tìm kiếm, xem sản phẩm, giỏ, checkout và tiếp nhận kết quả mua. |
+| [MOCK_FINANCE_CONFIG.md](configuration/MOCK_FINANCE_CONFIG.md) | Tài chính: chính sách hoa hồng, đối soát, duyệt chi, chi trả và điều chỉnh. |
 
 ## Kế hoạch kiến trúc và workflow
 
-[MOCK_PLATFORM_ARCHITECTURE_PLAN.md](MOCK_PLATFORM_ARCHITECTURE_PLAN.md) đề xuất 7 trang UI, workflow, API/worker và Control DB tách riêng Business DB. Đang review, chưa triển khai. Người dùng đã xác nhận kết thúc bước thiết kế phần cấu hình để chuyển sang kiến trúc; các giá trị chưa nhập và khoảng trống schema vẫn cần được xử lý ở bước tương ứng.
+[MOCK_PLATFORM_ARCHITECTURE_PLAN.md](plans/MOCK_PLATFORM_ARCHITECTURE_PLAN.md) đề xuất 7 trang UI, workflow, API/worker và Control DB tách riêng Business DB. Đang review, chưa triển khai. Người dùng đã xác nhận kết thúc bước thiết kế phần cấu hình để chuyển sang kiến trúc; các giá trị chưa nhập và khoảng trống schema vẫn cần được xử lý ở bước tương ứng.
 
 ## Nguyên tắc sử dụng
 
@@ -38,9 +38,19 @@ Bắt đầu tại [Hướng dẫn từ pull code đến lượt mock đầu ti�
 
 ## Triển khai
 
-- [Trạng thái thực tế và các giới hạn](MOCK_IMPLEMENTATION_STATUS.md).
+- [Trạng thái thực tế và các giới hạn](reviews/MOCK_IMPLEMENTATION_STATUS.md).
 - [Khởi động và hướng dẫn sử dụng](../../scripts/mock_platform/README.md).
 
-- [Tổng quan OLTP, kích hoạt crawler và chạy lại từ đầu](MOCK_OVERVIEW_CONTROLS.md).
+- [Tổng quan OLTP, kích hoạt crawler và chạy lại từ đầu](guides/MOCK_OVERVIEW_CONTROLS.md).
 
-- [Nhập JSON và cấu hình vận hành theo khả năng engine hiện tại](REALISTIC_CONFIG_CURRENT_ENGINE.md).
+- [Nhập JSON và cấu hình vận hành theo khả năng engine hiện tại](guides/REALISTIC_CONFIG_CURRENT_ENGINE.md).
+
+- [Audit trực tiếp OLTP và đối chiếu rule ngày 05/11/2026](reviews/OLTP_DATA_AUDIT_2026-11-05.md).
+
+- [Kế hoạch nâng cấp engine sau lượt thử vận hành 2026](plans/MOCK_ENGINE_UPGRADE_PLAN.md): ưu tiên sửa lỗi, liên kết nghiệp vụ, lịch qua ngày và tiêu chí nghiệm thu.
+
+- [Rà soát đa dạng thực thể và khả năng config hiện tại](reviews/ENTITY_DIVERSITY_CONFIG_REVIEW.md): đối chiếu đủ 27 bảng, trường đã hỗ trợ, trường bị cố định và phương án nâng cấp tối thiểu.
+
+- [Nâng cấp và sử dụng engine v2](guides/ENGINE_V2_UPGRADE_GUIDE.md): schema 33 bảng, migration rõ ràng, UI profile/chính sách, config liên kết mới và giới hạn còn lại.
+
+- [Thư viện cấu hình mẫu đã phân loại](examples/README.md): `scenarios/` cho tab Cấu hình kịch bản; `settings/` để nhập và điền chính sách/hồ sơ ở Thiết lập.

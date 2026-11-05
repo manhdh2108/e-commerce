@@ -1,0 +1,380 @@
+{
+  "format": "mock-studio-settings",
+  "format_version": 1,
+  "name": "Thiết lập thương mại điện tử · hồ sơ đa dạng",
+  "business_policy": {
+    "return_window_days": 7,
+    "payout_hold_days": 10,
+    "max_delivery_attempts": 3
+  },
+  "entity_profile": {
+    "surnames": [
+      "Nguyễn",
+      "Trần",
+      "Lê",
+      "Phạm",
+      "Hoàng",
+      "Huỳnh",
+      "Vũ",
+      "Võ",
+      "Phan",
+      "Trương",
+      "Bùi",
+      "Đặng",
+      "Đỗ",
+      "Ngô",
+      "Hồ",
+      "Dương",
+      "Đinh",
+      "Lý",
+      "Mai",
+      "Cao",
+      "Tạ",
+      "Hà",
+      "Tô",
+      "Lâm",
+      "Đào",
+      "Đoàn",
+      "Châu",
+      "La",
+      "Lưu",
+      "Triệu",
+      "Quách",
+      "Tăng"
+    ],
+    "given_names": [
+      "Minh Anh",
+      "Ngọc Anh",
+      "Tuấn Anh",
+      "Phương Anh",
+      "Hải Anh",
+      "Đức Anh",
+      "Quỳnh Anh",
+      "Bảo Anh",
+      "Thu Hà",
+      "Ngọc Hà",
+      "Thanh Hà",
+      "Minh Hà",
+      "Quang Huy",
+      "Gia Huy",
+      "Đức Huy",
+      "Minh Huy",
+      "Ngọc Mai",
+      "Thanh Mai",
+      "Hoàng Mai",
+      "Thu Mai",
+      "Đức Long",
+      "Hải Long",
+      "Minh Long",
+      "Thành Long",
+      "Lan Chi",
+      "Khánh Chi",
+      "Thảo Chi",
+      "Mai Chi",
+      "Gia Bảo",
+      "Quốc Bảo",
+      "Minh Bảo",
+      "Thiên Bảo",
+      "Thanh Tâm",
+      "Minh Tâm",
+      "Ngọc Tâm",
+      "Hồng Tâm",
+      "Hải Yến",
+      "Kim Yến",
+      "Bảo Yến",
+      "Thu Yến",
+      "Minh Khang",
+      "Bảo Khang",
+      "Gia Khang",
+      "Đức Khang",
+      "Khánh Linh",
+      "Thùy Linh",
+      "Ngọc Linh",
+      "Hà Linh",
+      "Tuấn Kiệt",
+      "Anh Kiệt",
+      "Trung Kiên",
+      "Minh Kiên",
+      "Hoài Nam",
+      "Thành Nam",
+      "Phương Thảo",
+      "Thanh Thảo",
+      "Bích Ngọc",
+      "Hồng Ngọc",
+      "Nhật Minh",
+      "Hoàng Minh",
+      "Quang Vinh",
+      "Đức Vinh",
+      "Ngọc Hân",
+      "Gia Hân"
+    ],
+    "phone_prefixes": [
+      "032",
+      "033",
+      "034",
+      "035",
+      "036",
+      "037",
+      "038",
+      "039",
+      "070",
+      "076",
+      "077",
+      "078",
+      "079",
+      "081",
+      "082",
+      "083",
+      "084",
+      "085",
+      "086",
+      "088",
+      "089",
+      "090",
+      "091",
+      "092",
+      "093",
+      "094",
+      "096",
+      "097",
+      "098",
+      "099"
+    ],
+    "locations": [
+      {
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "ward": "Khu vực mô phỏng Nam 01",
+        "district": null,
+        "street": "Đường Hoa Mai"
+      },
+      {
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "ward": "Khu vực mô phỏng Nam 02",
+        "district": null,
+        "street": "Đường Hoa Sen"
+      },
+      {
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "ward": "Khu vực mô phỏng Nam 03",
+        "district": null,
+        "street": "Đường Hoa Phượng"
+      },
+      {
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "ward": "Khu vực mô phỏng Nam 04",
+        "district": null,
+        "street": "Đường Ánh Dương"
+      },
+      {
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "ward": "Khu vực mô phỏng Nam 05",
+        "district": null,
+        "street": "Đường Bình Minh"
+      },
+      {
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "ward": "Khu vực mô phỏng Nam 06",
+        "district": null,
+        "street": "Đường An Nhiên"
+      },
+      {
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "ward": "Khu vực mô phỏng Nam 07",
+        "district": null,
+        "street": "Đường Hướng Dương"
+      },
+      {
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "ward": "Khu vực mô phỏng Nam 08",
+        "district": null,
+        "street": "Đường Trúc Xanh"
+      },
+      {
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "ward": "Khu vực mô phỏng Bắc 01",
+        "district": null,
+        "street": "Đường Hoa Mai"
+      },
+      {
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "ward": "Khu vực mô phỏng Bắc 02",
+        "district": null,
+        "street": "Đường Hoa Sen"
+      },
+      {
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "ward": "Khu vực mô phỏng Bắc 03",
+        "district": null,
+        "street": "Đường Hoa Phượng"
+      },
+      {
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "ward": "Khu vực mô phỏng Bắc 04",
+        "district": null,
+        "street": "Đường Ánh Dương"
+      },
+      {
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "ward": "Khu vực mô phỏng Bắc 05",
+        "district": null,
+        "street": "Đường Bình Minh"
+      },
+      {
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "ward": "Khu vực mô phỏng Bắc 06",
+        "district": null,
+        "street": "Đường An Nhiên"
+      },
+      {
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "ward": "Khu vực mô phỏng Bắc 07",
+        "district": null,
+        "street": "Đường Hướng Dương"
+      },
+      {
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "ward": "Khu vực mô phỏng Bắc 08",
+        "district": null,
+        "street": "Đường Trúc Xanh"
+      },
+      {
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "ward": "Khu vực mô phỏng Trung 01",
+        "district": null,
+        "street": "Đường Hoa Mai"
+      },
+      {
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "ward": "Khu vực mô phỏng Trung 02",
+        "district": null,
+        "street": "Đường Hoa Sen"
+      },
+      {
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "ward": "Khu vực mô phỏng Trung 03",
+        "district": null,
+        "street": "Đường Hoa Phượng"
+      },
+      {
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "ward": "Khu vực mô phỏng Trung 04",
+        "district": null,
+        "street": "Đường Ánh Dương"
+      },
+      {
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "ward": "Khu vực mô phỏng Trung 05",
+        "district": null,
+        "street": "Đường Bình Minh"
+      },
+      {
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "ward": "Khu vực mô phỏng Trung 06",
+        "district": null,
+        "street": "Đường An Nhiên"
+      },
+      {
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "ward": "Khu vực mô phỏng Trung 07",
+        "district": null,
+        "street": "Đường Hướng Dương"
+      },
+      {
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "ward": "Khu vực mô phỏng Trung 08",
+        "district": null,
+        "street": "Đường Trúc Xanh"
+      }
+    ],
+    "warehouses": [
+      {
+        "warehouse_code": "WH-SG-01",
+        "warehouse_name": "Kho mô phỏng Nam 01",
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "address": "30 Đường Kho Vận Mô Phỏng 1"
+      },
+      {
+        "warehouse_code": "WH-SG-02",
+        "warehouse_name": "Kho mô phỏng Nam 02",
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "address": "40 Đường Kho Vận Mô Phỏng 2"
+      },
+      {
+        "warehouse_code": "WH-HN-01",
+        "warehouse_name": "Kho mô phỏng Bắc 01",
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "address": "30 Đường Kho Vận Mô Phỏng 1"
+      },
+      {
+        "warehouse_code": "WH-HN-02",
+        "warehouse_name": "Kho mô phỏng Bắc 02",
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "address": "40 Đường Kho Vận Mô Phỏng 2"
+      },
+      {
+        "warehouse_code": "WH-DN-01",
+        "warehouse_name": "Kho mô phỏng Trung 01",
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "address": "30 Đường Kho Vận Mô Phỏng 1"
+      },
+      {
+        "warehouse_code": "WH-DN-02",
+        "warehouse_name": "Kho mô phỏng Trung 02",
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "address": "40 Đường Kho Vận Mô Phỏng 2"
+      }
+    ],
+    "carriers": [
+      {
+        "carrier_code": "MOCK-FAST",
+        "carrier_name": "Chuyển phát nhanh mô phỏng"
+      },
+      {
+        "carrier_code": "MOCK-STANDARD",
+        "carrier_name": "Giao tiêu chuẩn mô phỏng"
+      },
+      {
+        "carrier_code": "MOCK-ECONOMY",
+        "carrier_name": "Giao tiết kiệm mô phỏng"
+      },
+      {
+        "carrier_code": "MOCK-CITY",
+        "carrier_name": "Giao nội thành mô phỏng"
+      },
+      {
+        "carrier_code": "MOCK-REGIONAL",
+        "carrier_name": "Giao liên vùng mô phỏng"
+      }
+    ]
+  }
+}

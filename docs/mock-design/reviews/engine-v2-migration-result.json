@@ -1,0 +1,238 @@
+{
+  "at": "2026-11-05T23:19:28",
+  "legacy_tables": 27,
+  "business_tables_after": 33,
+  "preserved_all_legacy_values": true,
+  "legacy_rows": {
+    "categories": {
+      "rows": 6,
+      "sha256": "db6608bac45924af45854f4c3f05a2c95ff6b26ff7c3a316c508f65b7966c6d4"
+    },
+    "products": {
+      "rows": 149,
+      "sha256": "f9a0e791ceb1ee785dbd233feaa658a8fcb720af847be7bfe3c2caa62c4e559b"
+    },
+    "sellers": {
+      "rows": 9,
+      "sha256": "b1036af966f1d8e0c574a58643200587fe42867d4a58648152b19683c7b0cdc5"
+    },
+    "customers": {
+      "rows": 338,
+      "sha256": "365b9511c8b7e5ff055fef1204491cb0539853e084bbbe95c1795c2bcb917a06"
+    },
+    "customer_addresses": {
+      "rows": 784,
+      "sha256": "31ebf8f12df6fd5c9c108032c2881878a374156af83e9ef894e80a6f3448ce7a"
+    },
+    "warehouses": {
+      "rows": 1,
+      "sha256": "f712cc3dc47636743bd50e39172be53503c36cc6af68dde36aea60d25b67563e"
+    },
+    "inventory_levels": {
+      "rows": 149,
+      "sha256": "666079b47ae99d453767fb01df2520a4ba51754aa1a7684aba7ad248cc633ea1"
+    },
+    "inventory_movements": {
+      "rows": 927,
+      "sha256": "062db3ea2fb607eec23390047512fa002a70daa334b7956805b07cf9ee6a548a"
+    },
+    "inventory_daily_balance": {
+      "rows": 7301,
+      "sha256": "537f861f3704cd9991015ceef9b08f53453336ea3df6ca634a26b863a2168b47"
+    },
+    "shipments": {
+      "rows": 667,
+      "sha256": "7e7a3093b062aaed0424b5d0600fb88e609780bca9631d6896d6817c9051df89"
+    },
+    "carriers": {
+      "rows": 1,
+      "sha256": "dc68946f103dc8a6957ff14af77163ce3ede3f8f74b9b0cf2027d0ff03405fcc"
+    },
+    "marketing_campaigns": {
+      "rows": 32,
+      "sha256": "0dc5d5fd46db5c017d9915c16b7891433c77fe9be7be8ebace8752f384f206d0"
+    },
+    "ad_spend_logs": {
+      "rows": 49,
+      "sha256": "a661dbf04b9d2fba94749b9f1f3a6d64fce544224bf72e167d1b7c818b0bd1bf"
+    },
+    "sessions": {
+      "rows": 6600,
+      "sha256": "b45d05739eda65f282f418d90126e512c1afe2b4294a3ff863b01e0d90240b66"
+    },
+    "channels": {
+      "rows": 3,
+      "sha256": "5e54418519035003f4c2830a1531e2199870bd24c1028d541ae4967ec1f37b61"
+    },
+    "seller_commission_rates": {
+      "rows": 1,
+      "sha256": "5c7579dfa01a4502caa95cd9783552ef34cd54635cb12aa5cf85bff520e24899"
+    },
+    "seller_payouts": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "promotions": {
+      "rows": 96,
+      "sha256": "e553c36af161c7ea8e60c9f4600757aae7fb0a35781a542ebc674a8ed9391bc4"
+    },
+    "cart_items": {
+      "rows": 1506,
+      "sha256": "e9a32a123c339e2610c8ed0cccb3405d38f2ebf3cded79bdbded7458dcc4e780"
+    },
+    "orders": {
+      "rows": 688,
+      "sha256": "eb88e27a5f5328dc0d215a47f77d68beb0701d772170a3611aa871e7c61e7993"
+    },
+    "order_items": {
+      "rows": 688,
+      "sha256": "de544449345d9d4a84fc7ee8adb996cf2fb1ec6f3631e99fb2c8cc2db7b75376"
+    },
+    "payments": {
+      "rows": 688,
+      "sha256": "05ec200e26b7bbe18f08878d2ebf6688cb7242694627a68cb9f85d50663227a2"
+    },
+    "payment_methods": {
+      "rows": 5,
+      "sha256": "915c4498d7b7d6f2648ded726464388366b4aa717342b799d35b42abd981da34"
+    },
+    "page_events": {
+      "rows": 18497,
+      "sha256": "82fde4ea76d57d7edc6446c8c69929c737f8b9a1414da9f7518dd96a02bf609f"
+    },
+    "returns": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "product_reviews": {
+      "rows": 150,
+      "sha256": "ed10957ada45c32c4c10c38a306d7310468b7c78fd1b70859d3af642118b006d"
+    },
+    "order_item_promotions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "migration": {
+    "constraints": [
+      {
+        "table": "ad_spend_logs",
+        "name": "ck_mock_ad_spend_logs_0",
+        "kind": "check"
+      },
+      {
+        "table": "inventory_daily_balance",
+        "name": "ck_mock_inventory_daily_balance_0",
+        "kind": "check"
+      },
+      {
+        "table": "inventory_levels",
+        "name": "ck_mock_inventory_levels_0",
+        "kind": "check"
+      },
+      {
+        "table": "order_items",
+        "columns": [
+          "order_id",
+          "line_number"
+        ],
+        "kind": "unique"
+      },
+      {
+        "table": "order_items",
+        "name": "ck_mock_order_items_0",
+        "kind": "check"
+      },
+      {
+        "table": "orders",
+        "name": "ck_mock_orders_0",
+        "kind": "check"
+      },
+      {
+        "table": "payments",
+        "name": "ck_mock_payments_0",
+        "kind": "check"
+      },
+      {
+        "table": "product_reviews",
+        "name": "ck_mock_product_reviews_0",
+        "kind": "check"
+      },
+      {
+        "table": "returns",
+        "name": "ck_mock_returns_0",
+        "kind": "check"
+      },
+      {
+        "table": "seller_commission_rates",
+        "name": "ck_mock_seller_commission_rates_0",
+        "kind": "check"
+      }
+    ],
+    "version": 2,
+    "new_tables": [
+      "checkout_lines",
+      "checkouts",
+      "delivery_attempts",
+      "promotion_usages",
+      "refunds",
+      "seller_payout_items"
+    ],
+    "new_columns": [
+      {
+        "table": "order_item_promotions",
+        "column": "funded_by"
+      },
+      {
+        "table": "order_items",
+        "column": "commission_category_id"
+      },
+      {
+        "table": "order_items",
+        "column": "commission_rate"
+      },
+      {
+        "table": "order_items",
+        "column": "commission_seller_tier"
+      },
+      {
+        "table": "orders",
+        "column": "cancellation_reason"
+      },
+      {
+        "table": "orders",
+        "column": "checkout_id"
+      },
+      {
+        "table": "page_events",
+        "column": "search_keyword"
+      },
+      {
+        "table": "returns",
+        "column": "approved_at"
+      },
+      {
+        "table": "returns",
+        "column": "decision_reason"
+      },
+      {
+        "table": "returns",
+        "column": "received_at"
+      },
+      {
+        "table": "returns",
+        "column": "warehouse_id"
+      },
+      {
+        "table": "shipments",
+        "column": "in_transit_at"
+      },
+      {
+        "table": "shipments",
+        "column": "returned_at"
+      }
+    ],
+    "rewrites_existing_rows": false
+  },
+  "new_jobs_or_orders_created": false
+}

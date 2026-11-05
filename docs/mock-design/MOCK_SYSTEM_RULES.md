@@ -61,7 +61,7 @@ Mỗi lần đồng bộ cần ghi nhận thời điểm thực hiện và thố
 
 Đồng bộ chỉ bổ sung sản phẩm, danh mục và người bán mới cần thiết theo Rule 01. Không tự sinh hoặc sửa đơn hàng, khách hàng, thanh toán, tồn kho, marketing, analytics, chính sách hoa hồng hay đối soát; không tự kích hoạt các hành động nghiệp vụ của hệ thống khác. Catalog mới có thể được các hệ thống khác sử dụng trong kế hoạch chạy riêng sau đó.
 
-Màn Catalog & Seller hiển thị 4 nhóm nghiệp vụ: Người bán, Quản trị viên catalog, Nhân viên quản lý người bán, Khách truy cập. Tổng thể vẫn có 5 bên tác động nếu tính tiến trình đồng bộ bên ngoài. Cấu hình hành động cụ thể được mô tả trong [MOCK_CATALOG_SELLER_CONFIG.md](MOCK_CATALOG_SELLER_CONFIG.md).
+Màn Catalog & Seller hiển thị 4 nhóm nghiệp vụ: Người bán, Quản trị viên catalog, Nhân viên quản lý người bán, Khách truy cập. Tổng thể vẫn có 5 bên tác động nếu tính tiến trình đồng bộ bên ngoài. Cấu hình hành động cụ thể được mô tả trong [MOCK_CATALOG_SELLER_CONFIG.md](configuration/MOCK_CATALOG_SELLER_CONFIG.md).
 
 ## Rule 03 — Nơi lưu tài liệu và cách chốt logic mới
 

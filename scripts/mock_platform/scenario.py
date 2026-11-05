@@ -243,7 +243,7 @@ def main():
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("docs/mock-design/examples/realistic-current-engine-2026.json"),
+        default=Path("docs/mock-design/examples/scenarios/realistic-current-engine-2026.json"),
     )
     args = parser.parse_args()
     scenario = RealisticScenario(args.year, args.category_id)

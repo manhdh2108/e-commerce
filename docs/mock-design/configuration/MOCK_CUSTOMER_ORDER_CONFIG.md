@@ -1,12 +1,12 @@
 # Cấu hình kịch bản mock — Khách hàng & Đơn hàng
 
-> Đã chuyển sang triển khai theo yêu cầu người dùng. Nội dung dưới đây là thiết kế; xem [trạng thái thực tế](MOCK_IMPLEMENTATION_STATUS.md) để biết tính năng đã chạy và giới hạn. Không hiểu “đã có thiết kế” là toàn bộ nghiệp vụ đã hoàn thành.
+> Đã chuyển sang triển khai theo yêu cầu người dùng. Nội dung dưới đây là thiết kế; xem [trạng thái thực tế](../reviews/MOCK_IMPLEMENTATION_STATUS.md) để biết tính năng đã chạy và giới hạn. Không hiểu “đã có thiết kế” là toàn bộ nghiệp vụ đã hoàn thành.
 
 **Trạng thái:** Đề xuất danh sách hành động và form cấu hình để chốt cùng người dùng. Chưa triển khai code/UI; chưa chốt cách ghi dữ liệu chi tiết.
 
 Các tài liệu cũ bên dưới chỉ dùng tham khảo cấu trúc, có thể có sai sót; không quyết định logic mới. Nếu khác yêu cầu đã chốt, phải ghi nhận điểm cần đối chiếu thay vì ép thiết kế mới theo tài liệu cũ.
 
-Cơ sở tham khảo: [schema OLTP](../OLTP_SCHEMA.md), [ERD](../OLTP_ERD.md), các mục khách hàng, đơn hàng, thanh toán và sau bán của [bộ luật cũ](../DATA_GENERATION_RULES.md). Không tự áp tỷ lệ hoặc ngưỡng trong bộ luật cũ thành cấu hình đã chốt.
+Cơ sở tham khảo: [schema OLTP](../../data-model/oltp/OLTP_SCHEMA.md), [ERD](../../data-model/oltp/OLTP_ERD.md), các mục khách hàng, đơn hàng, thanh toán và sau bán của [bộ luật cũ](../../data-model/oltp/DATA_GENERATION_RULES.md). Không tự áp tỷ lệ hoặc ngưỡng trong bộ luật cũ thành cấu hình đã chốt.
 
 ## 1. Vị trí và phạm vi màn hình
 

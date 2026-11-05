@@ -98,7 +98,7 @@ def test_sync_append_only_and_no_side_effects(platform):
     assert p["new"] == 0 and p["skipped"] == 1
     enqueue(s, w, "sync", preview=p["id"])
     assert s.data("products")[0]["price"] == 100000
-    assert len(s.db.bm.tables) == 27
+    assert len(s.db.bm.tables) == 33
     assert (
         "control_records"
         not in __import__("sqlalchemy").inspect(s.db.business).get_table_names()
@@ -302,7 +302,7 @@ def test_calendar_ranges_and_backend_blocks_unavailable_actions(platform):
     assert len(days("2024-01-01", "2024-12-31")) == 366
     assert len(days("2026-01-01", "2026-12-31")) == 365
     with pytest.raises(ValueError):
-        s.save_version({"config": {"PAY-02": {"enabled": True, "count": 1}}})
+        s.save_version({"config": {"SYS-04": {"enabled": True, "count": 1}}})
     with pytest.raises(ValueError):
         s.save_version(
             {"config": {"CAT-04": {"enabled": True, "count": 1, "params": {}}}}
@@ -412,11 +412,6 @@ def test_edit_saved_config_does_not_change_queued_job(platform):
     }
     id = s.save_version({"name": "Chạy 2 khách", "config": original})["id"]
     plan = s.plan({"version": id, "start": "2026-11-01", "end": "2026-11-01"})
-    # Exercise legacy plan migration too: old jobs used to hold only a version ID.
-    legacy = s.db.get("plans", plan["id"])
-    legacy.pop("config_snapshot")
-    legacy.pop("version_revision")
-    s.db.put("plans", plan["id"], legacy)
     job = s.newjob("run", {"request_key": "queued-before-edit", "plan": plan["id"]})
     s.update_version(
         id,
@@ -811,7 +806,7 @@ def test_import_rejects_malformed_or_unsupported_config_without_saving(platform)
         '{"GST-01":{},"GST-01":{}}',
         '{"GST-01":{"enabled":true,"params":{},"count":NaN}}',
         json.dumps({"name": "x", "config": {}, "unexpected": True}),
-        json.dumps({"format_version": 2, "config": {}}),
+        json.dumps({"format_version": 3, "config": {}}),
     ]
     for code, cfg in [
         ("MISSING", {}),
@@ -822,7 +817,7 @@ def test_import_rejects_malformed_or_unsupported_config_without_saving(platform)
         ("GST-01", {"special": {"2026-02-30": 1}}),
         ("GST-01", {"special": {"20261101": 1}}),
         ("GST-01", {"extra": 1}),
-        ("PAY-02", {"enabled": True}),
+        ("SYS-04", {"enabled": True}),
         ("PAY-01", {"params": {"success_rate": 101}}),
         ("CUS-05", {"params": {"quantity": 1.5}}),
         ("WH-01", {"params": {"quantity": "10"}}),

@@ -7,7 +7,9 @@ from .service import ACTIONS, CATALOG
 from .storage import ROOT
 
 MAX_CONFIG_BYTES = 2 * 1024 * 1024
-TEMPLATE = ROOT / "docs/mock-design/examples/realistic-current-engine-2026.json"
+TEMPLATE = (
+    ROOT / "docs/mock-design/examples/scenarios/realistic-current-engine-2026.json"
+)
 
 
 class ConfigTransfer:
@@ -23,7 +25,8 @@ class ConfigTransfer:
             result[key] = value
         return result
 
-    def preview(self, payload):
+    @classmethod
+    def parse_document(cls, payload):
         text = payload.get("text")
         if not isinstance(text, str) or not text.strip():
             raise ValueError("Hãy chọn file JSON có nội dung.")
@@ -36,7 +39,7 @@ class ConfigTransfer:
 
             data = json.loads(
                 text.lstrip("\ufeff"),
-                object_pairs_hook=self.unique_object,
+                object_pairs_hook=cls.unique_object,
                 parse_constant=invalid_constant,
             )
         except json.JSONDecodeError as exc:
@@ -46,7 +49,19 @@ class ConfigTransfer:
         except RecursionError:
             raise ValueError("JSON lồng quá nhiều cấp.") from None
         if not isinstance(data, dict) or not data:
-            raise ValueError("Gốc JSON phải là object cấu hình không rỗng.")
+            raise ValueError("Gốc JSON phải là object không rỗng.")
+        return data
+
+    def preview(self, payload):
+        data = self.parse_document(payload)
+        if data.get("format") == "mock-studio-settings" or set(data) == {
+            "return_window_days",
+            "payout_hold_days",
+            "max_delivery_attempts",
+        }:
+            raise ValueError(
+                "Đây là file thiết lập; hãy nhập ở Thiết lập → Nhập thiết lập bằng JSON."
+            )
         warnings = []
         if "config" in data:
             allowed = {"name", "config", "format", "format_version", "version_id"}
@@ -57,11 +72,10 @@ class ConfigTransfer:
                 )
             if data.get("format", "mock-studio-config") != "mock-studio-config":
                 raise ValueError("Định dạng file không phải mock-studio-config.")
-            if (
-                type(data.get("format_version", 1)) is not int
-                or data.get("format_version", 1) != 1
-            ):
-                raise ValueError("Chỉ hỗ trợ format_version = 1.")
+            if type(data.get("format_version", 1)) is not int or data.get(
+                "format_version", 1
+            ) not in [1, 2]:
+                raise ValueError("Chỉ hỗ trợ format_version = 1 hoặc 2.")
             config, name = data["config"], data.get("name", "Cấu hình nhập từ JSON")
             if "version_id" in data:
                 warnings.append(
@@ -93,6 +107,10 @@ class ConfigTransfer:
                     )
                 },
             }
+            if "delay_days" in cfg:
+                normalized[code]["delay_days"] = cfg["delay_days"]
+            if "variants" in cfg:
+                normalized[code]["variants"] = cfg["variants"]
         enabled = [code for code, cfg in normalized.items() if cfg["enabled"]]
         counts = Counter(ACTIONS[code]["system"] for code in enabled)
         all_dates = sorted(

@@ -2,7 +2,7 @@
 
 Tài liệu này đề xuất bộ trường cần lấy từ Tiki để có sản phẩm và giá thật làm nền cho dữ liệu mô phỏng. Đây là thiết kế mapping, chưa phải thay đổi code hoặc database.
 
-Đối chiếu với [OLTP_SCHEMA.md](../OLTP_SCHEMA.md), [OLTP_ERD.md](../OLTP_ERD.md), [SCHEMA.md](../SCHEMA.md), crawler hiện tại và JSON thực tế trong `data/tiki_crawl.db`.
+Đối chiếu với [OLTP_SCHEMA.md](../data-model/oltp/OLTP_SCHEMA.md), [OLTP_ERD.md](../data-model/oltp/OLTP_ERD.md), [SCHEMA.md](../data-model/crawler/SCHEMA.md), crawler hiện tại và JSON thực tế trong `data/tiki_crawl.db`.
 
 ## 1. Cách đọc các liên kết
 
