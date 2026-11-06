@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const P=require('../web/presentation.js');
-const catalog=JSON.parse(fs.readFileSync(path.join(__dirname,'../actions.json'),'utf8'));
+const catalog=JSON.parse(fs.readFileSync(path.join(__dirname,'../resources/actions.json'),'utf8'));
 const config={
  'CUS-05':{enabled:true,count:8,params:{method:'Momo',quantity:1,channel:'App'},special:{'2026-11-11':24}},
  'PAY-01':{enabled:true,count:0,mode:'all',params:{success_rate:100},special:{}},

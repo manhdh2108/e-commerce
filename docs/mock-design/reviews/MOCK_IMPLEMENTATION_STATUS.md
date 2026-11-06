@@ -1,5 +1,9 @@
 # Trạng thái triển khai Mock Studio
 
+> Bản vận hành mới sau rà soát ngày 06/11/2026: xem [kết quả hiện hành](REALISM_UPGRADE_RESULT_2026-11-06.md) và [hướng dẫn áp dụng](../guides/REALISTIC_OPERATIONS_2026.md). Các hạn chế và số liệu bên dưới thuộc các mốc triển khai trước đó.
+
+> Bổ sung ngày 06/11/2026: cơ chế quần thể/actor, phân bố thuộc tính/tồn, lịch theo phiên và tham số theo điều kiện đã được nâng cấp. Xem [hướng dẫn hiện hành](../guides/CONFIG_DRIVEN_ENGINE_GUIDE.md). Các phần bên dưới cần được đọc theo mốc triển khai ghi trong từng mục.
+
 Bản triển khai ngày 05/11/2026. Đây là báo cáo thực tế, không thay thế rule hoặc tự xác nhận nghiệp vụ chưa chốt.
 
 ## Đã triển khai

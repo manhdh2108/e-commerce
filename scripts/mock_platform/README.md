@@ -4,6 +4,38 @@
 
 Người mới dùng: [Hướng dẫn đầy đủ từ pull đến lượt mock đầu tiên](../../docs/mock-design/guides/FIRST_MOCK_RUN_GUIDE.md), có ảnh dashboard, cấu hình 2 đơn COD và hướng dẫn từng trang UI.
 
+## Cấu trúc source
+
+```text
+scripts/mock_platform/
+├── __main__.py          # Điểm chạy serve / worker / crawl-worker / status
+├── application/         # Điều phối use case, job, snapshot và thao tác dữ liệu
+├── config/              # Kiểm tra/import config, profile, policy, sinh mẫu
+├── engine/              # Thực thi hành động, actor, selector và workflow nghiệp vụ
+├── infrastructure/      # Kết nối DB, transaction, migration và index
+├── integrations/        # Kích hoạt/theo dõi crawler Tiki độc lập
+├── interfaces/          # HTTP API và phục vụ giao diện
+├── diagnostics/         # Kiểm tra dữ liệu và audit chỉ đọc
+├── resources/           # Registry hành động, schema, mặc định và SQL khởi tạo
+├── web/                 # HTML, CSS, JavaScript của UI
+└── tests/               # Kiểm thử Python và JavaScript
+```
+
+Luồng chính: CLI/API gọi `application`; worker thực thi các workflow trong `engine` và ghi dữ liệu qua `infrastructure`. `config` chịu trách nhiệm định dạng và kiểm tra cấu hình; `resources` cung cấp đường dẫn tài nguyên tập trung, không phụ thuộc thư mục chạy lệnh. Crawler thật vẫn ở `scripts/crawl_tiki.py`; `integrations/crawler.py` chỉ điều phối tiến trình đó.
+
+Thêm bộ sinh thuộc tính hoặc quy tắc config trong `config`; thêm rule hành động trong `engine`; thêm endpoint trong `interfaces`. Không đặt module nghiệp vụ mới ở thư mục gốc package. Việc gom package không đổi database, dữ liệu, API hay lệnh `scripts/start_mock.sh`.
+
+Các module Python nội bộ đã chuyển đường dẫn; mã bên ngoài nếu import trực tiếp cần cập nhật, ví dụ `scripts.mock_platform.application.service.PlatformService` và `scripts.mock_platform.infrastructure.storage.Database`. Các lệnh công cụ hiện hành:
+
+```bash
+.venv/bin/python -m scripts.mock_platform.diagnostics.audit --help
+.venv/bin/python -m scripts.mock_platform.infrastructure.migrations --help
+.venv/bin/python -m scripts.mock_platform.infrastructure.indexes --help
+.venv/bin/python -m scripts.mock_platform.config.scenario --help
+```
+
+Kế hoạch đã preview trước khi thay source cần preview lại theo fingerprint mới. Job/lịch sử đã hoàn tất được giữ nguyên.
+
 ## Nâng cấp engine v2
 
 Xem [hướng dẫn v2](../../docs/mock-design/guides/ENGINE_V2_UPGRADE_GUIDE.md) trước khi chạy trên DB cũ: preview/apply migration, giữ dữ liệu lịch sử, cấu hình mới và các giả định chính sách. Mẫu mới tải trong tab Cấu hình hoặc [file JSON](../../docs/mock-design/examples/scenarios/upgraded-linked-2026.json).

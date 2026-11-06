@@ -16,7 +16,7 @@ Không sửa/xóa dữ liệu, không gọi crawler, không xếp job, không pa
 - Khi lấy snapshot có job `5f1afc04-828b-4864-803b-251e2c92ac51` đang chạy ngày **16/02/2026**. Checkpoint và số dư cuối ngày đã hoàn tất đến **15/02/2026**. Những kiểm tra chốt ngày chỉ áp dụng đến mốc này.
 - Số liệu sẽ tiếp tục tăng do worker đang chạy. Không dùng báo cáo này như dashboard thời gian thực.
 - Kết quả máy đọc được: [audit-results-2026-11-05.json](audit-results-2026-11-05.json).
-- Mã kiểm tra: [`scripts/mock_platform/audit.py`](../../../scripts/mock_platform/audit.py), lớp `ReadOnlyAudit`.
+- Mã kiểm tra: [`scripts/mock_platform/diagnostics/audit.py`](../../../scripts/mock_platform/diagnostics/audit.py), lớp `ReadOnlyAudit`.
 
 Đã xác minh riêng bằng truy vấn SQL độc lập cho lỗi phân nhóm Analytics; không chỉ dựa vào kết quả của script audit.
 
@@ -201,7 +201,7 @@ Lượt kiểm tra này chỉ bổ sung công cụ/báo cáo, chưa thay handler
 Từ thư mục gốc repository, dùng cùng biến môi trường kết nối của web:
 
 ```bash
-.venv/bin/python -m scripts.mock_platform.audit \
+.venv/bin/python -m scripts.mock_platform.diagnostics.audit \
   --output docs/mock-design/audit-results-latest.json
 ```
 

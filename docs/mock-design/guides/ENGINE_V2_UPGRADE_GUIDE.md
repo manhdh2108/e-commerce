@@ -41,7 +41,7 @@ Migration chỉ thêm cấu trúc và ràng buộc sau preflight. Không đổi 
 Chạy tại thư mục gốc repository, dùng cùng biến `MOCK_CONTROL_URL` và `MOCK_BUSINESS_URL` như ứng dụng:
 
 ```bash
-.venv/bin/python -m scripts.mock_platform.migrations
+.venv/bin/python -m scripts.mock_platform.infrastructure.migrations
 ```
 
 Lệnh mặc định chỉ xem trước: bảng/cột cần thêm, CHECK/UNIQUE và dữ liệu xung đột. Nó không apply migration. Khi preflight đạt:
@@ -51,7 +51,7 @@ Lệnh mặc định chỉ xem trước: bảng/cột cần thêm, CHECK/UNIQUE 
 3. Apply rõ ràng rồi khởi động:
 
 ```bash
-.venv/bin/python -m scripts.mock_platform.migrations --apply
+.venv/bin/python -m scripts.mock_platform.infrastructure.migrations --apply
 ./scripts/start_mock.sh
 ```
 

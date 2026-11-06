@@ -5,9 +5,9 @@ import json
 
 from fastapi.testclient import TestClient
 
-from scripts.mock_platform.api import create_app
-from scripts.mock_platform.settings_transfer import SettingsTransfer
-from scripts.mock_platform.storage import ROOT
+from scripts.mock_platform.interfaces.api import create_app
+from scripts.mock_platform.config.settings_transfer import SettingsTransfer
+from scripts.mock_platform.resources import PROJECT_ROOT as ROOT
 from scripts.mock_platform.tests.test_platform import platform, initialize  # noqa: F401 — fixture
 
 
@@ -29,13 +29,15 @@ def test_settings_preview_fill_contract_and_no_writes(platform):
         assert p["business_policy"]["payout_hold_days"] == 10
         assert p["summary"] == {
             "surnames": 32,
-            "given_names": 64,
-            "name_combinations": 2048,
+            "given_names": 104,
+            "name_combinations": 3328,
             "phone_prefixes": 30,
-            "locations": 24,
-            "provinces": 3,
+            "locations": 20,
+            "provinces": 4,
             "warehouses": 6,
             "carriers": 5,
+            "actor_groups": 21,
+            "inventory_rules": 4,
         }
         assert any("đã tạo dữ liệu nền" in w for w in p["warnings"])
         download = client.get("/api/settings-template")

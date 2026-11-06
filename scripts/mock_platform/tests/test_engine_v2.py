@@ -8,11 +8,11 @@ import pytest
 from sqlalchemy import select
 
 from scripts.mock_platform.tests.test_platform import platform, initialize, enqueue  # noqa: F401 — pytest fixture
-from scripts.mock_platform.storage import UnitOfWork
-from scripts.mock_platform.domain import DomainEngine, NotEligible
-from scripts.mock_platform.service import ACTIONS
-from scripts.mock_platform.validation import BusinessValidator
-from scripts.mock_platform.config_transfer import ConfigTransfer
+from scripts.mock_platform.infrastructure.storage import UnitOfWork
+from scripts.mock_platform.engine.domain import DomainEngine, NotEligible
+from scripts.mock_platform.application.service import ACTIONS
+from scripts.mock_platform.diagnostics.validation import BusinessValidator
+from scripts.mock_platform.config.config_transfer import ConfigTransfer
 
 
 def command(s, w, code, at="2026-11-01T12:00:00", **params):
@@ -82,7 +82,7 @@ def test_profiles_reproducible_and_special_replaces_count(platform):
         s.db.get("plans", plan["id"])["config_snapshot"] == original["config_snapshot"]
     )
     # New plan uses edits; deterministic resolver itself preserves old snapshot.
-    from scripts.mock_platform.profiles import ParameterProfiles
+    from scripts.mock_platform.config.profiles import ParameterProfiles
 
     assert ParameterProfiles.resolve(
         cfg["GST-WEB-01"], {}, 42, "stable"
@@ -397,7 +397,7 @@ def test_validator_catches_actor_corruption_and_arithmetic(platform):
 
 
 def test_migration_additive_idempotent_and_preflight(platform):
-    from scripts.mock_platform.migrations import SchemaMigration
+    from scripts.mock_platform.infrastructure.migrations import SchemaMigration
 
     s, w, _ = platform
     initialize(s, w)
@@ -422,13 +422,19 @@ def test_policy_snapshot_prevents_late_return_after_settlement(platform):
 
 
 def test_new_scenario_runs_linked_journeys_returns_and_backlog(platform):
-    from scripts.mock_platform.upgraded_scenario import UpgradedScenario
+    from scripts.mock_platform.config.upgraded_scenario import UpgradedScenario
 
     s, w, _ = platform
+    from scripts.mock_platform.config.settings_transfer import SettingsTransfer
+    from scripts.mock_platform.resources import PROJECT_ROOT
+    settings = json.loads((PROJECT_ROOT / 'docs/mock-design/examples/settings/diverse-ecommerce.json').read_text())
+    preview = SettingsTransfer(s).preview({'text':json.dumps(settings)})
+    s.save_entity_profile(preview['entity_profile'])
+    s.save_business_policy(preview['business_policy'])
     enqueue(s, w, "sync", preview=s.source_preview({})["id"])
     enqueue(s, w, "bootstrap", customers=30, stock=3000)
     document = UpgradedScenario().build()
-    # Keep the full 12-day workflow and sale calendar with a small integration workload.
+    # Keep the full 20-day cohort including delivery plus payout hold, at reduced load.
     for cfg in document["config"].values():
         if cfg.get("mode") != "all":
             cfg["count"] = max(1, cfg["count"] // 10) if cfg["count"] else 0
@@ -437,7 +443,7 @@ def test_new_scenario_runs_linked_journeys_returns_and_backlog(platform):
                 for day, n in cfg.get("special", {}).items()
             }
     id = ConfigTransfer(s).save({"text": json.dumps(document)})["id"]
-    plan = s.plan({"version": id, "start": "2026-11-01", "end": "2026-11-12"})
+    plan = s.plan({"version": id, "start": "2026-11-01", "end": "2026-11-20"})
     enqueue(s, w, "run", plan=plan["id"])
     assert s.data("orders") and all(o["session_id"] for o in s.data("orders"))
     assert len({r["device_type"] for r in s.data("sessions")}) >= 2
@@ -486,7 +492,7 @@ def test_plan_snapshots_entity_policy_and_recovery_watermark(platform):
 
 def test_postgres_migration_from_27_tables_preserves_ids_and_prices(platform):
     from sqlalchemy import MetaData,Table,Column,inspect
-    from scripts.mock_platform.migrations import SchemaMigration
+    from scripts.mock_platform.infrastructure.migrations import SchemaMigration
     from pathlib import Path
     s,_,_=platform
     if s.db.business.dialect.name!='postgresql':pytest.skip('DDL migration is PostgreSQL-specific')

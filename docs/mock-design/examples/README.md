@@ -10,3 +10,7 @@ Mỗi loại giữ một mẫu cơ bản và một bản đầy đủ mới nh�
 Import thiết lập: kiểm tra → điền form → bấm **Lưu chính sách / Lưu hồ sơ** tương ứng. Import kịch bản: xem trước → lưu một cấu hình hành động. Cả hai không tự cào, đồng bộ, bootstrap, chạy mock hay thay dữ liệu OLTP hiện có.
 
 [Hướng dẫn thiết lập](settings/README.md) · [Hướng dẫn engine v2](../guides/ENGINE_V2_UPGRADE_GUIDE.md).
+
+Bản đầy đủ mới nhất khai báo 21 nhóm tác động, phân bố thuộc tính/tồn đầu, lịch tương đối theo phiên và lookup tham số theo điều kiện. Đọc [hướng dẫn engine cấu hình](../guides/CONFIG_DRIVEN_ENGINE_GUIDE.md) trước khi nhập. Để áp hồ sơ cho seller mới, lưu thiết lập trước lần đồng bộ đầu tiên; không ghi đè seller đã có.
+
+Bản mới sau rà soát có 52 hành động bật, 20 bộ địa phương ở bốn thành phố, năm carrier, lịch theo trọng số và các nhánh retry/hủy/từ chối. Xem [hướng dẫn vận hành 2026](../guides/REALISTIC_OPERATIONS_2026.md) để biết semantics, giới hạn và cách dùng trên DB đã có dữ liệu.

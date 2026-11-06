@@ -49,6 +49,15 @@
       const value = cfg.params?.[field.key] ?? field.default;
       return value === '' || value === null || value === undefined ? [] : [{label:field.label.replace(/\s*\(trống:.*\)$/,''),value:valueLabel(field,value)}];
     });
+    if(cfg.actor_pool)rows.push({label:'Nhóm thực hiện',value:cfg.actor_pool});
+    if(cfg.schedule?.start)rows.push({label:'Khung giờ',value:cfg.schedule.start+' – '+cfg.schedule.end});
+    if(cfg.schedule?.windows)rows.push({label:'Phân bố giờ hoạt động',value:cfg.schedule.windows.map(w=>w.start+' – '+w.end+' (trọng số '+w.weight+')').join('; ')});
+    if(cfg.schedule?.after_seconds)rows.push({label:'Độ trễ xử lý từ đầu vào',value:cfg.schedule.after_seconds.min+' – '+cfg.schedule.after_seconds.max+' giây'});
+    if(cfg.variant_mode==='cycle')rows.push({label:'Cách chọn nhóm tham số',value:'Luân phiên từng nhóm'});
+    if(cfg.phase!==undefined)rows.push({label:'Thứ tự xử lý',value:cfg.phase});
+    if(cfg.preferences?.products)rows.push({label:'Ưu tiên sản phẩm',value:cfg.preferences.products.source==='session_views'?'Sản phẩm đã xem trong phiên':'Sở thích từ tìm kiếm trong phiên'});
+    if(cfg.schedule?.offset_seconds)rows.push({label:'Theo phiên',value:'Độ trễ từ lúc mở phiên (giây): '+cfg.schedule.offset_seconds.min+' – '+cfg.schedule.offset_seconds.max});
+    if(cfg.parameter_rules?.length)rows.push({label:'Tham số theo điều kiện',value:cfg.parameter_rules.length+' quy tắc, ưu tiên quy tắc khớp đầu tiên'});
     if(cfg.delay_days)rows.push({label:'Độ trễ tối thiểu',value:cfg.delay_days+' ngày'});
     if(cfg.variants?.length){const total=cfg.variants.reduce((n,r)=>n+r.weight,0);for(const row of cfg.variants){rows.push({label:'Nhóm '+row.name,value:`Trọng số ${row.weight}/${total}: `+parameters(a,{params:{...cfg.params,...row.params}}).map(p=>p.label+': '+p.value).join('; ')})}}
     return rows;

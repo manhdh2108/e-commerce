@@ -24,10 +24,10 @@ Snapshot mô tả thời điểm kiểm tra, không khẳng định DB sẽ gi�
 
 Code đối chiếu:
 
-- [Danh sách hành động và các trường config](../../../scripts/mock_platform/actions.json).
-- [Worker: dữ liệu nền và cách áp tham số](../../../scripts/mock_platform/worker.py).
-- [Handler: trường nào thực sự được ghi](../../../scripts/mock_platform/domain.py).
-- [Import và kiểm tra định dạng config](../../../scripts/mock_platform/config_transfer.py).
+- [Danh sách hành động và các trường config](../../../scripts/mock_platform/resources/actions.json).
+- [Worker: dữ liệu nền và cách áp tham số](../../../scripts/mock_platform/application/worker.py).
+- [Handler: trường nào thực sự được ghi](../../../scripts/mock_platform/engine/domain.py).
+- [Import và kiểm tra định dạng config](../../../scripts/mock_platform/config/config_transfer.py).
 
 ## 3. Giới hạn chính của config hiện tại
 

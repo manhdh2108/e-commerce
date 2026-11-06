@@ -30,8 +30,8 @@ async function overview(){
       planId='';syncId='';currentJob=j.id;location.hash='monitor';
     },'#reset-feedback');
   },'#reset-feedback');
-  await Promise.all([drawDashboard(),drawCrawler()]);
-  poll=setInterval(()=>{if(location.hash==='#overview'||!location.hash)Promise.all([drawDashboard(),drawCrawler()]).catch(()=>{})},5000);
+  await Promise.all([drawDashboard(),drawCrawler(),drawOverviewState()]);
+  poll=setInterval(()=>{if(location.hash==='#overview'||!location.hash)Promise.all([drawDashboard(),drawCrawler(),drawOverviewState()]).catch(()=>{})},5000);
 }
 function dailyOrderChart(rows){
   if(!rows.length)return '<p class="empty">Chưa có đơn hàng.</p>';
@@ -70,4 +70,13 @@ async function syncPage(){
     $('#source-check-result').innerHTML=metricCards([['Sản phẩm trong SQLite',fmt(p.source_count),'Toàn bộ sản phẩm nguồn'],['ID sản phẩm chưa có',fmt(p.source_new),`${fmt(p.new)} sản phẩm mới đủ điều kiện thêm`],['ID sản phẩm đã có',fmt(p.source_existing),'Giữ nguyên theo rule append-only'],['Bản ghi có lỗi',fmt(p.errors.length),'Cần kiểm tra SKU, chào bán hoặc trường bắt buộc']])+`<p class="label">Kiểm tra lúc ${esc(p.checked_at)}. Đếm sản phẩm, không đếm các dòng raw hoặc bảng phụ của crawler.</p>${p.errors.length?'<details><summary>Xem lỗi dữ liệu</summary>'+table(p.errors)+'</details>':''}`;
     notice('#source-feedback',p.new?'Có sản phẩm mới. Hãy Xem trước đồng bộ bên dưới để chọn giới hạn và thực hiện.':'Chưa có sản phẩm mới hợp lệ để đồng bộ.');
   },'#source-feedback');
+}
+
+async function drawOverviewState(){
+  await refresh();
+  if(!$('#overview-jobs'))return;
+  for(const [key,value] of Object.entries({catalog:fmt(state.counts?.products),orders:fmt(state.counts?.sellers),plan:state.last_day||'Chưa bắt đầu'})){
+    const node=document.querySelector(`[data-overview-stat="${key}"]`);if(node)node.textContent=value;
+  }
+  $('#overview-jobs').innerHTML=jobRows(state.jobs||[]);wireJobs();
 }

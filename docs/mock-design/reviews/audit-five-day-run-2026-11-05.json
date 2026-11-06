@@ -1,0 +1,1201 @@
+{
+  "started_at": "2026-11-05T23:58:05",
+  "finished_at": "2026-11-05T23:58:07",
+  "business_snapshot_first": true,
+  "read_only": true,
+  "target": "postgresql+psycopg://mock:***@127.0.0.1:55432/mock_oltp",
+  "last_day_in_control": "2026-01-05",
+  "checked_closed_through": "2026-01-05",
+  "active_jobs_at_control_snapshot": [],
+  "counts": {
+    "categories": 6,
+    "products": 149,
+    "sellers": 9,
+    "customers": 24,
+    "customer_addresses": 1,
+    "channels": 3,
+    "payment_methods": 5,
+    "orders": 1,
+    "order_items": 1,
+    "payments": 1,
+    "returns": 1,
+    "product_reviews": 0,
+    "promotions": 3,
+    "order_item_promotions": 1,
+    "warehouses": 6,
+    "inventory_levels": 5,
+    "inventory_movements": 6,
+    "inventory_daily_balance": 15,
+    "carriers": 5,
+    "shipments": 1,
+    "marketing_campaigns": 1,
+    "ad_spend_logs": 5,
+    "sessions": 1575,
+    "page_events": 4367,
+    "cart_items": 315,
+    "seller_commission_rates": 5,
+    "seller_payouts": 0,
+    "checkouts": 1,
+    "checkout_lines": 1,
+    "refunds": 0,
+    "promotion_usages": 2,
+    "seller_payout_items": 0,
+    "delivery_attempts": 1
+  },
+  "business_tables": [
+    "categories",
+    "products",
+    "sellers",
+    "customers",
+    "customer_addresses",
+    "warehouses",
+    "inventory_movements",
+    "shipments",
+    "inventory_daily_balance",
+    "carriers",
+    "inventory_levels",
+    "marketing_campaigns",
+    "ad_spend_logs",
+    "sessions",
+    "channels",
+    "seller_commission_rates",
+    "seller_payouts",
+    "promotions",
+    "cart_items",
+    "order_items",
+    "orders",
+    "payment_methods",
+    "order_item_promotions",
+    "page_events",
+    "checkouts",
+    "refunds",
+    "promotion_usages",
+    "seller_payout_items",
+    "delivery_attempts",
+    "checkout_lines",
+    "payments",
+    "product_reviews",
+    "returns"
+  ],
+  "control_tables": [
+    "control_records"
+  ],
+  "checks": [
+    {
+      "check": "FK categories.parent_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK products.category_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK products.seller_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE products.sku",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK customer_addresses.customer_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK orders.campaign_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK orders.channel_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK orders.checkout_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK orders.customer_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK orders.seller_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK orders.session_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK orders.shipping_address_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK orders.shipping_promotion_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE orders.order_code",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK order_items.commission_category_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK order_items.order_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK order_items.product_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE order_items.order_id,line_number",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK payments.order_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK payments.payment_method_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK returns.order_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK returns.warehouse_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK product_reviews.customer_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK product_reviews.order_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK product_reviews.product_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE product_reviews.order_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK promotions.product_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK promotions.seller_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK order_item_promotions.order_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK order_item_promotions.promotion_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK inventory_levels.warehouse_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE inventory_levels.warehouse_id,sku",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK inventory_movements.warehouse_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK inventory_daily_balance.warehouse_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE inventory_daily_balance.balance_date,warehouse_id,sku",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK shipments.carrier_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK shipments.warehouse_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE shipments.order_code",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE shipments.tracking_code",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK ad_spend_logs.campaign_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE ad_spend_logs.campaign_id,channel_code,log_date",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK sessions.campaign_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK sessions.channel_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK sessions.customer_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK page_events.order_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK page_events.product_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK page_events.session_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK cart_items.customer_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK cart_items.product_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK cart_items.session_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK seller_commission_rates.category_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK seller_payouts.seller_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE seller_payouts.seller_id,period_start,period_end",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK checkouts.customer_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK checkouts.session_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE checkouts.checkout_code",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK checkout_lines.cart_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK checkout_lines.checkout_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK checkout_lines.order_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE checkout_lines.cart_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE checkout_lines.order_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK refunds.order_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK refunds.return_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK promotion_usages.customer_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK promotion_usages.order_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK promotion_usages.promotion_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK seller_payout_items.order_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK seller_payout_items.seller_payout_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE seller_payout_items.order_item_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "FK delivery_attempts.shipment_id",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "UNIQUE delivery_attempts.shipment_id,attempt_number",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Logical reference shipments.order_code",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Logical reference inventory_levels.sku",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Logical reference inventory_movements.sku",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Logical reference inventory_daily_balance.sku",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Product identity / price / active seller",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Category denormalized name",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Category cycles",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Tiki original ID/SKU/seller/offer retained",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "First-sync selling price retained",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Order gross/discount/final arithmetic",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Line arithmetic / quantity",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Order seller and address ownership",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Order state agrees with lines/shipment",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Paid amount equals due completed obligation / paid cancellations have refund ledger",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Payment chronology, COD after delivery, customer exists before purchase",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Shipping chronology and completion timestamp",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Review owner/product/fulfilled/after delivery",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Stock agrees with complete movement ledger",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Reserved stock bounds",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Reserved stock agrees with open unpicked orders",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Sale ledger agrees with shipped order lines",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Closed-day stock balances agree with historical movement ledger",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Closed-day held stock reconstructed from order / pickup / cancellation times",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Event inside session interval",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Cart customer agrees with session",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Cart closure chronology",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Completed-day sessions closed",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Completed-day carts not left active",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Analytics actor agrees with guest/registered session",
+      "violations": 2269,
+      "examples": [
+        {
+          "event_id": 67,
+          "code": "GST-WEB-02",
+          "at": "2026-01-01T10:00:00",
+          "customer_id": 1
+        },
+        {
+          "event_id": 74,
+          "code": "GST-WEB-02",
+          "at": "2026-01-01T10:00:00",
+          "customer_id": 2
+        },
+        {
+          "event_id": 68,
+          "code": "GST-WEB-02",
+          "at": "2026-01-01T10:00:00",
+          "customer_id": 1
+        },
+        {
+          "event_id": 468,
+          "code": "CUS-WEB-04",
+          "at": "2026-01-05T10:00:00",
+          "customer_id": null
+        },
+        {
+          "event_id": 69,
+          "code": "GST-WEB-02",
+          "at": "2026-01-01T10:00:00",
+          "customer_id": 3
+        },
+        {
+          "event_id": 70,
+          "code": "GST-WEB-02",
+          "at": "2026-01-01T10:00:00",
+          "customer_id": 3
+        },
+        {
+          "event_id": 172,
+          "code": "GST-WEB-02",
+          "at": "2026-01-02T10:00:00",
+          "customer_id": 2
+        },
+        {
+          "event_id": 71,
+          "code": "GST-WEB-02",
+          "at": "2026-01-01T10:00:00",
+          "customer_id": 3
+        }
+      ]
+    },
+    {
+      "check": "Ad reports inside campaign dates and budget",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Promotion dates and nonnegative limits",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Commission policy overlap",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Checkpoint daily records contiguous through closed cutoff",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "No unavailable action was executed",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Action ID deterministic / receipt ownership",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Completed-day action counts equal per-day replacement configuration",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "All historical sync changes were catalog inserts only",
+      "violations": 0,
+      "examples": []
+    },
+    {
+      "check": "Business snapshot row matches an available journal image",
+      "violations": 0,
+      "examples": []
+    }
+  ],
+  "findings": {
+    "physical_fk_count": 56,
+    "non_pk_nullable_columns": 249,
+    "source_tables": [
+      "products",
+      "product_checkpoints",
+      "product_raw",
+      "product_categories"
+    ],
+    "source_comparison": {
+      "source_products": 149,
+      "new_source_ids": 0,
+      "target_ids_missing_from_current_source": 0,
+      "prices_different_from_current_source": 0,
+      "provenance_records": 149
+    },
+    "states": {
+      "orders": {
+        "Completed": 1
+      },
+      "payments": {
+        "Success": 1
+      },
+      "shipments": {
+        "Delivered": 1
+      },
+      "cart_items": {
+        "Removed": 10,
+        "Abandoned": 304,
+        "Converted": 1
+      }
+    },
+    "order_shape": {
+      "multi_line_orders": 0,
+      "quantity_distribution": {
+        "1": 1
+      },
+      "completed_same_day": 0,
+      "zero_shipping_fee": 0,
+      "zero_order_discount": 0
+    },
+    "stock_totals": {
+      "quantity_on_hand": 99,
+      "quantity_reserved": 0
+    },
+    "actor_mismatch_by_code": {
+      "GST-WEB-02": 169,
+      "CUS-WEB-04": 159,
+      "CUS-WEB-02": 257,
+      "GST-WEB-03": 416,
+      "GST-WEB-04": 58,
+      "GST-WEB-05": 15,
+      "GST-WEB-06": 25,
+      "CUS-WEB-05": 36,
+      "CUS-WEB-06": 106,
+      "CUS-WEB-03": 1028
+    },
+    "event_types": {
+      "search": 786,
+      "view_product": 3150,
+      "add_to_cart": 315,
+      "remove_from_cart": 10,
+      "begin_checkout": 105,
+      "purchase": 1
+    },
+    "order_session_links": 1,
+    "order_campaign_links": 0,
+    "session_campaign_links": 0,
+    "money": {
+      "completed_amount": 601550.0,
+      "successful_payments": 601550.0,
+      "ad_spend": 280000.0
+    },
+    "commission_coverage_current_catalog": {
+      "product_category_ids": [
+        112,
+        625,
+        626,
+        5770,
+        9423
+      ],
+      "policy_category_ids": [
+        112,
+        625,
+        626,
+        5770,
+        9423
+      ]
+    },
+    "legacy_plans_without_snapshot": [],
+    "daily_order_counts": [
+      {
+        "day": "2026-01-01",
+        "requested": 17,
+        "created": 0
+      },
+      {
+        "day": "2026-01-02",
+        "requested": 23,
+        "created": 0
+      },
+      {
+        "day": "2026-01-03",
+        "requested": 25,
+        "created": 1
+      },
+      {
+        "day": "2026-01-04",
+        "requested": 26,
+        "created": 0
+      },
+      {
+        "day": "2026-01-05",
+        "requested": 14,
+        "created": 0
+      }
+    ],
+    "results_status": {
+      "DONE": 46625,
+      "EXHAUSTED": 554,
+      "REJECTED": 123
+    },
+    "receipt_status": {
+      "DONE": 46926,
+      "EXHAUSTED": 554,
+      "REJECTED": 123
+    },
+    "version_revisions": [
+      {
+        "id": "1fb0daf2-1ffa-44e9-8e93-8dc78841cc45",
+        "name": "Thử nghiệm 6 hệ thống · 10 checkout/ngày · sale ×3",
+        "revision": 1
+      },
+      {
+        "id": "d081ac43-d91a-4b0b-9682-8cb57f1c915f",
+        "name": "Vận hành liên kết 2026 · profile & nghiệp vụ qua ngày",
+        "revision": 1
+      },
+      {
+        "id": "39390ecf-4603-4f66-aa0a-e7b9752697e3",
+        "name": "Vận hành có lịch biến thiên 2026 · trong phạm vi engine hiện tại",
+        "revision": 1
+      },
+      {
+        "id": "adf4a51e-3fc1-4bcd-9b26-84194f58e0e0",
+        "name": "Vận hành liên kết 2026 · profile & nghiệp vụ qua ngày",
+        "revision": 1
+      }
+    ],
+    "reset_history_count": 1,
+    "manifest_status": {
+      "DONE": 46926
+    },
+    "mutation_action_codes": [
+      "ADS-01",
+      "AUT-WEB-01",
+      "AUT-WEB-02",
+      "AUT-WH-04",
+      "CAR-01",
+      "CAR-02",
+      "CAR-03",
+      "CAR-04",
+      "CUS-03",
+      "CUS-05",
+      "CUS-08",
+      "CUS-09",
+      "CUS-WEB-01",
+      "CUS-WEB-02",
+      "CUS-WEB-03",
+      "CUS-WEB-04",
+      "CUS-WEB-05",
+      "CUS-WEB-06",
+      "DSP-01",
+      "FIN-POL-01",
+      "GST-01",
+      "GST-02",
+      "GST-WEB-01",
+      "GST-WEB-02",
+      "GST-WEB-03",
+      "GST-WEB-04",
+      "GST-WEB-05",
+      "GST-WEB-06",
+      "MKT-01",
+      "MKT-03",
+      "MKT-04",
+      "ORD-01",
+      "PAY-01",
+      "SEL-01",
+      "SEL-02",
+      "SEL-05",
+      "SHOP-MKT-01",
+      "SUP-01",
+      "SYS-01",
+      "WH-01",
+      "bootstrap",
+      "reset",
+      "sync"
+    ],
+    "null_fields": {
+      "categories": {
+        "parent_id": 1
+      },
+      "products": {
+        "quantity_sold": 93,
+        "stock_item": 149,
+        "cost_price": 149
+      },
+      "sellers": {
+        "phone": 9
+      },
+      "customers": {
+        "gender": 24,
+        "date_of_birth": 24
+      },
+      "customer_addresses": {
+        "district": 1
+      },
+      "channels": {},
+      "payment_methods": {},
+      "orders": {
+        "campaign_id": 1,
+        "cancelled_at": 1,
+        "cancellation_reason": 1
+      },
+      "order_items": {},
+      "payments": {},
+      "returns": {
+        "refunded_at": 1,
+        "received_at": 1,
+        "decision_reason": 1
+      },
+      "product_reviews": {},
+      "promotions": {
+        "seller_id": 2,
+        "product_id": 3,
+        "max_discount_amount": 3
+      },
+      "order_item_promotions": {},
+      "warehouses": {},
+      "inventory_levels": {},
+      "inventory_movements": {
+        "reference_code": 5
+      },
+      "inventory_daily_balance": {},
+      "carriers": {},
+      "shipments": {
+        "failed_at": 1,
+        "returned_at": 1
+      },
+      "marketing_campaigns": {},
+      "ad_spend_logs": {},
+      "sessions": {
+        "customer_id": 945,
+        "campaign_id": 1575
+      },
+      "page_events": {
+        "product_id": 787,
+        "order_id": 4366,
+        "search_keyword": 3581
+      },
+      "cart_items": {
+        "customer_id": 126
+      },
+      "seller_commission_rates": {},
+      "seller_payouts": {},
+      "checkouts": {},
+      "checkout_lines": {},
+      "refunds": {},
+      "promotion_usages": {
+        "released_at": 2
+      },
+      "seller_payout_items": {},
+      "delivery_attempts": {}
+    },
+    "metadata_required_but_nullable": {
+      "categories": [
+        "category_name",
+        "level",
+        "slug"
+      ],
+      "products": [
+        "sku",
+        "name",
+        "url_key",
+        "price",
+        "original_price",
+        "discount",
+        "discount_rate",
+        "brand_name",
+        "rating_average",
+        "review_count",
+        "thumbnail_url",
+        "category_id",
+        "category_name",
+        "quantity_sold",
+        "crawl_date",
+        "is_active",
+        "seller_id",
+        "seller_product_id",
+        "url_path",
+        "inventory_status",
+        "stock_item",
+        "short_description",
+        "type",
+        "cost_price",
+        "created_at",
+        "updated_at"
+      ],
+      "sellers": [
+        "seller_name",
+        "shop_name",
+        "tier",
+        "province",
+        "city",
+        "email",
+        "phone",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "customers": [
+        "full_name",
+        "email",
+        "phone_number",
+        "gender",
+        "date_of_birth",
+        "province",
+        "city",
+        "membership_tier",
+        "registration_date",
+        "updated_at"
+      ],
+      "customer_addresses": [
+        "recipient_name",
+        "phone",
+        "address_detail",
+        "ward",
+        "province",
+        "is_default"
+      ],
+      "channels": [
+        "channel_name",
+        "channel_type"
+      ],
+      "payment_methods": [
+        "method_name",
+        "method_group"
+      ],
+      "orders": [
+        "order_code",
+        "seller_id",
+        "channel_id",
+        "order_status",
+        "total_gross_amount",
+        "total_discount_amount",
+        "shipping_fee",
+        "shipping_discount_amount",
+        "final_amount",
+        "shipping_address_id",
+        "created_at",
+        "updated_at"
+      ],
+      "order_items": [
+        "order_id",
+        "line_number",
+        "product_id",
+        "quantity",
+        "list_price",
+        "unit_price",
+        "discount_amount",
+        "net_amount",
+        "item_status"
+      ],
+      "payments": [
+        "order_id",
+        "payment_method_id",
+        "payment_status",
+        "paid_amount",
+        "transaction_time"
+      ],
+      "returns": [
+        "order_item_id",
+        "quantity",
+        "return_reason",
+        "refund_amount",
+        "status",
+        "requested_at"
+      ],
+      "product_reviews": [
+        "order_item_id",
+        "product_id",
+        "customer_id",
+        "rating",
+        "comment",
+        "created_at"
+      ],
+      "promotions": [
+        "promo_code",
+        "promo_name",
+        "promo_type",
+        "apply_level",
+        "eligibility",
+        "discount_type",
+        "discount_value",
+        "min_order_value",
+        "per_customer_limit",
+        "start_date",
+        "end_date"
+      ],
+      "order_item_promotions": [
+        "order_item_id",
+        "promotion_id",
+        "applied_discount_amount"
+      ],
+      "warehouses": [
+        "warehouse_code",
+        "warehouse_name",
+        "province",
+        "city",
+        "address"
+      ],
+      "inventory_levels": [
+        "warehouse_id",
+        "sku",
+        "quantity_on_hand",
+        "quantity_reserved",
+        "updated_at"
+      ],
+      "inventory_movements": [
+        "warehouse_id",
+        "sku",
+        "movement_type",
+        "quantity_change",
+        "movement_date"
+      ],
+      "inventory_daily_balance": [
+        "balance_date",
+        "warehouse_id",
+        "sku",
+        "quantity_on_hand",
+        "quantity_reserved"
+      ],
+      "carriers": [
+        "carrier_code",
+        "carrier_name"
+      ],
+      "shipments": [
+        "order_code",
+        "warehouse_id",
+        "carrier_id",
+        "tracking_code",
+        "shipment_status",
+        "shipping_cost",
+        "created_at"
+      ],
+      "marketing_campaigns": [
+        "campaign_code",
+        "campaign_name",
+        "campaign_type",
+        "target_channel_code",
+        "budget_amount",
+        "start_date",
+        "end_date"
+      ],
+      "ad_spend_logs": [
+        "campaign_id",
+        "channel_code",
+        "log_date",
+        "cost_amount",
+        "impressions",
+        "clicks"
+      ],
+      "sessions": [
+        "channel_id",
+        "traffic_source",
+        "device_type",
+        "started_at",
+        "ended_at"
+      ],
+      "page_events": [
+        "session_id",
+        "event_type",
+        "event_time"
+      ],
+      "cart_items": [
+        "session_id",
+        "product_id",
+        "quantity",
+        "cart_status",
+        "added_at"
+      ],
+      "seller_commission_rates": [
+        "category_id",
+        "seller_tier",
+        "commission_rate",
+        "effective_from"
+      ],
+      "seller_payouts": [
+        "seller_id",
+        "period_start",
+        "period_end",
+        "gross_sales",
+        "refund_amount",
+        "commission_amount",
+        "payout_amount",
+        "payout_status"
+      ],
+      "checkouts": [],
+      "checkout_lines": [],
+      "refunds": [],
+      "promotion_usages": [],
+      "seller_payout_items": [],
+      "delivery_attempts": []
+    },
+    "profiles": {
+      "distinct_customer_phones": 24,
+      "distinct_address_details": 1,
+      "customers_with_address_without_default": 0,
+      "review_ratings": {},
+      "product_crawl_after_mock_created": 149
+    }
+  }
+}

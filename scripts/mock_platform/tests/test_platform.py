@@ -3,10 +3,10 @@ import uuid
 import sqlite3
 import pytest
 from fastapi.testclient import TestClient
-from scripts.mock_platform.storage import Database, UnitOfWork
-from scripts.mock_platform.service import PlatformService
-from scripts.mock_platform.worker import Worker
-from scripts.mock_platform.api import create_app
+from scripts.mock_platform.infrastructure.storage import Database, UnitOfWork
+from scripts.mock_platform.application.service import PlatformService
+from scripts.mock_platform.application.worker import Worker
+from scripts.mock_platform.interfaces.api import create_app
 
 
 @pytest.fixture
@@ -229,7 +229,7 @@ def test_pause_and_duplicate_submission(platform):
 
 
 def test_wrong_seller_and_pending_job_blocks_new_work(platform):
-    from scripts.mock_platform.domain import DomainEngine, NotEligible
+    from scripts.mock_platform.engine.domain import DomainEngine, NotEligible
 
     s, w, _ = platform
     initialize(s, w)
@@ -296,7 +296,7 @@ def test_auto_processes_input_and_conflicting_sku_skipped(platform):
 
 
 def test_calendar_ranges_and_backend_blocks_unavailable_actions(platform):
-    from scripts.mock_platform.service import days
+    from scripts.mock_platform.application.service import days
 
     s, _, _ = platform
     assert len(days("2024-01-01", "2024-12-31")) == 366
@@ -345,7 +345,7 @@ def test_marketing_analytics_and_source_metrics_independent(platform):
     assert len(s.data("page_events")) == 3
     assert s.data("cart_items")[0]["cart_status"] == "Abandoned"
     assert s.data("products")[0]["quantity_sold"] is None
-    from scripts.mock_platform.validation import BusinessValidator
+    from scripts.mock_platform.diagnostics.validation import BusinessValidator
 
     assert BusinessValidator(s.db).report()["ok"]
 
@@ -362,7 +362,7 @@ def test_initial_sale_status_is_explicit_not_source_visibility(platform):
 
 
 def test_edit_saved_config_in_place_invalidates_old_preview(platform):
-    from scripts.mock_platform.service import ConfigurationConflict
+    from scripts.mock_platform.application.service import ConfigurationConflict
 
     s, _, _ = platform
     old_config = {
@@ -475,7 +475,7 @@ def test_paused_job_resumes_with_original_config_after_edit(platform, monkeypatc
 def test_concurrent_saved_config_updates_do_not_overwrite(platform):
     from concurrent.futures import ThreadPoolExecutor
     from threading import Barrier
-    from scripts.mock_platform.service import ConfigurationConflict
+    from scripts.mock_platform.application.service import ConfigurationConflict
 
     s, _, _ = platform
     if s.db.control.dialect.name != "postgresql":
@@ -498,7 +498,7 @@ def test_concurrent_saved_config_updates_do_not_overwrite(platform):
 
 
 def test_dashboard_and_source_check_are_read_only(platform):
-    from scripts.mock_platform.operations import DataOperations
+    from scripts.mock_platform.application.operations import DataOperations
 
     s, w, source = platform
     initialize(s, w)
@@ -519,7 +519,7 @@ def test_dashboard_and_source_check_are_read_only(platform):
 
 
 def test_reset_all_requires_confirmation_and_restores_initial_workflow(platform):
-    from scripts.mock_platform.operations import DataOperations
+    from scripts.mock_platform.application.operations import DataOperations
 
     s, w, source = platform
     initialize(s, w)
@@ -557,7 +557,7 @@ def test_reset_all_requires_confirmation_and_restores_initial_workflow(platform)
 def test_reset_crash_after_target_commit_recovers_and_cancels_paused_jobs(
     platform, monkeypatch
 ):
-    from scripts.mock_platform.operations import DataOperations
+    from scripts.mock_platform.application.operations import DataOperations
 
     s, w, source = platform
     initialize(s, w)
@@ -596,7 +596,7 @@ def test_reset_crash_after_target_commit_recovers_and_cancels_paused_jobs(
 
 
 def test_stale_reset_preview_and_running_job_are_blocked(platform):
-    from scripts.mock_platform.operations import DataOperations
+    from scripts.mock_platform.application.operations import DataOperations
 
     s, w, _ = platform
     preview = DataOperations(s).reset_preview()
@@ -629,7 +629,7 @@ def test_stale_reset_preview_and_running_job_are_blocked(platform):
 def test_crawler_queue_uses_existing_cli_without_syncing(
     platform, monkeypatch, tmp_path
 ):
-    from scripts.mock_platform.crawler import CrawlerService, CrawlerWorker
+    from scripts.mock_platform.integrations.crawler import CrawlerService, CrawlerWorker
 
     s, w, source = platform
     crawler = CrawlerService(s)
@@ -666,7 +666,7 @@ def test_crawler_queue_uses_existing_cli_without_syncing(
         def wait(self, **kwargs):
             return 0
 
-    monkeypatch.setattr("scripts.mock_platform.crawler.subprocess.Popen", FakeProcess)
+    monkeypatch.setattr("scripts.mock_platform.integrations.crawler.subprocess.Popen", FakeProcess)
     assert worker.tick()
     result = s.db.get("crawl_jobs", job["id"])
     assert result["status"] == "COMPLETE"
@@ -683,7 +683,7 @@ def test_crawler_queue_uses_existing_cli_without_syncing(
 
 
 def test_dashboard_money_and_reset_of_related_business_rows(platform):
-    from scripts.mock_platform.operations import DataOperations
+    from scripts.mock_platform.application.operations import DataOperations
 
     s, w, _ = platform
     test_end_to_end_and_special_day(platform)
@@ -706,7 +706,7 @@ def test_dashboard_money_and_reset_of_related_business_rows(platform):
 
 def test_reset_delete_failure_rolls_back_every_business_table(platform):
     from sqlalchemy import event
-    from scripts.mock_platform.operations import DataOperations
+    from scripts.mock_platform.application.operations import DataOperations
 
     s, w, _ = platform
     initialize(s, w)
@@ -740,7 +740,7 @@ def test_reset_delete_failure_rolls_back_every_business_table(platform):
 
 def test_import_preview_save_roundtrip_and_no_business_effects(platform):
     import json
-    from scripts.mock_platform.config_transfer import ConfigTransfer
+    from scripts.mock_platform.config.config_transfer import ConfigTransfer
 
     s, _, source = platform
     counts, before = s.summary()["counts"], source.read_bytes()
@@ -844,8 +844,8 @@ def test_import_rejects_malformed_or_unsupported_config_without_saving(platform)
 
 def test_realistic_calendar_template_fits_engine_and_monthly_plan_limit(platform):
     import json
-    from scripts.mock_platform.scenario import RealisticScenario
-    from scripts.mock_platform.config_transfer import ConfigTransfer
+    from scripts.mock_platform.config.scenario import RealisticScenario
+    from scripts.mock_platform.config.config_transfer import ConfigTransfer
 
     s, _, _ = platform
     scenario = RealisticScenario()
@@ -878,9 +878,9 @@ def test_realistic_calendar_template_fits_engine_and_monthly_plan_limit(platform
 
 def test_realistic_template_rehearsal_in_isolated_database(platform):
     import json
-    from scripts.mock_platform.scenario import RealisticScenario
-    from scripts.mock_platform.config_transfer import ConfigTransfer
-    from scripts.mock_platform.validation import BusinessValidator
+    from scripts.mock_platform.config.scenario import RealisticScenario
+    from scripts.mock_platform.config.config_transfer import ConfigTransfer
+    from scripts.mock_platform.diagnostics.validation import BusinessValidator
 
     s, w, _ = platform
     enqueue(s, w, "sync", preview=s.source_preview({})["id"])

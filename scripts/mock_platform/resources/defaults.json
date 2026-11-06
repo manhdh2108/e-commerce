@@ -1,0 +1,109 @@
+{
+  "entity_profile": {
+    "surnames": [
+      "Nguyễn",
+      "Trần",
+      "Lê",
+      "Phạm",
+      "Hoàng",
+      "Vũ",
+      "Đặng",
+      "Bùi"
+    ],
+    "given_names": [
+      "Minh Anh",
+      "Thu Hà",
+      "Quang Huy",
+      "Ngọc Mai",
+      "Đức Long",
+      "Lan Chi",
+      "Gia Bảo",
+      "Thanh Tâm"
+    ],
+    "locations": [
+      {
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "ward": "Phường Bến Thành",
+        "district": null,
+        "street": "Lê Thánh Tôn"
+      },
+      {
+        "province": "Hà Nội",
+        "city": "Hà Nội",
+        "ward": "Phường Cầu Giấy",
+        "district": null,
+        "street": "Cầu Giấy"
+      },
+      {
+        "province": "Đà Nẵng",
+        "city": "Đà Nẵng",
+        "ward": "Phường Hải Châu",
+        "district": null,
+        "street": "Trần Phú"
+      }
+    ],
+    "phone_prefixes": [
+      "090",
+      "091",
+      "093",
+      "097"
+    ],
+    "warehouses": [
+      {
+        "warehouse_code": "WH-SG-01",
+        "warehouse_name": "Trung tâm phân phối Sài Gòn",
+        "province": "TP. Hồ Chí Minh",
+        "city": "TP. Hồ Chí Minh",
+        "address": "Đường Nguyễn Văn Linh"
+      }
+    ],
+    "carriers": [
+      {
+        "carrier_code": "GHN",
+        "carrier_name": "Giao Hàng Nhanh"
+      }
+    ]
+  },
+  "business_policy": {
+    "return_window_days": 7,
+    "payout_hold_days": 8,
+    "max_delivery_attempts": 3
+  },
+  "channels": [
+    {
+      "channel_name": "Web",
+      "channel_type": "Digital"
+    },
+    {
+      "channel_name": "App",
+      "channel_type": "Digital"
+    },
+    {
+      "channel_name": "Livestream",
+      "channel_type": "Digital"
+    }
+  ],
+  "payment_methods": [
+    {
+      "method_name": "COD",
+      "method_group": "COD"
+    },
+    {
+      "method_name": "Momo",
+      "method_group": "E-Wallet"
+    },
+    {
+      "method_name": "ZaloPay",
+      "method_group": "E-Wallet"
+    },
+    {
+      "method_name": "Credit Card",
+      "method_group": "Card"
+    },
+    {
+      "method_name": "Bank Transfer",
+      "method_group": "Bank Transfer"
+    }
+  ]
+}

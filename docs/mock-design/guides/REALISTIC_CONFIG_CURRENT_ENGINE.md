@@ -11,7 +11,7 @@ Không thể dùng cấu hình để bổ sung những nghiệp vụ engine chư
 ## 2. Các file sử dụng
 
 - JSON và CSV mẫu cũ đã được xóa khỏi thư viện. Có thể tạo lại ở thư mục riêng bằng generator bên dưới nếu cần nghiên cứu lịch cũ.
-- Bộ sinh cấu hình OOP Python: `scripts/mock_platform/scenario.py`.
+- Bộ sinh cấu hình OOP Python: `scripts/mock_platform/config/scenario.py`.
 
 JSON có lịch riêng cho năm **2026**. Seed của môi trường vẫn điều khiển lựa chọn đối tượng/kết quả xử lý; lịch sản lượng đã được tính và ghi rõ trong JSON, không bị tính lại ngẫu nhiên mỗi lần chạy.
 
@@ -112,7 +112,7 @@ Engine giới hạn 100.000 yêu cầu **theo số lượng** cho một kế ho�
 Ngoài năm 2026, `special` không còn áp dụng; engine sẽ quay về số ngày thường, không tự mở rộng lịch. Sinh file cho năm khác bằng:
 
 ```bash
-.venv/bin/python -m scripts.mock_platform.scenario \
+.venv/bin/python -m scripts.mock_platform.config.scenario \
   --year 2027 --category-id 9423 \
   --output data/generated-scenarios/realistic-current-engine-2027.json
 ```

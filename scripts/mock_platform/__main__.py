@@ -1,5 +1,6 @@
 import argparse
-from .service import PlatformService
+
+from .application.service import PlatformService
 
 
 def main():
@@ -11,12 +12,14 @@ def main():
     args = parser.parse_args()
     if args.command == "serve":
         import uvicorn
-        from .api import create_app
+
+        from .interfaces.api import create_app
 
         uvicorn.run(create_app(), host="127.0.0.1", port=args.port)
     elif args.command == "crawl-worker":
-        from .crawler import CrawlerWorker
         import signal
+
+        from .integrations.crawler import CrawlerWorker
 
         def stop_crawler(signum, frame):
             raise KeyboardInterrupt
@@ -24,7 +27,7 @@ def main():
         signal.signal(signal.SIGTERM, stop_crawler)
         CrawlerWorker().loop()
     elif args.command == "worker":
-        from .worker import Worker
+        from .application.worker import Worker
 
         Worker().loop()
     else:

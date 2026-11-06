@@ -1,7 +1,7 @@
 {
   "format": "mock-studio-settings",
   "format_version": 1,
-  "name": "Thiết lập thương mại điện tử · hồ sơ đa dạng",
+  "name": "Vận hành bán lẻ Việt Nam · hồ sơ thực thể và mạng lưới phân phối",
   "business_policy": {
     "return_window_days": 7,
     "payout_hold_days": 10,
@@ -106,7 +106,47 @@
       "Quang Vinh",
       "Đức Vinh",
       "Ngọc Hân",
-      "Gia Hân"
+      "Gia Hân",
+      "Bảo Ngọc",
+      "Minh Châu",
+      "Hà My",
+      "Phương Nhi",
+      "Ngọc Trâm",
+      "Thảo Nguyên",
+      "Khánh Vy",
+      "Bảo Trân",
+      "Quỳnh Như",
+      "Anh Thư",
+      "Nhật Hạ",
+      "Hồng Nhung",
+      "Diệu Linh",
+      "Thanh Tú",
+      "Hoàng Phúc",
+      "Đăng Khoa",
+      "Trọng Nhân",
+      "Thiện Nhân",
+      "Anh Dũng",
+      "Đình Phong",
+      "Quốc Hưng",
+      "Nhật Quang",
+      "Đức Thịnh",
+      "Minh Triết",
+      "Hữu Phước",
+      "Thanh Sơn",
+      "Ngọc Sơn",
+      "Quốc Khánh",
+      "Hồng Phúc",
+      "Quang Hải",
+      "Xuân Trường",
+      "Văn Thành",
+      "Văn Tùng",
+      "Trung Hiếu",
+      "Hữu Nghĩa",
+      "Tiến Đạt",
+      "Đình Huy",
+      "Quốc Việt",
+      "Hoàng Lâm",
+      "Minh Đức"
     ],
     "phone_prefixes": [
       "032",
@@ -144,237 +184,2212 @@
       {
         "province": "TP. Hồ Chí Minh",
         "city": "TP. Hồ Chí Minh",
-        "ward": "Khu vực mô phỏng Nam 01",
+        "ward": "Phường Bến Thành",
         "district": null,
-        "street": "Đường Hoa Mai"
+        "street": "Lê Thánh Tôn"
       },
       {
         "province": "TP. Hồ Chí Minh",
         "city": "TP. Hồ Chí Minh",
-        "ward": "Khu vực mô phỏng Nam 02",
+        "ward": "Phường Sài Gòn",
         "district": null,
-        "street": "Đường Hoa Sen"
+        "street": "Đồng Khởi"
       },
       {
         "province": "TP. Hồ Chí Minh",
         "city": "TP. Hồ Chí Minh",
-        "ward": "Khu vực mô phỏng Nam 03",
+        "ward": "Phường Tân Định",
         "district": null,
-        "street": "Đường Hoa Phượng"
+        "street": "Hai Bà Trưng"
       },
       {
         "province": "TP. Hồ Chí Minh",
         "city": "TP. Hồ Chí Minh",
-        "ward": "Khu vực mô phỏng Nam 04",
+        "ward": "Phường Xuân Hòa",
         "district": null,
-        "street": "Đường Ánh Dương"
+        "street": "Võ Văn Tần"
       },
       {
         "province": "TP. Hồ Chí Minh",
         "city": "TP. Hồ Chí Minh",
-        "ward": "Khu vực mô phỏng Nam 05",
+        "ward": "Phường Nhiêu Lộc",
         "district": null,
-        "street": "Đường Bình Minh"
+        "street": "Lê Văn Sỹ"
       },
       {
         "province": "TP. Hồ Chí Minh",
         "city": "TP. Hồ Chí Minh",
-        "ward": "Khu vực mô phỏng Nam 06",
+        "ward": "Phường Khánh Hội",
         "district": null,
-        "street": "Đường An Nhiên"
-      },
-      {
-        "province": "TP. Hồ Chí Minh",
-        "city": "TP. Hồ Chí Minh",
-        "ward": "Khu vực mô phỏng Nam 07",
-        "district": null,
-        "street": "Đường Hướng Dương"
-      },
-      {
-        "province": "TP. Hồ Chí Minh",
-        "city": "TP. Hồ Chí Minh",
-        "ward": "Khu vực mô phỏng Nam 08",
-        "district": null,
-        "street": "Đường Trúc Xanh"
+        "street": "Bến Vân Đồn"
       },
       {
         "province": "Hà Nội",
         "city": "Hà Nội",
-        "ward": "Khu vực mô phỏng Bắc 01",
+        "ward": "Phường Cầu Giấy",
         "district": null,
-        "street": "Đường Hoa Mai"
+        "street": "Cầu Giấy"
       },
       {
         "province": "Hà Nội",
         "city": "Hà Nội",
-        "ward": "Khu vực mô phỏng Bắc 02",
+        "ward": "Phường Nghĩa Đô",
         "district": null,
-        "street": "Đường Hoa Sen"
+        "street": "Nguyễn Văn Huyên"
       },
       {
         "province": "Hà Nội",
         "city": "Hà Nội",
-        "ward": "Khu vực mô phỏng Bắc 03",
+        "ward": "Phường Yên Hòa",
         "district": null,
-        "street": "Đường Hoa Phượng"
+        "street": "Trung Kính"
       },
       {
         "province": "Hà Nội",
         "city": "Hà Nội",
-        "ward": "Khu vực mô phỏng Bắc 04",
+        "ward": "Phường Tây Hồ",
         "district": null,
-        "street": "Đường Ánh Dương"
+        "street": "Lạc Long Quân"
       },
       {
         "province": "Hà Nội",
         "city": "Hà Nội",
-        "ward": "Khu vực mô phỏng Bắc 05",
+        "ward": "Phường Hà Đông",
         "district": null,
-        "street": "Đường Bình Minh"
+        "street": "Quang Trung"
       },
       {
         "province": "Hà Nội",
         "city": "Hà Nội",
-        "ward": "Khu vực mô phỏng Bắc 06",
+        "ward": "Phường Phương Liệt",
         "district": null,
-        "street": "Đường An Nhiên"
-      },
-      {
-        "province": "Hà Nội",
-        "city": "Hà Nội",
-        "ward": "Khu vực mô phỏng Bắc 07",
-        "district": null,
-        "street": "Đường Hướng Dương"
-      },
-      {
-        "province": "Hà Nội",
-        "city": "Hà Nội",
-        "ward": "Khu vực mô phỏng Bắc 08",
-        "district": null,
-        "street": "Đường Trúc Xanh"
+        "street": "Giải Phóng"
       },
       {
         "province": "Đà Nẵng",
         "city": "Đà Nẵng",
-        "ward": "Khu vực mô phỏng Trung 01",
+        "ward": "Phường Hải Châu",
         "district": null,
-        "street": "Đường Hoa Mai"
+        "street": "Trần Phú"
       },
       {
         "province": "Đà Nẵng",
         "city": "Đà Nẵng",
-        "ward": "Khu vực mô phỏng Trung 02",
+        "ward": "Phường Thanh Khê",
         "district": null,
-        "street": "Đường Hoa Sen"
+        "street": "Điện Biên Phủ"
       },
       {
         "province": "Đà Nẵng",
         "city": "Đà Nẵng",
-        "ward": "Khu vực mô phỏng Trung 03",
+        "ward": "Phường Hòa Cường",
         "district": null,
-        "street": "Đường Hoa Phượng"
+        "street": "Núi Thành"
       },
       {
         "province": "Đà Nẵng",
         "city": "Đà Nẵng",
-        "ward": "Khu vực mô phỏng Trung 04",
+        "ward": "Phường An Khê",
         "district": null,
-        "street": "Đường Ánh Dương"
+        "street": "Hà Huy Tập"
       },
       {
-        "province": "Đà Nẵng",
-        "city": "Đà Nẵng",
-        "ward": "Khu vực mô phỏng Trung 05",
+        "province": "Cần Thơ",
+        "city": "Cần Thơ",
+        "ward": "Phường Ninh Kiều",
         "district": null,
-        "street": "Đường Bình Minh"
+        "street": "Hòa Bình"
       },
       {
-        "province": "Đà Nẵng",
-        "city": "Đà Nẵng",
-        "ward": "Khu vực mô phỏng Trung 06",
+        "province": "Cần Thơ",
+        "city": "Cần Thơ",
+        "ward": "Phường Cái Khế",
         "district": null,
-        "street": "Đường An Nhiên"
+        "street": "Trần Văn Khéo"
       },
       {
-        "province": "Đà Nẵng",
-        "city": "Đà Nẵng",
-        "ward": "Khu vực mô phỏng Trung 07",
+        "province": "Cần Thơ",
+        "city": "Cần Thơ",
+        "ward": "Phường Tân An",
         "district": null,
-        "street": "Đường Hướng Dương"
+        "street": "Đường 3 Tháng 2"
       },
       {
-        "province": "Đà Nẵng",
-        "city": "Đà Nẵng",
-        "ward": "Khu vực mô phỏng Trung 08",
+        "province": "Cần Thơ",
+        "city": "Cần Thơ",
+        "ward": "Phường Bình Thủy",
         "district": null,
-        "street": "Đường Trúc Xanh"
+        "street": "Cách Mạng Tháng Tám"
       }
     ],
     "warehouses": [
       {
         "warehouse_code": "WH-SG-01",
-        "warehouse_name": "Kho mô phỏng Nam 01",
+        "warehouse_name": "Trung tâm phân phối Sài Gòn",
         "province": "TP. Hồ Chí Minh",
         "city": "TP. Hồ Chí Minh",
-        "address": "30 Đường Kho Vận Mô Phỏng 1"
+        "address": "Đường Nguyễn Văn Linh"
       },
       {
         "warehouse_code": "WH-SG-02",
-        "warehouse_name": "Kho mô phỏng Nam 02",
+        "warehouse_name": "Kho trung chuyển Tân Bình",
         "province": "TP. Hồ Chí Minh",
         "city": "TP. Hồ Chí Minh",
-        "address": "40 Đường Kho Vận Mô Phỏng 2"
+        "address": "Đường Trường Chinh"
       },
       {
         "warehouse_code": "WH-HN-01",
-        "warehouse_name": "Kho mô phỏng Bắc 01",
+        "warehouse_name": "Trung tâm phân phối Hà Nội",
         "province": "Hà Nội",
         "city": "Hà Nội",
-        "address": "30 Đường Kho Vận Mô Phỏng 1"
+        "address": "Đường Phạm Hùng"
       },
       {
         "warehouse_code": "WH-HN-02",
-        "warehouse_name": "Kho mô phỏng Bắc 02",
+        "warehouse_name": "Kho trung chuyển Long Biên",
         "province": "Hà Nội",
         "city": "Hà Nội",
-        "address": "40 Đường Kho Vận Mô Phỏng 2"
+        "address": "Đường Nguyễn Văn Linh"
       },
       {
         "warehouse_code": "WH-DN-01",
-        "warehouse_name": "Kho mô phỏng Trung 01",
+        "warehouse_name": "Trung tâm phân phối Đà Nẵng",
         "province": "Đà Nẵng",
         "city": "Đà Nẵng",
-        "address": "30 Đường Kho Vận Mô Phỏng 1"
+        "address": "Đường Tôn Đức Thắng"
       },
       {
-        "warehouse_code": "WH-DN-02",
-        "warehouse_name": "Kho mô phỏng Trung 02",
-        "province": "Đà Nẵng",
-        "city": "Đà Nẵng",
-        "address": "40 Đường Kho Vận Mô Phỏng 2"
+        "warehouse_code": "WH-CT-01",
+        "warehouse_name": "Trung tâm phân phối Cần Thơ",
+        "province": "Cần Thơ",
+        "city": "Cần Thơ",
+        "address": "Đường Võ Văn Kiệt"
       }
     ],
     "carriers": [
       {
-        "carrier_code": "MOCK-FAST",
-        "carrier_name": "Chuyển phát nhanh mô phỏng"
+        "carrier_code": "GHN",
+        "carrier_name": "Giao Hàng Nhanh"
       },
       {
-        "carrier_code": "MOCK-STANDARD",
-        "carrier_name": "Giao tiêu chuẩn mô phỏng"
+        "carrier_code": "GHTK",
+        "carrier_name": "Giao Hàng Tiết Kiệm"
       },
       {
-        "carrier_code": "MOCK-ECONOMY",
-        "carrier_name": "Giao tiết kiệm mô phỏng"
+        "carrier_code": "VTP",
+        "carrier_name": "Viettel Post"
       },
       {
-        "carrier_code": "MOCK-CITY",
-        "carrier_name": "Giao nội thành mô phỏng"
+        "carrier_code": "VNPOST",
+        "carrier_name": "Bưu điện Việt Nam"
       },
       {
-        "carrier_code": "MOCK-REGIONAL",
-        "carrier_name": "Giao liên vùng mô phỏng"
+        "carrier_code": "JT",
+        "carrier_name": "J&T Express"
       }
-    ]
+    ],
+    "customer_attributes": {
+      "gender": {
+        "kind": "choice",
+        "values": [
+          "Male",
+          "Female"
+        ],
+        "weights": [
+          48,
+          52
+        ],
+        "null_rate": 0.15
+      },
+      "date_of_birth": {
+        "kind": "date",
+        "min": "1960-01-01",
+        "max": "2007-12-31",
+        "null_rate": 0.25
+      },
+      "membership_tier": {
+        "kind": "choice",
+        "values": [
+          "Member",
+          "Silver",
+          "Gold"
+        ],
+        "weights": [
+          74,
+          21,
+          5
+        ]
+      },
+      "email": {
+        "kind": "pattern",
+        "value": "{letters:8}.{digits:4}@example.com"
+      }
+    },
+    "seller_attributes": {
+      "phone": {
+        "kind": "pattern",
+        "value": "09{digits:8}"
+      },
+      "email": {
+        "kind": "pattern",
+        "value": "contact.{letters:9}@example.com"
+      },
+      "seller_name": {
+        "kind": "choice",
+        "values": [
+          "Nguyễn Minh Đức",
+          "Nguyễn Ngọc Lan",
+          "Nguyễn Thành Đạt",
+          "Nguyễn Thanh Hương",
+          "Nguyễn Quang Huy",
+          "Nguyễn Thu Trang",
+          "Trần Minh Đức",
+          "Trần Ngọc Lan",
+          "Trần Thành Đạt",
+          "Trần Thanh Hương",
+          "Trần Quang Huy",
+          "Trần Thu Trang",
+          "Lê Minh Đức",
+          "Lê Ngọc Lan",
+          "Lê Thành Đạt",
+          "Lê Thanh Hương",
+          "Lê Quang Huy",
+          "Lê Thu Trang",
+          "Phạm Minh Đức",
+          "Phạm Ngọc Lan",
+          "Phạm Thành Đạt",
+          "Phạm Thanh Hương",
+          "Phạm Quang Huy",
+          "Phạm Thu Trang",
+          "Hoàng Minh Đức",
+          "Hoàng Ngọc Lan",
+          "Hoàng Thành Đạt",
+          "Hoàng Thanh Hương",
+          "Hoàng Quang Huy",
+          "Hoàng Thu Trang",
+          "Huỳnh Minh Đức",
+          "Huỳnh Ngọc Lan",
+          "Huỳnh Thành Đạt",
+          "Huỳnh Thanh Hương",
+          "Huỳnh Quang Huy",
+          "Huỳnh Thu Trang",
+          "Vũ Minh Đức",
+          "Vũ Ngọc Lan",
+          "Vũ Thành Đạt",
+          "Vũ Thanh Hương",
+          "Vũ Quang Huy",
+          "Vũ Thu Trang",
+          "Võ Minh Đức",
+          "Võ Ngọc Lan",
+          "Võ Thành Đạt",
+          "Võ Thanh Hương",
+          "Võ Quang Huy",
+          "Võ Thu Trang",
+          "Phan Minh Đức",
+          "Phan Ngọc Lan",
+          "Phan Thành Đạt",
+          "Phan Thanh Hương",
+          "Phan Quang Huy",
+          "Phan Thu Trang",
+          "Trương Minh Đức",
+          "Trương Ngọc Lan",
+          "Trương Thành Đạt",
+          "Trương Thanh Hương",
+          "Trương Quang Huy",
+          "Trương Thu Trang",
+          "Bùi Minh Đức",
+          "Bùi Ngọc Lan",
+          "Bùi Thành Đạt",
+          "Bùi Thanh Hương",
+          "Bùi Quang Huy",
+          "Bùi Thu Trang",
+          "Đặng Minh Đức",
+          "Đặng Ngọc Lan",
+          "Đặng Thành Đạt",
+          "Đặng Thanh Hương",
+          "Đặng Quang Huy",
+          "Đặng Thu Trang",
+          "Đỗ Minh Đức",
+          "Đỗ Ngọc Lan",
+          "Đỗ Thành Đạt",
+          "Đỗ Thanh Hương",
+          "Đỗ Quang Huy",
+          "Đỗ Thu Trang",
+          "Ngô Minh Đức",
+          "Ngô Ngọc Lan",
+          "Ngô Thành Đạt",
+          "Ngô Thanh Hương",
+          "Ngô Quang Huy",
+          "Ngô Thu Trang",
+          "Hồ Minh Đức",
+          "Hồ Ngọc Lan",
+          "Hồ Thành Đạt",
+          "Hồ Thanh Hương",
+          "Hồ Quang Huy",
+          "Hồ Thu Trang",
+          "Dương Minh Đức",
+          "Dương Ngọc Lan",
+          "Dương Thành Đạt",
+          "Dương Thanh Hương",
+          "Dương Quang Huy",
+          "Dương Thu Trang",
+          "Đinh Minh Đức",
+          "Đinh Ngọc Lan",
+          "Đinh Thành Đạt",
+          "Đinh Thanh Hương",
+          "Đinh Quang Huy",
+          "Đinh Thu Trang",
+          "Lý Minh Đức",
+          "Lý Ngọc Lan",
+          "Lý Thành Đạt",
+          "Lý Thanh Hương",
+          "Lý Quang Huy",
+          "Lý Thu Trang",
+          "Mai Minh Đức",
+          "Mai Ngọc Lan",
+          "Mai Thành Đạt",
+          "Mai Thanh Hương",
+          "Mai Quang Huy",
+          "Mai Thu Trang",
+          "Cao Minh Đức",
+          "Cao Ngọc Lan",
+          "Cao Thành Đạt",
+          "Cao Thanh Hương",
+          "Cao Quang Huy",
+          "Cao Thu Trang"
+        ]
+      },
+      "shop_name": {
+        "kind": "choice",
+        "values": [
+          "An Khang",
+          "An Phát",
+          "An Thịnh",
+          "An Long",
+          "An Hà",
+          "An Lâm",
+          "An Châu",
+          "An Tâm",
+          "Minh Khang",
+          "Minh Phát",
+          "Minh Thịnh",
+          "Minh Long",
+          "Minh Hà",
+          "Minh Lâm",
+          "Minh Châu",
+          "Minh Tâm",
+          "Gia Khang",
+          "Gia Phát",
+          "Gia Thịnh",
+          "Gia Long",
+          "Gia Hà",
+          "Gia Lâm",
+          "Gia Châu",
+          "Gia Tâm",
+          "Bảo Khang",
+          "Bảo Phát",
+          "Bảo Thịnh",
+          "Bảo Long",
+          "Bảo Hà",
+          "Bảo Lâm",
+          "Bảo Châu",
+          "Bảo Tâm",
+          "Thanh Khang",
+          "Thanh Phát",
+          "Thanh Thịnh",
+          "Thanh Long",
+          "Thanh Hà",
+          "Thanh Lâm",
+          "Thanh Châu",
+          "Thanh Tâm",
+          "Phúc Khang",
+          "Phúc Phát",
+          "Phúc Thịnh",
+          "Phúc Long",
+          "Phúc Hà",
+          "Phúc Lâm",
+          "Phúc Châu",
+          "Phúc Tâm",
+          "Hưng Khang",
+          "Hưng Phát",
+          "Hưng Thịnh",
+          "Hưng Long",
+          "Hưng Hà",
+          "Hưng Lâm",
+          "Hưng Châu",
+          "Hưng Tâm",
+          "Đức Khang",
+          "Đức Phát",
+          "Đức Thịnh",
+          "Đức Long",
+          "Đức Hà",
+          "Đức Lâm",
+          "Đức Châu",
+          "Đức Tâm",
+          "Hoàng Khang",
+          "Hoàng Phát",
+          "Hoàng Thịnh",
+          "Hoàng Long",
+          "Hoàng Hà",
+          "Hoàng Lâm",
+          "Hoàng Châu",
+          "Hoàng Tâm",
+          "Ngọc Khang",
+          "Ngọc Phát",
+          "Ngọc Thịnh",
+          "Ngọc Long",
+          "Ngọc Hà",
+          "Ngọc Lâm",
+          "Ngọc Châu",
+          "Ngọc Tâm"
+        ]
+      },
+      "tier": {
+        "kind": "choice",
+        "values": [
+          "Normal",
+          "Preferred",
+          "Mall"
+        ],
+        "weights": [
+          70,
+          24,
+          6
+        ]
+      }
+    },
+    "inventory": [
+      {
+        "warehouses": {
+          "province": [
+            "TP. Hồ Chí Minh"
+          ]
+        },
+        "quantity": {
+          "kind": "integer",
+          "min": 12,
+          "max": 180
+        },
+        "coverage": 0.85
+      },
+      {
+        "warehouses": {
+          "province": [
+            "Hà Nội"
+          ]
+        },
+        "quantity": {
+          "kind": "integer",
+          "min": 10,
+          "max": 150
+        },
+        "coverage": 0.8
+      },
+      {
+        "warehouses": {
+          "province": [
+            "Đà Nẵng"
+          ]
+        },
+        "quantity": {
+          "kind": "integer",
+          "min": 5,
+          "max": 90
+        },
+        "coverage": 0.6
+      },
+      {
+        "warehouses": {
+          "province": [
+            "Cần Thơ"
+          ]
+        },
+        "quantity": {
+          "kind": "integer",
+          "min": 5,
+          "max": 100
+        },
+        "coverage": 0.65
+      }
+    ],
+    "actors": [
+      {
+        "id": "sellers",
+        "entity": "sellers",
+        "roles": [
+          "catalog/1. Nhóm Người bán",
+          "orders/3. Người bán xử lý đơn",
+          "marketing/Người bán tạo ưu đãi",
+          "finance/Người bán tra cứu"
+        ],
+        "where": {},
+        "attributes": {
+          "segment": {
+            "kind": "choice",
+            "values": [
+              "regular",
+              "occasional",
+              "engaged"
+            ],
+            "weights": [
+              5,
+              3,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "catalog-team-2",
+        "entity": "virtual",
+        "count": 12,
+        "roles": [
+          "catalog/2. Nhóm Quản trị viên catalog"
+        ],
+        "attributes": {
+          "display_name": {
+            "kind": "choice",
+            "values": [
+              "Nguyễn Minh Anh",
+              "Nguyễn Ngọc Hà",
+              "Nguyễn Hoàng Mai",
+              "Nguyễn Mai Chi",
+              "Nguyễn Hải Yến",
+              "Nguyễn Thùy Linh",
+              "Nguyễn Phương Thảo",
+              "Nguyễn Gia Hân",
+              "Nguyễn Quỳnh Như",
+              "Nguyễn Thiện Nhân",
+              "Nguyễn Ngọc Sơn",
+              "Nguyễn Tiến Đạt",
+              "Trần Minh Anh",
+              "Trần Ngọc Hà",
+              "Trần Hoàng Mai",
+              "Trần Mai Chi",
+              "Trần Hải Yến",
+              "Trần Thùy Linh",
+              "Trần Phương Thảo",
+              "Trần Gia Hân",
+              "Trần Quỳnh Như",
+              "Trần Thiện Nhân",
+              "Trần Ngọc Sơn",
+              "Trần Tiến Đạt",
+              "Lê Minh Anh",
+              "Lê Ngọc Hà",
+              "Lê Hoàng Mai",
+              "Lê Mai Chi",
+              "Lê Hải Yến",
+              "Lê Thùy Linh",
+              "Lê Phương Thảo",
+              "Lê Gia Hân",
+              "Lê Quỳnh Như",
+              "Lê Thiện Nhân",
+              "Lê Ngọc Sơn",
+              "Lê Tiến Đạt",
+              "Phạm Minh Anh",
+              "Phạm Ngọc Hà",
+              "Phạm Hoàng Mai",
+              "Phạm Mai Chi",
+              "Phạm Hải Yến",
+              "Phạm Thùy Linh",
+              "Phạm Phương Thảo",
+              "Phạm Gia Hân",
+              "Phạm Quỳnh Như",
+              "Phạm Thiện Nhân",
+              "Phạm Ngọc Sơn",
+              "Phạm Tiến Đạt",
+              "Hoàng Minh Anh",
+              "Hoàng Ngọc Hà",
+              "Hoàng Hoàng Mai",
+              "Hoàng Mai Chi",
+              "Hoàng Hải Yến",
+              "Hoàng Thùy Linh",
+              "Hoàng Phương Thảo",
+              "Hoàng Gia Hân",
+              "Hoàng Quỳnh Như",
+              "Hoàng Thiện Nhân",
+              "Hoàng Ngọc Sơn",
+              "Hoàng Tiến Đạt",
+              "Huỳnh Minh Anh",
+              "Huỳnh Ngọc Hà",
+              "Huỳnh Hoàng Mai",
+              "Huỳnh Mai Chi",
+              "Huỳnh Hải Yến",
+              "Huỳnh Thùy Linh",
+              "Huỳnh Phương Thảo",
+              "Huỳnh Gia Hân",
+              "Huỳnh Quỳnh Như",
+              "Huỳnh Thiện Nhân",
+              "Huỳnh Ngọc Sơn",
+              "Huỳnh Tiến Đạt",
+              "Vũ Minh Anh",
+              "Vũ Ngọc Hà",
+              "Vũ Hoàng Mai",
+              "Vũ Mai Chi",
+              "Vũ Hải Yến",
+              "Vũ Thùy Linh",
+              "Vũ Phương Thảo",
+              "Vũ Gia Hân",
+              "Vũ Quỳnh Như",
+              "Vũ Thiện Nhân",
+              "Vũ Ngọc Sơn",
+              "Vũ Tiến Đạt",
+              "Võ Minh Anh",
+              "Võ Ngọc Hà",
+              "Võ Hoàng Mai",
+              "Võ Mai Chi",
+              "Võ Hải Yến",
+              "Võ Thùy Linh",
+              "Võ Phương Thảo",
+              "Võ Gia Hân",
+              "Võ Quỳnh Như",
+              "Võ Thiện Nhân",
+              "Võ Ngọc Sơn",
+              "Võ Tiến Đạt",
+              "Phan Minh Anh",
+              "Phan Ngọc Hà",
+              "Phan Hoàng Mai",
+              "Phan Mai Chi",
+              "Phan Hải Yến",
+              "Phan Thùy Linh",
+              "Phan Phương Thảo",
+              "Phan Gia Hân",
+              "Phan Quỳnh Như",
+              "Phan Thiện Nhân",
+              "Phan Ngọc Sơn",
+              "Phan Tiến Đạt",
+              "Trương Minh Anh",
+              "Trương Ngọc Hà",
+              "Trương Hoàng Mai",
+              "Trương Mai Chi",
+              "Trương Hải Yến",
+              "Trương Thùy Linh",
+              "Trương Phương Thảo",
+              "Trương Gia Hân",
+              "Trương Quỳnh Như",
+              "Trương Thiện Nhân",
+              "Trương Ngọc Sơn",
+              "Trương Tiến Đạt",
+              "Bùi Minh Anh",
+              "Bùi Ngọc Hà",
+              "Bùi Hoàng Mai",
+              "Bùi Mai Chi",
+              "Bùi Hải Yến",
+              "Bùi Thùy Linh",
+              "Bùi Phương Thảo",
+              "Bùi Gia Hân",
+              "Bùi Quỳnh Như",
+              "Bùi Thiện Nhân",
+              "Bùi Ngọc Sơn",
+              "Bùi Tiến Đạt",
+              "Đặng Minh Anh",
+              "Đặng Ngọc Hà",
+              "Đặng Hoàng Mai",
+              "Đặng Mai Chi",
+              "Đặng Hải Yến",
+              "Đặng Thùy Linh",
+              "Đặng Phương Thảo",
+              "Đặng Gia Hân",
+              "Đặng Quỳnh Như",
+              "Đặng Thiện Nhân",
+              "Đặng Ngọc Sơn",
+              "Đặng Tiến Đạt"
+            ]
+          }
+        },
+        "availability": {
+          "start": "08:00:00",
+          "end": "21:59:59"
+        }
+      },
+      {
+        "id": "catalog-team-3",
+        "entity": "virtual",
+        "count": 12,
+        "roles": [
+          "catalog/3. Nhóm Nhân viên quản lý người bán"
+        ],
+        "attributes": {
+          "display_name": {
+            "kind": "choice",
+            "values": [
+              "Nguyễn Minh Anh",
+              "Nguyễn Ngọc Hà",
+              "Nguyễn Hoàng Mai",
+              "Nguyễn Mai Chi",
+              "Nguyễn Hải Yến",
+              "Nguyễn Thùy Linh",
+              "Nguyễn Phương Thảo",
+              "Nguyễn Gia Hân",
+              "Nguyễn Quỳnh Như",
+              "Nguyễn Thiện Nhân",
+              "Nguyễn Ngọc Sơn",
+              "Nguyễn Tiến Đạt",
+              "Trần Minh Anh",
+              "Trần Ngọc Hà",
+              "Trần Hoàng Mai",
+              "Trần Mai Chi",
+              "Trần Hải Yến",
+              "Trần Thùy Linh",
+              "Trần Phương Thảo",
+              "Trần Gia Hân",
+              "Trần Quỳnh Như",
+              "Trần Thiện Nhân",
+              "Trần Ngọc Sơn",
+              "Trần Tiến Đạt",
+              "Lê Minh Anh",
+              "Lê Ngọc Hà",
+              "Lê Hoàng Mai",
+              "Lê Mai Chi",
+              "Lê Hải Yến",
+              "Lê Thùy Linh",
+              "Lê Phương Thảo",
+              "Lê Gia Hân",
+              "Lê Quỳnh Như",
+              "Lê Thiện Nhân",
+              "Lê Ngọc Sơn",
+              "Lê Tiến Đạt",
+              "Phạm Minh Anh",
+              "Phạm Ngọc Hà",
+              "Phạm Hoàng Mai",
+              "Phạm Mai Chi",
+              "Phạm Hải Yến",
+              "Phạm Thùy Linh",
+              "Phạm Phương Thảo",
+              "Phạm Gia Hân",
+              "Phạm Quỳnh Như",
+              "Phạm Thiện Nhân",
+              "Phạm Ngọc Sơn",
+              "Phạm Tiến Đạt",
+              "Hoàng Minh Anh",
+              "Hoàng Ngọc Hà",
+              "Hoàng Hoàng Mai",
+              "Hoàng Mai Chi",
+              "Hoàng Hải Yến",
+              "Hoàng Thùy Linh",
+              "Hoàng Phương Thảo",
+              "Hoàng Gia Hân",
+              "Hoàng Quỳnh Như",
+              "Hoàng Thiện Nhân",
+              "Hoàng Ngọc Sơn",
+              "Hoàng Tiến Đạt",
+              "Huỳnh Minh Anh",
+              "Huỳnh Ngọc Hà",
+              "Huỳnh Hoàng Mai",
+              "Huỳnh Mai Chi",
+              "Huỳnh Hải Yến",
+              "Huỳnh Thùy Linh",
+              "Huỳnh Phương Thảo",
+              "Huỳnh Gia Hân",
+              "Huỳnh Quỳnh Như",
+              "Huỳnh Thiện Nhân",
+              "Huỳnh Ngọc Sơn",
+              "Huỳnh Tiến Đạt",
+              "Vũ Minh Anh",
+              "Vũ Ngọc Hà",
+              "Vũ Hoàng Mai",
+              "Vũ Mai Chi",
+              "Vũ Hải Yến",
+              "Vũ Thùy Linh",
+              "Vũ Phương Thảo",
+              "Vũ Gia Hân",
+              "Vũ Quỳnh Như",
+              "Vũ Thiện Nhân",
+              "Vũ Ngọc Sơn",
+              "Vũ Tiến Đạt",
+              "Võ Minh Anh",
+              "Võ Ngọc Hà",
+              "Võ Hoàng Mai",
+              "Võ Mai Chi",
+              "Võ Hải Yến",
+              "Võ Thùy Linh",
+              "Võ Phương Thảo",
+              "Võ Gia Hân",
+              "Võ Quỳnh Như",
+              "Võ Thiện Nhân",
+              "Võ Ngọc Sơn",
+              "Võ Tiến Đạt",
+              "Phan Minh Anh",
+              "Phan Ngọc Hà",
+              "Phan Hoàng Mai",
+              "Phan Mai Chi",
+              "Phan Hải Yến",
+              "Phan Thùy Linh",
+              "Phan Phương Thảo",
+              "Phan Gia Hân",
+              "Phan Quỳnh Như",
+              "Phan Thiện Nhân",
+              "Phan Ngọc Sơn",
+              "Phan Tiến Đạt",
+              "Trương Minh Anh",
+              "Trương Ngọc Hà",
+              "Trương Hoàng Mai",
+              "Trương Mai Chi",
+              "Trương Hải Yến",
+              "Trương Thùy Linh",
+              "Trương Phương Thảo",
+              "Trương Gia Hân",
+              "Trương Quỳnh Như",
+              "Trương Thiện Nhân",
+              "Trương Ngọc Sơn",
+              "Trương Tiến Đạt",
+              "Bùi Minh Anh",
+              "Bùi Ngọc Hà",
+              "Bùi Hoàng Mai",
+              "Bùi Mai Chi",
+              "Bùi Hải Yến",
+              "Bùi Thùy Linh",
+              "Bùi Phương Thảo",
+              "Bùi Gia Hân",
+              "Bùi Quỳnh Như",
+              "Bùi Thiện Nhân",
+              "Bùi Ngọc Sơn",
+              "Bùi Tiến Đạt",
+              "Đặng Minh Anh",
+              "Đặng Ngọc Hà",
+              "Đặng Hoàng Mai",
+              "Đặng Mai Chi",
+              "Đặng Hải Yến",
+              "Đặng Thùy Linh",
+              "Đặng Phương Thảo",
+              "Đặng Gia Hân",
+              "Đặng Quỳnh Như",
+              "Đặng Thiện Nhân",
+              "Đặng Ngọc Sơn",
+              "Đặng Tiến Đạt"
+            ]
+          }
+        },
+        "availability": {
+          "start": "08:00:00",
+          "end": "21:59:59"
+        }
+      },
+      {
+        "id": "visitors",
+        "entity": "virtual",
+        "count": 25000,
+        "roles": [
+          "catalog/4. Nhóm Khách truy cập",
+          "orders/1. Khách vãng lai",
+          "analytics/Khách vãng lai"
+        ],
+        "attributes": {
+          "segment": {
+            "kind": "choice",
+            "values": [
+              "new",
+              "returning"
+            ],
+            "weights": [
+              7,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "id": "customers",
+        "entity": "customers",
+        "roles": [
+          "orders/2. Khách đã đăng ký",
+          "analytics/Khách đã đăng ký"
+        ],
+        "where": {},
+        "attributes": {
+          "segment": {
+            "kind": "choice",
+            "values": [
+              "regular",
+              "occasional",
+              "engaged"
+            ],
+            "weights": [
+              5,
+              3,
+              2
+            ]
+          }
+        },
+        "sampling": {
+          "field": "membership_tier",
+          "weights": {
+            "Member": 1,
+            "Silver": 1.7,
+            "Gold": 2.8
+          },
+          "default": 1
+        }
+      },
+      {
+        "id": "orders-team-6",
+        "entity": "virtual",
+        "count": 12,
+        "roles": [
+          "orders/4. Nhân viên chăm sóc khách hàng / xử lý sau bán"
+        ],
+        "attributes": {
+          "display_name": {
+            "kind": "choice",
+            "values": [
+              "Nguyễn Minh Anh",
+              "Nguyễn Ngọc Hà",
+              "Nguyễn Hoàng Mai",
+              "Nguyễn Mai Chi",
+              "Nguyễn Hải Yến",
+              "Nguyễn Thùy Linh",
+              "Nguyễn Phương Thảo",
+              "Nguyễn Gia Hân",
+              "Nguyễn Quỳnh Như",
+              "Nguyễn Thiện Nhân",
+              "Nguyễn Ngọc Sơn",
+              "Nguyễn Tiến Đạt",
+              "Trần Minh Anh",
+              "Trần Ngọc Hà",
+              "Trần Hoàng Mai",
+              "Trần Mai Chi",
+              "Trần Hải Yến",
+              "Trần Thùy Linh",
+              "Trần Phương Thảo",
+              "Trần Gia Hân",
+              "Trần Quỳnh Như",
+              "Trần Thiện Nhân",
+              "Trần Ngọc Sơn",
+              "Trần Tiến Đạt",
+              "Lê Minh Anh",
+              "Lê Ngọc Hà",
+              "Lê Hoàng Mai",
+              "Lê Mai Chi",
+              "Lê Hải Yến",
+              "Lê Thùy Linh",
+              "Lê Phương Thảo",
+              "Lê Gia Hân",
+              "Lê Quỳnh Như",
+              "Lê Thiện Nhân",
+              "Lê Ngọc Sơn",
+              "Lê Tiến Đạt",
+              "Phạm Minh Anh",
+              "Phạm Ngọc Hà",
+              "Phạm Hoàng Mai",
+              "Phạm Mai Chi",
+              "Phạm Hải Yến",
+              "Phạm Thùy Linh",
+              "Phạm Phương Thảo",
+              "Phạm Gia Hân",
+              "Phạm Quỳnh Như",
+              "Phạm Thiện Nhân",
+              "Phạm Ngọc Sơn",
+              "Phạm Tiến Đạt",
+              "Hoàng Minh Anh",
+              "Hoàng Ngọc Hà",
+              "Hoàng Hoàng Mai",
+              "Hoàng Mai Chi",
+              "Hoàng Hải Yến",
+              "Hoàng Thùy Linh",
+              "Hoàng Phương Thảo",
+              "Hoàng Gia Hân",
+              "Hoàng Quỳnh Như",
+              "Hoàng Thiện Nhân",
+              "Hoàng Ngọc Sơn",
+              "Hoàng Tiến Đạt",
+              "Huỳnh Minh Anh",
+              "Huỳnh Ngọc Hà",
+              "Huỳnh Hoàng Mai",
+              "Huỳnh Mai Chi",
+              "Huỳnh Hải Yến",
+              "Huỳnh Thùy Linh",
+              "Huỳnh Phương Thảo",
+              "Huỳnh Gia Hân",
+              "Huỳnh Quỳnh Như",
+              "Huỳnh Thiện Nhân",
+              "Huỳnh Ngọc Sơn",
+              "Huỳnh Tiến Đạt",
+              "Vũ Minh Anh",
+              "Vũ Ngọc Hà",
+              "Vũ Hoàng Mai",
+              "Vũ Mai Chi",
+              "Vũ Hải Yến",
+              "Vũ Thùy Linh",
+              "Vũ Phương Thảo",
+              "Vũ Gia Hân",
+              "Vũ Quỳnh Như",
+              "Vũ Thiện Nhân",
+              "Vũ Ngọc Sơn",
+              "Vũ Tiến Đạt",
+              "Võ Minh Anh",
+              "Võ Ngọc Hà",
+              "Võ Hoàng Mai",
+              "Võ Mai Chi",
+              "Võ Hải Yến",
+              "Võ Thùy Linh",
+              "Võ Phương Thảo",
+              "Võ Gia Hân",
+              "Võ Quỳnh Như",
+              "Võ Thiện Nhân",
+              "Võ Ngọc Sơn",
+              "Võ Tiến Đạt",
+              "Phan Minh Anh",
+              "Phan Ngọc Hà",
+              "Phan Hoàng Mai",
+              "Phan Mai Chi",
+              "Phan Hải Yến",
+              "Phan Thùy Linh",
+              "Phan Phương Thảo",
+              "Phan Gia Hân",
+              "Phan Quỳnh Như",
+              "Phan Thiện Nhân",
+              "Phan Ngọc Sơn",
+              "Phan Tiến Đạt",
+              "Trương Minh Anh",
+              "Trương Ngọc Hà",
+              "Trương Hoàng Mai",
+              "Trương Mai Chi",
+              "Trương Hải Yến",
+              "Trương Thùy Linh",
+              "Trương Phương Thảo",
+              "Trương Gia Hân",
+              "Trương Quỳnh Như",
+              "Trương Thiện Nhân",
+              "Trương Ngọc Sơn",
+              "Trương Tiến Đạt",
+              "Bùi Minh Anh",
+              "Bùi Ngọc Hà",
+              "Bùi Hoàng Mai",
+              "Bùi Mai Chi",
+              "Bùi Hải Yến",
+              "Bùi Thùy Linh",
+              "Bùi Phương Thảo",
+              "Bùi Gia Hân",
+              "Bùi Quỳnh Như",
+              "Bùi Thiện Nhân",
+              "Bùi Ngọc Sơn",
+              "Bùi Tiến Đạt",
+              "Đặng Minh Anh",
+              "Đặng Ngọc Hà",
+              "Đặng Hoàng Mai",
+              "Đặng Mai Chi",
+              "Đặng Hải Yến",
+              "Đặng Thùy Linh",
+              "Đặng Phương Thảo",
+              "Đặng Gia Hân",
+              "Đặng Quỳnh Như",
+              "Đặng Thiện Nhân",
+              "Đặng Ngọc Sơn",
+              "Đặng Tiến Đạt"
+            ]
+          }
+        },
+        "availability": {
+          "start": "08:00:00",
+          "end": "21:59:59"
+        }
+      },
+      {
+        "id": "orders-team-7",
+        "entity": "virtual",
+        "count": 3,
+        "roles": [
+          "orders/5. Dịch vụ thanh toán mô phỏng"
+        ],
+        "attributes": {
+          "process_name": {
+            "kind": "constant",
+            "value": "5. Dịch vụ thanh toán"
+          },
+          "worker_group": {
+            "kind": "choice",
+            "values": [
+              "primary",
+              "secondary"
+            ],
+            "weights": [
+              8,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "orders-team-8",
+        "entity": "virtual",
+        "count": 3,
+        "roles": [
+          "orders/6. Tiến trình tự động của hệ thống"
+        ],
+        "attributes": {
+          "process_name": {
+            "kind": "constant",
+            "value": "6. Tiến trình tự động của hệ thống"
+          },
+          "worker_group": {
+            "kind": "choice",
+            "values": [
+              "primary",
+              "secondary"
+            ],
+            "weights": [
+              8,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "warehouse-team-9",
+        "entity": "virtual",
+        "count": 12,
+        "roles": [
+          "warehouse/Nhân viên kho"
+        ],
+        "attributes": {
+          "display_name": {
+            "kind": "choice",
+            "values": [
+              "Nguyễn Minh Anh",
+              "Nguyễn Ngọc Hà",
+              "Nguyễn Hoàng Mai",
+              "Nguyễn Mai Chi",
+              "Nguyễn Hải Yến",
+              "Nguyễn Thùy Linh",
+              "Nguyễn Phương Thảo",
+              "Nguyễn Gia Hân",
+              "Nguyễn Quỳnh Như",
+              "Nguyễn Thiện Nhân",
+              "Nguyễn Ngọc Sơn",
+              "Nguyễn Tiến Đạt",
+              "Trần Minh Anh",
+              "Trần Ngọc Hà",
+              "Trần Hoàng Mai",
+              "Trần Mai Chi",
+              "Trần Hải Yến",
+              "Trần Thùy Linh",
+              "Trần Phương Thảo",
+              "Trần Gia Hân",
+              "Trần Quỳnh Như",
+              "Trần Thiện Nhân",
+              "Trần Ngọc Sơn",
+              "Trần Tiến Đạt",
+              "Lê Minh Anh",
+              "Lê Ngọc Hà",
+              "Lê Hoàng Mai",
+              "Lê Mai Chi",
+              "Lê Hải Yến",
+              "Lê Thùy Linh",
+              "Lê Phương Thảo",
+              "Lê Gia Hân",
+              "Lê Quỳnh Như",
+              "Lê Thiện Nhân",
+              "Lê Ngọc Sơn",
+              "Lê Tiến Đạt",
+              "Phạm Minh Anh",
+              "Phạm Ngọc Hà",
+              "Phạm Hoàng Mai",
+              "Phạm Mai Chi",
+              "Phạm Hải Yến",
+              "Phạm Thùy Linh",
+              "Phạm Phương Thảo",
+              "Phạm Gia Hân",
+              "Phạm Quỳnh Như",
+              "Phạm Thiện Nhân",
+              "Phạm Ngọc Sơn",
+              "Phạm Tiến Đạt",
+              "Hoàng Minh Anh",
+              "Hoàng Ngọc Hà",
+              "Hoàng Hoàng Mai",
+              "Hoàng Mai Chi",
+              "Hoàng Hải Yến",
+              "Hoàng Thùy Linh",
+              "Hoàng Phương Thảo",
+              "Hoàng Gia Hân",
+              "Hoàng Quỳnh Như",
+              "Hoàng Thiện Nhân",
+              "Hoàng Ngọc Sơn",
+              "Hoàng Tiến Đạt",
+              "Huỳnh Minh Anh",
+              "Huỳnh Ngọc Hà",
+              "Huỳnh Hoàng Mai",
+              "Huỳnh Mai Chi",
+              "Huỳnh Hải Yến",
+              "Huỳnh Thùy Linh",
+              "Huỳnh Phương Thảo",
+              "Huỳnh Gia Hân",
+              "Huỳnh Quỳnh Như",
+              "Huỳnh Thiện Nhân",
+              "Huỳnh Ngọc Sơn",
+              "Huỳnh Tiến Đạt",
+              "Vũ Minh Anh",
+              "Vũ Ngọc Hà",
+              "Vũ Hoàng Mai",
+              "Vũ Mai Chi",
+              "Vũ Hải Yến",
+              "Vũ Thùy Linh",
+              "Vũ Phương Thảo",
+              "Vũ Gia Hân",
+              "Vũ Quỳnh Như",
+              "Vũ Thiện Nhân",
+              "Vũ Ngọc Sơn",
+              "Vũ Tiến Đạt",
+              "Võ Minh Anh",
+              "Võ Ngọc Hà",
+              "Võ Hoàng Mai",
+              "Võ Mai Chi",
+              "Võ Hải Yến",
+              "Võ Thùy Linh",
+              "Võ Phương Thảo",
+              "Võ Gia Hân",
+              "Võ Quỳnh Như",
+              "Võ Thiện Nhân",
+              "Võ Ngọc Sơn",
+              "Võ Tiến Đạt",
+              "Phan Minh Anh",
+              "Phan Ngọc Hà",
+              "Phan Hoàng Mai",
+              "Phan Mai Chi",
+              "Phan Hải Yến",
+              "Phan Thùy Linh",
+              "Phan Phương Thảo",
+              "Phan Gia Hân",
+              "Phan Quỳnh Như",
+              "Phan Thiện Nhân",
+              "Phan Ngọc Sơn",
+              "Phan Tiến Đạt",
+              "Trương Minh Anh",
+              "Trương Ngọc Hà",
+              "Trương Hoàng Mai",
+              "Trương Mai Chi",
+              "Trương Hải Yến",
+              "Trương Thùy Linh",
+              "Trương Phương Thảo",
+              "Trương Gia Hân",
+              "Trương Quỳnh Như",
+              "Trương Thiện Nhân",
+              "Trương Ngọc Sơn",
+              "Trương Tiến Đạt",
+              "Bùi Minh Anh",
+              "Bùi Ngọc Hà",
+              "Bùi Hoàng Mai",
+              "Bùi Mai Chi",
+              "Bùi Hải Yến",
+              "Bùi Thùy Linh",
+              "Bùi Phương Thảo",
+              "Bùi Gia Hân",
+              "Bùi Quỳnh Như",
+              "Bùi Thiện Nhân",
+              "Bùi Ngọc Sơn",
+              "Bùi Tiến Đạt",
+              "Đặng Minh Anh",
+              "Đặng Ngọc Hà",
+              "Đặng Hoàng Mai",
+              "Đặng Mai Chi",
+              "Đặng Hải Yến",
+              "Đặng Thùy Linh",
+              "Đặng Phương Thảo",
+              "Đặng Gia Hân",
+              "Đặng Quỳnh Như",
+              "Đặng Thiện Nhân",
+              "Đặng Ngọc Sơn",
+              "Đặng Tiến Đạt"
+            ]
+          }
+        },
+        "availability": {
+          "start": "08:00:00",
+          "end": "21:59:59"
+        }
+      },
+      {
+        "id": "warehouse-team-10",
+        "entity": "virtual",
+        "count": 12,
+        "roles": [
+          "warehouse/Nhân viên điều phối"
+        ],
+        "attributes": {
+          "display_name": {
+            "kind": "choice",
+            "values": [
+              "Nguyễn Minh Anh",
+              "Nguyễn Ngọc Hà",
+              "Nguyễn Hoàng Mai",
+              "Nguyễn Mai Chi",
+              "Nguyễn Hải Yến",
+              "Nguyễn Thùy Linh",
+              "Nguyễn Phương Thảo",
+              "Nguyễn Gia Hân",
+              "Nguyễn Quỳnh Như",
+              "Nguyễn Thiện Nhân",
+              "Nguyễn Ngọc Sơn",
+              "Nguyễn Tiến Đạt",
+              "Trần Minh Anh",
+              "Trần Ngọc Hà",
+              "Trần Hoàng Mai",
+              "Trần Mai Chi",
+              "Trần Hải Yến",
+              "Trần Thùy Linh",
+              "Trần Phương Thảo",
+              "Trần Gia Hân",
+              "Trần Quỳnh Như",
+              "Trần Thiện Nhân",
+              "Trần Ngọc Sơn",
+              "Trần Tiến Đạt",
+              "Lê Minh Anh",
+              "Lê Ngọc Hà",
+              "Lê Hoàng Mai",
+              "Lê Mai Chi",
+              "Lê Hải Yến",
+              "Lê Thùy Linh",
+              "Lê Phương Thảo",
+              "Lê Gia Hân",
+              "Lê Quỳnh Như",
+              "Lê Thiện Nhân",
+              "Lê Ngọc Sơn",
+              "Lê Tiến Đạt",
+              "Phạm Minh Anh",
+              "Phạm Ngọc Hà",
+              "Phạm Hoàng Mai",
+              "Phạm Mai Chi",
+              "Phạm Hải Yến",
+              "Phạm Thùy Linh",
+              "Phạm Phương Thảo",
+              "Phạm Gia Hân",
+              "Phạm Quỳnh Như",
+              "Phạm Thiện Nhân",
+              "Phạm Ngọc Sơn",
+              "Phạm Tiến Đạt",
+              "Hoàng Minh Anh",
+              "Hoàng Ngọc Hà",
+              "Hoàng Hoàng Mai",
+              "Hoàng Mai Chi",
+              "Hoàng Hải Yến",
+              "Hoàng Thùy Linh",
+              "Hoàng Phương Thảo",
+              "Hoàng Gia Hân",
+              "Hoàng Quỳnh Như",
+              "Hoàng Thiện Nhân",
+              "Hoàng Ngọc Sơn",
+              "Hoàng Tiến Đạt",
+              "Huỳnh Minh Anh",
+              "Huỳnh Ngọc Hà",
+              "Huỳnh Hoàng Mai",
+              "Huỳnh Mai Chi",
+              "Huỳnh Hải Yến",
+              "Huỳnh Thùy Linh",
+              "Huỳnh Phương Thảo",
+              "Huỳnh Gia Hân",
+              "Huỳnh Quỳnh Như",
+              "Huỳnh Thiện Nhân",
+              "Huỳnh Ngọc Sơn",
+              "Huỳnh Tiến Đạt",
+              "Vũ Minh Anh",
+              "Vũ Ngọc Hà",
+              "Vũ Hoàng Mai",
+              "Vũ Mai Chi",
+              "Vũ Hải Yến",
+              "Vũ Thùy Linh",
+              "Vũ Phương Thảo",
+              "Vũ Gia Hân",
+              "Vũ Quỳnh Như",
+              "Vũ Thiện Nhân",
+              "Vũ Ngọc Sơn",
+              "Vũ Tiến Đạt",
+              "Võ Minh Anh",
+              "Võ Ngọc Hà",
+              "Võ Hoàng Mai",
+              "Võ Mai Chi",
+              "Võ Hải Yến",
+              "Võ Thùy Linh",
+              "Võ Phương Thảo",
+              "Võ Gia Hân",
+              "Võ Quỳnh Như",
+              "Võ Thiện Nhân",
+              "Võ Ngọc Sơn",
+              "Võ Tiến Đạt",
+              "Phan Minh Anh",
+              "Phan Ngọc Hà",
+              "Phan Hoàng Mai",
+              "Phan Mai Chi",
+              "Phan Hải Yến",
+              "Phan Thùy Linh",
+              "Phan Phương Thảo",
+              "Phan Gia Hân",
+              "Phan Quỳnh Như",
+              "Phan Thiện Nhân",
+              "Phan Ngọc Sơn",
+              "Phan Tiến Đạt",
+              "Trương Minh Anh",
+              "Trương Ngọc Hà",
+              "Trương Hoàng Mai",
+              "Trương Mai Chi",
+              "Trương Hải Yến",
+              "Trương Thùy Linh",
+              "Trương Phương Thảo",
+              "Trương Gia Hân",
+              "Trương Quỳnh Như",
+              "Trương Thiện Nhân",
+              "Trương Ngọc Sơn",
+              "Trương Tiến Đạt",
+              "Bùi Minh Anh",
+              "Bùi Ngọc Hà",
+              "Bùi Hoàng Mai",
+              "Bùi Mai Chi",
+              "Bùi Hải Yến",
+              "Bùi Thùy Linh",
+              "Bùi Phương Thảo",
+              "Bùi Gia Hân",
+              "Bùi Quỳnh Như",
+              "Bùi Thiện Nhân",
+              "Bùi Ngọc Sơn",
+              "Bùi Tiến Đạt",
+              "Đặng Minh Anh",
+              "Đặng Ngọc Hà",
+              "Đặng Hoàng Mai",
+              "Đặng Mai Chi",
+              "Đặng Hải Yến",
+              "Đặng Thùy Linh",
+              "Đặng Phương Thảo",
+              "Đặng Gia Hân",
+              "Đặng Quỳnh Như",
+              "Đặng Thiện Nhân",
+              "Đặng Ngọc Sơn",
+              "Đặng Tiến Đạt"
+            ]
+          }
+        },
+        "availability": {
+          "start": "08:00:00",
+          "end": "21:59:59"
+        }
+      },
+      {
+        "id": "carriers",
+        "entity": "carriers",
+        "roles": [
+          "warehouse/Đơn vị vận chuyển mô phỏng"
+        ],
+        "where": {},
+        "attributes": {
+          "segment": {
+            "kind": "choice",
+            "values": [
+              "regular",
+              "occasional",
+              "engaged"
+            ],
+            "weights": [
+              5,
+              3,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "warehouse-team-12",
+        "entity": "virtual",
+        "count": 3,
+        "roles": [
+          "warehouse/Tiến trình tự động"
+        ],
+        "attributes": {
+          "process_name": {
+            "kind": "constant",
+            "value": "Tiến trình tự động"
+          },
+          "worker_group": {
+            "kind": "choice",
+            "values": [
+              "primary",
+              "secondary"
+            ],
+            "weights": [
+              8,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "marketing-team-13",
+        "entity": "virtual",
+        "count": 12,
+        "roles": [
+          "marketing/Nhân viên marketing sàn"
+        ],
+        "attributes": {
+          "display_name": {
+            "kind": "choice",
+            "values": [
+              "Nguyễn Minh Anh",
+              "Nguyễn Ngọc Hà",
+              "Nguyễn Hoàng Mai",
+              "Nguyễn Mai Chi",
+              "Nguyễn Hải Yến",
+              "Nguyễn Thùy Linh",
+              "Nguyễn Phương Thảo",
+              "Nguyễn Gia Hân",
+              "Nguyễn Quỳnh Như",
+              "Nguyễn Thiện Nhân",
+              "Nguyễn Ngọc Sơn",
+              "Nguyễn Tiến Đạt",
+              "Trần Minh Anh",
+              "Trần Ngọc Hà",
+              "Trần Hoàng Mai",
+              "Trần Mai Chi",
+              "Trần Hải Yến",
+              "Trần Thùy Linh",
+              "Trần Phương Thảo",
+              "Trần Gia Hân",
+              "Trần Quỳnh Như",
+              "Trần Thiện Nhân",
+              "Trần Ngọc Sơn",
+              "Trần Tiến Đạt",
+              "Lê Minh Anh",
+              "Lê Ngọc Hà",
+              "Lê Hoàng Mai",
+              "Lê Mai Chi",
+              "Lê Hải Yến",
+              "Lê Thùy Linh",
+              "Lê Phương Thảo",
+              "Lê Gia Hân",
+              "Lê Quỳnh Như",
+              "Lê Thiện Nhân",
+              "Lê Ngọc Sơn",
+              "Lê Tiến Đạt",
+              "Phạm Minh Anh",
+              "Phạm Ngọc Hà",
+              "Phạm Hoàng Mai",
+              "Phạm Mai Chi",
+              "Phạm Hải Yến",
+              "Phạm Thùy Linh",
+              "Phạm Phương Thảo",
+              "Phạm Gia Hân",
+              "Phạm Quỳnh Như",
+              "Phạm Thiện Nhân",
+              "Phạm Ngọc Sơn",
+              "Phạm Tiến Đạt",
+              "Hoàng Minh Anh",
+              "Hoàng Ngọc Hà",
+              "Hoàng Hoàng Mai",
+              "Hoàng Mai Chi",
+              "Hoàng Hải Yến",
+              "Hoàng Thùy Linh",
+              "Hoàng Phương Thảo",
+              "Hoàng Gia Hân",
+              "Hoàng Quỳnh Như",
+              "Hoàng Thiện Nhân",
+              "Hoàng Ngọc Sơn",
+              "Hoàng Tiến Đạt",
+              "Huỳnh Minh Anh",
+              "Huỳnh Ngọc Hà",
+              "Huỳnh Hoàng Mai",
+              "Huỳnh Mai Chi",
+              "Huỳnh Hải Yến",
+              "Huỳnh Thùy Linh",
+              "Huỳnh Phương Thảo",
+              "Huỳnh Gia Hân",
+              "Huỳnh Quỳnh Như",
+              "Huỳnh Thiện Nhân",
+              "Huỳnh Ngọc Sơn",
+              "Huỳnh Tiến Đạt",
+              "Vũ Minh Anh",
+              "Vũ Ngọc Hà",
+              "Vũ Hoàng Mai",
+              "Vũ Mai Chi",
+              "Vũ Hải Yến",
+              "Vũ Thùy Linh",
+              "Vũ Phương Thảo",
+              "Vũ Gia Hân",
+              "Vũ Quỳnh Như",
+              "Vũ Thiện Nhân",
+              "Vũ Ngọc Sơn",
+              "Vũ Tiến Đạt",
+              "Võ Minh Anh",
+              "Võ Ngọc Hà",
+              "Võ Hoàng Mai",
+              "Võ Mai Chi",
+              "Võ Hải Yến",
+              "Võ Thùy Linh",
+              "Võ Phương Thảo",
+              "Võ Gia Hân",
+              "Võ Quỳnh Như",
+              "Võ Thiện Nhân",
+              "Võ Ngọc Sơn",
+              "Võ Tiến Đạt",
+              "Phan Minh Anh",
+              "Phan Ngọc Hà",
+              "Phan Hoàng Mai",
+              "Phan Mai Chi",
+              "Phan Hải Yến",
+              "Phan Thùy Linh",
+              "Phan Phương Thảo",
+              "Phan Gia Hân",
+              "Phan Quỳnh Như",
+              "Phan Thiện Nhân",
+              "Phan Ngọc Sơn",
+              "Phan Tiến Đạt",
+              "Trương Minh Anh",
+              "Trương Ngọc Hà",
+              "Trương Hoàng Mai",
+              "Trương Mai Chi",
+              "Trương Hải Yến",
+              "Trương Thùy Linh",
+              "Trương Phương Thảo",
+              "Trương Gia Hân",
+              "Trương Quỳnh Như",
+              "Trương Thiện Nhân",
+              "Trương Ngọc Sơn",
+              "Trương Tiến Đạt",
+              "Bùi Minh Anh",
+              "Bùi Ngọc Hà",
+              "Bùi Hoàng Mai",
+              "Bùi Mai Chi",
+              "Bùi Hải Yến",
+              "Bùi Thùy Linh",
+              "Bùi Phương Thảo",
+              "Bùi Gia Hân",
+              "Bùi Quỳnh Như",
+              "Bùi Thiện Nhân",
+              "Bùi Ngọc Sơn",
+              "Bùi Tiến Đạt",
+              "Đặng Minh Anh",
+              "Đặng Ngọc Hà",
+              "Đặng Hoàng Mai",
+              "Đặng Mai Chi",
+              "Đặng Hải Yến",
+              "Đặng Thùy Linh",
+              "Đặng Phương Thảo",
+              "Đặng Gia Hân",
+              "Đặng Quỳnh Như",
+              "Đặng Thiện Nhân",
+              "Đặng Ngọc Sơn",
+              "Đặng Tiến Đạt"
+            ]
+          }
+        },
+        "availability": {
+          "start": "08:00:00",
+          "end": "21:59:59"
+        }
+      },
+      {
+        "id": "marketing-team-14",
+        "entity": "virtual",
+        "count": 3,
+        "roles": [
+          "marketing/Nền tảng quảng cáo mô phỏng"
+        ],
+        "attributes": {
+          "process_name": {
+            "kind": "constant",
+            "value": "Nền tảng quảng cáo"
+          },
+          "worker_group": {
+            "kind": "choice",
+            "values": [
+              "primary",
+              "secondary"
+            ],
+            "weights": [
+              8,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "marketing-team-15",
+        "entity": "virtual",
+        "count": 3,
+        "roles": [
+          "marketing/Tiến trình tự động"
+        ],
+        "attributes": {
+          "process_name": {
+            "kind": "constant",
+            "value": "Tiến trình tự động"
+          },
+          "worker_group": {
+            "kind": "choice",
+            "values": [
+              "primary",
+              "secondary"
+            ],
+            "weights": [
+              8,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "analytics-team-16",
+        "entity": "virtual",
+        "count": 3,
+        "roles": [
+          "analytics/Bộ mô phỏng phiên và hành vi"
+        ],
+        "attributes": {
+          "process_name": {
+            "kind": "constant",
+            "value": "Bộ  phiên và hành vi"
+          },
+          "worker_group": {
+            "kind": "choice",
+            "values": [
+              "primary",
+              "secondary"
+            ],
+            "weights": [
+              8,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "analytics-team-17",
+        "entity": "virtual",
+        "count": 3,
+        "roles": [
+          "analytics/Bộ tiếp nhận kết quả giao dịch"
+        ],
+        "attributes": {
+          "process_name": {
+            "kind": "constant",
+            "value": "Bộ tiếp nhận kết quả giao dịch"
+          },
+          "worker_group": {
+            "kind": "choice",
+            "values": [
+              "primary",
+              "secondary"
+            ],
+            "weights": [
+              8,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "finance-team-18",
+        "entity": "virtual",
+        "count": 12,
+        "roles": [
+          "finance/Nhân viên quản lý chính sách hoa hồng"
+        ],
+        "attributes": {
+          "display_name": {
+            "kind": "choice",
+            "values": [
+              "Nguyễn Minh Anh",
+              "Nguyễn Ngọc Hà",
+              "Nguyễn Hoàng Mai",
+              "Nguyễn Mai Chi",
+              "Nguyễn Hải Yến",
+              "Nguyễn Thùy Linh",
+              "Nguyễn Phương Thảo",
+              "Nguyễn Gia Hân",
+              "Nguyễn Quỳnh Như",
+              "Nguyễn Thiện Nhân",
+              "Nguyễn Ngọc Sơn",
+              "Nguyễn Tiến Đạt",
+              "Trần Minh Anh",
+              "Trần Ngọc Hà",
+              "Trần Hoàng Mai",
+              "Trần Mai Chi",
+              "Trần Hải Yến",
+              "Trần Thùy Linh",
+              "Trần Phương Thảo",
+              "Trần Gia Hân",
+              "Trần Quỳnh Như",
+              "Trần Thiện Nhân",
+              "Trần Ngọc Sơn",
+              "Trần Tiến Đạt",
+              "Lê Minh Anh",
+              "Lê Ngọc Hà",
+              "Lê Hoàng Mai",
+              "Lê Mai Chi",
+              "Lê Hải Yến",
+              "Lê Thùy Linh",
+              "Lê Phương Thảo",
+              "Lê Gia Hân",
+              "Lê Quỳnh Như",
+              "Lê Thiện Nhân",
+              "Lê Ngọc Sơn",
+              "Lê Tiến Đạt",
+              "Phạm Minh Anh",
+              "Phạm Ngọc Hà",
+              "Phạm Hoàng Mai",
+              "Phạm Mai Chi",
+              "Phạm Hải Yến",
+              "Phạm Thùy Linh",
+              "Phạm Phương Thảo",
+              "Phạm Gia Hân",
+              "Phạm Quỳnh Như",
+              "Phạm Thiện Nhân",
+              "Phạm Ngọc Sơn",
+              "Phạm Tiến Đạt",
+              "Hoàng Minh Anh",
+              "Hoàng Ngọc Hà",
+              "Hoàng Hoàng Mai",
+              "Hoàng Mai Chi",
+              "Hoàng Hải Yến",
+              "Hoàng Thùy Linh",
+              "Hoàng Phương Thảo",
+              "Hoàng Gia Hân",
+              "Hoàng Quỳnh Như",
+              "Hoàng Thiện Nhân",
+              "Hoàng Ngọc Sơn",
+              "Hoàng Tiến Đạt",
+              "Huỳnh Minh Anh",
+              "Huỳnh Ngọc Hà",
+              "Huỳnh Hoàng Mai",
+              "Huỳnh Mai Chi",
+              "Huỳnh Hải Yến",
+              "Huỳnh Thùy Linh",
+              "Huỳnh Phương Thảo",
+              "Huỳnh Gia Hân",
+              "Huỳnh Quỳnh Như",
+              "Huỳnh Thiện Nhân",
+              "Huỳnh Ngọc Sơn",
+              "Huỳnh Tiến Đạt",
+              "Vũ Minh Anh",
+              "Vũ Ngọc Hà",
+              "Vũ Hoàng Mai",
+              "Vũ Mai Chi",
+              "Vũ Hải Yến",
+              "Vũ Thùy Linh",
+              "Vũ Phương Thảo",
+              "Vũ Gia Hân",
+              "Vũ Quỳnh Như",
+              "Vũ Thiện Nhân",
+              "Vũ Ngọc Sơn",
+              "Vũ Tiến Đạt",
+              "Võ Minh Anh",
+              "Võ Ngọc Hà",
+              "Võ Hoàng Mai",
+              "Võ Mai Chi",
+              "Võ Hải Yến",
+              "Võ Thùy Linh",
+              "Võ Phương Thảo",
+              "Võ Gia Hân",
+              "Võ Quỳnh Như",
+              "Võ Thiện Nhân",
+              "Võ Ngọc Sơn",
+              "Võ Tiến Đạt",
+              "Phan Minh Anh",
+              "Phan Ngọc Hà",
+              "Phan Hoàng Mai",
+              "Phan Mai Chi",
+              "Phan Hải Yến",
+              "Phan Thùy Linh",
+              "Phan Phương Thảo",
+              "Phan Gia Hân",
+              "Phan Quỳnh Như",
+              "Phan Thiện Nhân",
+              "Phan Ngọc Sơn",
+              "Phan Tiến Đạt",
+              "Trương Minh Anh",
+              "Trương Ngọc Hà",
+              "Trương Hoàng Mai",
+              "Trương Mai Chi",
+              "Trương Hải Yến",
+              "Trương Thùy Linh",
+              "Trương Phương Thảo",
+              "Trương Gia Hân",
+              "Trương Quỳnh Như",
+              "Trương Thiện Nhân",
+              "Trương Ngọc Sơn",
+              "Trương Tiến Đạt",
+              "Bùi Minh Anh",
+              "Bùi Ngọc Hà",
+              "Bùi Hoàng Mai",
+              "Bùi Mai Chi",
+              "Bùi Hải Yến",
+              "Bùi Thùy Linh",
+              "Bùi Phương Thảo",
+              "Bùi Gia Hân",
+              "Bùi Quỳnh Như",
+              "Bùi Thiện Nhân",
+              "Bùi Ngọc Sơn",
+              "Bùi Tiến Đạt",
+              "Đặng Minh Anh",
+              "Đặng Ngọc Hà",
+              "Đặng Hoàng Mai",
+              "Đặng Mai Chi",
+              "Đặng Hải Yến",
+              "Đặng Thùy Linh",
+              "Đặng Phương Thảo",
+              "Đặng Gia Hân",
+              "Đặng Quỳnh Như",
+              "Đặng Thiện Nhân",
+              "Đặng Ngọc Sơn",
+              "Đặng Tiến Đạt"
+            ]
+          }
+        },
+        "availability": {
+          "start": "08:00:00",
+          "end": "21:59:59"
+        }
+      },
+      {
+        "id": "finance-team-19",
+        "entity": "virtual",
+        "count": 12,
+        "roles": [
+          "finance/Nhân viên đối soát"
+        ],
+        "attributes": {
+          "display_name": {
+            "kind": "choice",
+            "values": [
+              "Nguyễn Minh Anh",
+              "Nguyễn Ngọc Hà",
+              "Nguyễn Hoàng Mai",
+              "Nguyễn Mai Chi",
+              "Nguyễn Hải Yến",
+              "Nguyễn Thùy Linh",
+              "Nguyễn Phương Thảo",
+              "Nguyễn Gia Hân",
+              "Nguyễn Quỳnh Như",
+              "Nguyễn Thiện Nhân",
+              "Nguyễn Ngọc Sơn",
+              "Nguyễn Tiến Đạt",
+              "Trần Minh Anh",
+              "Trần Ngọc Hà",
+              "Trần Hoàng Mai",
+              "Trần Mai Chi",
+              "Trần Hải Yến",
+              "Trần Thùy Linh",
+              "Trần Phương Thảo",
+              "Trần Gia Hân",
+              "Trần Quỳnh Như",
+              "Trần Thiện Nhân",
+              "Trần Ngọc Sơn",
+              "Trần Tiến Đạt",
+              "Lê Minh Anh",
+              "Lê Ngọc Hà",
+              "Lê Hoàng Mai",
+              "Lê Mai Chi",
+              "Lê Hải Yến",
+              "Lê Thùy Linh",
+              "Lê Phương Thảo",
+              "Lê Gia Hân",
+              "Lê Quỳnh Như",
+              "Lê Thiện Nhân",
+              "Lê Ngọc Sơn",
+              "Lê Tiến Đạt",
+              "Phạm Minh Anh",
+              "Phạm Ngọc Hà",
+              "Phạm Hoàng Mai",
+              "Phạm Mai Chi",
+              "Phạm Hải Yến",
+              "Phạm Thùy Linh",
+              "Phạm Phương Thảo",
+              "Phạm Gia Hân",
+              "Phạm Quỳnh Như",
+              "Phạm Thiện Nhân",
+              "Phạm Ngọc Sơn",
+              "Phạm Tiến Đạt",
+              "Hoàng Minh Anh",
+              "Hoàng Ngọc Hà",
+              "Hoàng Hoàng Mai",
+              "Hoàng Mai Chi",
+              "Hoàng Hải Yến",
+              "Hoàng Thùy Linh",
+              "Hoàng Phương Thảo",
+              "Hoàng Gia Hân",
+              "Hoàng Quỳnh Như",
+              "Hoàng Thiện Nhân",
+              "Hoàng Ngọc Sơn",
+              "Hoàng Tiến Đạt",
+              "Huỳnh Minh Anh",
+              "Huỳnh Ngọc Hà",
+              "Huỳnh Hoàng Mai",
+              "Huỳnh Mai Chi",
+              "Huỳnh Hải Yến",
+              "Huỳnh Thùy Linh",
+              "Huỳnh Phương Thảo",
+              "Huỳnh Gia Hân",
+              "Huỳnh Quỳnh Như",
+              "Huỳnh Thiện Nhân",
+              "Huỳnh Ngọc Sơn",
+              "Huỳnh Tiến Đạt",
+              "Vũ Minh Anh",
+              "Vũ Ngọc Hà",
+              "Vũ Hoàng Mai",
+              "Vũ Mai Chi",
+              "Vũ Hải Yến",
+              "Vũ Thùy Linh",
+              "Vũ Phương Thảo",
+              "Vũ Gia Hân",
+              "Vũ Quỳnh Như",
+              "Vũ Thiện Nhân",
+              "Vũ Ngọc Sơn",
+              "Vũ Tiến Đạt",
+              "Võ Minh Anh",
+              "Võ Ngọc Hà",
+              "Võ Hoàng Mai",
+              "Võ Mai Chi",
+              "Võ Hải Yến",
+              "Võ Thùy Linh",
+              "Võ Phương Thảo",
+              "Võ Gia Hân",
+              "Võ Quỳnh Như",
+              "Võ Thiện Nhân",
+              "Võ Ngọc Sơn",
+              "Võ Tiến Đạt",
+              "Phan Minh Anh",
+              "Phan Ngọc Hà",
+              "Phan Hoàng Mai",
+              "Phan Mai Chi",
+              "Phan Hải Yến",
+              "Phan Thùy Linh",
+              "Phan Phương Thảo",
+              "Phan Gia Hân",
+              "Phan Quỳnh Như",
+              "Phan Thiện Nhân",
+              "Phan Ngọc Sơn",
+              "Phan Tiến Đạt",
+              "Trương Minh Anh",
+              "Trương Ngọc Hà",
+              "Trương Hoàng Mai",
+              "Trương Mai Chi",
+              "Trương Hải Yến",
+              "Trương Thùy Linh",
+              "Trương Phương Thảo",
+              "Trương Gia Hân",
+              "Trương Quỳnh Như",
+              "Trương Thiện Nhân",
+              "Trương Ngọc Sơn",
+              "Trương Tiến Đạt",
+              "Bùi Minh Anh",
+              "Bùi Ngọc Hà",
+              "Bùi Hoàng Mai",
+              "Bùi Mai Chi",
+              "Bùi Hải Yến",
+              "Bùi Thùy Linh",
+              "Bùi Phương Thảo",
+              "Bùi Gia Hân",
+              "Bùi Quỳnh Như",
+              "Bùi Thiện Nhân",
+              "Bùi Ngọc Sơn",
+              "Bùi Tiến Đạt",
+              "Đặng Minh Anh",
+              "Đặng Ngọc Hà",
+              "Đặng Hoàng Mai",
+              "Đặng Mai Chi",
+              "Đặng Hải Yến",
+              "Đặng Thùy Linh",
+              "Đặng Phương Thảo",
+              "Đặng Gia Hân",
+              "Đặng Quỳnh Như",
+              "Đặng Thiện Nhân",
+              "Đặng Ngọc Sơn",
+              "Đặng Tiến Đạt"
+            ]
+          }
+        },
+        "availability": {
+          "start": "08:00:00",
+          "end": "21:59:59"
+        }
+      },
+      {
+        "id": "finance-team-20",
+        "entity": "virtual",
+        "count": 3,
+        "roles": [
+          "finance/Dịch vụ chi trả mô phỏng"
+        ],
+        "attributes": {
+          "process_name": {
+            "kind": "constant",
+            "value": "Dịch vụ chi trả"
+          },
+          "worker_group": {
+            "kind": "choice",
+            "values": [
+              "primary",
+              "secondary"
+            ],
+            "weights": [
+              8,
+              2
+            ]
+          }
+        }
+      },
+      {
+        "id": "finance-team-21",
+        "entity": "virtual",
+        "count": 3,
+        "roles": [
+          "finance/Tiến trình tự động"
+        ],
+        "attributes": {
+          "process_name": {
+            "kind": "constant",
+            "value": "Tiến trình tự động"
+          },
+          "worker_group": {
+            "kind": "choice",
+            "values": [
+              "primary",
+              "secondary"
+            ],
+            "weights": [
+              8,
+              2
+            ]
+          }
+        }
+      }
+    ],
+    "channels": [
+      {
+        "channel_name": "Web",
+        "channel_type": "Digital"
+      },
+      {
+        "channel_name": "App",
+        "channel_type": "Digital"
+      },
+      {
+        "channel_name": "Livestream",
+        "channel_type": "Digital"
+      }
+    ],
+    "payment_methods": [
+      {
+        "method_name": "COD",
+        "method_group": "COD"
+      },
+      {
+        "method_name": "Momo",
+        "method_group": "E-Wallet"
+      },
+      {
+        "method_name": "ZaloPay",
+        "method_group": "E-Wallet"
+      },
+      {
+        "method_name": "Credit Card",
+        "method_group": "Card"
+      },
+      {
+        "method_name": "Bank Transfer",
+        "method_group": "Bank Transfer"
+      }
+    ],
+    "bootstrap": {
+      "customer_history_days": {
+        "kind": "integer",
+        "min": 7,
+        "max": 1095
+      }
+    }
   }
 }

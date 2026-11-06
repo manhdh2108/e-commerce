@@ -1,0 +1,1 @@
+"""Mock Studio application package."""

@@ -54,3 +54,15 @@ Bắt đầu tại [Hướng dẫn từ pull code đến lượt mock đầu ti�
 - [Nâng cấp và sử dụng engine v2](guides/ENGINE_V2_UPGRADE_GUIDE.md): schema 33 bảng, migration rõ ràng, UI profile/chính sách, config liên kết mới và giới hạn còn lại.
 
 - [Thư viện cấu hình mẫu đã phân loại](examples/README.md): `scenarios/` cho tab Cấu hình kịch bản; `settings/` để nhập và điền chính sách/hồ sơ ở Thiết lập.
+
+## Bản nâng cấp dùng cấu hình ngày 06/11/2026
+
+[Hướng dẫn engine dùng cấu hình thực thể và kịch bản](guides/CONFIG_DRIVEN_ENGINE_GUIDE.md): cấu hình ai thực hiện, thuộc tính, phạm vi, lịch phiên, lookup và cách nâng cấp giữ dữ liệu cũ. Các báo cáo rà soát trước đó phản ánh trạng thái trước lần nâng cấp này.
+
+[Kết quả triển khai và kiểm chứng](reviews/CONFIG_DRIVEN_UPGRADE_RESULT_2026-11-06.md): những cơ chế đã thêm, dữ liệu hiện có được giữ nguyên và các giới hạn còn lại.
+
+[Rà soát dấu vết mô phỏng trong code và config](reviews/MOCK_REALISM_CODE_CONFIG_REVIEW_2026-11-06.md): lỗi thời gian đã tái hiện, phân bố còn cứng, các điểm chỉ cần sửa config và các cơ chế thực sự cần nâng cấp.
+
+[Bản vận hành bán lẻ Việt Nam 2026](guides/REALISTIC_OPERATIONS_2026.md): code và hai config đã cập nhật sau rà soát, rule thời gian, địa danh, hành trình, ngoại lệ và cách áp dụng.
+
+[Kết quả kiểm chứng bản vận hành mới](reviews/REALISM_UPGRADE_RESULT_2026-11-06.md): 82 bài PostgreSQL, 80 bài SQLite, kiểm tra UI/API và bằng chứng giữ nguyên dữ liệu đang có.

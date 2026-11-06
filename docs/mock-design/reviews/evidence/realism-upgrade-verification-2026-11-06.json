@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-06",
+  "postgres_full": {
+    "passed": 82,
+    "log": "Isolated PostgreSQL regression suite"
+  },
+  "sqlite_full": {
+    "passed": 80,
+    "skipped": 2
+  },
+  "javascript_suites_passed": 6,
+  "live_preserved": {
+    "tables": 33,
+    "rows": 14575,
+    "changed_tables": [],
+    "orders": 124,
+    "last_day": "2026-01-05"
+  },
+  "live_read_only_audit": {
+    "checks": 109,
+    "violations": 0
+  },
+  "browser_visual_review": "Blocked by browser URL policy; validated with JavaScript tests and API instead",
+  "example_json_files": 4
+}

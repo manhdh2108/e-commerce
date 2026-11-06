@@ -9,7 +9,7 @@ services:
       - "127.0.0.1:55432:5432"
     volumes:
       - mock-platform-data:/var/lib/postgresql/data
-      - ./mock_platform/init-db.sql:/docker-entrypoint-initdb.d/02-business.sql:ro
+      - ./mock_platform/resources/init-db.sql:/docker-entrypoint-initdb.d/02-business.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U mock -d mock_control"]
       interval: 3s

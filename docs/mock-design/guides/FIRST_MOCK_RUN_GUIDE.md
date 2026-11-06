@@ -43,7 +43,7 @@ Kiểm tra commit đã có các file cần thiết:
 
 ```bash
 ls scripts/start_mock.sh scripts/requirements-mock.txt scripts/compose.mock.yaml
-ls scripts/mock_platform/config_transfer.py scripts/mock_platform/web/config-transfer.js
+ls scripts/mock_platform/config/config_transfer.py scripts/mock_platform/web/config-transfer.js
 ls docs/mock-design/examples/scenarios/first-run-cod.json
 ```
 
@@ -104,7 +104,7 @@ Script khởi động không tự đọc `.env`; dùng biến môi trường đ�
 
 ```bash
 .venv/bin/python - <<'PY'
-from scripts.mock_platform.storage import Database
+from scripts.mock_platform.infrastructure.storage import Database
 
 db = Database()
 db.start_control()

@@ -20,3 +20,11 @@ const summary=P.parameters(action,{params:{device:'Mobile'},variants:[{name:'Má
 assert(summary.some(p=>p.label==='Nhóm Máy tính'&&p.value.includes('Máy tính')));
 assert(summary.some(p=>p.label==='Độ trễ tối thiểu'&&p.value==='2 ngày'));
 console.log('Profile form checks passed: escaping, Vietnamese labels, weighted bundles, numeric capture, removal and delay summary.');
+
+// Editing weighted windows must preserve duration and the advanced execution contract.
+const advanced={phase:4,variant_mode:'cycle',preferences:{products:{source:'session_views',weight:8}},schedule:{windows:[{start:'18:00:00',end:'21:00:00',weight:3}],after_seconds:{kind:'integer',min:60,max:600}}};
+const fields={'#action-actor-pool':'customers','#action-selection':'{}','#action-parameter-rules':'[]','#schedule-start':'','#schedule-end':'','#schedule-offset':'','#session-duration':'{"kind":"integer","min":600,"max":1800}','#action-runtime-options':JSON.stringify(advanced)};
+context.$=selector=>Object.hasOwn(fields,selector)?{value:fields[selector]}:null;
+const edited={};context.captureActionProfiles(edited);
+assert.equal(edited.phase,4);assert.equal(edited.variant_mode,'cycle');assert.equal(edited.preferences.products.source,'session_views');
+assert.equal(edited.schedule.windows[0].weight,3);assert.equal(edited.schedule.duration_seconds.max,1800);assert.equal(edited.schedule.after_seconds.min,60);

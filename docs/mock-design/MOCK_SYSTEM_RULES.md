@@ -111,3 +111,17 @@ Mỗi kế hoạch giữ snapshot cấu hình. Khi cấu hình được sửa, p
 - Trước khi xóa, hiển thị số dòng từng bảng và yêu cầu nhập `XOA TOAN BO`. Chặn khi còn lượt ghi đang chạy/chờ. Không tự xóa chỉ vì khởi động web hoặc mở trang.
 - Chạy lại theo thứ tự: đồng bộ SQLite → OLTP, tạo dữ liệu nền, xem trước kế hoạch, chạy từ ngày bắt đầu đã thiết lập.
 - Chưa triển khai xóa từ ngày được chọn trở về trước: người dùng đồng ý dùng nút xóa toàn bộ thay thế vì dữ liệu các ngày sau có liên kết/phụ thuộc vào dữ liệu trước.
+
+
+## Rule 09 — Ranh giới code và cấu hình thực thể/kịch bản
+
+**Trạng thái:** Người dùng làm rõ và yêu cầu triển khai ngày 06/11/2026.
+
+- Code định nghĩa semantics nghiệp vụ, rule, quan hệ/quyền, validation và các cơ chế nhận cấu hình. Không viết riêng nhánh cho từng nhóm dữ liệu mẫu để cố bao hết tình huống ngoài thực tế.
+- Thiết lập môi trường ngoài chính sách còn mô tả các nhóm tác động và các bộ thuộc tính, tham số để tạo/chọn nhiều thực thể. Giữ cùng định danh khi một thực thể có vai trò ở nhiều hệ thống.
+- Cấu hình kịch bản chọn nhóm thực hiện, hành động, lượng, lịch và các tham số vận hành. Độ đa dạng và các trường hợp cụ thể nằm trong config, trong giới hạn semantics engine hỗ trợ.
+- Kho/tài nguyên không bị đồng nhất với người thực hiện. Actor metadata/phân công được lưu riêng trong Control DB; các thực thể nghiệp vụ vẫn liên kết đúng ID OLTP.
+- 149 sản phẩm Tiki là bộ dữ liệu test, không phải quy mô hoặc giới hạn nghiệp vụ. Không thiết kế thuật toán hoặc cấu hình bắt buộc liệt kê toàn bộ ID của bộ test.
+- Không lấp NULL/bảng trống bằng giao dịch giả sai trạng thái; phân biệt nguồn thiếu, chưa đến hạn, thiếu cấu hình và thiếu cơ chế code.
+
+Xem [hướng dẫn engine dùng cấu hình](guides/CONFIG_DRIVEN_ENGINE_GUIDE.md) để biết khả năng đã triển khai và giới hạn hiện tại.
