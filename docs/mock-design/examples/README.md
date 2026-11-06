@@ -1,6 +1,6 @@
-# Bốn file cấu hình hiện hành
+# Các bộ cấu hình hiện hành
 
-Mỗi loại giữ một mẫu cơ bản và một bản đầy đủ mới nhất. Các file JSON/CSV kịch bản cũ đã được dọn; README và hướng dẫn không phải file cấu hình.
+Mỗi loại giữ một mẫu cơ bản, một bản đầy đủ và một bản quy mô vừa được bổ sung theo yêu cầu. Có tổng cộng sáu file JSON; README và hướng dẫn không phải file cấu hình.
 
 | Loại | Mẫu cơ bản | Bản đầy đủ mới nhất | Nhập ở đâu? |
 |---|---|---|---|
@@ -8,6 +8,8 @@ Mỗi loại giữ một mẫu cơ bản và một bản đầy đủ mới nh�
 | Chính sách / Hồ sơ | [policy-only.json](settings/policy-only.json) | [diverse-ecommerce.json](settings/diverse-ecommerce.json) | Tab **Thiết lập → Nhập thiết lập bằng JSON** |
 
 Import thiết lập: kiểm tra → điền form → bấm **Lưu chính sách / Lưu hồ sơ** tương ứng. Import kịch bản: xem trước → lưu một cấu hình hành động. Cả hai không tự cào, đồng bộ, bootstrap, chạy mock hay thay dữ liệu OLTP hiện có.
+
+Bộ quy mô vừa: [medium-ecommerce.json](settings/medium-ecommerce.json) và [medium-linked-2026.json](scenarios/medium-linked-2026.json). Mục tiêu khoảng 1.000 lượt đặt/ngày thường. Đọc [hướng dẫn quy mô vừa](MEDIUM_SCALE.md) trước khi nhập.
 
 [Hướng dẫn thiết lập](settings/README.md) · [Hướng dẫn engine v2](../guides/ENGINE_V2_UPGRADE_GUIDE.md).
 

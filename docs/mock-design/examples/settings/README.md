@@ -10,12 +10,13 @@
 
 File chỉ có chính sách sẽ giữ nguyên các ô hồ sơ. File chỉ có hồ sơ sẽ giữ nguyên các ô chính sách. File sai không điền hoặc lưu một phần. Sửa nội dung JSON sau khi xem trước thì phải kiểm tra lại trước khi điền.
 
-## Hai mẫu
+## Các mẫu
 
 | File | Nội dung |
 |---|---|
 | [diverse-ecommerce.json](diverse-ecommerce.json) | Đầy đủ chính sách và hồ sơ đa dạng theo các trường generator hiện hỗ trợ. |
 | [policy-only.json](policy-only.json) | Chỉ ba ô chính sách, không thay hồ sơ thực thể. |
+| [medium-ecommerce.json](medium-ecommerce.json) | Hồ sơ cho quy mô khoảng 1.000 lượt đặt/ngày; dùng cùng kịch bản medium. Xem [hướng dẫn](../MEDIUM_SCALE.md). |
 
 Bộ đa dạng gồm **32 họ × 64 tên = tối đa 2.048 tổ hợp tên**, **30 đầu số**, **24 bộ địa phương ở 3 thành phố**, **6 kho**, **5 carrier**. Tên không phải khóa; có thể trùng tên/điện thoại và ID khách vẫn riêng.
 
