@@ -1,6 +1,13 @@
 from datetime import datetime, timedelta
+<<<<<<< Updated upstream:scripts/mock_platform/domain.py
 import random
 from .storage import UnitOfWork
+=======
+
+from sqlalchemy import select
+
+from ..infrastructure.storage import UnitOfWork
+>>>>>>> Stashed changes:scripts/mock_platform/engine/domain.py
 
 
 class NotEligible(ValueError):
@@ -53,6 +60,8 @@ class DomainEngine:
         return self.state.get(key, default)
 
     def saleable(self, r):
+        # One table read instead of a query per seller; same rows as one().
+        self.u.rows("sellers")
         s = self.u.one("sellers", r["seller_id"])
         return (
             r["is_active"]
@@ -757,6 +766,24 @@ class DomainEngine:
             return
         raise NotEligible("Hành động chưa được bật cho luồng áp dụng voucher.")
 
+    def has_begin_checkout(self, session_id):
+        """Whether a session already has a begin_checkout event (indexed lookup)."""
+        memo = self.__dict__.setdefault("_begin_checkout", {})
+        if session_id not in memo:
+            pe = self.db.bm.tables["page_events"]
+            memo[session_id] = (
+                self.u.conn.execute(
+                    select(pe.c.id)
+                    .where(
+                        pe.c.session_id == session_id,
+                        pe.c.event_type == "begin_checkout",
+                    )
+                    .limit(1)
+                ).first()
+                is not None
+            )
+        return memo[session_id]
+
     def analytics(self):
         c = self.code
 
@@ -801,8 +828,43 @@ class DomainEngine:
                 started_at=self.now,
             )
         if c == "AUT-WEB-01":
+<<<<<<< Updated upstream:scripts/mock_platform/domain.py
             s = self.choose("sessions", lambda r: not r["ended_at"])
             return self.touch("sessions", s, ended_at=self.now)
+=======
+            s = self.choose(
+                "sessions",
+                lambda r: (
+                    not r["ended_at"]
+                    and (
+                        not self.p.get("device") or r["device_type"] == self.p["device"]
+                    )
+                    and (
+                        not self.p.get("traffic")
+                        or r["traffic_source"] == self.p["traffic"]
+                    )
+                    and (
+                        not self.p.get("channel")
+                        or self.u.one("channels", r["channel_id"])["channel_name"]
+                        == self.p["channel"]
+                    )
+                ),
+            )
+            scheduled = self.getmeta("session_end:" + str(s["id"]))
+            end = min(scheduled, self.now) if scheduled else self.now
+            pe = self.db.bm.tables["page_events"]
+            events = [
+                r["event_time"]
+                for r in self.u.conn.execute(
+                    select(pe.c.event_time).where(pe.c.session_id == s["id"])
+                ).mappings()
+            ]
+            events = [
+                t.isoformat() if hasattr(t, "isoformat") else t for t in events
+            ]
+            end = max([end, s["started_at"], *events])
+            return self.touch("sessions", s, ended_at=end)
+>>>>>>> Stashed changes:scripts/mock_platform/engine/domain.py
         if c == "AUT-WEB-02":
             cart = self.choose(
                 "cart_items",
@@ -857,6 +919,14 @@ class DomainEngine:
                 lambda r: (
                     r["cart_status"] == "Active"
                     and not self.u.one("sessions", r["session_id"])["ended_at"]
+<<<<<<< Updated upstream:scripts/mock_platform/domain.py
+=======
+                    and user_matches(self.u.one("sessions", r["session_id"]))
+                    and (
+                        not c.endswith("06")
+                        or not self.has_begin_checkout(r["session_id"])
+                    )
+>>>>>>> Stashed changes:scripts/mock_platform/engine/domain.py
                 ),
             )
             if c.endswith("05"):

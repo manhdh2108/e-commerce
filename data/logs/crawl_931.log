@@ -1,0 +1,30 @@
+2026-11-05 22:17:58,040 INFO Selected 1 root categories
+2026-11-05 22:17:58,044 INFO crawl_run_id=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 (dùng --resume-run để tiếp tục khi gián đoạn)
+2026-11-05 22:18:14,868 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=938 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:19,218 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=938 page=2 {'new': 15, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:32,348 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=939 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:42,585 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=939 page=2 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:48,912 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=939 page=3 {'new': 17, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:06,251 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=1701 page=1 {'new': 28, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:29,491 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=1716 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:33,832 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=1716 page=2 {'new': 32, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:47,660 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=5344 page=1 {'new': 11, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:59,979 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=5345 page=1 {'new': 21, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:14,171 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=5346 page=1 {'new': 29, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:24,553 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=5406 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:31,003 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=5406 page=2 {'new': 12, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:46,012 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=5407 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:53,300 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=5407 page=2 {'new': 19, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:05,729 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=5408 page=1 {'new': 4, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:18,969 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=8344 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:26,278 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=8344 page=2 {'new': 35, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:40,733 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=8345 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:46,033 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=8345 page=2 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:50,750 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=8345 page=3 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:55,603 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=8345 page=4 {'new': 4, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:07,339 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=8347 page=1 {'new': 10, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:21,151 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=10388 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:25,693 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=10388 page=2 {'new': 21, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:36,351 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=27574 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:41,695 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=27574 page=2 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:49,091 INFO run=e2889e6e-0bbb-4549-a33c-8c2402a2eb85 root=931 leaf=27574 page=3 {'new': 1, 'updated': 0, 'unchanged': 0}

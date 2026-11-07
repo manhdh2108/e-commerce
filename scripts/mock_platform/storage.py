@@ -30,7 +30,26 @@ from sqlalchemy.types import TypeDecorator
 ROOT = Path(__file__).resolve().parents[2]
 
 
+_PLAIN = (str, int, float, bool, type(None))
+
+
+def _clean_scalar(x):
+    if isinstance(x, _PLAIN):
+        return x
+    if isinstance(x, Decimal):
+        return float(x)
+    if isinstance(x, (date, datetime)):
+        return x.isoformat()
+    raise TypeError
+
+
 def clean(value):
+    # Fast path for flat rows of scalars; identical to the JSON round trip below.
+    if isinstance(value, dict) and all(type(k) is str for k in value):
+        try:
+            return {k: _clean_scalar(v) for k, v in value.items()}
+        except TypeError:
+            pass
     return json.loads(
         json.dumps(
             value,
@@ -71,8 +90,8 @@ class Database:
             "MOCK_BUSINESS_URL",
             "postgresql+psycopg://mock:local_mock_only@127.0.0.1:55432/mock_oltp",
         )
-        self.control = create_engine(self.control_url, pool_pre_ping=True)
-        self.business = create_engine(self.business_url, pool_pre_ping=True)
+        self.control = create_engine(self.control_url)
+        self.business = create_engine(self.business_url)
         c, b = self.control.url, self.business.url
         if c.database == b.database:
             raise ValueError(
@@ -207,16 +226,70 @@ class Database:
                     c.commit()
 
 
-class UnitOfWork:
-    """Collect before/after images; cache reads only within one transaction."""
+class SharedTableCache:
+    """Committed full-table images reused across transactions of one writer.
 
-    def __init__(self, db, conn):
+    Only the single business writer (worker, under the advisory lock) uses it.
+    A transaction reads a private copy; its images are merged back only after
+    the business commit, so a rollback leaves the shared copy untouched.
+    """
+
+    def __init__(self):
+        self.tables = {}
+
+    def clear(self):
+        self.tables = {}
+
+    def merge(self, uow):
+        for name, rows in uow.cache.items():
+            positions = uow.positions.get(name)
+            if any(rows[i]["id"] > rows[i + 1]["id"] for i in range(len(rows) - 1)):
+                rows = sorted(rows, key=lambda r: r["id"])
+                positions = None
+            if positions is None:
+                positions = {r["id"]: i for i, r in enumerate(rows)}
+            self.tables[name] = (rows, positions)
+        # Tables changed in this transaction but not read through rows():
+        # apply the committed after-images to the shared copy.
+        for change in uow.changes:
+            name = change["table"]
+            if name in uow.cache or name not in self.tables:
+                continue
+            rows, positions = self.tables[name]
+            after, position = change["after"], positions.get(change["id"])
+            if after is None:
+                self.tables.pop(name)
+            elif position is not None:
+                rows[position] = after
+            elif not rows or rows[-1]["id"] < after["id"]:
+                positions[after["id"]] = len(rows)
+                rows.append(after)
+            else:
+                self.tables.pop(name)
+
+
+class UnitOfWork:
+    """Collect before/after images; cache reads within one transaction.
+
+    With ``shared`` (a SharedTableCache), full-table reads start from the last
+    committed image instead of reloading the table.
+    """
+
+    def __init__(self, db, conn, shared=None):
         self.db, self.conn = db, conn
+        self.shared = shared
         self.changes = []
         self.cache = {}
 
     def rows(self, name):
         if name not in self.cache:
+            image = self.shared.tables.get(name) if self.shared else None
+            if image is not None and not any(
+                c["table"] == name for c in self.changes
+            ):
+                self.cache[name] = list(image[0])
+                self.positions[name] = dict(image[1])
+                return self.cache[name]
             t = self.db.bm.tables[name]
             self.cache[name] = [
                 clean(dict(r))
@@ -226,7 +299,32 @@ class UnitOfWork:
 
     def one(self, name, id):
         if name in self.cache:
+<<<<<<< Updated upstream:scripts/mock_platform/storage.py
             return next((r for r in self.cache[name] if r["id"] == id), None)
+=======
+            if name not in self.positions:
+                self.positions[name] = {
+                    r["id"]: i for i, r in enumerate(self.cache[name])
+                }
+            position = self.positions[name].get(id)
+            return self.cache[name][position] if position is not None else None
+        image = self.shared.tables.get(name) if self.shared else None
+        if (
+            image is not None
+            and type(id) is int
+            and (name, id) not in self.row_cache
+            and not any(c["table"] == name for c in self.changes)
+        ):
+            position = image[1].get(id)
+            return image[0][position] if position is not None else None
+        if (name, id) not in self.row_cache:
+            t = self.db.bm.tables[name]
+            r = self.conn.execute(select(t).where(t.c.id == id)).mappings().first()
+            self.row_cache[name, id] = clean(dict(r)) if r else None
+        return self.row_cache[name, id]
+
+    def prefetch_by(self, name, column, values):
+>>>>>>> Stashed changes:scripts/mock_platform/infrastructure/storage.py
         t = self.db.bm.tables[name]
         r = self.conn.execute(select(t).where(t.c.id == id)).mappings().first()
         return clean(dict(r)) if r else None
@@ -269,3 +367,55 @@ class UnitOfWork:
                 {"table": table_name, "id": id, "before": before, "after": after}
             )
         return after
+<<<<<<< Updated upstream:scripts/mock_platform/storage.py
+=======
+
+
+class RuntimeState:
+    """Read-through metadata snapshot for one command, without loading the full journal.
+
+    ``shared`` (optional, worker-owned) maps key -> JSON text (or None when the
+    record does not exist) for committed runtime records; values are decoded
+    per command so callers always get fresh objects, as from the database.
+    """
+
+    def __init__(self, db, shared=None):
+        self.db = db
+        self.cache = {}
+        self.shared = shared
+
+    def prefetch(self, keys):
+        missing = list(dict.fromkeys(k for k in keys if k not in self.cache))
+        if self.shared is not None:
+            rest = []
+            for k in missing:
+                if k in self.shared:
+                    text = self.shared[k]
+                    self.cache[k] = None if text is None else json.loads(text)
+                else:
+                    rest.append(k)
+            missing = rest
+        t = self.db.records
+        if not missing:
+            return
+        with self.db.control.connect() as c:
+            for start in range(0, len(missing), 500):
+                part = missing[start : start + 500]
+                self.cache.update(dict.fromkeys(part))
+                for row in c.execute(
+                    select(t.c.id, t.c.data).where(
+                        t.c.kind == "runtime", t.c.id.in_(part)
+                    )
+                ):
+                    self.cache[row.id] = row.data
+        if self.shared is not None:
+            for k in missing:
+                v = self.cache[k]
+                self.shared[k] = None if v is None else json.dumps(v)
+
+    def get(self, key, default=None):
+        if key not in self.cache:
+            self.prefetch([key])
+        value = self.cache[key]
+        return default if value is None else value
+>>>>>>> Stashed changes:scripts/mock_platform/infrastructure/storage.py

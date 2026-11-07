@@ -1,0 +1,221 @@
+{"ts": "2026-11-07 22:44:28", "event": "batch_start", "batch_id": 1, "watermark_from": "2025-12-31", "watermark_to": "2026-01-13", "mock_last_day": "2026-01-13"}
+{"ts": "2026-11-07 22:44:28", "event": "extracted", "table": "products", "mode": "FULL", "rows": 3532, "checksum": "1b01e893faa9", "sec": 0.34, "purpose": "Dim_Product (SCD)"}
+{"ts": "2026-11-07 22:44:28", "event": "extracted", "table": "categories", "mode": "FULL", "rows": 49, "checksum": "5192a25948f3", "sec": 0.03, "purpose": "Dim_Category"}
+{"ts": "2026-11-07 22:44:28", "event": "extracted", "table": "sellers", "mode": "FULL", "rows": 481, "checksum": "ca50a85f1264", "sec": 0.06, "purpose": "Dim_Seller (SCD)"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "customers", "mode": "FULL", "rows": 10380, "checksum": "eba5663adb72", "sec": 0.54, "purpose": "Dim_Customer (SCD)"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "channels", "mode": "FULL", "rows": 3, "checksum": "cdcbb47a3a9c", "sec": 0.03, "purpose": "Dim_Channel"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "payment_methods", "mode": "FULL", "rows": 5, "checksum": "d2c4203d8ca1", "sec": 0.03, "purpose": "Dim_Payment_Method"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "warehouses", "mode": "FULL", "rows": 6, "checksum": "fc0b7aff40cb", "sec": 0.03, "purpose": "Dim_Warehouse"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "marketing_campaigns", "mode": "FULL", "rows": 1, "checksum": "debd27472e78", "sec": 0.03, "purpose": "Dim_Campaign"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "promotions", "mode": "FULL", "rows": 3, "checksum": "3c3941181e1e", "sec": 0.04, "purpose": "Dim_Promotion"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "seller_commission_rates", "mode": "FULL", "rows": 132, "checksum": "771b648b3360", "sec": 0.04, "purpose": "Hoa hồng theo thời gian"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "orders", "mode": "WINDOW", "rows": 1511, "checksum": "a78dcddca482", "sec": 0.13, "purpose": "Fact_Order_Item"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "order_items", "mode": "PARENT", "rows": 1737, "checksum": "1977d58543b8", "sec": 0.13, "purpose": "Fact_Order_Item (grain)"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "payments", "mode": "PARENT", "rows": 1362, "checksum": "179b8359f1b0", "sec": 0.09, "purpose": "Phương thức thanh toán"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "order_item_promotions", "mode": "PARENT", "rows": 188, "checksum": "b1003d813deb", "sec": 0.04, "purpose": "Bridge khuyến mãi"}
+{"ts": "2026-11-07 22:44:29", "event": "extracted", "table": "returns", "mode": "WINDOW", "rows": 6, "checksum": "c73eb90cda87", "sec": 0.03, "purpose": "is_returned"}
+{"ts": "2026-11-07 22:44:44", "event": "extracted", "table": "inventory_daily_balance", "mode": "WINDOW", "rows": 237324, "checksum": "f9aca3fd87b6", "sec": 14.44, "purpose": "Fact_Inventory_Snapshot"}
+{"ts": "2026-11-07 22:44:45", "event": "extracted", "table": "inventory_movements", "mode": "WINDOW", "rows": 19765, "checksum": "a850bd004fb3", "sec": 1.12, "purpose": "Nhập/bán/điều chỉnh"}
+{"ts": "2026-11-07 22:44:45", "event": "extracted", "table": "ad_spend_logs", "mode": "WINDOW", "rows": 8, "checksum": "f1dcbf37aa9f", "sec": 0.03, "purpose": "Fact_Ad_Spend"}
+{"ts": "2026-11-07 22:44:48", "event": "extracted", "table": "tiki_product_category", "mode": "FULL", "rows": 3532, "checksum": "ed6e6d93e3db", "purpose": "Cây danh mục (IR-04)"}
+{"ts": "2026-11-07 22:44:48", "event": "batch_extracted", "batch_id": 1, "sec": 20.2}
+{"ts": "2026-11-07 22:45:20", "event": "batch_start", "batch_id": 2, "watermark_from": "2025-12-31", "watermark_to": "2026-01-13", "mock_last_day": "2026-01-13"}
+{"ts": "2026-11-07 22:45:21", "event": "extracted", "table": "products", "mode": "FULL", "rows": 3532, "checksum": "1b01e893faa9", "sec": 0.33, "purpose": "Dim_Product (SCD)"}
+{"ts": "2026-11-07 22:45:21", "event": "extracted", "table": "categories", "mode": "FULL", "rows": 49, "checksum": "5192a25948f3", "sec": 0.03, "purpose": "Dim_Category"}
+{"ts": "2026-11-07 22:45:21", "event": "extracted", "table": "sellers", "mode": "FULL", "rows": 481, "checksum": "ca50a85f1264", "sec": 0.06, "purpose": "Dim_Seller (SCD)"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "customers", "mode": "FULL", "rows": 10380, "checksum": "eba5663adb72", "sec": 0.61, "purpose": "Dim_Customer (SCD)"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "channels", "mode": "FULL", "rows": 3, "checksum": "cdcbb47a3a9c", "sec": 0.02, "purpose": "Dim_Channel"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "payment_methods", "mode": "FULL", "rows": 5, "checksum": "d2c4203d8ca1", "sec": 0.02, "purpose": "Dim_Payment_Method"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "warehouses", "mode": "FULL", "rows": 6, "checksum": "fc0b7aff40cb", "sec": 0.02, "purpose": "Dim_Warehouse"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "marketing_campaigns", "mode": "FULL", "rows": 1, "checksum": "debd27472e78", "sec": 0.02, "purpose": "Dim_Campaign"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "promotions", "mode": "FULL", "rows": 3, "checksum": "3c3941181e1e", "sec": 0.03, "purpose": "Dim_Promotion"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "seller_commission_rates", "mode": "FULL", "rows": 132, "checksum": "771b648b3360", "sec": 0.03, "purpose": "Hoa hồng theo thời gian"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "orders", "mode": "WINDOW", "rows": 1511, "checksum": "a78dcddca482", "sec": 0.14, "purpose": "Fact_Order_Item"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "order_items", "mode": "PARENT", "rows": 1737, "checksum": "1977d58543b8", "sec": 0.12, "purpose": "Fact_Order_Item (grain)"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "payments", "mode": "PARENT", "rows": 1362, "checksum": "179b8359f1b0", "sec": 0.09, "purpose": "Phương thức thanh toán"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "order_item_promotions", "mode": "PARENT", "rows": 188, "checksum": "b1003d813deb", "sec": 0.03, "purpose": "Bridge khuyến mãi"}
+{"ts": "2026-11-07 22:45:22", "event": "extracted", "table": "returns", "mode": "WINDOW", "rows": 6, "checksum": "c73eb90cda87", "sec": 0.02, "purpose": "is_returned"}
+{"ts": "2026-11-07 22:45:36", "event": "extracted", "table": "inventory_daily_balance", "mode": "WINDOW", "rows": 237324, "checksum": "f9aca3fd87b6", "sec": 13.51, "purpose": "Fact_Inventory_Snapshot"}
+{"ts": "2026-11-07 22:45:37", "event": "extracted", "table": "inventory_movements", "mode": "WINDOW", "rows": 19765, "checksum": "a850bd004fb3", "sec": 1.15, "purpose": "Nhập/bán/điều chỉnh"}
+{"ts": "2026-11-07 22:45:37", "event": "extracted", "table": "ad_spend_logs", "mode": "WINDOW", "rows": 8, "checksum": "f1dcbf37aa9f", "sec": 0.02, "purpose": "Fact_Ad_Spend"}
+{"ts": "2026-11-07 22:45:39", "event": "extracted", "table": "tiki_product_category", "mode": "FULL", "rows": 3532, "checksum": "ed6e6d93e3db", "purpose": "Cây danh mục (IR-04)"}
+{"ts": "2026-11-07 22:45:39", "event": "batch_extracted", "batch_id": 2, "sec": 18.1}
+{"ts": "2026-11-07 22:52:45", "event": "transform_start", "batch_id": 1, "watermark_to": "2026-01-13"}
+{"ts": "2026-11-07 22:52:45", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-07 22:52:45", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.23}
+{"ts": "2026-11-07 22:52:45", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 0.24}
+{"ts": "2026-11-07 22:52:45", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-07 22:52:46", "event": "transformed", "entity": "customer", "read": 10380, "valid": 10380, "warn": 0, "quarantined": 0, "dedup": 0, "written": 10380, "balanced": true, "sec": 0.41}
+{"ts": "2026-11-07 22:52:46", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:52:46", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:52:46", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:52:46", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:52:46", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:52:46", "event": "transformed", "entity": "order_item_promotion", "read": 188, "valid": 188, "warn": 0, "quarantined": 0, "dedup": 0, "written": 188, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-07 22:52:46", "event": "transform_failed", "batch_id": 1, "error": "syntax error at end of input\nLINE 26: ...mestamp)   -- hoàn tất trong ngày chưa chốt: để batch sau) s\n                                                                        ^"}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 461, in <module>
+    main()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 433, in main
+    res = run_entity(cur, b, e, fmt)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 309, in run_entity
+    cur.execute(f"""CREATE TEMP TABLE tmp_{name} AS
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.SyntaxError: syntax error at end of input
+LINE 26: ...mestamp)   -- hoàn tất trong ngày chưa chốt: để batch sau) s
+                                                                        ^
+{"ts": "2026-11-07 22:53:02", "event": "transform_start", "batch_id": 1, "watermark_to": "2026-01-13"}
+{"ts": "2026-11-07 22:53:02", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-07 22:53:02", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.2}
+{"ts": "2026-11-07 22:53:02", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 0.23}
+{"ts": "2026-11-07 22:53:02", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-07 22:53:03", "event": "transformed", "entity": "customer", "read": 10380, "valid": 10380, "warn": 0, "quarantined": 0, "dedup": 0, "written": 10380, "balanced": true, "sec": 0.38}
+{"ts": "2026-11-07 22:53:03", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:53:03", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:53:03", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:53:03", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:53:03", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:53:03", "event": "transformed", "entity": "order_item_promotion", "read": 188, "valid": 188, "warn": 0, "quarantined": 0, "dedup": 0, "written": 188, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-07 22:53:03", "event": "transformed", "entity": "order_item_sales", "read": 1295, "valid": 1286, "warn": 9, "quarantined": 0, "dedup": 0, "written": 1295, "balanced": true, "sec": 0.12}
+{"ts": "2026-11-07 22:53:06", "event": "transformed", "entity": "inventory_daily", "read": 237324, "valid": 237324, "warn": 0, "quarantined": 0, "dedup": 0, "written": 237324, "balanced": true, "sec": 3.54}
+{"ts": "2026-11-07 22:53:07", "event": "dq_table_check", "rule": "DQ-18", "checked": 219067, "failed": 0}
+{"ts": "2026-11-07 22:53:07", "event": "transformed", "entity": "ad_spend_daily", "read": 8, "valid": 8, "warn": 0, "quarantined": 0, "dedup": 0, "written": 8, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:53:07", "event": "batch_transformed", "batch_id": 1, "read": 253303, "written": 253303, "quarantined": 0, "dedup": 0, "sec": 5.8}
+{"ts": "2026-11-07 22:54:38", "event": "test_batch_created", "batch_id": 3, "source_batch": 1, "injected": {"E1": 5, "E2": 3, "E3": 4, "E5": 2, "E7": 3, "E6": 5, "E4": 3}, "e5_order_lines": 2, "ids": {"E1 DQ-02": [1, 3, 4, 5, 6], "E2 DQ-03": [7, 8, 11], "E3 DQ-04": [1, 2, 3, 4], "E5 DQ-05 orders": [2, 9], "E6 DQ-07": [1, 2, 3, 4, 5], "E7 DQ-08": [6, 7, 8]}}
+{"ts": "2026-11-07 22:54:40", "event": "transform_start", "batch_id": 3, "watermark_to": "2026-01-13"}
+{"ts": "2026-11-07 22:54:40", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-07 22:54:44", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 4.19}
+{"ts": "2026-11-07 22:54:45", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 0.3}
+{"ts": "2026-11-07 22:54:45", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.05}
+{"ts": "2026-11-07 22:54:45", "event": "transformed", "entity": "customer", "read": 10385, "valid": 10377, "warn": 3, "quarantined": 0, "dedup": 5, "written": 10380, "balanced": true, "sec": 0.43}
+{"ts": "2026-11-07 22:54:45", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:54:45", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:54:45", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:54:45", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:54:45", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 22:54:45", "event": "transformed", "entity": "order_item_promotion", "read": 188, "valid": 188, "warn": 0, "quarantined": 0, "dedup": 0, "written": 188, "balanced": true, "sec": 0.13}
+{"ts": "2026-11-07 22:54:46", "event": "transformed", "entity": "order_item_sales", "read": 1295, "valid": 1276, "warn": 9, "quarantined": 10, "dedup": 0, "written": 1285, "balanced": true, "sec": 1.11}
+{"ts": "2026-11-07 23:04:40", "event": "transform_failed", "batch_id": 3, "error": "canceling statement due to user request"}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 463, in <module>
+    main()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 435, in main
+    res = run_entity(cur, b, e, fmt)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 309, in run_entity
+    cur.execute(f"""CREATE TEMP TABLE tmp_{name} AS
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.QueryCanceled: canceling statement due to user request
+{"ts": "2026-11-07 23:04:42", "event": "transform_start", "batch_id": 3, "watermark_to": "2026-01-13"}
+{"ts": "2026-11-07 23:04:42", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-07 23:04:42", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.19}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 0.24}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.05}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "customer", "read": 10385, "valid": 10377, "warn": 3, "quarantined": 0, "dedup": 5, "written": 10380, "balanced": true, "sec": 0.41}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "order_item_promotion", "read": 188, "valid": 188, "warn": 0, "quarantined": 0, "dedup": 0, "written": 188, "balanced": true, "sec": 0.06}
+{"ts": "2026-11-07 23:04:43", "event": "transformed", "entity": "order_item_sales", "read": 1295, "valid": 1276, "warn": 9, "quarantined": 10, "dedup": 0, "written": 1285, "balanced": true, "sec": 0.16}
+{"ts": "2026-11-07 23:04:47", "event": "transformed", "entity": "inventory_daily", "read": 237327, "valid": 237324, "warn": 0, "quarantined": 3, "dedup": 0, "written": 237324, "balanced": true, "sec": 3.45}
+{"ts": "2026-11-07 23:05:45", "event": "transform_failed", "batch_id": 3, "error": "canceling statement due to user request"}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 463, in <module>
+    log(event="transform_failed", batch_id=b, error=str(exc))
+^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 440, in main
+    for e in ENTITIES:
+            ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 380, in post_inventory
+    def post_inventory(cur, b):
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.QueryCanceled: canceling statement due to user request
+{"ts": "2026-11-07 23:05:50", "event": "transform_start", "batch_id": 3, "watermark_to": "2026-01-13"}
+{"ts": "2026-11-07 23:05:52", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-07 23:05:52", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.23}
+{"ts": "2026-11-07 23:05:52", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 0.46}
+{"ts": "2026-11-07 23:05:53", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.07}
+{"ts": "2026-11-07 23:05:54", "event": "transformed", "entity": "customer", "read": 10385, "valid": 10377, "warn": 3, "quarantined": 0, "dedup": 5, "written": 10380, "balanced": true, "sec": 1.16}
+{"ts": "2026-11-07 23:05:54", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:05:54", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:05:54", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:05:54", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:05:54", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:05:54", "event": "transformed", "entity": "order_item_promotion", "read": 188, "valid": 188, "warn": 0, "quarantined": 0, "dedup": 0, "written": 188, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-07 23:05:54", "event": "transformed", "entity": "order_item_sales", "read": 1295, "valid": 1276, "warn": 9, "quarantined": 10, "dedup": 0, "written": 1285, "balanced": true, "sec": 0.16}
+{"ts": "2026-11-07 23:05:58", "event": "transformed", "entity": "inventory_daily", "read": 237327, "valid": 237324, "warn": 0, "quarantined": 3, "dedup": 0, "written": 237324, "balanced": true, "sec": 4.11}
+{"ts": "2026-11-07 23:05:59", "event": "dq_table_check", "rule": "DQ-18", "checked": 219067, "failed": 0}
+{"ts": "2026-11-07 23:05:59", "event": "transformed", "entity": "ad_spend_daily", "read": 8, "valid": 4, "warn": 0, "quarantined": 4, "dedup": 0, "written": 4, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:05:59", "event": "batch_transformed", "batch_id": 3, "read": 253311, "written": 253289, "quarantined": 17, "dedup": 5, "sec": 8.9}
+{"ts": "2026-11-07 23:06:10", "event": "transform_start", "batch_id": 3, "watermark_to": "2026-01-13"}
+{"ts": "2026-11-07 23:06:12", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-07 23:06:12", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.19}
+{"ts": "2026-11-07 23:06:12", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 0.38}
+{"ts": "2026-11-07 23:06:12", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.09}
+{"ts": "2026-11-07 23:06:14", "event": "transformed", "entity": "customer", "read": 10385, "valid": 10377, "warn": 3, "quarantined": 0, "dedup": 5, "written": 10380, "balanced": true, "sec": 1.37}
+{"ts": "2026-11-07 23:06:14", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:06:14", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:06:14", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:06:14", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:06:14", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:06:14", "event": "transformed", "entity": "order_item_promotion", "read": 188, "valid": 188, "warn": 0, "quarantined": 0, "dedup": 0, "written": 188, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-07 23:06:14", "event": "transformed", "entity": "order_item_sales", "read": 1295, "valid": 1276, "warn": 9, "quarantined": 10, "dedup": 0, "written": 1285, "balanced": true, "sec": 0.17}
+{"ts": "2026-11-07 23:06:20", "event": "transformed", "entity": "inventory_daily", "read": 237327, "valid": 237324, "warn": 0, "quarantined": 3, "dedup": 0, "written": 237324, "balanced": true, "sec": 5.41}
+{"ts": "2026-11-07 23:06:20", "event": "dq_table_check", "rule": "DQ-18", "checked": 219067, "failed": 0}
+{"ts": "2026-11-07 23:06:20", "event": "transformed", "entity": "ad_spend_daily", "read": 8, "valid": 4, "warn": 0, "quarantined": 4, "dedup": 0, "written": 4, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:06:20", "event": "transform_failed", "batch_id": 3, "error": "Tỷ lệ cách ly ad_spend_daily = 50.0% vượt ngưỡng 5%"}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 471, in <module>
+    main()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/transform.py", line 449, in main
+    raise RuntimeError(f"Tỷ lệ cách ly {e['name']} = {ratio:.1%} vượt ngưỡng {a.max_quarantine_ratio:.0%}")
+RuntimeError: Tỷ lệ cách ly ad_spend_daily = 50.0% vượt ngưỡng 5%
+{"ts": "2026-11-07 23:06:24", "event": "transform_start", "batch_id": 3, "watermark_to": "2026-01-13"}
+{"ts": "2026-11-07 23:06:25", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-07 23:06:26", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.2}
+{"ts": "2026-11-07 23:06:26", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 0.42}
+{"ts": "2026-11-07 23:06:26", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.09}
+{"ts": "2026-11-07 23:06:27", "event": "transformed", "entity": "customer", "read": 10385, "valid": 10377, "warn": 3, "quarantined": 0, "dedup": 5, "written": 10380, "balanced": true, "sec": 0.96}
+{"ts": "2026-11-07 23:06:27", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:06:27", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:06:27", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:06:27", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:06:27", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:06:27", "event": "transformed", "entity": "order_item_promotion", "read": 188, "valid": 188, "warn": 0, "quarantined": 0, "dedup": 0, "written": 188, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-07 23:06:27", "event": "transformed", "entity": "order_item_sales", "read": 1295, "valid": 1276, "warn": 9, "quarantined": 10, "dedup": 0, "written": 1285, "balanced": true, "sec": 0.15}
+{"ts": "2026-11-07 23:06:32", "event": "transformed", "entity": "inventory_daily", "read": 237327, "valid": 237324, "warn": 0, "quarantined": 3, "dedup": 0, "written": 237324, "balanced": true, "sec": 4.52}
+{"ts": "2026-11-07 23:06:33", "event": "dq_table_check", "rule": "DQ-18", "checked": 219067, "failed": 0}
+{"ts": "2026-11-07 23:06:33", "event": "transformed", "entity": "ad_spend_daily", "read": 8, "valid": 4, "warn": 0, "quarantined": 4, "dedup": 0, "written": 4, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:06:33", "event": "batch_transformed", "batch_id": 3, "read": 253311, "written": 253289, "quarantined": 17, "dedup": 5, "sec": 9.3}
+{"ts": "2026-11-07 23:07:08", "event": "transform_start", "batch_id": 1, "watermark_to": "2026-01-13"}
+{"ts": "2026-11-07 23:07:10", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-07 23:07:10", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.19}
+{"ts": "2026-11-07 23:07:11", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 0.39}
+{"ts": "2026-11-07 23:07:11", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.07}
+{"ts": "2026-11-07 23:07:11", "event": "transformed", "entity": "customer", "read": 10380, "valid": 10380, "warn": 0, "quarantined": 0, "dedup": 0, "written": 10380, "balanced": true, "sec": 0.84}
+{"ts": "2026-11-07 23:07:12", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:07:12", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:07:12", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:07:12", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:07:12", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-07 23:07:12", "event": "transformed", "entity": "order_item_promotion", "read": 188, "valid": 188, "warn": 0, "quarantined": 0, "dedup": 0, "written": 188, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:07:12", "event": "transformed", "entity": "order_item_sales", "read": 1295, "valid": 1286, "warn": 9, "quarantined": 0, "dedup": 0, "written": 1295, "balanced": true, "sec": 0.15}
+{"ts": "2026-11-07 23:07:17", "event": "transformed", "entity": "inventory_daily", "read": 237324, "valid": 237324, "warn": 0, "quarantined": 0, "dedup": 0, "written": 237324, "balanced": true, "sec": 5.52}
+{"ts": "2026-11-07 23:07:18", "event": "dq_table_check", "rule": "DQ-18", "checked": 219067, "failed": 0}
+{"ts": "2026-11-07 23:07:18", "event": "transformed", "entity": "ad_spend_daily", "read": 8, "valid": 8, "warn": 0, "quarantined": 0, "dedup": 0, "written": 8, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-07 23:07:18", "event": "batch_transformed", "batch_id": 1, "read": 253303, "written": 253303, "quarantined": 0, "dedup": 0, "sec": 10.0}

@@ -1,0 +1,58 @@
+source_name,province_code,province_name,region
+Hà Nội,ha-noi,Hà Nội,Bắc
+Ha Noi,ha-noi,Hà Nội,Bắc
+TP. Hà Nội,ha-noi,Hà Nội,Bắc
+Thành phố Hà Nội,ha-noi,Hà Nội,Bắc
+HN,ha-noi,Hà Nội,Bắc
+Hải Phòng,hai-phong,Hải Phòng,Bắc
+Hai Phong,hai-phong,Hải Phòng,Bắc
+TP. Hải Phòng,hai-phong,Hải Phòng,Bắc
+Quảng Ninh,quang-ninh,Quảng Ninh,Bắc
+Bắc Ninh,bac-ninh,Bắc Ninh,Bắc
+Hưng Yên,hung-yen,Hưng Yên,Bắc
+Ninh Bình,ninh-binh,Ninh Bình,Bắc
+Phú Thọ,phu-tho,Phú Thọ,Bắc
+Thái Nguyên,thai-nguyen,Thái Nguyên,Bắc
+Lạng Sơn,lang-son,Lạng Sơn,Bắc
+Cao Bằng,cao-bang,Cao Bằng,Bắc
+Tuyên Quang,tuyen-quang,Tuyên Quang,Bắc
+Lào Cai,lao-cai,Lào Cai,Bắc
+Lai Châu,lai-chau,Lai Châu,Bắc
+Điện Biên,dien-bien,Điện Biên,Bắc
+Sơn La,son-la,Sơn La,Bắc
+Thanh Hóa,thanh-hoa,Thanh Hóa,Trung
+Thanh Hoá,thanh-hoa,Thanh Hóa,Trung
+Nghệ An,nghe-an,Nghệ An,Trung
+Hà Tĩnh,ha-tinh,Hà Tĩnh,Trung
+Quảng Trị,quang-tri,Quảng Trị,Trung
+Huế,hue,Huế,Trung
+TP. Huế,hue,Huế,Trung
+Thừa Thiên Huế,hue,Huế,Trung
+Đà Nẵng,da-nang,Đà Nẵng,Trung
+Da Nang,da-nang,Đà Nẵng,Trung
+TP. Đà Nẵng,da-nang,Đà Nẵng,Trung
+Thành phố Đà Nẵng,da-nang,Đà Nẵng,Trung
+Quảng Ngãi,quang-ngai,Quảng Ngãi,Trung
+Gia Lai,gia-lai,Gia Lai,Trung
+Khánh Hòa,khanh-hoa,Khánh Hòa,Trung
+Khánh Hoà,khanh-hoa,Khánh Hòa,Trung
+Lâm Đồng,lam-dong,Lâm Đồng,Trung
+Đắk Lắk,dak-lak,Đắk Lắk,Trung
+Đắc Lắc,dak-lak,Đắk Lắk,Trung
+TP. Hồ Chí Minh,ho-chi-minh,TP. Hồ Chí Minh,Nam
+TP.HCM,ho-chi-minh,TP. Hồ Chí Minh,Nam
+TPHCM,ho-chi-minh,TP. Hồ Chí Minh,Nam
+Hồ Chí Minh,ho-chi-minh,TP. Hồ Chí Minh,Nam
+Ho Chi Minh,ho-chi-minh,TP. Hồ Chí Minh,Nam
+Thành phố Hồ Chí Minh,ho-chi-minh,TP. Hồ Chí Minh,Nam
+HCM,ho-chi-minh,TP. Hồ Chí Minh,Nam
+Cần Thơ,can-tho,Cần Thơ,Nam
+Can Tho,can-tho,Cần Thơ,Nam
+TP. Cần Thơ,can-tho,Cần Thơ,Nam
+Thành phố Cần Thơ,can-tho,Cần Thơ,Nam
+Đồng Nai,dong-nai,Đồng Nai,Nam
+Tây Ninh,tay-ninh,Tây Ninh,Nam
+Vĩnh Long,vinh-long,Vĩnh Long,Nam
+Đồng Tháp,dong-thap,Đồng Tháp,Nam
+Cà Mau,ca-mau,Cà Mau,Nam
+An Giang,an-giang,An Giang,Nam

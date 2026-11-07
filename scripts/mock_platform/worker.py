@@ -1,15 +1,24 @@
 import hashlib
 import time
 import traceback
+<<<<<<< Updated upstream:scripts/mock_platform/worker.py
 from .storage import UnitOfWork
 from .domain import DomainEngine, NotEligible
 from .service import PlatformService, ACTIONS, stamp
+=======
+
+from ..engine.domain import DomainEngine, NotEligible
+from ..infrastructure.storage import SharedTableCache, UnitOfWork
+from .service import ACTIONS, PlatformService, stamp
+>>>>>>> Stashed changes:scripts/mock_platform/application/worker.py
 
 
 class Worker:
     def __init__(self, service=None):
         self.s = service or PlatformService()
         self.db = self.s.db
+        self.table_cache = SharedTableCache()
+        self.runtime_cache = {}
 
     def apply_effects(self, effects, c):
         for effect in effects:
@@ -37,6 +46,12 @@ class Worker:
             self.db.put(
                 "revision", "main", self.db.get("revision", "main", 0, c) + 1, c
             )
+        # Control transaction committed: mirror runtime effects into the worker cache.
+        from ..infrastructure.storage import clean
+        import json as _json
+
+        for effect in manifest.get("effects", []):
+            self.runtime_cache[effect["key"]] = _json.dumps(clean(effect["value"]))
 
     def recover(self, key, manifest):
         # Fold repeated modifications of a row into first/last images.
@@ -68,7 +83,7 @@ class Worker:
             return self.db.get("receipts", key)
         with self.db.business.connect() as conn:
             tx = conn.begin()
-            u = UnitOfWork(self.db, conn)
+            u = UnitOfWork(self.db, conn, self.table_cache)
             try:
                 result = callback(u) or {}
                 manifest = {
@@ -83,6 +98,7 @@ class Worker:
             except BaseException:
                 tx.rollback()
                 raise
+            self.table_cache.merge(u)
         self.finish(key, manifest)
         return self.db.get("receipts", key)
 
@@ -290,6 +306,9 @@ class Worker:
             **{f"{kind}-WEB-{i:02}": 2 for kind in ["GST", "CUS"] for i in range(1, 7)},
         }
         for day in plan["days"]:
+            # Bound any cache staleness to one simulated day.
+            self.table_cache.clear()
+            self.runtime_cache.clear()
             if self.paused(jid):
                 return False
             saved = self.db.get("checkpoint", "main", {}).get("last_day")
@@ -344,6 +363,7 @@ class Worker:
                     self.db.put("jobs", jid, job)
 
                     def apply(u):
+<<<<<<< Updated upstream:scripts/mock_platform/worker.py
                         with self.db.control.connect() as c:
                             state = {
                                 r.id: r.data
@@ -351,6 +371,31 @@ class Worker:
                                     __import__("sqlalchemy")
                                     .select(self.db.records)
                                     .where(self.db.records.c.kind == "runtime")
+=======
+                        from ..infrastructure.storage import RuntimeState
+
+                        state = RuntimeState(self.db, self.runtime_cache)
+                        engine = DomainEngine(
+                            self.db,
+                            u,
+                            {
+                                **action,
+                                "entity_profile": plan.get("entity_profile"),
+                                "business_policy": plan.get("business_policy"),
+                                "schedule": {
+                                    k: v.get("delay_days", 0) for k, v in cfg.items()
+                                },
+                            },
+                            state,
+                        )
+                        engine.execute()
+                        for change in u.changes:
+                            row = change.get("after") or {}
+                            if change["table"] == "page_events":
+                                engine.meta(
+                                    "session_last:" + str(row["session_id"]),
+                                    row["event_time"],
+>>>>>>> Stashed changes:scripts/mock_platform/application/worker.py
                                 )
                             }
                         engine = DomainEngine(self.db, u, action, state)
@@ -424,6 +469,8 @@ class Worker:
             return False
         job = jobs[0]
         jid = job.pop("id")
+        self.table_cache.clear()
+        self.runtime_cache.clear()
         with self.db.writer():
             job = self.db.get("jobs", jid)
             if job["status"] not in ["QUEUED", "RUNNING"]:

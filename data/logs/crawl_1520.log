@@ -1,0 +1,35 @@
+2026-11-05 22:17:57,964 INFO Selected 1 root categories
+2026-11-05 22:17:57,966 INFO crawl_run_id=bd556962-6106-4840-96c5-d970e29ba998 (dùng --resume-run để tiếp tục khi gián đoạn)
+2026-11-05 22:18:15,308 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:21,650 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=2 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:28,135 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=3 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:34,224 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=4 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:38,553 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=5 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:45,810 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=6 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:53,757 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=7 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:06,515 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=8 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:29,325 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=9 {'new': 39, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:34,180 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=10 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:41,667 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=11 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:46,318 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=12 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:53,454 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=13 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:58,391 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1583 page=14 {'new': 10, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:13,773 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1596 page=1 {'new': 38, 'updated': 2, 'unchanged': 0}
+2026-11-05 22:20:21,194 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1596 page=2 {'new': 2, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:32,171 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1597 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:37,353 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1597 page=2 {'new': 13, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:46,774 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1598 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:20:55,056 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1598 page=2 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:01,946 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1598 page=3 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:06,935 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1598 page=4 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:14,453 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1598 page=5 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:19,317 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1598 page=6 {'new': 16, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:34,026 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1600 page=1 {'new': 7, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:46,214 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1602 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:21:53,557 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1602 page=2 {'new': 7, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:07,405 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1604 page=1 {'new': 11, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:19,196 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1605 page=1 {'new': 15, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:32,144 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1607 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:36,676 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1607 page=2 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:42,044 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1607 page=3 {'new': 7, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:22:54,125 INFO run=bd556962-6106-4840-96c5-d970e29ba998 root=1520 leaf=1608 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}

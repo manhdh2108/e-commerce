@@ -1,0 +1,9 @@
+2026-11-05 22:17:57,915 INFO Selected 1 root categories
+2026-11-05 22:17:57,919 INFO crawl_run_id=abf247a4-e782-4de2-ab9c-62e934d3bbec (dùng --resume-run để tiếp tục khi gián đoạn)
+2026-11-05 22:18:10,585 INFO run=abf247a4-e782-4de2-ab9c-62e934d3bbec root=1789 leaf=1794 page=1 {'new': 11, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:21,845 INFO run=abf247a4-e782-4de2-ab9c-62e934d3bbec root=1789 leaf=1795 page=1 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:28,069 INFO run=abf247a4-e782-4de2-ab9c-62e934d3bbec root=1789 leaf=1795 page=2 {'new': 40, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:33,210 INFO run=abf247a4-e782-4de2-ab9c-62e934d3bbec root=1789 leaf=1795 page=3 {'new': 6, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:18:45,515 INFO run=abf247a4-e782-4de2-ab9c-62e934d3bbec root=1789 leaf=8061 page=1 {'new': 14, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:06,378 INFO run=abf247a4-e782-4de2-ab9c-62e934d3bbec root=1789 leaf=28856 page=1 {'new': 2, 'updated': 0, 'unchanged': 0}
+2026-11-05 22:19:12,440 INFO Done. Database: D:\PTIT\KÌ 1 năm 4\DATA WAREHOUSE\e-commerce\data\tiki_crawl.db; unique products: 1297

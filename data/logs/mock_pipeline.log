@@ -1,0 +1,69 @@
+2026-11-07 20:23:21 leftover-run RUNNING day 2026-01-06 done 30084 rejected 239 GST-WEB-03 · Xem chi tiết sản phẩm
+2026-11-07 20:34:03 leftover-run RUNNING day 2026-01-07 done 32680 rejected 261 CUS-WEB-01 · Bắt đầu phiên truy cập
+2026-11-07 20:50:01 leftover-run RUNNING day 2026-01-08 done 36890 rejected 269 CUS-WEB-01 · Bắt đầu phiên truy cập
+2026-11-07 21:05:32 leftover-run RUNNING day 2026-01-09 done 40843 rejected 278 WH-01 · Nhập hàng
+2026-11-07 21:24:16 leftover-run RUNNING day 2026-01-10 done 45407 rejected 324 CUS-WEB-01 · Bắt đầu phiên truy cập
+2026-11-07 21:44:46 leftover-run RUNNING day 2026-01-11 done 50296 rejected 331 CUS-WEB-01 · Bắt đầu phiên truy cập
+2026-11-07 21:52:01 leftover-run RUNNING day 2026-01-11 done 52233 rejected 332 GST-WEB-03 · Xem chi tiết sản phẩm
+2026-11-07 22:01:20 leftover-run RUNNING day 2026-01-12 done 54076 rejected 352 CUS-WEB-01 · Bắt đầu phiên truy cập
+2026-11-07 22:15:51 leftover-run RUNNING day 2026-01-12 done 57871 rejected 359 AUT-WH-04 · Chốt số dư cuối ngày
+2026-11-07 22:18:44 leftover-run RUNNING day 2026-01-13 done 57930 rejected 374 CUS-WEB-01 · Bắt đầu phiên truy cập
+2026-11-07 22:39:46 leftover-run RUNNING day 2026-01-14 done 62639 rejected 387 CUS-WEB-01 · Bắt đầu phiên truy cập
+2026-11-07 22:51:03 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:51:03 leftover-run auto-resume 1 after FAILED
+2026-11-07 22:52:21 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:52:38 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:52:38 leftover-run auto-resume 1 after FAILED
+2026-11-07 22:53:56 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:54:14 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:54:14 leftover-run auto-resume 1 after FAILED
+2026-11-07 22:55:31 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:55:48 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:55:48 leftover-run auto-resume 1 after FAILED
+2026-11-07 22:57:06 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:57:41 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:57:41 leftover-run auto-resume 1 after FAILED
+2026-11-07 22:58:59 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:59:34 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 22:59:34 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:00:52 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:01:09 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:01:09 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:02:26 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:02:44 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:02:44 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:04:02 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:04:19 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:04:19 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:05:37 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:06:11 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:06:11 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:07:29 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:07:46 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:07:46 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:09:03 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:09:20 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:09:20 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:10:37 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:10:55 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:10:55 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:12:12 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:12:29 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:12:29 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:13:47 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:14:04 leftover-run FAILED day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:14:04 leftover-run auto-resume 1 after FAILED
+2026-11-07 23:15:21 leftover-run RUNNING day 2026-01-14 done 65574 rejected 393 Lỗi kỹ thuật khi ghi dữ liệu. Xem log worker; không tự chạy lại batch chưa đối c
+2026-11-07 23:16:17 prepared
+2026-11-07 23:16:17 settings saved
+2026-11-07 23:16:22 sync QUEUED day None done 0 rejected 0 Đang chờ worker
+2026-11-07 23:16:37 sync RUNNING day None done 253 rejected 0 Đã xét 253/3532 sản phẩm
+2026-11-07 23:19:26 sync COMPLETE day None done 3532 rejected 0 Hoàn tất
+2026-11-07 23:19:26 bootstrap QUEUED day None done 0 rejected 0 Đang chờ worker
+2026-11-07 23:19:42 bootstrap RUNNING day None done 0 rejected 0 Đang chờ worker
+2026-11-07 23:21:13 bootstrap COMPLETE day None done 0 rejected 0 Hoàn tất
+2026-11-07 23:21:20 chunk plan 2026-01-01 -> 2026-01-29 planned 92913 version DW 2026 · ~100 lượt đặt/ngày, clickstream rút gọn
+2026-11-07 23:21:21 run QUEUED day None done 0 rejected 0 Đang chờ worker
+2026-11-07 23:21:36 run RUNNING day 2026-01-01 done 179 rejected 10 CUS-WEB-01 · Bắt đầu phiên truy cập
+2026-11-08 00:01:41 run RUNNING day 2026-01-02 done 11082 rejected 67 CUS-WEB-01 · Bắt đầu phiên truy cập
+2026-11-08 00:15:31 run RUNNING day 2026-01-03 done 14984 rejected 140 CUS-WEB-01 · Bắt đầu phiên truy cập
