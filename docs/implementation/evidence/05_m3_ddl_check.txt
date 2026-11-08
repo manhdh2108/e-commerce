@@ -1,0 +1,122 @@
+== C1 bảng trong dw (không tính partition)
+          relname          |    kind     | partitions | has_comment 
+---------------------------+-------------+------------+-------------
+ bridge_category_hierarchy | table       |          0 | t
+ bridge_promotion_group    | table       |          0 | t
+ dim_campaign              | table       |          0 | t
+ dim_category              | table       |          0 | t
+ dim_channel               | table       |          0 | t
+ dim_customer              | table       |          0 | t
+ dim_customer_profile      | table       |          0 | t
+ dim_date                  | table       |          0 | t
+ dim_month                 | table       |          0 | t
+ dim_payment_method        | table       |          0 | t
+ dim_product               | table       |          0 | t
+ dim_promotion             | table       |          0 | t
+ dim_promotion_group       | table       |          0 | t
+ dim_seller                | table       |          0 | t
+ dim_seller_tier_t3        | table       |          0 | t
+ dim_warehouse             | table       |          0 | t
+ fact_ad_spend             | table       |          0 | t
+ fact_inventory_snapshot   | partitioned |         37 | t
+ fact_order_item           | partitioned |         37 | t
+
+== C2 dim_date / dim_month
+ days |    min     |    max     | holidays | double_days 
+------+------------+------------+----------+-------------
+ 1095 | 2025-01-01 | 2027-12-31 |       17 |          36
+
+ months 
+--------
+     36
+
+ full_date  | day_name |           holiday_name           
+------------+----------+----------------------------------
+ 2026-01-01 | Thứ Năm  | Tết Dương lịch
+ 2026-02-16 | Thứ Hai  | Tết Nguyên đán (30 Tết)
+ 2026-02-17 | Thứ Ba   | Tết Nguyên đán (mùng 1)
+ 2026-02-18 | Thứ Tư   | Tết Nguyên đán (mùng 2)
+ 2026-02-19 | Thứ Năm  | Tết Nguyên đán (mùng 3)
+ 2026-04-26 | Chủ Nhật | Giỗ Tổ Hùng Vương (10/3 âm lịch)
+ 2026-04-30 | Thứ Năm  | Giải phóng miền Nam
+ 2026-05-01 | Thứ Sáu  | Quốc tế Lao động
+ 2026-09-02 | Thứ Tư   | Quốc khánh
+
+== C3 thành viên đặc biệt -1/0
+          t          |               string_agg                
+---------------------+-----------------------------------------
+ dim_product         | -1=Không áp dụng; 0=Chưa xác định
+ dim_customer        | -1=Khách vãng lai; 0=Chưa xác định
+ dim_campaign        | -1=Không có chiến dịch; 0=Chưa xác định
+ dim_promotion_group | -1=NONE; 0=UNKNOWN
+
+ profiles 
+----------
+      127
+
+== C4 khóa ngoại của fact
+ fact | fk 
+------+----
+
+== C5 partition routing: thử insert/rollback vào partition tháng 2026-01
+BEGIN
+INSERT 0 1
+   tableoid    
+---------------
+ fact_ad_spend
+
+ROLLBACK
+ partitions_foi 
+----------------
+             37
+
+== C6 từ điển dữ liệu: độ phủ mô tả
+        table_name         | cols | described | with_lineage 
+---------------------------+------+-----------+--------------
+ bridge_category_hierarchy |    3 |         3 |            3
+ bridge_promotion_group    |    3 |         3 |            3
+ dim_campaign              |    9 |         9 |            9
+ dim_category              |   11 |        11 |           11
+ dim_channel               |    5 |         5 |            5
+ dim_customer              |   18 |        18 |           18
+ dim_customer_profile      |    4 |         4 |            4
+ dim_date                  |   17 |         7 |            4
+ dim_month                 |    9 |         1 |            1
+ dim_payment_method        |    4 |         4 |            4
+ dim_product               |   18 |        18 |           18
+ dim_promotion             |   13 |        13 |           13
+ dim_promotion_group       |    3 |         3 |            3
+ dim_seller                |   17 |        17 |           17
+ dim_seller_tier_t3        |    5 |         5 |            5
+ dim_warehouse             |    7 |         7 |            7
+ fact_ad_spend             |    8 |         8 |            8
+ fact_inventory_snapshot   |   13 |        13 |           13
+ fact_order_item           |   32 |        32 |           32
+
+== C7 mẫu từ điển
+   table_name    |     column_name      | data_type | additivity | scd_type |                         description                          |                  source                  
+-----------------+----------------------+-----------+------------+----------+--------------------------------------------------------------+------------------------------------------
+ fact_order_item | source_system        | text      | KEY        | -        | Hệ thống nguồn của dòng (phần của khóa nghiệp vụ)            | hằng 'mock_oltp'
+ fact_order_item | order_id             | bigint    | KEY        | -        | Mã đơn nguồn (khóa nghiệp vụ)                                | orders.id
+ fact_order_item | line_number          | integer   | KEY        | -        | Số thứ tự dòng trong đơn (khóa nghiệp vụ)                    | order_items.line_number
+ fact_order_item | order_code           | text      | ATTR       | -        | Mã đơn hiển thị — degenerate dimension                       | orders.order_code
+ fact_order_item | date_key             | integer   | KEY        | -        | Ngày đơn hoàn tất (Date_Key chính của doanh thu)             | orders.completed_at
+ fact_order_item | order_date_key       | integer   | KEY        | -        | Ngày đặt hàng (role-playing Dim_Date)                        | orders.created_at
+ fact_order_item | product_key          | integer   | KEY        | -        | Phiên bản sản phẩm có hiệu lực lúc hoàn tất                  | order_items.product_id
+ fact_order_item | category_key         | integer   | KEY        | -        | Danh mục lá của sản phẩm lúc bán                             | products.category_id (IR-04)
+ fact_order_item | seller_key           | integer   | KEY        | -        | Phiên bản người bán lúc hoàn tất (hạng, tỉnh tại thời điểm b | orders.seller_id
+ fact_order_item | customer_key         | integer   | KEY        | -        | Phiên bản khách lúc hoàn tất; -1 = khách vãng lai            | orders.customer_id
+ fact_order_item | customer_profile_key | smallint  | KEY        | mini     | Hồ sơ khách (mini-dimension) TRƯỚC giao dịch                 | tính từ fact_order_item lịch sử + custom
+ fact_order_item | channel_key          | integer   | KEY        | -        | Kênh bán (Web/App/Livestream)                                | orders.channel_id
+
+== C8 CHECK ràng buộc grain/measure
+    conrelid     |                               pg_get_constraintdef                                
+-----------------+-----------------------------------------------------------------------------------
+ fact_order_item | CHECK ((gross_amount = ((quantity)::numeric * unit_price)))
+ fact_order_item | CHECK ((net_revenue = (gross_amount - discount_amount)))
+ fact_order_item | CHECK (((commission_rate >= (0)::numeric) AND (commission_rate <= (1)::numeric)))
+ fact_order_item | CHECK ((discount_amount >= (0)::numeric))
+ fact_order_item | CHECK ((net_revenue >= (0)::numeric))
+ fact_order_item | CHECK ((quantity > 0))
+ fact_order_item | CHECK ((unit_price >= (0)::numeric))
+

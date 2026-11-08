@@ -1,0 +1,78 @@
+2026-11-07 22:45
+== E1 batch_log
+ batch_id | batch_type  |  status   | watermark_from | watermark_to |     source_snapshot      |    message     
+----------+-------------+-----------+----------------+--------------+--------------------------+----------------
+        1 | INCREMENTAL | EXTRACTED | 2025-12-31     | 2026-01-13   | mock last_day=2026-01-13 | extract 20.2 s
+        2 | RERUN       | EXTRACTED | 2025-12-31     | 2026-01-13   | mock last_day=2026-01-13 | extract 18.1 s
+
+== E2 so sánh checksum batch 1 vs batch 2 (cùng watermark)
+       table_name        |   r1   |   r2   | same_checksum 
+-------------------------+--------+--------+---------------
+ ad_spend_logs           |      8 |      8 | t
+ categories              |     49 |     49 | t
+ channels                |      3 |      3 | t
+ customers               |  10380 |  10380 | t
+ inventory_daily_balance | 237324 | 237324 | t
+ inventory_movements     |  19765 |  19765 | t
+ marketing_campaigns     |      1 |      1 | t
+ order_item_promotions   |    188 |    188 | t
+ order_items             |   1737 |   1737 | t
+ orders                  |   1511 |   1511 | t
+ payment_methods         |      5 |      5 | t
+ payments                |   1362 |   1362 | t
+ products                |   3532 |   3532 | t
+ promotions              |      3 |      3 | t
+ returns                 |      6 |      6 | t
+ seller_commission_rates |    132 |    132 | t
+ sellers                 |    481 |    481 | t
+ tiki_product_category   |   3532 |   3532 | t
+ warehouses              |      6 |      6 | t
+
+== E3 dữ liệu của ngày đang chạy lọt vào raw? (trạng thái đơn đọc lúc extract)
+ completed_after_t | created_after_t | updated_after_t |     max_created     
+-------------------+-----------------+-----------------+---------------------
+                 0 |               0 |               0 | 2026-01-13 23:01:08
+
+ max_balance | min_balance | days 
+-------------+-------------+------
+ 2026-01-13  | 2026-01-01  |   13
+
+== E4 raw bất biến (NV-01)
+ERROR:  raw.orders là bất biến (NV-01): không cho phép UPDATE
+CONTEXT:  PL/pgSQL function raw.forbid_mutation() line 2 at RAISE
+ERROR:  raw.products là bất biến (NV-01): không cho phép DELETE
+CONTEXT:  PL/pgSQL function raw.forbid_mutation() line 2 at RAISE
+ERROR:  raw.channels là bất biến (NV-01): không cho phép TRUNCATE
+CONTEXT:  PL/pgSQL function raw.forbid_mutation() line 2 at RAISE
+== E5 đối chiếu với nguồn (ngày đã đóng không đổi)
+                t                | count  
+---------------------------------+--------
+ orders created<=13/01           |   1511
+ order_items của các đơn đó      |   1737
+ inventory_daily_balance <=13/01 | 237324
+ ad_spend_logs <=13/01           |      8
+
+== E6 row_hash = md5 dòng nguồn (mẫu 3 sản phẩm)
+   id   |               md5                
+--------+----------------------------------
+ 380290 | 2cd61b4277ca632ca853d7db93056ddb
+ 433801 | beb6fa56d712f21e2919f48c39c94f23
+ 484392 | f96f6b6b371e2de9c944146fa582b0ba
+
+   id   |             row_hash             
+--------+----------------------------------
+ 380290 | 2cd61b4277ca632ca853d7db93056ddb
+ 433801 | beb6fa56d712f21e2919f48c39c94f23
+ 484392 | f96f6b6b371e2de9c944146fa582b0ba
+(3 rows)
+
+== E7 dung lượng raw
+         relname         |  size   
+-------------------------+---------
+ inventory_daily_balance | 60 MB
+ inventory_movements     | 5816 kB
+ customers               | 4576 kB
+ products                | 4416 kB
+ tiki_product_category   | 1304 kB
+(5 rows)
+

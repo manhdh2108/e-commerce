@@ -1,0 +1,199 @@
+2026-11-07 22:26
+Null display is "∅".
+=== P0. Mốc dữ liệu (ngày mô phỏng có dữ liệu)
+  tu_ngay   |  den_ngay  | so_don 
+------------+------------+--------
+ 2026-01-01 | 2026-01-12 |   1382
+
+=== P1. Số dòng theo hệ thống nguồn (33 bảng)
+      he_thong      |          bang           | so_dong 
+--------------------+-------------------------+---------
+ 1 Catalog & Seller | categories              |      49
+ 1 Catalog & Seller | products                |    3532
+ 1 Catalog & Seller | seller_commission_rates |     132
+ 1 Catalog & Seller | sellers                 |     481
+ 2 Đơn hàng         | channels                |       3
+ 2 Đơn hàng         | checkout_lines          |    1586
+ 2 Đơn hàng         | checkouts               |    1231
+ 2 Đơn hàng         | customer_addresses      |    1209
+ 2 Đơn hàng         | customers               |   10361
+ 2 Đơn hàng         | order_items             |    1586
+ 2 Đơn hàng         | orders                  |    1382
+ 2 Đơn hàng         | payment_methods         |       5
+ 2 Đơn hàng         | payments                |    1237
+ 2 Đơn hàng         | product_reviews         |     177
+ 2 Đơn hàng         | refunds                 |       9
+ 2 Đơn hàng         | returns                 |       6
+ 3 Kho & Vận chuyển | carriers                |       5
+ 3 Kho & Vận chuyển | delivery_attempts       |    1084
+ 3 Kho & Vận chuyển | inventory_daily_balance |  219067
+ 3 Kho & Vận chuyển | inventory_levels        |   18257
+ 3 Kho & Vận chuyển | inventory_movements     |   19672
+ 3 Kho & Vận chuyển | shipments               |    1175
+ 3 Kho & Vận chuyển | warehouses              |       6
+ 4 Marketing        | ad_spend_logs           |       8
+ 4 Marketing        | marketing_campaigns     |       1
+ 4 Marketing        | order_item_promotions   |     188
+ 4 Marketing        | promotion_usages        |     367
+ 4 Marketing        | promotions              |       3
+ 5 Clickstream      | cart_items              |    5829
+ 5 Clickstream      | page_events             |   29036
+ 5 Clickstream      | sessions                |   12037
+ 6 Tài chính        | seller_payout_items     |       0
+ 6 Tài chính        | seller_payouts          |       0
+
+=== P2. Cột thời gian dùng cho trích xuất incremental (bảng nào KHÔNG có cột thời gian)
+       table_name        |                               cot_thoi_gian                                | co_updated_at 
+-------------------------+----------------------------------------------------------------------------+---------------
+ carriers                | ∅                                                                          | f
+ categories              | ∅                                                                          | f
+ channels                | ∅                                                                          | f
+ checkout_lines          | ∅                                                                          | f
+ customer_addresses      | ∅                                                                          | f
+ order_item_promotions   | ∅                                                                          | f
+ order_items             | ∅                                                                          | f
+ payment_methods         | ∅                                                                          | f
+ warehouses              | ∅                                                                          | f
+ delivery_attempts       | attempted_at                                                               | f
+ inventory_daily_balance | balance_date                                                               | f
+ orders                  | created_at, completed_at, cancelled_at, updated_at                         | t
+ cart_items              | added_at, closed_at                                                        | f
+ checkouts               | created_at                                                                 | f
+ product_reviews         | created_at                                                                 | f
+ seller_payout_items     | created_at                                                                 | f
+ promotion_usages        | created_at, released_at                                                    | f
+ seller_commission_rates | effective_from, effective_to                                               | f
+ marketing_campaigns     | start_date, end_date                                                       | f
+ page_events             | event_time                                                                 | f
+ ad_spend_logs           | log_date                                                                   | f
+ inventory_movements     | movement_date                                                              | f
+ seller_payouts          | period_start, period_end, paid_at                                          | f
+ shipments               | created_at, picked_at, delivered_at, failed_at, in_transit_at, returned_at | f
+ customers               | date_of_birth, registration_date, updated_at                               | t
+ returns                 | requested_at, refunded_at, received_at, approved_at                        | f
+ refunds                 | requested_at, completed_at                                                 | f
+ promotions              | start_date, end_date                                                       | f
+ sessions                | started_at, ended_at                                                       | f
+ payments                | transaction_time                                                           | f
+ inventory_levels        | updated_at                                                                 | t
+ sellers                 | created_at, updated_at                                                     | t
+ products                | crawl_date, created_at, updated_at                                         | t
+
+=== P3. Kiểu dữ liệu thời gian (có/không múi giờ) — IR-07
+          data_type          | count 
+-----------------------------+-------
+ date                        |    10
+ timestamp without time zone |    39
+
+=== IR-01. Kho dùng sku, đơn hàng dùng product_id
+          bang           | so_sku | sku_khong_map 
+-------------------------+--------+---------------
+ products (sku trùng?)   |   3532 |             0
+ inventory_movements     |   3532 |             0
+ inventory_daily_balance |   3532 |             0
+
+=== IR-02. shipments nối đơn bằng order_code
+ so_van_don | map_duoc_order_id | khong_map | van_don_trung_ma_don 
+------------+-------------------+-----------+----------------------
+       1175 |              1175 |         0 |                    0
+
+=== IR-03. Mã kênh: marketing vs bảng channels
+                  nguon                  |  gia_tri   | count 
+-----------------------------------------+------------+-------
+ ad_spend_logs.channel_code              | WEB        |     8
+ channels.channel_name                   | App        |     1
+ channels.channel_name                   | Livestream |     1
+ channels.channel_name                   | Web        |     1
+ marketing_campaigns.target_channel_code | WEB        |     1
+
+=== IR-04. Danh mục: products.category_id là gốc hay lá?
+ level | so_san_pham 
+-------+-------------
+     2 |        3532
+
+ level | so_danh_muc | co_cha 
+-------+-------------+--------
+     1 |           5 |      0
+     2 |          44 |     44
+
+=== IR-05. Khách vãng lai (customer_id NULL)
+ so_don | don_khach_vang_lai | phan_tram 
+--------+--------------------+-----------
+   1382 |                733 |      53.0
+
+ phien_khach_vang_lai | tong_phien 
+----------------------+------------
+                 6644 |      12037
+
+=== IR-06. Tiền: kiểu nguồn và phần lẻ
+  table_name   |       column_name        | data_type | numeric_precision | numeric_scale 
+---------------+--------------------------+-----------+-------------------+---------------
+ ad_spend_logs | cost_amount              | numeric   |                24 |             6
+ order_items   | commission_rate          | numeric   |                24 |             6
+ order_items   | discount_amount          | numeric   |                24 |             6
+ order_items   | list_price               | numeric   |                24 |             6
+ order_items   | net_amount               | numeric   |                24 |             6
+ order_items   | unit_price               | numeric   |                24 |             6
+ orders        | final_amount             | numeric   |                24 |             6
+ orders        | shipping_discount_amount | numeric   |                24 |             6
+ orders        | shipping_fee             | numeric   |                24 |             6
+ orders        | total_discount_amount    | numeric   |                24 |             6
+ orders        | total_gross_amount       | numeric   |                24 |             6
+
+ unit_price_le | discount_le | net_le | tong_dong 
+---------------+-------------+--------+-----------
+             0 |          26 |     26 |      1586
+
+=== IR-08. Tỉnh/thành: tập giá trị ở các bảng
+        bang        |    province     | count 
+--------------------+-----------------+-------
+ customer_addresses | Cần Thơ         |   226
+ customer_addresses | Hà Nội          |   366
+ customer_addresses | TP. Hồ Chí Minh |   355
+ customer_addresses | Đà Nẵng         |   262
+ customers          | Cần Thơ         |  2002
+ customers          | Hà Nội          |  3095
+ customers          | TP. Hồ Chí Minh |  3183
+ customers          | Đà Nẵng         |  2081
+ sellers            | Cần Thơ         |    97
+ sellers            | Hà Nội          |   147
+ sellers            | TP. Hồ Chí Minh |   146
+ sellers            | Đà Nẵng         |    91
+ warehouses         | Cần Thơ         |     1
+ warehouses         | Hà Nội          |     2
+ warehouses         | TP. Hồ Chí Minh |     2
+ warehouses         | Đà Nẵng         |     1
+
+=== IR-09. Giá trị thiếu ở thuộc tính khách
+ tong  | thieu_gioi_tinh | thieu_ngay_sinh | thieu_tinh 
+-------+-----------------+-----------------+------------
+ 10361 |            1540 |            2655 |          0
+
+=== IR-10. discount_rate của products: phần trăm hay tỷ lệ?
+   min    |    max    | lon_hon_1 
+----------+-----------+-----------
+ 0.000000 | 62.000000 |       720
+
+=== T1. Không có lịch sử trong OLTP (chỉ trạng thái hiện tại)
+   bang    | da_bi_ghi_de | count 
+-----------+--------------+-------
+ customers |            0 | 10361
+ sellers   |            1 |   481
+ products  |            0 |  3532
+
+=== T2. Bảng con không có thời gian, phải trích theo khóa cha
+              ghi_chu               | count 
+------------------------------------+-------
+ order_items không có cột thời gian |  1586
+
+=== K. Toàn vẹn khóa quan trọng (mồ côi)
+                quan_he                 | count 
+----------------------------------------+-------
+ order_items→orders                     |     0
+ order_items→products                   |     0
+ orders→sellers                         |     0
+ orders→customers (không tính vãng lai) |     0
+ payments→orders                        |     0
+ order_item_promotions→order_items      |     0
+ products→sellers                       |     0
+
