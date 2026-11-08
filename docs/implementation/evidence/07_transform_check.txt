@@ -1,0 +1,115 @@
+2026-11-07 23:06
+== T1 batch_log
+ batch_id | batch_type  |   status    |                                          message                                           
+----------+-------------+-------------+--------------------------------------------------------------------------------------------
+        1 | INCREMENTAL | TRANSFORMED | TRANSFORM: syntax error at end of input                                                   +
+          |             |             | LINE 26: ...mestamp)   -- hoàn tất trong ngày chưa chốt: để batch sau) s                  +
+          |             |             |                                                                         ^; transform 5.8 s
+        2 | RERUN       | EXTRACTED   | extract 18.1 s
+        3 | TEST_ERRORS | TRANSFORMED | ; transform 9.3 s
+
+== T2 kiểm đếm TRANSFORM batch 1 (dữ liệu thật)
+      table_name      | rows_read | rows_valid | rows_warn | rows_quarantined | rows_deduplicated | rows_written | balanced 
+----------------------+-----------+------------+-----------+------------------+-------------------+--------------+----------
+ ad_spend_daily       |         8 |          8 |         0 |                0 |                 0 |            8 | t
+ campaign             |         1 |          1 |         0 |                0 |                 0 |            1 | t
+ category             |        77 |         49 |        28 |                0 |                 0 |           77 | t
+ channel              |         3 |          3 |         0 |                0 |                 0 |            3 | t
+ customer             |     10380 |      10380 |         0 |                0 |                 0 |        10380 | t
+ inventory_daily      |    237324 |     237324 |         0 |                0 |                 0 |       237324 | t
+ order_item_promotion |       188 |        188 |         0 |                0 |                 0 |          188 | t
+ order_item_sales     |      1295 |       1286 |         9 |                0 |                 0 |         1295 | t
+ payment_method       |         5 |          5 |         0 |                0 |                 0 |            5 | t
+ product              |      3532 |       3532 |         0 |                0 |                 0 |         3532 | t
+ promotion            |         3 |          3 |         0 |                0 |                 0 |            3 | t
+ seller               |       481 |        481 |         0 |                0 |                 0 |          481 | t
+ warehouse            |         6 |          6 |         0 |                0 |                 0 |            6 | t
+
+ check_code | source_value | target_value | passed 
+------------+--------------+--------------+--------
+ RC-07      |       253303 |       253303 | t
+ RC-07      |       253311 |       253311 | t
+
+== T3 batch 3 (TEST_ERRORS): mỗi ca lỗi bị bắt bởi quy tắc nào
+ rule_code | severity |                 source_table                  | dong |                                                                        khoa                                                                        
+-----------+----------+-----------------------------------------------+------+----------------------------------------------------------------------------------------------------------------------------------------------------
+ DQ-02     | ERROR    | order_items + orders + payments               |    5 | (1,1) (3,1) (4,1) (5,1) (6,1)
+ DQ-03     | ERROR    | order_items + orders + payments               |    8 | (1,1) (11,1) (3,1) (4,1) (5,1) (6,1) (7,1) (8,1)
+ DQ-04     | ERROR    | ad_spend_logs                                 |    4 | 1 2 3 4
+ DQ-04     | ERROR    | inventory_daily_balance + inventory_movements |    3 | 2026-01-01/1/SKU-KHONG-TON-TAI-1 2026-01-01/1/SKU-KHONG-TON-TAI-2 2026-01-01/1/SKU-KHONG-TON-TAI-3
+ DQ-05     | ERROR    | order_items + orders + payments               |    2 | (2,1) (9,1)
+ DQ-07     | WARN     | customers                                     |    5 | 1 2 3 4 5
+ DQ-08     | WARN     | customers                                     |    3 | 6 7 8
+ DQ-12     | WARN     | tiki_product_category + categories            |   28 | 15074 15076 1508 1510 1582 1584 1585 1586 1592 22998 24024 27600 4387 4388 4393 4399 4400 4554 53530 53540 53562 5404 5451 68154 8212 8346 933 941
+ DQ-15     | WARN     | order_items + orders + payments               |    9 | (1140,1) (1152,1) (1177,1) (1177,2) (1178,1) (1207,1) (1264,1) (1270,1) (1270,2)
+
+== T4 batch 3: dòng hợp lệ — đối soát tổng tiền với batch 1 (loại đúng các dòng lỗi)
+ dong_b1 | dong_b3 |    net_b1    |    net_b3    | net_bi_loai 
+---------+---------+--------------+--------------+-------------
+    1295 |    1285 | 922400105.00 | 918628005.00 |  3772100.00
+
+ khach_trung_giu_ban_moi 
+-------------------------
+                       5
+
+== T5 mẫu chuẩn hóa batch 1
+ category_id | parent_id | level | is_leaf |   category_name    |                    path_names                    
+-------------+-----------+-------+---------+--------------------+--------------------------------------------------
+         931 |           |     1 | f       | Thời trang nữ      | Thời trang nữ
+        1520 |           |     1 | f       | Làm Đẹp - Sức Khỏe | Làm Đẹp - Sức Khỏe
+        1582 |      1520 |     2 | f       | Danh mục 1582      | Làm Đẹp - Sức Khỏe > Danh mục 1582
+        1583 |      1582 |     3 | t       | Sữa rửa mặt        | Làm Đẹp - Sức Khỏe > Danh mục 1582 > Sữa rửa mặt
+
+ level | nut | la | chua_ten 
+-------+-----+----+----------
+     1 |   5 |  0 |        0
+     2 |  22 |  4 |       18
+     3 |  32 | 22 |       10
+     4 |  18 | 18 |        0
+
+ product_id |      sku      | discount_rate | list_price | root_category_id | cost_ratio | unit_cost_est 
+------------+---------------+---------------+------------+------------------+------------+---------------
+     380290 | 3703546134002 |        0.0000 |  135000.00 |             1520 |      0.550 |      74000.00
+     433801 | 2367525119661 |        0.0000 |  250000.00 |             1520 |      0.550 |     138000.00
+     484392 | 1505954173941 |        0.4400 |   31000.00 |             4384 |      0.815 |      25000.00
+
+ seller_id | phone_masked | email_domain | province_code | region |  tier  
+-----------+--------------+--------------+---------------+--------+--------
+         1 | 095****524   | example.com  | can-tho       | Nam    | Normal
+        38 | 093****952   | example.com  | ho-chi-minh   | Nam    | Normal
+       193 | 098****412   | example.com  | ho-chi-minh   | Nam    | Mall
+
+ gender | count 
+--------+-------
+ F      |  4638
+ M      |  4198
+ U      |  1544
+
+ age_band | count 
+----------+-------
+ 18–24    |  1081
+ 25–34    |  1587
+ 35–44    |  1628
+ 45+      |  3424
+ Không rõ |  2660
+
+ region | count 
+--------+-------
+ Bắc    |  3101
+ Nam    |  5192
+ Trung  |  2087
+
+ channel_id | channel_name | marketing_code 
+------------+--------------+----------------
+          1 | Web          | WEB
+          2 | App          | APP
+          3 | Livestream   | LIVESTREAM
+
+  dong  |  nhap   | ban  | tra | dieu_chinh | het_hang 
+--------+---------+------+-----+------------+----------
+ 237324 | 5671400 | 1699 |   6 |        -21 |        0
+
+   min    |   max    | count |     sum      
+----------+----------+-------+--------------
+ 20260103 | 20260113 |  1295 | 922400105.00
+

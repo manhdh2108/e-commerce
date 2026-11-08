@@ -1,0 +1,9 @@
+source_code,channel_id,note
+WEB,1,mã engine Mock Studio
+APP,2,mã engine Mock Studio
+LIVESTREAM,3,mã engine Mock Studio
+MOBILE_APP,2,mã theo OLTP_SCHEMA §10
+LIVE,3,mã theo OLTP_SCHEMA §10
+Web,1,tên trong bảng channels
+App,2,tên trong bảng channels
+Livestream,3,tên trong bảng channels

@@ -1,0 +1,64 @@
+2026-11-07 22:30
+=== G1. Fact_Order_Item — khóa grain (order_id, line_number) duy nhất?
+ dong | khoa_duy_nhat | trung 
+------+---------------+-------
+ 1687 |          1687 |     0
+
+=== G2. Dòng nào thuộc fact (đơn Completed, item Fulfilled/Returned)
+ order_status | item_status | dong | co_completed_at 
+--------------+-------------+------+-----------------
+ Cancelled    | Cancelled   |   78 |               0
+ Completed    | Fulfilled   | 1195 |            1195
+ Pending      | Pending     |  114 |               0
+ Processing   | Pending     |  300 |               0
+
+=== G3. Mỗi đơn có 1 seller, 1 kênh? (để seller/channel là thuộc tính cấp dòng hợp lệ)
+ don  | co_seller | co_kenh 
+------+-----------+---------
+ 1467 |      1467 |    1467
+
+ checkout_tach_nhieu_don 
+-------------------------
+                     149
+
+=== G4. Số dòng mỗi đơn và mỗi dòng (đơn nhiều dòng?)
+ so_dong | so_don 
+---------+--------
+       1 |   1276
+       2 |    167
+       3 |     19
+       4 |      5
+
+=== G5. Độ trễ đặt → hoàn tất (late-arriving theo Date_Key = ngày completed)
+ tre_ngay | count 
+----------+-------
+        2 |    83
+        3 |   649
+        4 |   266
+        5 |    37
+        6 |     2
+
+=== G6. Fact_Inventory_Snapshot — khóa (balance_date, warehouse_id, sku) duy nhất? Dày hay thưa?
+  dong  | khoa_duy_nhat | so_ngay | cap_kho_sku | neu_day_du 
+--------+---------------+---------+-------------+------------
+ 219067 |        219067 |      12 |       18257 |      21192
+
+ balance_date | count 
+--------------+-------
+ 2026-01-12   | 18257
+ 2026-01-11   | 18256
+ 2026-01-10   | 18256
+
+=== G7. Fact_Ad_Spend — nguồn theo ngày: khóa (campaign, channel, log_date) duy nhất?
+ dong | khoa_duy_nhat | dong_neu_gop_thang 
+------+---------------+--------------------
+    8 |             8 |                  1
+
+=== G8. Kích thước tầng tổng hợp (ước lượng số nhóm)
+               tang                | count 
+-----------------------------------+-------
+ ngay x san_pham x kenh (Fact 1)   |  1021
+ ngay x danh_muc_la x kenh         |   404
+ ngay x seller                     |   607
+ ton kho: ngay x danh_muc_la x kho |  3168
+
