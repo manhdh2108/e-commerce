@@ -1,0 +1,114 @@
+Project dw_2 {
+ database_type: 'PostgreSQL'
+}
+
+Table dim_category [headercolor: #8b5cf6] {
+  category_key int [pk, not null]
+  category_id int [not null, unique]
+  category_name text [not null]
+  is_named boolean [not null]
+  parent_category_key int
+  level smallint [not null]
+  is_leaf boolean [not null]
+  root_category_key int
+  path_ids text [not null]
+  path_names text [not null]
+  batch_id bigint
+}
+
+Table bridge_category_hierarchy [headercolor: #8b5cf6] {
+  ancestor_key int [not null]
+  descendant_key int [not null]
+  depth smallint [not null]
+  indexes {
+    (ancestor_key, descendant_key) [pk]
+  }
+}
+
+Table dim_seller [headercolor: #f59e0b] {
+  seller_key serial [pk, not null]
+  seller_id bigint [not null]
+  shop_name text [not null]
+  seller_name text [not null]
+  email_domain text
+  phone_masked text
+  province_code text [not null]
+  province_name text [not null]
+  region text [not null]
+  tier text [not null]
+  status text [not null]
+  scd1_hash text [not null]
+  scd2_hash text [not null]
+  valid_from date [not null]
+  valid_to date [not null]
+  is_current boolean [not null]
+  batch_id bigint
+  indexes {
+    (seller_id, valid_from) [unique]
+  }
+}
+
+Table dim_seller_tier_t3 [headercolor: #f59e0b] {
+  seller_id bigint [pk, not null]
+  current_tier text [not null]
+  previous_tier text
+  tier_changed_on date
+  batch_id bigint
+}
+
+Table dim_promotion [headercolor: #ec4899] {
+  promotion_key int [pk, not null]
+  promotion_id bigint [unique]
+  promo_code text [not null]
+  promo_name text [not null]
+  promo_type text [not null]
+  funded_by text [not null]
+  apply_level text [not null]
+  discount_type text
+  discount_value numeric(18,2)
+  min_order_value numeric(18,2)
+  seller_id bigint
+  start_ts timestamp
+  end_ts timestamp
+}
+
+Table dim_promotion_group [headercolor: #ec4899] {
+  promotion_group_key int [pk, not null]
+  group_signature text [not null, unique]
+  promotion_count smallint [not null]
+}
+
+Table bridge_promotion_group [headercolor: #ec4899] {
+  promotion_group_key int [not null]
+  promotion_key int [not null]
+  weighting_factor numeric(9,6) [not null]
+  indexes {
+    (promotion_group_key, promotion_key) [pk]
+  }
+}
+
+TableGroup Product_Category [color: #8b5cf6] {
+ dim_category
+ bridge_category_hierarchy
+}
+
+TableGroup Seller_History [color: #f59e0b] {
+ dim_seller
+ dim_seller_tier_t3
+}
+
+TableGroup Campaign_Promotion [color: #ec4899] {
+ dim_promotion
+ dim_promotion_group
+ bridge_promotion_group
+}
+
+Ref: dim_category.parent_category_key > dim_category.category_key
+
+Ref: bridge_category_hierarchy.ancestor_key > dim_category.category_key
+
+Ref: bridge_category_hierarchy.descendant_key > dim_category.category_key
+
+Ref: bridge_promotion_group.promotion_group_key > dim_promotion_group.promotion_group_key
+
+Ref: bridge_promotion_group.promotion_key > dim_promotion.promotion_key

@@ -1,0 +1,1458 @@
+{
+  "groups": [
+    [
+      "Facts",
+      "#f43f5e",
+      [
+        "fact_order_item",
+        "fact_inventory_snapshot",
+        "fact_ad_spend"
+      ]
+    ],
+    [
+      "Time_Channel",
+      "#3b82f6",
+      [
+        "dim_date",
+        "dim_month",
+        "dim_channel"
+      ]
+    ],
+    [
+      "Product_Category",
+      "#8b5cf6",
+      [
+        "dim_product",
+        "dim_category",
+        "bridge_category_hierarchy"
+      ]
+    ],
+    [
+      "Seller_History",
+      "#f59e0b",
+      [
+        "dim_seller",
+        "dim_seller_tier_t3"
+      ]
+    ],
+    [
+      "Customer_Profile",
+      "#06b6d4",
+      [
+        "dim_customer",
+        "dim_customer_profile"
+      ]
+    ],
+    [
+      "Campaign_Promotion",
+      "#ec4899",
+      [
+        "dim_campaign",
+        "dim_promotion",
+        "dim_promotion_group",
+        "bridge_promotion_group"
+      ]
+    ],
+    [
+      "Warehouse_Payment",
+      "#10b981",
+      [
+        "dim_warehouse",
+        "dim_payment_method"
+      ]
+    ]
+  ],
+  "tables": {
+    "dim_month": {
+      "name": "dim_month",
+      "columns": [
+        {
+          "name": "month_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "year",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "quarter",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "month",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "month_label",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "quarter_label",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "first_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "last_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "days_in_month",
+          "type": "smallint",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "month_key"
+      ],
+      "unique": []
+    },
+    "dim_date": {
+      "name": "dim_date",
+      "columns": [
+        {
+          "name": "date_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "full_date",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "day_of_month",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "day_of_week",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "day_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "iso_week",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "iso_year",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "month_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "month",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "month_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "quarter",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "year",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "is_weekend",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "is_holiday",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "holiday_name",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "is_double_day",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "is_month_end",
+          "type": "boolean",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "date_key"
+      ],
+      "unique": [
+        [
+          "full_date"
+        ]
+      ]
+    },
+    "dim_category": {
+      "name": "dim_category",
+      "columns": [
+        {
+          "name": "category_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "category_id",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "category_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "is_named",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "parent_category_key",
+          "type": "int",
+          "nullable": true
+        },
+        {
+          "name": "level",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "is_leaf",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "root_category_key",
+          "type": "int",
+          "nullable": true
+        },
+        {
+          "name": "path_ids",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "path_names",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "batch_id",
+          "type": "bigint",
+          "nullable": true
+        }
+      ],
+      "pk": [
+        "category_key"
+      ],
+      "unique": [
+        [
+          "category_id"
+        ]
+      ]
+    },
+    "bridge_category_hierarchy": {
+      "name": "bridge_category_hierarchy",
+      "columns": [
+        {
+          "name": "ancestor_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "descendant_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "depth",
+          "type": "smallint",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "ancestor_key",
+        "descendant_key"
+      ],
+      "unique": []
+    },
+    "dim_product": {
+      "name": "dim_product",
+      "columns": [
+        {
+          "name": "product_key",
+          "type": "serial",
+          "nullable": false
+        },
+        {
+          "name": "product_id",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "sku",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "product_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "brand_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "category_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "seller_id",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "list_price",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "original_price",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "discount_rate",
+          "type": "numeric(6,4)",
+          "nullable": false
+        },
+        {
+          "name": "unit_cost_est",
+          "type": "numeric(18,2)",
+          "nullable": true
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "scd1_hash",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "scd2_hash",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "valid_from",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "valid_to",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "is_current",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "batch_id",
+          "type": "bigint",
+          "nullable": true
+        }
+      ],
+      "pk": [
+        "product_key"
+      ],
+      "unique": [
+        [
+          "product_id",
+          "valid_from"
+        ]
+      ]
+    },
+    "dim_seller": {
+      "name": "dim_seller",
+      "columns": [
+        {
+          "name": "seller_key",
+          "type": "serial",
+          "nullable": false
+        },
+        {
+          "name": "seller_id",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "shop_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "seller_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "email_domain",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "phone_masked",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "province_code",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "province_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "region",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "tier",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "scd1_hash",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "scd2_hash",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "valid_from",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "valid_to",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "is_current",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "batch_id",
+          "type": "bigint",
+          "nullable": true
+        }
+      ],
+      "pk": [
+        "seller_key"
+      ],
+      "unique": [
+        [
+          "seller_id",
+          "valid_from"
+        ]
+      ]
+    },
+    "dim_seller_tier_t3": {
+      "name": "dim_seller_tier_t3",
+      "columns": [
+        {
+          "name": "seller_id",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "current_tier",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "previous_tier",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "tier_changed_on",
+          "type": "date",
+          "nullable": true
+        },
+        {
+          "name": "batch_id",
+          "type": "bigint",
+          "nullable": true
+        }
+      ],
+      "pk": [
+        "seller_id"
+      ],
+      "unique": []
+    },
+    "dim_customer": {
+      "name": "dim_customer",
+      "columns": [
+        {
+          "name": "customer_key",
+          "type": "serial",
+          "nullable": false
+        },
+        {
+          "name": "customer_id",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "full_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "phone_masked",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "email_domain",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "gender",
+          "type": "char(1)",
+          "nullable": false
+        },
+        {
+          "name": "birth_year",
+          "type": "smallint",
+          "nullable": true
+        },
+        {
+          "name": "age_band",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "province_code",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "province_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "region",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "registration_date",
+          "type": "date",
+          "nullable": true
+        },
+        {
+          "name": "scd1_hash",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "scd2_hash",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "valid_from",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "valid_to",
+          "type": "date",
+          "nullable": false
+        },
+        {
+          "name": "is_current",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "batch_id",
+          "type": "bigint",
+          "nullable": true
+        }
+      ],
+      "pk": [
+        "customer_key"
+      ],
+      "unique": [
+        [
+          "customer_id",
+          "valid_from"
+        ]
+      ]
+    },
+    "dim_customer_profile": {
+      "name": "dim_customer_profile",
+      "columns": [
+        {
+          "name": "customer_profile_key",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "membership_tier",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "spend_band_12m",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "frequency_band",
+          "type": "text",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "customer_profile_key"
+      ],
+      "unique": [
+        [
+          "membership_tier",
+          "spend_band_12m",
+          "frequency_band"
+        ]
+      ]
+    },
+    "dim_channel": {
+      "name": "dim_channel",
+      "columns": [
+        {
+          "name": "channel_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "channel_id",
+          "type": "int",
+          "nullable": true
+        },
+        {
+          "name": "channel_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "channel_type",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "marketing_code",
+          "type": "text",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "channel_key"
+      ],
+      "unique": [
+        [
+          "channel_id"
+        ]
+      ]
+    },
+    "dim_payment_method": {
+      "name": "dim_payment_method",
+      "columns": [
+        {
+          "name": "payment_method_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "payment_method_id",
+          "type": "int",
+          "nullable": true
+        },
+        {
+          "name": "method_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "method_group",
+          "type": "text",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "payment_method_key"
+      ],
+      "unique": [
+        [
+          "payment_method_id"
+        ]
+      ]
+    },
+    "dim_warehouse": {
+      "name": "dim_warehouse",
+      "columns": [
+        {
+          "name": "warehouse_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "warehouse_id",
+          "type": "int",
+          "nullable": true
+        },
+        {
+          "name": "warehouse_code",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "warehouse_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "province_code",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "province_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "region",
+          "type": "text",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "warehouse_key"
+      ],
+      "unique": [
+        [
+          "warehouse_id"
+        ]
+      ]
+    },
+    "dim_campaign": {
+      "name": "dim_campaign",
+      "columns": [
+        {
+          "name": "campaign_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "campaign_id",
+          "type": "int",
+          "nullable": true
+        },
+        {
+          "name": "campaign_code",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "campaign_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "campaign_type",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "target_channel_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "budget_amount",
+          "type": "numeric(18,2)",
+          "nullable": true
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "nullable": true
+        },
+        {
+          "name": "end_date",
+          "type": "date",
+          "nullable": true
+        }
+      ],
+      "pk": [
+        "campaign_key"
+      ],
+      "unique": [
+        [
+          "campaign_id"
+        ]
+      ]
+    },
+    "dim_promotion": {
+      "name": "dim_promotion",
+      "columns": [
+        {
+          "name": "promotion_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "promotion_id",
+          "type": "bigint",
+          "nullable": true
+        },
+        {
+          "name": "promo_code",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "promo_name",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "promo_type",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "funded_by",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "apply_level",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "discount_type",
+          "type": "text",
+          "nullable": true
+        },
+        {
+          "name": "discount_value",
+          "type": "numeric(18,2)",
+          "nullable": true
+        },
+        {
+          "name": "min_order_value",
+          "type": "numeric(18,2)",
+          "nullable": true
+        },
+        {
+          "name": "seller_id",
+          "type": "bigint",
+          "nullable": true
+        },
+        {
+          "name": "start_ts",
+          "type": "timestamp",
+          "nullable": true
+        },
+        {
+          "name": "end_ts",
+          "type": "timestamp",
+          "nullable": true
+        }
+      ],
+      "pk": [
+        "promotion_key"
+      ],
+      "unique": [
+        [
+          "promotion_id"
+        ]
+      ]
+    },
+    "dim_promotion_group": {
+      "name": "dim_promotion_group",
+      "columns": [
+        {
+          "name": "promotion_group_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "group_signature",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "promotion_count",
+          "type": "smallint",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "promotion_group_key"
+      ],
+      "unique": [
+        [
+          "group_signature"
+        ]
+      ]
+    },
+    "bridge_promotion_group": {
+      "name": "bridge_promotion_group",
+      "columns": [
+        {
+          "name": "promotion_group_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "promotion_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "weighting_factor",
+          "type": "numeric(9,6)",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "promotion_group_key",
+        "promotion_key"
+      ],
+      "unique": []
+    },
+    "fact_order_item": {
+      "name": "fact_order_item",
+      "columns": [
+        {
+          "name": "source_system",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "order_id",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "line_number",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "order_code",
+          "type": "text",
+          "nullable": false
+        },
+        {
+          "name": "date_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "order_date_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "product_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "category_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "seller_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "customer_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "customer_profile_key",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "channel_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "payment_method_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "campaign_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "promotion_group_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "quantity",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "list_price",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "unit_price",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "list_amount",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "gross_amount",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "list_discount_amount",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "discount_amount",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "net_revenue",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "commission_rate",
+          "type": "numeric(6,4)",
+          "nullable": false
+        },
+        {
+          "name": "commission_amount",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "seller_net_amount",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "cost_amount_est",
+          "type": "numeric(18,2)",
+          "nullable": true
+        },
+        {
+          "name": "gross_margin_est",
+          "type": "numeric(18,2)",
+          "nullable": true
+        },
+        {
+          "name": "is_returned",
+          "type": "boolean",
+          "nullable": false
+        },
+        {
+          "name": "line_count",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "batch_id",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "updated_batch_id",
+          "type": "bigint",
+          "nullable": true
+        }
+      ],
+      "pk": [
+        "date_key",
+        "source_system",
+        "order_id",
+        "line_number"
+      ],
+      "unique": []
+    },
+    "fact_inventory_snapshot": {
+      "name": "fact_inventory_snapshot",
+      "columns": [
+        {
+          "name": "date_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "product_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "warehouse_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "category_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "quantity_on_hand",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "quantity_reserved",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "quantity_available",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "qty_imported",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "qty_sold",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "qty_returned",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "qty_adjusted",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "stockout_flag",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "inventory_value_est",
+          "type": "numeric(18,2)",
+          "nullable": true
+        },
+        {
+          "name": "batch_id",
+          "type": "bigint",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "date_key",
+        "product_key",
+        "warehouse_key"
+      ],
+      "unique": []
+    },
+    "fact_ad_spend": {
+      "name": "fact_ad_spend",
+      "columns": [
+        {
+          "name": "month_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "campaign_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "channel_key",
+          "type": "int",
+          "nullable": false
+        },
+        {
+          "name": "cost_amount",
+          "type": "numeric(18,2)",
+          "nullable": false
+        },
+        {
+          "name": "impressions",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "clicks",
+          "type": "bigint",
+          "nullable": false
+        },
+        {
+          "name": "active_days",
+          "type": "smallint",
+          "nullable": false
+        },
+        {
+          "name": "batch_id",
+          "type": "bigint",
+          "nullable": false
+        }
+      ],
+      "pk": [
+        "month_key",
+        "campaign_key",
+        "channel_key"
+      ],
+      "unique": []
+    }
+  },
+  "relationships": [
+    {
+      "from": "dim_date",
+      "column": "month_key",
+      "to": "dim_month",
+      "target": "month_key"
+    },
+    {
+      "from": "dim_category",
+      "column": "parent_category_key",
+      "to": "dim_category",
+      "target": "category_key"
+    },
+    {
+      "from": "bridge_category_hierarchy",
+      "column": "ancestor_key",
+      "to": "dim_category",
+      "target": "category_key"
+    },
+    {
+      "from": "bridge_category_hierarchy",
+      "column": "descendant_key",
+      "to": "dim_category",
+      "target": "category_key"
+    },
+    {
+      "from": "dim_product",
+      "column": "category_key",
+      "to": "dim_category",
+      "target": "category_key"
+    },
+    {
+      "from": "dim_campaign",
+      "column": "target_channel_key",
+      "to": "dim_channel",
+      "target": "channel_key"
+    },
+    {
+      "from": "bridge_promotion_group",
+      "column": "promotion_group_key",
+      "to": "dim_promotion_group",
+      "target": "promotion_group_key"
+    },
+    {
+      "from": "bridge_promotion_group",
+      "column": "promotion_key",
+      "to": "dim_promotion",
+      "target": "promotion_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "date_key",
+      "to": "dim_date",
+      "target": "date_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "order_date_key",
+      "to": "dim_date",
+      "target": "date_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "product_key",
+      "to": "dim_product",
+      "target": "product_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "category_key",
+      "to": "dim_category",
+      "target": "category_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "seller_key",
+      "to": "dim_seller",
+      "target": "seller_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "customer_key",
+      "to": "dim_customer",
+      "target": "customer_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "customer_profile_key",
+      "to": "dim_customer_profile",
+      "target": "customer_profile_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "channel_key",
+      "to": "dim_channel",
+      "target": "channel_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "payment_method_key",
+      "to": "dim_payment_method",
+      "target": "payment_method_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "campaign_key",
+      "to": "dim_campaign",
+      "target": "campaign_key"
+    },
+    {
+      "from": "fact_order_item",
+      "column": "promotion_group_key",
+      "to": "dim_promotion_group",
+      "target": "promotion_group_key"
+    },
+    {
+      "from": "fact_inventory_snapshot",
+      "column": "date_key",
+      "to": "dim_date",
+      "target": "date_key"
+    },
+    {
+      "from": "fact_inventory_snapshot",
+      "column": "product_key",
+      "to": "dim_product",
+      "target": "product_key"
+    },
+    {
+      "from": "fact_inventory_snapshot",
+      "column": "warehouse_key",
+      "to": "dim_warehouse",
+      "target": "warehouse_key"
+    },
+    {
+      "from": "fact_inventory_snapshot",
+      "column": "category_key",
+      "to": "dim_category",
+      "target": "category_key"
+    },
+    {
+      "from": "fact_ad_spend",
+      "column": "month_key",
+      "to": "dim_month",
+      "target": "month_key"
+    },
+    {
+      "from": "fact_ad_spend",
+      "column": "campaign_key",
+      "to": "dim_campaign",
+      "target": "campaign_key"
+    },
+    {
+      "from": "fact_ad_spend",
+      "column": "channel_key",
+      "to": "dim_channel",
+      "target": "channel_key"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "table_count": 19,
+  "tables": [
+    "bridge_category_hierarchy",
+    "bridge_promotion_group",
+    "dim_campaign",
+    "dim_category",
+    "dim_channel",
+    "dim_customer",
+    "dim_customer_profile",
+    "dim_date",
+    "dim_month",
+    "dim_payment_method",
+    "dim_product",
+    "dim_promotion",
+    "dim_promotion_group",
+    "dim_seller",
+    "dim_seller_tier_t3",
+    "dim_warehouse",
+    "fact_ad_spend",
+    "fact_inventory_snapshot",
+    "fact_order_item"
+  ],
+  "column_count": 200,
+  "fk_count": 26,
+  "method": "Native DrawSQL JPG table crops + grouped composite + DDL FK routing"
+}

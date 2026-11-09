@@ -1,0 +1,259 @@
+Project oltp_2 {
+ database_type: 'PostgreSQL'
+}
+
+Table sellers [headercolor: #8b5cf6] {
+  id bigint [pk, not null]
+  seller_name "character varying"
+  shop_name "character varying"
+  tier "character varying"
+  province "character varying"
+  city "character varying"
+  email "character varying"
+  phone "character varying"
+  status "character varying"
+  created_at "timestamp without time zone"
+  updated_at "timestamp without time zone"
+}
+
+Table products [headercolor: #8b5cf6] {
+  id bigint [pk, not null]
+  sku "character varying" [unique]
+  name "character varying"
+  url_key "character varying"
+  price numeric(24,6)
+  original_price numeric(24,6)
+  discount numeric(24,6)
+  discount_rate numeric(24,6)
+  brand_name "character varying"
+  rating_average numeric(24,6)
+  review_count integer
+  thumbnail_url "character varying"
+  category_id integer
+  category_name "character varying"
+  quantity_sold integer
+  crawl_date date
+  is_active boolean
+  seller_id bigint
+  seller_product_id "character varying"
+  url_path "character varying"
+  inventory_status "character varying"
+  stock_item text
+  short_description text
+  type "character varying"
+  cost_price numeric(24,6)
+  created_at "timestamp without time zone"
+  updated_at "timestamp without time zone"
+}
+
+Table customers [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  full_name "character varying"
+  email "character varying"
+  phone_number "character varying"
+  gender "character varying"
+  date_of_birth date
+  province "character varying"
+  city "character varying"
+  membership_tier "character varying"
+  registration_date "timestamp without time zone"
+  updated_at "timestamp without time zone"
+}
+
+Table customer_addresses [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  customer_id bigint
+  recipient_name "character varying"
+  phone "character varying"
+  address_detail "character varying"
+  ward "character varying"
+  district "character varying"
+  province "character varying"
+  is_default boolean
+}
+
+Table channels [headercolor: #3b82f6] {
+  id integer [pk, not null]
+  channel_name "character varying"
+  channel_type "character varying"
+}
+
+Table payment_methods [headercolor: #3b82f6] {
+  id integer [pk, not null]
+  method_name "character varying"
+  method_group "character varying"
+}
+
+Table checkouts [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  checkout_code "character varying" [unique]
+  session_id bigint
+  customer_id bigint
+  created_at "timestamp without time zone"
+}
+
+Table checkout_lines [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  checkout_id bigint
+  cart_item_id bigint [unique]
+  order_item_id bigint [unique]
+}
+
+Table orders [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  order_code "character varying" [unique]
+  customer_id bigint
+  seller_id bigint
+  channel_id integer
+  session_id bigint
+  campaign_id integer
+  order_status "character varying"
+  total_gross_amount numeric(24,6)
+  total_discount_amount numeric(24,6)
+  shipping_fee numeric(24,6)
+  shipping_discount_amount numeric(24,6)
+  shipping_promotion_id bigint
+  final_amount numeric(24,6)
+  shipping_address_id bigint
+  created_at "timestamp without time zone"
+  completed_at "timestamp without time zone"
+  cancelled_at "timestamp without time zone"
+  updated_at "timestamp without time zone"
+  checkout_id bigint
+  cancellation_reason text
+}
+
+Table order_items [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  order_id bigint
+  line_number integer
+  product_id bigint
+  quantity integer
+  list_price numeric(24,6)
+  unit_price numeric(24,6)
+  discount_amount numeric(24,6)
+  net_amount numeric(24,6)
+  item_status "character varying"
+  commission_rate numeric(24,6)
+  commission_category_id integer
+  commission_seller_tier "character varying"
+  indexes {
+    (order_id, line_number) [unique]
+  }
+}
+
+Table order_item_promotions [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  order_item_id bigint
+  promotion_id bigint
+  applied_discount_amount numeric(24,6)
+  funded_by "character varying"
+}
+
+Table payments [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  order_id bigint
+  payment_method_id integer
+  payment_status "character varying"
+  paid_amount numeric(24,6)
+  transaction_time "timestamp without time zone"
+}
+
+Table refunds [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  order_id bigint
+  return_id bigint
+  amount numeric(24,6)
+  reason "character varying"
+  refund_status "character varying"
+  requested_at "timestamp without time zone"
+  completed_at "timestamp without time zone"
+}
+
+Table returns [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  order_item_id bigint
+  quantity integer
+  return_reason "character varying"
+  refund_amount numeric(24,6)
+  status "character varying"
+  requested_at "timestamp without time zone"
+  refunded_at "timestamp without time zone"
+  received_at "timestamp without time zone"
+  warehouse_id integer
+  approved_at "timestamp without time zone"
+  decision_reason text
+}
+
+Table product_reviews [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  order_item_id bigint [unique]
+  product_id bigint
+  customer_id bigint
+  rating integer
+  comment text
+  created_at "timestamp without time zone"
+}
+
+TableGroup Catalog_Seller [color: #8b5cf6] {
+ sellers
+ products
+}
+
+TableGroup Customer_Order [color: #3b82f6] {
+ customers
+ customer_addresses
+ channels
+ payment_methods
+ checkouts
+ checkout_lines
+ orders
+ order_items
+ order_item_promotions
+ payments
+ refunds
+ returns
+ product_reviews
+}
+
+Ref: checkout_lines.checkout_id > checkouts.id
+
+Ref: checkout_lines.order_item_id > order_items.id
+
+Ref: checkouts.customer_id > customers.id
+
+Ref: customer_addresses.customer_id > customers.id
+
+Ref: order_item_promotions.order_item_id > order_items.id
+
+Ref: order_items.order_id > orders.id
+
+Ref: order_items.product_id > products.id
+
+Ref: orders.channel_id > channels.id
+
+Ref: orders.checkout_id > checkouts.id
+
+Ref: orders.customer_id > customers.id
+
+Ref: orders.seller_id > sellers.id
+
+Ref: orders.shipping_address_id > customer_addresses.id
+
+Ref: payments.order_id > orders.id
+
+Ref: payments.payment_method_id > payment_methods.id
+
+Ref: product_reviews.customer_id > customers.id
+
+Ref: product_reviews.order_item_id > order_items.id
+
+Ref: product_reviews.product_id > products.id
+
+Ref: products.seller_id > sellers.id
+
+Ref: refunds.order_id > orders.id
+
+Ref: refunds.return_id > returns.id
+
+Ref: returns.order_item_id > order_items.id

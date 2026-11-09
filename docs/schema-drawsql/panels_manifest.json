@@ -1,0 +1,144 @@
+{
+  "oltp_1": {
+    "kind": "oltp",
+    "tables": [
+      "ad_spend_logs",
+      "categories",
+      "channels",
+      "customer_addresses",
+      "customers",
+      "marketing_campaigns",
+      "payment_methods",
+      "products",
+      "promotion_usages",
+      "promotions",
+      "seller_commission_rates",
+      "seller_payout_items",
+      "seller_payouts",
+      "sellers"
+    ]
+  },
+  "oltp_2": {
+    "kind": "oltp",
+    "tables": [
+      "channels",
+      "checkout_lines",
+      "checkouts",
+      "customer_addresses",
+      "customers",
+      "order_item_promotions",
+      "order_items",
+      "orders",
+      "payment_methods",
+      "payments",
+      "product_reviews",
+      "products",
+      "refunds",
+      "returns",
+      "sellers"
+    ]
+  },
+  "oltp_3": {
+    "kind": "oltp",
+    "tables": [
+      "carriers",
+      "cart_items",
+      "channels",
+      "customers",
+      "delivery_attempts",
+      "inventory_daily_balance",
+      "inventory_levels",
+      "inventory_movements",
+      "marketing_campaigns",
+      "orders",
+      "page_events",
+      "products",
+      "sessions",
+      "shipments",
+      "warehouses"
+    ]
+  },
+  "dw_1": {
+    "kind": "dw",
+    "tables": [
+      "dim_campaign",
+      "dim_category",
+      "dim_channel",
+      "dim_customer",
+      "dim_customer_profile",
+      "dim_date",
+      "dim_month",
+      "dim_payment_method",
+      "dim_product",
+      "dim_promotion_group",
+      "dim_seller",
+      "dim_warehouse",
+      "fact_ad_spend",
+      "fact_inventory_snapshot",
+      "fact_order_item"
+    ]
+  },
+  "dw_2": {
+    "kind": "dw",
+    "tables": [
+      "bridge_category_hierarchy",
+      "bridge_promotion_group",
+      "dim_category",
+      "dim_promotion",
+      "dim_promotion_group",
+      "dim_seller",
+      "dim_seller_tier_t3"
+    ]
+  },
+  "oltp_cross_panel": [
+    {
+      "from": "checkout_lines",
+      "column": "cart_item_id",
+      "to": "cart_items",
+      "target": "id"
+    },
+    {
+      "from": "checkouts",
+      "column": "session_id",
+      "to": "sessions",
+      "target": "id"
+    },
+    {
+      "from": "order_item_promotions",
+      "column": "promotion_id",
+      "to": "promotions",
+      "target": "id"
+    },
+    {
+      "from": "order_items",
+      "column": "commission_category_id",
+      "to": "categories",
+      "target": "id"
+    },
+    {
+      "from": "orders",
+      "column": "shipping_promotion_id",
+      "to": "promotions",
+      "target": "id"
+    },
+    {
+      "from": "promotion_usages",
+      "column": "order_id",
+      "to": "orders",
+      "target": "id"
+    },
+    {
+      "from": "returns",
+      "column": "warehouse_id",
+      "to": "warehouses",
+      "target": "id"
+    },
+    {
+      "from": "seller_payout_items",
+      "column": "order_item_id",
+      "to": "order_items",
+      "target": "id"
+    }
+  ],
+  "dw_cross_panel": []
+}

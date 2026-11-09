@@ -1,0 +1,233 @@
+Project oltp_1 {
+ database_type: 'PostgreSQL'
+}
+
+Table categories [headercolor: #8b5cf6] {
+  id integer [pk, not null]
+  category_name "character varying"
+  parent_id integer
+  level integer
+  slug "character varying"
+}
+
+Table sellers [headercolor: #8b5cf6] {
+  id bigint [pk, not null]
+  seller_name "character varying"
+  shop_name "character varying"
+  tier "character varying"
+  province "character varying"
+  city "character varying"
+  email "character varying"
+  phone "character varying"
+  status "character varying"
+  created_at "timestamp without time zone"
+  updated_at "timestamp without time zone"
+}
+
+Table products [headercolor: #8b5cf6] {
+  id bigint [pk, not null]
+  sku "character varying" [unique]
+  name "character varying"
+  url_key "character varying"
+  price numeric(24,6)
+  original_price numeric(24,6)
+  discount numeric(24,6)
+  discount_rate numeric(24,6)
+  brand_name "character varying"
+  rating_average numeric(24,6)
+  review_count integer
+  thumbnail_url "character varying"
+  category_id integer
+  category_name "character varying"
+  quantity_sold integer
+  crawl_date date
+  is_active boolean
+  seller_id bigint
+  seller_product_id "character varying"
+  url_path "character varying"
+  inventory_status "character varying"
+  stock_item text
+  short_description text
+  type "character varying"
+  cost_price numeric(24,6)
+  created_at "timestamp without time zone"
+  updated_at "timestamp without time zone"
+}
+
+Table customers [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  full_name "character varying"
+  email "character varying"
+  phone_number "character varying"
+  gender "character varying"
+  date_of_birth date
+  province "character varying"
+  city "character varying"
+  membership_tier "character varying"
+  registration_date "timestamp without time zone"
+  updated_at "timestamp without time zone"
+}
+
+Table customer_addresses [headercolor: #3b82f6] {
+  id bigint [pk, not null]
+  customer_id bigint
+  recipient_name "character varying"
+  phone "character varying"
+  address_detail "character varying"
+  ward "character varying"
+  district "character varying"
+  province "character varying"
+  is_default boolean
+}
+
+Table channels [headercolor: #3b82f6] {
+  id integer [pk, not null]
+  channel_name "character varying"
+  channel_type "character varying"
+}
+
+Table payment_methods [headercolor: #3b82f6] {
+  id integer [pk, not null]
+  method_name "character varying"
+  method_group "character varying"
+}
+
+Table marketing_campaigns [headercolor: #f59e0b] {
+  id integer [pk, not null]
+  campaign_code "character varying"
+  campaign_name "character varying"
+  campaign_type "character varying"
+  target_channel_code "character varying"
+  budget_amount numeric(24,6)
+  start_date date
+  end_date date
+}
+
+Table ad_spend_logs [headercolor: #f59e0b] {
+  id bigint [pk, not null]
+  campaign_id integer
+  channel_code "character varying"
+  log_date date
+  cost_amount numeric(24,6)
+  impressions bigint
+  clicks bigint
+  indexes {
+    (campaign_id, channel_code, log_date) [unique]
+  }
+}
+
+Table promotions [headercolor: #f59e0b] {
+  id bigint [pk, not null]
+  promo_code "character varying"
+  promo_name "character varying"
+  promo_type "character varying"
+  seller_id bigint
+  apply_level "character varying"
+  product_id bigint
+  eligibility "character varying"
+  discount_type "character varying"
+  discount_value numeric(24,6)
+  min_order_value numeric(24,6)
+  max_discount_amount numeric(24,6)
+  usage_limit integer
+  per_customer_limit integer
+  start_date "timestamp without time zone"
+  end_date "timestamp without time zone"
+}
+
+Table promotion_usages [headercolor: #f59e0b] {
+  id bigint [pk, not null]
+  promotion_id bigint
+  order_id bigint
+  customer_id bigint
+  discount_amount numeric(24,6)
+  usage_status "character varying"
+  created_at "timestamp without time zone"
+  released_at "timestamp without time zone"
+}
+
+Table seller_commission_rates [headercolor: #ec4899] {
+  id integer [pk, not null]
+  category_id integer
+  seller_tier "character varying"
+  commission_rate numeric(24,6)
+  effective_from date
+  effective_to date
+}
+
+Table seller_payouts [headercolor: #ec4899] {
+  id bigint [pk, not null]
+  seller_id bigint
+  period_start date
+  period_end date
+  gross_sales numeric(24,6)
+  refund_amount numeric(24,6)
+  commission_amount numeric(24,6)
+  payout_amount numeric(24,6)
+  payout_status "character varying"
+  paid_at "timestamp without time zone"
+  indexes {
+    (seller_id, period_start, period_end) [unique]
+  }
+}
+
+Table seller_payout_items [headercolor: #ec4899] {
+  id bigint [pk, not null]
+  seller_payout_id bigint
+  order_item_id bigint [unique]
+  gross_amount numeric(24,6)
+  refund_amount numeric(24,6)
+  commission_amount numeric(24,6)
+  net_amount numeric(24,6)
+  created_at "timestamp without time zone"
+}
+
+TableGroup Catalog_Seller [color: #8b5cf6] {
+ categories
+ sellers
+ products
+}
+
+TableGroup Customer_Order [color: #3b82f6] {
+ customers
+ customer_addresses
+ channels
+ payment_methods
+}
+
+TableGroup Marketing [color: #f59e0b] {
+ marketing_campaigns
+ ad_spend_logs
+ promotions
+ promotion_usages
+}
+
+TableGroup Finance [color: #ec4899] {
+ seller_commission_rates
+ seller_payouts
+ seller_payout_items
+}
+
+Ref: ad_spend_logs.campaign_id > marketing_campaigns.id
+
+Ref: categories.parent_id > categories.id
+
+Ref: customer_addresses.customer_id > customers.id
+
+Ref: products.category_id > categories.id
+
+Ref: products.seller_id > sellers.id
+
+Ref: promotion_usages.customer_id > customers.id
+
+Ref: promotion_usages.promotion_id > promotions.id
+
+Ref: promotions.product_id > products.id
+
+Ref: promotions.seller_id > sellers.id
+
+Ref: seller_commission_rates.category_id > categories.id
+
+Ref: seller_payout_items.seller_payout_id > seller_payouts.id
+
+Ref: seller_payouts.seller_id > sellers.id

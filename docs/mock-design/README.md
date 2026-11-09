@@ -1,5 +1,9 @@
 # Tài liệu chốt thiết kế hệ thống mock
 
+## Bản tổng hợp và sơ đồ tác động liên hệ thống
+
+[Bản tổng hợp quy tắc và tác động hệ thống](../system-impact/TONG_HOP_QUY_TAC_VA_TAC_DONG_HE_THONG.md) đối chiếu Rule 01–08, sáu miền nghiệp vụ và lớp DW; kèm hai sơ đồ SVG/PNG (tổng quan và chi tiết), ma trận ảnh hưởng và giới hạn của checkout ngày 09/11/2026. Đây là tài liệu tổng hợp, không bổ sung quyết định nghiệp vụ mới.
+
 Thư mục này tách riêng rule và các tài liệu đang chốt từ cuộc trao đổi mới ngày 05/11/2026, theo yêu cầu phân biệt với tài liệu trước mốc 10h. Phân loại dựa trên nội dung cuộc trao đổi, không suy từ timestamp của file.
 
 ## Chạy lần đầu trên máy mới

@@ -1,0 +1,353 @@
+Project ecommerce_dw {
+ database_type: 'PostgreSQL'
+}
+Table fact_order_item [headercolor: #f43f5e] {
+  source_system text [not null]
+  order_id bigint [not null]
+  line_number int [not null]
+  order_code text [not null]
+  date_key int [not null]
+  order_date_key int [not null]
+  product_key int [not null]
+  category_key int [not null]
+  seller_key int [not null]
+  customer_key int [not null]
+  customer_profile_key smallint [not null]
+  channel_key int [not null]
+  payment_method_key int [not null]
+  campaign_key int [not null]
+  promotion_group_key int [not null]
+  quantity int [not null]
+  list_price numeric(18,2) [not null]
+  unit_price numeric(18,2) [not null]
+  list_amount numeric(18,2) [not null]
+  gross_amount numeric(18,2) [not null]
+  list_discount_amount numeric(18,2) [not null]
+  discount_amount numeric(18,2) [not null]
+  net_revenue numeric(18,2) [not null]
+  commission_rate numeric(6,4) [not null]
+  commission_amount numeric(18,2) [not null]
+  seller_net_amount numeric(18,2) [not null]
+  cost_amount_est numeric(18,2)
+  gross_margin_est numeric(18,2)
+  is_returned boolean [not null]
+  line_count smallint [not null]
+  batch_id bigint [not null]
+  updated_batch_id bigint
+  indexes {
+    (date_key, source_system, order_id, line_number) [pk]
+  }
+}
+
+Table fact_inventory_snapshot [headercolor: #f43f5e] {
+  date_key int [not null]
+  product_key int [not null]
+  warehouse_key int [not null]
+  category_key int [not null]
+  quantity_on_hand int [not null]
+  quantity_reserved int [not null]
+  quantity_available int [not null]
+  qty_imported int [not null]
+  qty_sold int [not null]
+  qty_returned int [not null]
+  qty_adjusted int [not null]
+  stockout_flag smallint [not null]
+  inventory_value_est numeric(18,2)
+  batch_id bigint [not null]
+  indexes {
+    (date_key, product_key, warehouse_key) [pk]
+  }
+}
+
+Table fact_ad_spend [headercolor: #f43f5e] {
+  month_key int [not null]
+  campaign_key int [not null]
+  channel_key int [not null]
+  cost_amount numeric(18,2) [not null]
+  impressions bigint [not null]
+  clicks bigint [not null]
+  active_days smallint [not null]
+  batch_id bigint [not null]
+  indexes {
+    (month_key, campaign_key, channel_key) [pk]
+  }
+}
+
+TableGroup Facts [color: #f43f5e] {
+  fact_order_item
+  fact_inventory_snapshot
+  fact_ad_spend
+}
+
+Table dim_date [headercolor: #3b82f6] {
+  date_key int [pk, not null]
+  full_date date [not null, unique]
+  day_of_month smallint [not null]
+  day_of_week smallint [not null]
+  day_name text [not null]
+  iso_week smallint [not null]
+  iso_year smallint [not null]
+  month_key int [not null]
+  month smallint [not null]
+  month_name text [not null]
+  quarter smallint [not null]
+  year smallint [not null]
+  is_weekend boolean [not null]
+  is_holiday boolean [not null]
+  holiday_name text
+  is_double_day boolean [not null]
+  is_month_end boolean [not null]
+}
+
+Table dim_month [headercolor: #3b82f6] {
+  month_key int [pk, not null]
+  year smallint [not null]
+  quarter smallint [not null]
+  month smallint [not null]
+  month_label text [not null]
+  quarter_label text [not null]
+  first_date date [not null]
+  last_date date [not null]
+  days_in_month smallint [not null]
+}
+
+Table dim_channel [headercolor: #3b82f6] {
+  channel_key int [pk, not null]
+  channel_id int [unique]
+  channel_name text [not null]
+  channel_type text [not null]
+  marketing_code text [not null]
+}
+
+TableGroup Time_Channel [color: #3b82f6] {
+  dim_date
+  dim_month
+  dim_channel
+}
+
+Table dim_product [headercolor: #8b5cf6] {
+  product_key serial [pk, not null]
+  product_id bigint [not null]
+  sku text [not null]
+  product_name text [not null]
+  brand_name text [not null]
+  category_key int [not null]
+  seller_id bigint [not null]
+  list_price numeric(18,2) [not null]
+  original_price numeric(18,2) [not null]
+  discount_rate numeric(6,4) [not null]
+  unit_cost_est numeric(18,2)
+  is_active boolean [not null]
+  scd1_hash text [not null]
+  scd2_hash text [not null]
+  valid_from date [not null]
+  valid_to date [not null]
+  is_current boolean [not null]
+  batch_id bigint
+  indexes {
+    (product_id, valid_from) [unique]
+  }
+}
+
+Table dim_category [headercolor: #8b5cf6] {
+  category_key int [pk, not null]
+  category_id int [not null, unique]
+  category_name text [not null]
+  is_named boolean [not null]
+  parent_category_key int
+  level smallint [not null]
+  is_leaf boolean [not null]
+  root_category_key int
+  path_ids text [not null]
+  path_names text [not null]
+  batch_id bigint
+}
+
+Table bridge_category_hierarchy [headercolor: #8b5cf6] {
+  ancestor_key int [not null]
+  descendant_key int [not null]
+  depth smallint [not null]
+  indexes {
+    (ancestor_key, descendant_key) [pk]
+  }
+}
+
+TableGroup Product_Category [color: #8b5cf6] {
+  dim_product
+  dim_category
+  bridge_category_hierarchy
+}
+
+Table dim_seller [headercolor: #f59e0b] {
+  seller_key serial [pk, not null]
+  seller_id bigint [not null]
+  shop_name text [not null]
+  seller_name text [not null]
+  email_domain text
+  phone_masked text
+  province_code text [not null]
+  province_name text [not null]
+  region text [not null]
+  tier text [not null]
+  status text [not null]
+  scd1_hash text [not null]
+  scd2_hash text [not null]
+  valid_from date [not null]
+  valid_to date [not null]
+  is_current boolean [not null]
+  batch_id bigint
+  indexes {
+    (seller_id, valid_from) [unique]
+  }
+}
+
+Table dim_seller_tier_t3 [headercolor: #f59e0b] {
+  seller_id bigint [pk, not null]
+  current_tier text [not null]
+  previous_tier text
+  tier_changed_on date
+  batch_id bigint
+}
+
+TableGroup Seller_History [color: #f59e0b] {
+  dim_seller
+  dim_seller_tier_t3
+}
+
+Table dim_customer [headercolor: #06b6d4] {
+  customer_key serial [pk, not null]
+  customer_id bigint [not null]
+  full_name text [not null]
+  phone_masked text
+  email_domain text
+  gender char(1) [not null]
+  birth_year smallint
+  age_band text [not null]
+  province_code text [not null]
+  province_name text [not null]
+  region text [not null]
+  registration_date date
+  scd1_hash text [not null]
+  scd2_hash text [not null]
+  valid_from date [not null]
+  valid_to date [not null]
+  is_current boolean [not null]
+  batch_id bigint
+  indexes {
+    (customer_id, valid_from) [unique]
+  }
+}
+
+Table dim_customer_profile [headercolor: #06b6d4] {
+  customer_profile_key smallint [pk, not null]
+  membership_tier text [not null]
+  spend_band_12m text [not null]
+  frequency_band text [not null]
+  indexes {
+    (membership_tier, spend_band_12m, frequency_band) [unique]
+  }
+}
+
+TableGroup Customer_Profile [color: #06b6d4] {
+  dim_customer
+  dim_customer_profile
+}
+
+Table dim_campaign [headercolor: #ec4899] {
+  campaign_key int [pk, not null]
+  campaign_id int [unique]
+  campaign_code text [not null]
+  campaign_name text [not null]
+  campaign_type text [not null]
+  target_channel_key int [not null]
+  budget_amount numeric(18,2)
+  start_date date
+  end_date date
+}
+
+Table dim_promotion [headercolor: #ec4899] {
+  promotion_key int [pk, not null]
+  promotion_id bigint [unique]
+  promo_code text [not null]
+  promo_name text [not null]
+  promo_type text [not null]
+  funded_by text [not null]
+  apply_level text [not null]
+  discount_type text
+  discount_value numeric(18,2)
+  min_order_value numeric(18,2)
+  seller_id bigint
+  start_ts timestamp
+  end_ts timestamp
+}
+
+Table dim_promotion_group [headercolor: #ec4899] {
+  promotion_group_key int [pk, not null]
+  group_signature text [not null, unique]
+  promotion_count smallint [not null]
+}
+
+Table bridge_promotion_group [headercolor: #ec4899] {
+  promotion_group_key int [not null]
+  promotion_key int [not null]
+  weighting_factor numeric(9,6) [not null]
+  indexes {
+    (promotion_group_key, promotion_key) [pk]
+  }
+}
+
+TableGroup Campaign_Promotion [color: #ec4899] {
+  dim_campaign
+  dim_promotion
+  dim_promotion_group
+  bridge_promotion_group
+}
+
+Table dim_warehouse [headercolor: #10b981] {
+  warehouse_key int [pk, not null]
+  warehouse_id int [unique]
+  warehouse_code text [not null]
+  warehouse_name text [not null]
+  province_code text [not null]
+  province_name text [not null]
+  region text [not null]
+}
+
+Table dim_payment_method [headercolor: #10b981] {
+  payment_method_key int [pk, not null]
+  payment_method_id int [unique]
+  method_name text [not null]
+  method_group text [not null]
+}
+
+TableGroup Warehouse_Payment [color: #10b981] {
+  dim_warehouse
+  dim_payment_method
+}
+
+Ref: dim_date.month_key > dim_month.month_key
+Ref: dim_category.parent_category_key > dim_category.category_key
+Ref: bridge_category_hierarchy.ancestor_key > dim_category.category_key
+Ref: bridge_category_hierarchy.descendant_key > dim_category.category_key
+Ref: dim_product.category_key > dim_category.category_key
+Ref: dim_campaign.target_channel_key > dim_channel.channel_key
+Ref: bridge_promotion_group.promotion_group_key > dim_promotion_group.promotion_group_key
+Ref: bridge_promotion_group.promotion_key > dim_promotion.promotion_key
+Ref: fact_order_item.date_key > dim_date.date_key
+Ref: fact_order_item.order_date_key > dim_date.date_key
+Ref: fact_order_item.product_key > dim_product.product_key
+Ref: fact_order_item.category_key > dim_category.category_key
+Ref: fact_order_item.seller_key > dim_seller.seller_key
+Ref: fact_order_item.customer_key > dim_customer.customer_key
+Ref: fact_order_item.customer_profile_key > dim_customer_profile.customer_profile_key
+Ref: fact_order_item.channel_key > dim_channel.channel_key
+Ref: fact_order_item.payment_method_key > dim_payment_method.payment_method_key
+Ref: fact_order_item.campaign_key > dim_campaign.campaign_key
+Ref: fact_order_item.promotion_group_key > dim_promotion_group.promotion_group_key
+Ref: fact_inventory_snapshot.date_key > dim_date.date_key
+Ref: fact_inventory_snapshot.product_key > dim_product.product_key
+Ref: fact_inventory_snapshot.warehouse_key > dim_warehouse.warehouse_key
+Ref: fact_inventory_snapshot.category_key > dim_category.category_key
+Ref: fact_ad_spend.month_key > dim_month.month_key
+Ref: fact_ad_spend.campaign_key > dim_campaign.campaign_key
+Ref: fact_ad_spend.channel_key > dim_channel.channel_key
