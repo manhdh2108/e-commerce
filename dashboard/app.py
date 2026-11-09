@@ -1,4 +1,4 @@
-"""PLAN 6.3 — Dashboard kho dữ liệu TMĐT (Streamlit + Plotly), 5 màn hình.
+"""PLAN 6.3 — Dashboard kho dữ liệu TMĐT (Streamlit + Plotly), 9 màn hình chia hai chế độ: Thống kê (stats.py, mặc định) và Kỹ thuật kho dữ liệu (fact_tabs.py và các màn hình kiểm tra).
 
     bash dashboard/run.sh            # chạy nền trong WSL → http://localhost:8501
     .venv/bin/streamlit run dashboard/app.py
@@ -7,55 +7,29 @@ Kết nối bằng role CHỈ ĐỌC dw_analyst (đổi bằng biến môi trư�
 KPI non-additive tính lại từ tử/mẫu theo mart.kpi_definitions. Mọi bảng có nút xuất CSV.
 """
 import datetime as dt
-import os
 
 import pandas as pd
 import plotly.express as px
 import psycopg
 import streamlit as st
 
-DSN = os.getenv("DW_DASH_URL", "postgresql://dw_analyst:dw_analyst_local@127.0.0.1:55432/dwh")
-PAGES = ["Tổng quan bán hàng", "Lịch sử thuộc tính (SCD)", "Đối soát vận hành (drill-across)",
-         "Chất lượng dữ liệu", "Hiệu năng"]
+import fact_tabs
+import stats
+from common import DSN, intf, num, pct, q, table, vnd
 
 st.set_page_config(page_title="DW TMĐT · Nhóm 5", page_icon="📊", layout="wide")
 
 
 # ------------------------------------------------------------------------------------------------
-@st.cache_data(ttl=300, show_spinner=False)
-def q(sql, params=None):
-    with psycopg.connect(DSN) as con:
-        cur = con.execute(sql, params or {})
-        cols = [c.name for c in cur.description]
-        return pd.DataFrame(cur.fetchall(), columns=cols)
-
-
-def num(df):
-    """Decimal → float để Plotly/pandas tính và vẽ."""
-    for c in df.columns:
-        if df[c].dtype == object and len(df) and df[c].map(lambda v: type(v).__name__ == "Decimal").any():
-            df[c] = df[c].astype(float)
-    return df
-
-
-def vnd(x):
-    return "—" if x is None or pd.isna(x) else f"{float(x):,.0f} đ".replace(",", ".")
-
-
-def pct(x, d=2):
-    return "—" if x is None or pd.isna(x) else f"{float(x) * 100:.{d}f}%"
-
-
-def intf(x):
-    return "—" if x is None or pd.isna(x) else f"{float(x):,.0f}".replace(",", ".")
-
-
-def table(df, name, caption=None):
-    if caption:
-        st.caption(caption)
-    st.dataframe(df, hide_index=True)
-    st.download_button(f"⬇ Xuất CSV — {name}", df.to_csv(index=False).encode("utf-8-sig"),
-                       file_name=f"{name}.csv", mime="text/csv", key=f"csv_{name}")
+def friendly_header():
+    f = q("SELECT * FROM mart.v_data_freshness")
+    if f.empty:
+        st.error("Kho chưa có dữ liệu.")
+        st.stop()
+    r = f.iloc[0]
+    st.caption(f"Dữ liệu cập nhật đến hết ngày {r.data_through:%d/%m/%Y} · lần nạp gần nhất {r.loaded_at:%d/%m/%Y %H:%M} · đơn vị tiền: đồng (VND)")
+    if r.mart_stale:
+        st.warning("Số liệu tổng hợp đang chưa theo kịp lần nạp dữ liệu mới nhất.")
 
 
 def header():
@@ -426,12 +400,19 @@ def page_perf():
 
 
 # ------------------------------------------------------------------------------------------------
+STATS = {"Tổng quan": stats.page_overview, "Bán hàng chi tiết": page_sales, "Tồn kho": stats.page_inventory, "Quảng cáo": stats.page_ads}
+TECH = {"3 bảng Fact và kỹ thuật (SCD, bridge)": fact_tabs.render, "Lịch sử thuộc tính (SCD)": page_scd,
+        "Đối soát vận hành (drill-across)": page_drill, "Chất lượng dữ liệu": page_dq, "Hiệu năng": page_perf}
+
 st.sidebar.title("📊 DW TMĐT")
-page = st.sidebar.radio("Màn hình", PAGES, key="page")
+mode = st.sidebar.radio("Chế độ xem", ["Thống kê", "Kỹ thuật kho dữ liệu"], key="mode", horizontal=True,
+                        help="Thống kê: số liệu kinh doanh cho người dùng. Kỹ thuật: các màn hình kiểm tra kho dữ liệu dùng khi bảo vệ.")
+pages = STATS if mode == "Thống kê" else TECH
+page = st.sidebar.radio("Màn hình", list(pages), key=f"page_{mode}")
 st.title(page)
 try:
-    header()
-    {PAGES[0]: page_sales, PAGES[1]: page_scd, PAGES[2]: page_drill, PAGES[3]: page_dq, PAGES[4]: page_perf}[page]()
+    (friendly_header if mode == "Thống kê" else header)()
+    pages[page]()
 except psycopg.OperationalError as exc:
     st.error(f"Không kết nối được kho dữ liệu ({DSN.split('@')[-1]}). Docker/WSL đã chạy chưa?\n\n{exc}")
 st.sidebar.caption(f"Kết nối: {DSN.split('@')[-1]} · role {DSN.split('//')[1].split(':')[0]} (chỉ đọc) · {dt.date.today():%d/%m/%Y}")

@@ -299,18 +299,24 @@ Cấu hình mock `dw-scd-2026` (áp dụng từ **25/01/2026**; tạo bằng `ma
 - **24 KPI** định nghĩa ở một nơi (`mart.kpi_definitions`: công thức, nguồn, A/SA/NA, lỗi thường gặp): 6 additive, 2 semi-additive, 16 non-additive. KPI theo kỳ (năm/quý/tháng) tính từ fact atomic.
 - **Drill-across** dùng `FULL OUTER JOIN` trên dimension dùng chung để **giữ nhóm chỉ có một phía**: `v_drill_sales_ads` (doanh thu × chi phí quảng cáo theo tháng–kênh; hiện có kênh **App có doanh thu nhưng chưa có chi phí quảng cáo**, một `INNER JOIN` sẽ làm mất doanh thu đó) và `v_drill_sales_inventory` (theo `product_id`, không theo `product_key`).
 - Refresh chỉ sau batch SUCCESS; lỗi refresh không hủy batch, `v_data_freshness.mart_stale` báo "dữ liệu cũ".
+- **Màn hình tổng duyệt nhất quán** `mart.v_consistency_check`: một view, 21 kiểm tra (khóa ngoại mồ côi, grain, khoảng hiệu lực SCD2, fact trỏ đúng phiên bản, tổng tiền khớp giữa fact và các MV, đẳng thức tiền, bridge, đối soát ETL), mỗi dòng `PASS` khi `gia_tri = ky_vong`, chạy ~1,3 giây; là bản rút gọn của bộ kiểm thử T1–T7, dùng khi demo.
 
 ### 7.2. Dashboard (Streamlit + Plotly, role `dw_analyst`)
 
+Dashboard có hai chế độ. Chế độ **Thống kê** (mặc định) dành cho người dùng nghiệp vụ, gồm Tổng quan, Bán hàng chi tiết, Tồn kho, Quảng cáo. Chế độ **Kỹ thuật kho dữ liệu** gồm các màn hình kiểm tra dùng khi bảo vệ, trong đó có màn hình 3 tab theo 3 bảng fact.
+
 | Màn hình | Nội dung | Kỹ năng thể hiện |
 |---|---|---|
-| Tổng quan bán hàng | 8 KPI, xu hướng, theo danh mục (cây), kênh, top sản phẩm/seller, khuyến mãi | Drill-down năm→quý→tháng→ngày, gốc→lá; non-additive tính lại mỗi kỳ; bridge |
+| Tổng quan | 5 thẻ số so với kỳ trước, doanh thu theo ngày và kênh, top danh mục/sản phẩm/cửa hàng, tỉnh khách, thanh toán, nhận xét ngắn | Đọc tầng tổng hợp; đếm phân biệt tính từ fact |
+| Tồn kho, Quảng cáo | Thẻ số, biểu đồ và bảng thống kê ngắn gọn cho từng nghiệp vụ | Semi-additive; tỷ số tính lại từ tử và mẫu |
+| 3 bảng Fact và kỹ thuật | Mỗi tab một fact: bài toán kinh doanh và SCD, bridge, semi-additive, drill-across | Tổng hợp các kỹ thuật trên ví dụ thật |
+| Bán hàng chi tiết | 8 KPI, xu hướng, theo danh mục (cây), kênh, top sản phẩm/seller, khuyến mãi | Drill-down năm→quý→tháng→ngày, gốc→lá; non-additive tính lại mỗi kỳ; bridge |
 | Lịch sử thuộc tính (SCD) | Hạng lúc bán vs hiện tại, tỉnh khách lúc mua vs hiện tại, tra phiên bản SCD2, SCD3, mini-dimension | SCD2 vs SCD1, SCD3 |
 | Đối soát vận hành | Doanh thu × quảng cáo; doanh thu × tồn kho | Drill-across, semi-additive |
 | Chất lượng dữ liệu | Batch, số dòng đọc/hợp lệ/WARN/cách ly, lý do cách ly, đối soát, khóa 0/−1 | Audit, quarantine, reconciliation |
 | Hiệu năng | Kết quả BM01–BM03, thời gian refresh MV, dung lượng | Bench |
 
-Mọi bảng có nút xuất CSV (UTF-8 BOM); đầu mỗi màn hình luôn hiển thị *dữ liệu đến hết ngày*, *batch nạp gần nhất*, *thời điểm refresh mart*, đơn vị VND (UTC+7).
+Các bảng ở màn hình Bán hàng chi tiết và chế độ Kỹ thuật có nút xuất CSV (UTF-8 BOM). Đầu mỗi màn hình luôn hiển thị *dữ liệu đến hết ngày* và *lần nạp gần nhất*, đơn vị VND (UTC+7); chế độ Kỹ thuật hiển thị thêm *thời điểm refresh mart*.
 
 ---
 
@@ -430,6 +436,7 @@ Mỗi vòng đi theo cùng quy trình đã làm: khảo sát nguồn → chốt 
 | `dw/sql/` | DDL theo thứ tự `00_init`, `05_profiling`, `20_stg`, `30_dw`, `40_mart`, `50_audit` |
 | `dw/etl/` | `extract.py`, `transform.py`, `load.py`, `config.py`, `mappings/*.csv`, `inject_test_errors.py` |
 | `dw/tests/` | `run_tests.py` (T1–T7), `test_scd_load.py`, `test_mart.sql`, `measure_*.sql` |
+| `dw/demo_sql/` | Câu SQL demo (mỗi file một tab DBeaver); kịch bản demo ở [KICH_BAN_DEMO.md](KICH_BAN_DEMO.md) |
 | `dashboard/`, `bench/` | Dashboard Streamlit; thí nghiệm hiệu năng |
 | `docs/` | Thiết kế M1–M3, kế hoạch, Blueprint, báo cáo kiểm thử, `implementation/` (nhật ký + bằng chứng) |
 

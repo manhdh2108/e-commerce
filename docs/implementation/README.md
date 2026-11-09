@@ -37,3 +37,6 @@ Thư mục này ghi lại **chi tiết từng bước đã thực hiện** khi x
 | 10 | PLAN 7 — Thí nghiệm hiệu năng BM01–BM03 | [10_buoc-7_thi-nghiem-hieu-nang.md](10_buoc-7_thi-nghiem-hieu-nang.md) | ✅ Xong (390 lượt đo, 100% hash khớp) | 08/11/2026 |
 | 11 | PLAN 8 — Kiểm thử T1–T7 | [11_buoc-8_kiem-thu.md](11_buoc-8_kiem-thu.md) → [báo cáo](../BAO_CAO_KIEM_THU_T1_T7.md) | ✅ Xong (58/58 PASS: T1 14, T2 10, T3 5, T4 10, T5 9, T6 5, T7 5; `bash dw/tests/run_tests.sh`) | 09/11/2026 |
 | 12 | PLAN 9 — Master Blueprint | [12_buoc-9_master-blueprint.md](12_buoc-9_master-blueprint.md) → [MASTER_BLUEPRINT.md](../MASTER_BLUEPRINT.md) | ✅ Xong (12 mục + 2 phụ lục; còn slide và demo) | 09/11/2026 |
+| 13 | Chuẩn bị demo: màn hình tổng duyệt `v_consistency_check`, SQL cho DBeaver, kịch bản gọn | [13_chuan-bi-demo.md](13_chuan-bi-demo.md) → [KICH_BAN_DEMO.md](../KICH_BAN_DEMO.md) | ✅ Xong (view 21/21 PASS ~1,3 s; 7 file SQL; chưa quay video Plan B) | 09/11/2026 |
+| 13 | Màn hình dashboard 3 tab theo 3 fact, kèm SCD/bridge (nay nằm ở chế độ Kỹ thuật, xem bước 14) | [13_man-hinh-phan-tich-3-fact.md](13_man-hinh-phan-tich-3-fact.md) | ✅ Xong | 09/11/2026 |
+| 14 | Thiết kế lại dashboard: chế độ Thống kê cho người dùng nghiệp vụ | [14_thiet-ke-lai-dashboard-thong-ke.md](14_thiet-ke-lai-dashboard-thong-ke.md) | ✅ Xong | 09/11/2026 |

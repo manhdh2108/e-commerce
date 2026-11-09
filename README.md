@@ -74,7 +74,7 @@ docker exec -i scripts-mock-postgres-1 psql -U mock -d dwh -c \
 ## 4. Dashboard, thí nghiệm hiệu năng, kiểm thử
 
 ```bash
-bash dashboard/run.sh                     # http://localhost:8501 — 5 màn hình, xuất CSV, role dw_analyst (chỉ đọc dw, mart)
+bash dashboard/run.sh                     # http://localhost:8501 — chế độ Thống kê (4 màn hình) và Kỹ thuật (5 màn hình), xuất CSV, role dw_analyst (chỉ đọc dw, mart)
 bash bench/run.sh                         # BM01 MV, BM02 partition, BM03 index (tạm dừng mock khi đo); kết quả trong bench/results/
 bash dw/tests/run_tests.sh --quick        # kiểm thử T1–T7 chỉ đọc, ~20 giây
 bash dw/tests/run_tests.sh                # đầy đủ, ~5 phút: nạp lại batch (T3), SCD có kiểm soát, dashboard
@@ -90,6 +90,7 @@ Mã thoát ≠ 0 nếu có FAIL; kết quả ghi thêm vào `data/logs/test.log`
 | `dw/sql/` | DDL: `00_init`, `05_profiling`, `20_stg`, `30_dw`, `40_mart`, `50_audit` |
 | `dw/etl/` | `extract.py`, `transform.py`, `load.py`, `config.py`, `mappings/*.csv`, `inject_test_errors.py` |
 | `dw/tests/` | `run_tests.py` (T1–T7), `test_scd_load.py`, `test_mart.sql`, `measure_*.sql` |
+| `dw/demo_sql/` | Các câu SQL demo, mỗi file một tab DBeaver (batch log, tích hợp mã kênh, MV vs fact, index, cách ly, `mart.v_consistency_check`); kịch bản ở [docs/KICH_BAN_DEMO.md](docs/KICH_BAN_DEMO.md) |
 | `dashboard/` | Streamlit + Plotly |
 | `bench/` | Thí nghiệm hiệu năng |
 | `docs/` | Thiết kế (M1–M3), kế hoạch, Blueprint, báo cáo kiểm thử, `implementation/` (nhật ký + bằng chứng) |

@@ -78,3 +78,123 @@ Traceback (most recent call last):
   File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
     raise MediaFileStorageError(
 streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename 'bf07cbeab92499e778dd3bae6ccd55d86b859c57bd72a936ae37f959.csv'. (No media file with id 'bf07cbeab92499e778dd3bae6ccd55d86b859c57bd72a936ae37f959')
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+  Stopping...
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+2026-11-09 20:23:31.370 MediaFileHandler: Missing file 08742da45cd060d04864c4d738b73f8565baf364d13092b628c5c9c3.csv
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 140, in get_file
+    return self._files_by_id[file_id]
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: '08742da45cd060d04864c4d738b73f8565baf364d13092b628c5c9c3'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/web/server/media_file_handler.py", line 95, in validate_absolute_path
+    self._storage.get_file(absolute_path)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
+    raise MediaFileStorageError(
+streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename '08742da45cd060d04864c4d738b73f8565baf364d13092b628c5c9c3.csv'. (No media file with id '08742da45cd060d04864c4d738b73f8565baf364d13092b628c5c9c3')
+2026-11-09 20:23:31.535 MediaFileHandler: Missing file 35a78761dc8106361699afc18f9e25540237c53c885ca52317855746.csv
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 140, in get_file
+    return self._files_by_id[file_id]
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: '35a78761dc8106361699afc18f9e25540237c53c885ca52317855746'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/web/server/media_file_handler.py", line 95, in validate_absolute_path
+    self._storage.get_file(absolute_path)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
+    raise MediaFileStorageError(
+streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename '35a78761dc8106361699afc18f9e25540237c53c885ca52317855746.csv'. (No media file with id '35a78761dc8106361699afc18f9e25540237c53c885ca52317855746')
+2026-11-09 20:31:25.778 MediaFileHandler: Missing file 7706f0581f2e049581f8382e72740a25b08c07e713bbe9c9c5a532ae.csv
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 140, in get_file
+    return self._files_by_id[file_id]
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: '7706f0581f2e049581f8382e72740a25b08c07e713bbe9c9c5a532ae'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/web/server/media_file_handler.py", line 95, in validate_absolute_path
+    self._storage.get_file(absolute_path)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
+    raise MediaFileStorageError(
+streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename '7706f0581f2e049581f8382e72740a25b08c07e713bbe9c9c5a532ae.csv'. (No media file with id '7706f0581f2e049581f8382e72740a25b08c07e713bbe9c9c5a532ae')
+2026-11-09 20:31:25.852 MediaFileHandler: Missing file 27085fd02cf54395080ed63fc35782cf89adca84110b0e6de7466896.csv
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 140, in get_file
+    return self._files_by_id[file_id]
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: '27085fd02cf54395080ed63fc35782cf89adca84110b0e6de7466896'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/web/server/media_file_handler.py", line 95, in validate_absolute_path
+    self._storage.get_file(absolute_path)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
+    raise MediaFileStorageError(
+streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename '27085fd02cf54395080ed63fc35782cf89adca84110b0e6de7466896.csv'. (No media file with id '27085fd02cf54395080ed63fc35782cf89adca84110b0e6de7466896')
+  Stopping...
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+  Stopping...
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+  Stopping...
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dashboard/fact_tabs.py:355: FutureWarning:
+
+Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+
+/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dashboard/fact_tabs.py:355: FutureWarning:
+
+Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+
+  Stopping...
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+  Stopping...
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+  Stopping...
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+

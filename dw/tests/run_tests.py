@@ -325,12 +325,12 @@ def t5(c, a, quick):
     rec("T5.7", "Mini-dimension: hồ sơ khách tính theo trạng thái TRƯỚC giao dịch (tính lại độc lập; dòng ngày mua đầu tiên → 'Chưa mua / 0 đơn')",
         bad == 0 and first[0] == first[1], f"{n} dòng, {bad} lệch; ngày mua đầu tiên: {first[1]}/{first[0]} dòng ở bucket 'Chưa mua'")
     if quick:
-        rec("T5.8", "Dashboard: 5 màn hình chạy không lỗi, KPI = SQL độc lập (test_app.py)", None, "bỏ qua (--quick)", status="SKIP")
+        rec("T5.8", "Dashboard: 9 màn hình chạy không lỗi, KPI = SQL độc lập (test_app.py)", None, "bỏ qua (--quick)", status="SKIP")
         rec("T5.9", "File CSV xuất ra = bảng hiển thị trên từng màn hình", None, "bỏ qua (--quick)", status="SKIP")
         return
     p = subprocess.run([sys.executable, "dashboard/test_app.py"], cwd=ROOT, capture_output=True, text=True)
     n_pass = p.stdout.count("PASS")
-    rec("T5.8", "Dashboard: 5 màn hình chạy không lỗi, KPI hiển thị và bộ lọc = SQL độc lập (test_app.py)", p.returncode == 0 and "FAIL" not in p.stdout,
+    rec("T5.8", "Dashboard: 9 màn hình chạy không lỗi, KPI hiển thị và bộ lọc = SQL độc lập (test_app.py)", p.returncode == 0 and "FAIL" not in p.stdout,
         f"{n_pass} kiểm tra PASS" + ("" if p.returncode == 0 else "\n" + p.stdout[-600:]))
     csv_vs_table()
 
@@ -342,6 +342,7 @@ def csv_vs_table():
     import pandas as pd
     import streamlit as st
     from streamlit.testing.v1 import AppTest
+    sys.path.insert(0, str(ROOT / "dashboard"))   # AppTest không tự thêm thư mục của app.py như `streamlit run`
     logging.disable(logging.WARNING)   # tắt cảnh báo "missing ScriptRunContext" của chế độ bare (khôi phục ở finally)
     shown, pairs, orig_df, orig_dl = [], [], st.dataframe, st.download_button
 
@@ -354,9 +355,12 @@ def csv_vs_table():
         return orig_dl(label, data, *a, **k)
     st.dataframe, st.download_button = df_spy, dl_spy
     try:
-        for page in ["Tổng quan bán hàng", "Lịch sử thuộc tính (SCD)", "Đối soát vận hành (drill-across)", "Chất lượng dữ liệu", "Hiệu năng"]:
+        tech = "Kỹ thuật kho dữ liệu"
+        for mode, page in [("Thống kê", "Bán hàng chi tiết"), (tech, "3 bảng Fact và kỹ thuật (SCD, bridge)"), (tech, "Lịch sử thuộc tính (SCD)"),
+                           (tech, "Đối soát vận hành (drill-across)"), (tech, "Chất lượng dữ liệu"), (tech, "Hiệu năng")]:
             at = AppTest.from_file(str(ROOT / "dashboard/app.py"), default_timeout=120)
-            at.session_state["page"] = page
+            at.session_state["mode"] = mode
+            at.session_state[f"page_{mode}"] = page
             at.run()
             if at.exception:
                 rec("T5.9", f"CSV = bảng hiển thị — màn hình {page}", False, f"exception: {at.exception[0].value[:200]}")
@@ -369,7 +373,7 @@ def csv_vs_table():
         back = pd.read_csv(io.BytesIO(raw))
         if df is None or back.shape != df.shape or list(back.columns) != [str(x) for x in df.columns]:
             bad.append(label)
-    rec("T5.9", "File CSV xuất ra có đúng cột, đúng số dòng của bảng hiển thị (mọi nút xuất CSV trên 5 màn hình)", bool(pairs) and not bad,
+    rec("T5.9", "File CSV xuất ra có đúng cột, đúng số dòng của bảng hiển thị (mọi nút xuất CSV trên các màn hình có nút này)", bool(pairs) and not bad,
         f"{len(pairs) - len(bad)}/{len(pairs)} nút CSV khớp bảng" + (f"; lệch: {bad}" if bad else ""))
 
 
