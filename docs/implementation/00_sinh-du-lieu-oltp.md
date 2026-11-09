@@ -163,3 +163,22 @@ Pipeline tự resume (cơ chế chống ngủ máy), nhưng lỗi này tất đ�
 - Engine tất định (seed 42) và luồng đối soát chưa chạy trước 14/01, nên dữ liệu 01/01–13/01 sinh lại phải **giống hệt** bản cũ. Sẽ kiểm chứng bằng cách trích lại `--until 2026-01-13` và so checksum với batch 1 của kho.
 - Tạo lại `mock_oltp` làm mất quyền `dw_reader`. Đã cấp lại (`002_source_grants.sql`) và cho `pipeline.py` tự cấp lại sau bước chuẩn bị (`grant_dw_reader`).
 - Thời gian mất: ~3,5 giờ sinh dữ liệu (13 ngày mô phỏng chạy lại).
+
+## 10. Sự cố 08/11/2026 00:27–07:00 — máy ngủ + đổi nhánh git giữa lúc đang sinh dữ liệu
+
+**Triệu chứng (07:01):** job `run` ở trạng thái `FAILED` tại ngày mô phỏng 05/01 (đã xong 27.541 hành động), tiến trình `pipeline.py` đã chết, log trong `data/logs/` không cập nhật từ 00:27.
+
+**Nguyên nhân (đã kiểm chứng):**
+1. **00:26–00:30, thao tác git:** `git stash -u` trên `main` → checkout nhánh `quybruno` → commit "ET". Thư mục làm việc bị thay bằng bản engine cũ hơn (cấu trúc phẳng `scripts/mock_platform/{domain,storage,worker}.py` còn **marker xung đột** `<<<<<<<`). Các file log (đã bị commit vào nhánh) cũng bị git ghi đè, nên tiến trình đang chạy ghi vào file cũ và không còn đọc được log. `core.autocrlf=true` biến các file `.sh` thành CRLF, khiến bash không chạy được.
+2. **00:43–07:00, máy vào Modern Standby** (Event Log Kernel-Power 506/507). WSL bị treo; khi máy thức dậy, kết nối DB của job bị đứt → `FAILED`.
+
+**Khôi phục, không mất dữ liệu đã sinh:**
+- Không động vào thư mục và nhánh `quybruno` của người dùng. Tạo **git worktree riêng** `D:/PTIT/mock_run` = `main@20d3a2f` + `git stash apply stash@{0}` (đúng phiên bản engine đã sinh các ngày 01–04; pull `main` lúc 13:49 ngày 07/11, trước lần sinh lại lúc 23:15).
+- Kiểm fingerprint `EngineContract` (sha256 của 26 file engine) so với kế hoạch đang chạy: `f76e4a3f…`. Bản dựng lại chỉ khớp khi tất cả file dùng CRLF, trừ `engine/domain.py`, `application/worker.py`, `infrastructure/storage.py` dùng LF. Đã chuẩn hóa 3 file này về LF, nên **nội dung code giống hệt hôm qua**.
+- Worktree: `pipeline.py` dùng `REPO = parents[2]`, còn `start_all.sh` dùng `.venv` của repo chính. Khởi động serve + worker từ worktree; worker nhận lại job `7afa944a…` và chạy tiếp từ receipts (không áp dụng trùng hành động). Sau đó mới bật `pipeline.py`. Lưu ý: nếu job ở trạng thái FAILED mà bật pipeline trước, pipeline sẽ lập chunk mới đè lên ngày đang dở.
+- **Kết quả (07:13):** ngày 05/01 hoàn tất, đang chạy 06/01, không có lỗi mới.
+
+**Phòng ngừa:**
+- Không đổi nhánh, stash hoặc pull trong thư mục repo chính khi Mock đang chạy. Mock hiện chạy từ `D:/PTIT/mock_run`, log ở `D:/PTIT/mock_run/data/logs/`.
+- Tắt sleep (Settings → Power → *When plugged in, put my device to sleep: Never*) và cắm sạc. Khóa màn hình (Win + L) thì an toàn.
+- Log worker cũ của đợt chạy đêm 07/11: `data/logs/mock_worker_20261107.log` (repo chính).

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Ngày thực hiện | 07/11/2026, 22:00–22:30 |
-| Trạng thái | ✅ Xong. Áp dụng tự động từ ngày mô phỏng **30/01/2026** (khi đợt 1 kết thúc, dự kiến ~04:00–05:00 08/11) |
+| Trạng thái | ✅ Xong. Áp dụng từ ngày mô phỏng **25/01/2026** (đổi từ 30/01 ngày 08/11, xem §10). Dự kiến ban đầu: **30/01/2026** (khi đợt 1 kết thúc, dự kiến ~04:00–05:00 08/11) |
 | Liên quan PLAN | Mục 1.0; khoảng trống G2, G3, G7 |
 | Liên quan đề xuất | M2 "Lịch sử chính xác" (SCD 1, 2, minh họa 3), T4; drill-across doanh thu–quảng cáo theo tháng–kênh (mục 6) |
 
@@ -162,3 +162,32 @@ File thay đổi:
 - sửa PLAN: mục 1.0, IR-03, `map_channel`, G2/G3, `dim_product`, lịch mục 10.
 
 Bước tiếp theo: **02 — PLAN 1.1, khởi tạo database `dwh`, role chỉ đọc, các schema `raw/stg/dw/mart/audit/bench`.**
+
+## 10. Cập nhật 08/11/2026: chuyển sớm sang kịch bản SCD từ 25/01
+
+**Lý do:** cần dữ liệu SCD thật sớm hơn để chuẩn bị demo. Các mốc 30/01 ở các mục trên là thiết kế ban đầu; mốc đang có hiệu lực là bảng dưới.
+
+| Hành động | Lịch ban đầu | Lịch hiện tại |
+|---|---|---|
+| `SYS-03`, `CUS-02`, `MGR-01` | Từ 30/01 | Từ **25/01** |
+| `SEL-03` tỉnh seller | Mỗi 4 ngày từ 30/01 | Mỗi 4 ngày từ **25/01** |
+| `SEL-01` tên shop | Mỗi 10 ngày từ 02/02 | Mỗi 10 ngày từ **26/01** |
+| `MGR-02` khóa seller | 16/03, 15/06, 15/09, 15/12 | **Thêm 27/01** để demo có ca thật |
+| `MKT-01` quảng cáo đa kênh | Từ 01/02 | Không đổi |
+| `ADS-01` | 4 lượt/ngày từ 30/01 | 4 lượt/ngày từ **25/01** |
+
+**Cách làm:** API chỉ có `pause`/`resume`, không đổi được kế hoạch của job đang chạy, nên kế hoạch được sửa trực tiếp trong `mock_control`:
+
+1. Dừng `pipeline.py` (vì nó tự resume job đang `PAUSED`), tạm dừng job, sao lưu kế hoạch.
+2. Sinh lại `dw-scd-2026.json`, nạp vào Mock Studio và lập một kế hoạch thử để engine chạy preflight.
+3. Ghi cấu hình mới vào `config_snapshot` của kế hoạch đang chạy. Ngày 24/01 đang dở được giữ đúng số lượng cũ bằng cách đặt `special["2026-01-24"]`.
+4. Resume job và khởi động lại pipeline. Sửa `SCHEDULE` trong `pipeline.py` thành `("2026-01-25", "dw-scd-2026.json")`.
+
+Code engine không đổi nên `EngineContract` vẫn khớp. Không chèn SCD vào ngày 24/01 vì ngày đó đã chạy dở: thay đổi mới có thể mang giờ sớm hơn các hành động đã chạy.
+
+**Bằng chứng:** [evidence/01_chuyen-kich-ban-scd-25-01.txt](evidence/01_chuyen-kich-ban-scd-25-01.txt).
+
+**Hệ quả cần ghi trong báo cáo:**
+- Dữ liệu 01/01–24/01 sinh theo `dw-lite-2026`, từ 25/01 theo `dw-scd-2026`.
+- Đây là thao tác ngoài luồng chuẩn của Mock Studio. Muốn tái lập đúng lượt sinh này thì phải áp dụng đúng mốc chuyển trên.
+- Lần khóa seller 27/01 là bổ sung cho demo, không thuộc lịch nghiệp vụ ban đầu.

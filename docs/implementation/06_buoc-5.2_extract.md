@@ -141,3 +141,24 @@ Output đầy đủ: [evidence/06_extract_check.txt](evidence/06_extract_check.t
   - 2 batch trong `audit.batch_log`, 38 dòng `audit.batch_table_log`.
 - Không ghi gì vào `mock_oltp`; engine mock vẫn chạy (đang ở ngày 14/01).
 - Bước tiếp theo: **07 — PLAN 5.3 Transform**: tạo các bảng ánh xạ `stg.map_*` (CSV), các bảng `stg.*` theo 5.3.3, các quy tắc DQ-01..20, cách ly vào `audit.quarantine`, kiểm đếm RC-07; chạy trên batch 1.
+
+## 9. Chạy lại sau khi sinh lại dữ liệu OLTP (08/11/2026 10:43) — batch 4
+
+**Lý do:** batch 1–3 được trích từ bộ OLTP cũ, trước sự cố seller_payouts (xem [00 §9–§10](00_sinh-du-lieu-oltp.md)). Sau khi sinh lại, cần trích lại từ dữ liệu mới.
+
+**Kiểm tra dữ liệu trước khi trích (dữ liệu đã tạm ổn chưa):** so OLTP sinh lại với `raw.*` của batch 1 cũ trên các trường bất biến, cùng một biểu thức `md5(string_agg(concat_ws('|', ...) ORDER BY id))`:
+
+| Bảng (phạm vi) | Số dòng | md5 OLTP mới = md5 batch 1 cũ |
+|---|---:|---|
+| orders (created_at < 13/01) | 1.382 | `f3daed44…` = `f3daed44…` |
+| order_items (của các đơn trên) | 1.586 | `5b338029…` = `5b338029…` |
+| payments (đơn tạo < 10/01) | 1.096 | `8bc61769…` = `8bc61769…` |
+| customers (registration_date < 13/01) | 10.348 | `873bf9ef…` = `873bf9ef…` |
+
+→ Khớp tuyệt đối: engine tất định, dữ liệu sinh lại giống bản cũ.
+
+**Lệnh:** `bash dw/etl/run.sh extract` (INCREMENTAL; chưa có batch SUCCESS nên watermark_from = 2025-12-31; watermark_to = last_day Mock = 2026-01-12, Mock đang sinh ngày 13/01).
+
+**Kết quả:** batch 4 `EXTRACTED` trong 42,7 s, 19 bảng. Đáng chú ý: products 3.532, sellers 481, customers 10.361 (FULL), orders 1.382, order_items 1.586, payments 1.280 (gồm cả thanh toán COD đến trễ), order_item_promotions 188, returns 6, inventory_daily_balance 219.067, inventory_movements 19.668, ad_spend_logs 8, tiki_product_category 3.532.
+
+Batch 1–3 cũ vẫn được giữ trong `raw` (bất biến) để làm lịch sử và bằng chứng. Từ bước Load trở đi chỉ dùng batch ≥ 4.

@@ -1,0 +1,69 @@
+== mart.refresh_all + test_mart.sql (dw_analyst)
+            mv_name             | batch_id |       refreshed_at        | row_count | seconds 
+--------------------------------+----------+---------------------------+-----------+---------
+ mv_ads_month_channel           |        4 | 2026-11-08 11:41:38.12844 |         1 |   0.037
+ mv_inventory_month_product     |        4 | 2026-11-08 11:41:38.12844 |     18257 |   2.635
+ mv_promotion_month             |        4 | 2026-11-08 11:41:38.12844 |         1 |   0.041
+ mv_sales_day_product           |        4 | 2026-11-08 11:41:38.12844 |      1021 |   0.370
+ mv_sales_month_category        |        4 | 2026-11-08 11:41:38.12844 |        81 |   0.079
+ mv_sales_month_channel         |        4 | 2026-11-08 11:41:38.12844 |         2 |   0.070
+ mv_sales_month_customer_region |        4 | 2026-11-08 11:41:38.12844 |         5 |   0.121
+ mv_sales_month_seller_tier     |        4 | 2026-11-08 11:41:38.12844 |       246 |   0.103
+(8 rows)
+
+ last_success_batch | data_through |         loaded_at          | mart_batch |     mart_refreshed_at     | mart_stale 
+--------------------+--------------+----------------------------+------------+---------------------------+------------
+                  4 | 2026-01-12   | 2026-11-08 10:57:00.554293 |          4 | 2026-11-08 11:41:38.12844 | f
+(1 row)
+
+                        kiem_tra                        |     mart     |   doc_lap    | ket_qua 
+--------------------------------------------------------+--------------+--------------+---------
+ MV ngày×SP: Σ net                                      | 858670245.00 | 858670245.00 | PASS
+ MV ngày×SP: Σ số món                                   |         1400 |         1400 | PASS
+ MV ngày×SP: Σ giá vốn ước tính                         | 645295000.00 | 645295000.00 | PASS
+ MV ngày×SP: Σ dòng                                     |         1195 |         1195 | PASS
+ MV tháng×danh mục: Σ net                               | 858670245.00 | 858670245.00 | PASS
+ MV tháng×kênh: số đơn từng (tháng,kênh) sai lệch       |            0 |            0 | PASS
+ MV seller tier: Σ net                                  | 858670245.00 | 858670245.00 | PASS
+ MV tỉnh khách: Σ net                                   | 858670245.00 | 858670245.00 | PASS
+ MV tồn kho: Σ tồn cuối tháng (ngày snapshot cuối)      |      5669671 |      5669671 | PASS
+ MV tồn kho: Σ bán xuất kho                             |         1589 |         1589 | PASS
+ MV QC: Σ chi phí                                       |   2932996.00 |   2932996.00 | PASS
+ MV voucher: Σ giảm giá phân bổ                         |   3040000.00 |   3040000.00 | PASS
+ Drill-across QC: Σ doanh thu (giữ cả nhóm chỉ có bán)  | 858670245.00 | 858670245.00 | PASS
+ Drill-across QC: Σ chi phí (giữ cả nhóm chỉ có QC)     |   2932996.00 |   2932996.00 | PASS
+ Drill-across tồn kho: Σ doanh thu                      | 858670245.00 | 858670245.00 | PASS
+ Drill-across tồn kho: Σ tồn cuối                       |      5669671 |      5669671 | PASS
+ KPI tháng: AOV = Σnet/số đơn tính trực tiếp            |    828033.02 |    828033.02 | PASS
+ KPI năm: số đơn = distinct cả năm (không cộng tháng)   |         1037 |         1037 | PASS
+ KPI tháng: số khách mua = distinct customer_id         |          429 |          429 | PASS
+ Khóa 0 trên fact (thông tin)                           |            0 |            0 | PASS
+ Mart không cũ (batch refresh = batch SUCCESS mới nhất) |            0 |            0 | PASS
+
+
+== drill-across
+ month_label | channel_name | net_revenue  | orders | cost_amount | revenue_per_ad_cost |   ctr    | missing_sales | missing_ads 
+-------------+--------------+--------------+--------+-------------+---------------------+----------+---------------+-------------
+ T01/2026    | Web          | 706525701.00 |    752 |  2932996.00 |              240.89 | 0.011267 | f             | f
+ T01/2026    | App          | 152144544.00 |    285 |             |                     |          | f             | t
+(2 rows)
+
+ period_level | year | quarter | month_key | net_revenue  | gross_amount | items | orders |    aov    | avg_price | voucher_rate | list_discount_rate | commission_rate_eff | return_rate | buyers | guest_order_share | margin_rate_est 
+--------------+------+---------+-----------+--------------+--------------+-------+--------+-----------+-----------+--------------+--------------------+---------------------+-------------+--------+-------------------+-----------------
+ Tháng        | 2026 |       1 |    202601 | 858670245.00 | 861710245.00 |  1400 |   1037 | 828033.02 | 615507.32 |     0.003528 |           0.076967 |            0.058622 |    0.000000 |    429 |          0.534233 |        0.248495
+ Quý          | 2026 |       1 |           | 858670245.00 | 861710245.00 |  1400 |   1037 | 828033.02 | 615507.32 |     0.003528 |           0.076967 |            0.058622 |    0.000000 |    429 |          0.534233 |        0.248495
+ Năm          | 2026 |         |           | 858670245.00 | 861710245.00 |  1400 |   1037 | 828033.02 | 615507.32 |     0.003528 |           0.076967 |            0.058622 |    0.000000 |    429 |          0.534233 |        0.248495
+(3 rows)
+
+
+== dashboard/test_app.py
+PASS Tổng quan bán hàng: metric=12 dataframe=7 chart=3 warning=0 info=0
+   PASS KPI 'Doanh thu thuần': dashboard=858.670.245 đ | SQL độc lập=858.670.245 đ
+   PASS KPI 'Số đơn': dashboard=1.037 | SQL độc lập=1.037
+   PASS KPI 'AOV': dashboard=828.033 đ | SQL độc lập=828.033 đ
+   PASS Bộ lọc kênh Web: dashboard=706.525.701 đ | SQL độc lập=706,525,701
+PASS Lịch sử thuộc tính (SCD): metric=4 dataframe=6 chart=4 warning=0 info=1
+PASS Đối soát vận hành (drill-across): metric=8 dataframe=2 chart=3 warning=1 info=0
+PASS Chất lượng dữ liệu: metric=9 dataframe=6 chart=1 warning=0 info=0
+PASS Hiệu năng: metric=4 dataframe=2 chart=1 warning=0 info=1
+OK: 0 lỗi

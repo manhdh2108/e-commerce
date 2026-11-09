@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 800" width="1640" height="800" font-family="'Segoe UI', Roboto, Arial, sans-serif">
+  <title>Kiến trúc luồng ETL — Data Warehouse TMĐT</title>
+  <defs>
+    <filter id="sh" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity="0.12"/>
+    </filter>
+    <marker id="a-k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#333"/></marker>
+    <marker id="a-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1F5FD6"/></marker>
+    <marker id="a-l" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5B9BF0"/></marker>
+
+    <symbol id="i-db" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="16" cy="8" rx="11" ry="4"/><path d="M5 8v16c0 2.2 4.9 4 11 4s11-1.8 11-4V8"/><path d="M5 16c0 2.2 4.9 4 11 4s11-1.8 11-4"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><ellipse cx="16" cy="16" rx="5" ry="12"/><path d="M4 16h24"/></symbol>
+    <symbol id="i-play" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M13 10l9 6-9 6z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M16 8v8l6 4"/></symbol>
+    <symbol id="i-flow" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="8" height="14" rx="2"/><rect x="21" y="9" width="8" height="14" rx="2"/><path d="M11 16h10M18 12l4 4-4 4"/></symbol>
+    <symbol id="i-table" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="24" height="22" rx="2"/><path d="M4 12h24M4 19h24M13 5v22"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 27h24"/><rect x="7" y="16" width="5" height="11"/><rect x="14" y="9" width="5" height="18"/><rect x="21" y="13" width="5" height="14"/></symbol>
+    <symbol id="i-term" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="26" height="22" rx="3"/><path d="M9 13l5 4-5 4M17 22h6"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22a12 12 0 1 1 24 0"/><path d="M16 22l6-8"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l11 4v8c0 7-5 12-11 14C10 27 5 22 5 15V7z"/><path d="M11 16l4 4 7-8"/></symbol>
+  </defs>
+
+  <rect width="1640" height="800" fill="#FFFFFF"/>
+
+  <!-- ================= PANELS ================= -->
+  <rect x="20"  y="40" width="280" height="470" rx="18" fill="#EEF4FF" stroke="#9DB7EC" stroke-width="1.5"/>
+  <rect x="320" y="40" width="270" height="470" rx="18" fill="#EDF8F1" stroke="#8FD0AC" stroke-width="1.5"/>
+  <rect x="620" y="40" width="660" height="470" rx="18" fill="#F5F0FF" stroke="#B79CEB" stroke-width="1.5"/>
+  <rect x="1310" y="40" width="270" height="470" rx="18" fill="#FFF6EA" stroke="#F0C28A" stroke-width="1.5"/>
+
+  <g font-size="20" font-weight="700" text-anchor="middle">
+    <text x="160"  y="82" fill="#3B6FD4">Nguồn dữ liệu</text>
+    <text x="455"  y="82" fill="#2B9E5E">Điều phối &amp; xử lý</text>
+    <text x="950"  y="82" fill="#7A4BD1">Data Warehouse</text>
+    <text x="1445" y="82" fill="#E0902B">Truy vấn &amp; BI</text>
+  </g>
+
+  <!-- ================= COLUMN 1: SOURCES ================= -->
+  <g filter="url(#sh)" fill="#fff" stroke="#9DB7EC" stroke-width="1.5">
+    <rect x="40" y="105" width="240" height="65" rx="10"/>
+    <rect x="40" y="200" width="240" height="65" rx="10"/>
+    <rect x="40" y="295" width="240" height="65" rx="10"/>
+    <rect x="40" y="390" width="240" height="90" rx="10"/>
+  </g>
+  <g color="#3B6FD4">
+    <use href="#i-globe" x="52" y="121" width="30" height="30"/>
+    <use href="#i-db"    x="52" y="216" width="30" height="30"/>
+    <use href="#i-play"  x="52" y="311" width="30" height="30"/>
+    <use href="#i-db"    x="52" y="420" width="30" height="30"/>
+  </g>
+  <g fill="#222">
+    <g font-size="15" font-weight="700">
+      <text x="92" y="134">Tiki API</text>
+      <text x="92" y="229">SQLite - tiki_crawl.db</text>
+      <text x="92" y="324">Mock Runner</text>
+      <text x="92" y="421">PostgreSQL - mock_oltp</text>
+    </g>
+    <g font-size="12" fill="#666">
+      <text x="92" y="153">dữ liệu sản phẩm thật</text>
+      <text x="92" y="248">crawl_tiki.py</text>
+      <text x="92" y="343">mô phỏng theo ngày</text>
+      <text x="92" y="440">OLTP · 27 bảng ·</text>
+      <text x="92" y="457">6 hệ thống nguồn</text>
+    </g>
+  </g>
+  <g stroke="#333" stroke-width="2" fill="none" marker-end="url(#a-k)">
+    <path d="M160 170V198"/>
+    <path d="M160 265V293"/>
+    <path d="M160 360V388"/>
+  </g>
+
+  <!-- ================= COLUMN 2: ORCHESTRATION & PROCESSING ================= -->
+  <g filter="url(#sh)" fill="#fff" stroke="#8FD0AC" stroke-width="1.5">
+    <rect x="340" y="150" width="230" height="70" rx="10"/>
+    <rect x="340" y="395" width="230" height="80" rx="10"/>
+  </g>
+  <g color="#2B9E5E">
+    <use href="#i-clock" x="354" y="170" width="30" height="30"/>
+    <use href="#i-flow"  x="354" y="420" width="30" height="30"/>
+  </g>
+  <g fill="#222">
+    <text x="396" y="191" font-size="16" font-weight="700">Orchestrator</text>
+    <text x="396" y="430" font-size="16" font-weight="700">Python ETL</text>
+    <text x="396" y="449" font-size="12" fill="#666">Extract → Transform → Load</text>
+  </g>
+  <path d="M455 220V393" stroke="#5B9BF0" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#a-l)"/>
+  <text x="466" y="312" font-size="12" font-style="italic" fill="#3F7FDB">trigger</text>
+
+  <!-- ================= COLUMN 3: DATA WAREHOUSE ================= -->
+  <rect x="640" y="100" width="620" height="300" rx="14" fill="#FBF8FF" stroke="#B79CEB" stroke-width="1.5"/>
+  <text x="950" y="130" font-size="17" font-weight="700" text-anchor="middle" fill="#4B2FA0">PostgreSQL - database dwh</text>
+  <text x="950" y="150" font-size="12" text-anchor="middle" fill="#777">storage</text>
+
+  <g filter="url(#sh)" fill="#fff" stroke-width="1.8">
+    <rect x="655"  y="205" width="125" height="160" rx="10" stroke="#B5703A"/>
+    <rect x="810"  y="205" width="125" height="160" rx="10" stroke="#3B6FD4"/>
+    <rect x="965"  y="205" width="125" height="160" rx="10" stroke="#D9A21B"/>
+    <rect x="1120" y="205" width="125" height="160" rx="10" stroke="#2B9E5E"/>
+  </g>
+  <g>
+    <use href="#i-table" x="701"  y="237" width="32" height="32" style="color:#B5703A"/>
+    <use href="#i-table" x="856"  y="237" width="32" height="32" style="color:#3B6FD4"/>
+    <use href="#i-table" x="1011" y="237" width="32" height="32" style="color:#D9A21B"/>
+    <use href="#i-table" x="1166" y="237" width="32" height="32" style="color:#2B9E5E"/>
+  </g>
+  <g text-anchor="middle">
+    <g font-size="14" font-weight="700" fill="#222">
+      <text x="717.5"  y="298">Raw Layer</text>
+      <text x="872.5"  y="298">Staging Layer</text>
+      <text x="1027.5" y="298">Data Warehouse</text>
+      <text x="1182.5" y="298">Mart Layer</text>
+    </g>
+    <g font-size="12" fill="#666">
+      <text x="717.5"  y="320">OLTP</text>
+      <text x="872.5"  y="320">chuẩn hóa</text>
+      <text x="1027.5" y="320">Dim · Fact · Bridge</text>
+      <text x="1182.5" y="320">KPI</text>
+    </g>
+  </g>
+  <g stroke="#333" stroke-width="2" fill="none" marker-end="url(#a-k)">
+    <path d="M780 285H808"/>
+    <path d="M935 285H963"/>
+    <path d="M1090 285H1118"/>
+  </g>
+
+  <!-- ================= COLUMN 4: BI ================= -->
+  <g filter="url(#sh)" fill="#fff" stroke="#F0C28A" stroke-width="1.5">
+    <rect x="1330" y="110" width="230" height="90" rx="10"/>
+    <rect x="1330" y="240" width="230" height="90" rx="10"/>
+    <rect x="1330" y="370" width="230" height="90" rx="10"/>
+  </g>
+  <g color="#E0902B">
+    <use href="#i-chart" x="1344" y="139" width="32" height="32"/>
+    <use href="#i-term"  x="1344" y="269" width="32" height="32"/>
+    <use href="#i-gauge" x="1344" y="399" width="32" height="32"/>
+  </g>
+  <g fill="#222">
+    <g font-size="16" font-weight="700">
+      <text x="1388" y="152">Streamlit</text>
+      <text x="1388" y="282">SQL Analyst</text>
+      <text x="1388" y="412">Benchmark</text>
+    </g>
+    <g font-size="12" fill="#666">
+      <text x="1388" y="172">dashboard</text>
+      <text x="1388" y="302">role dw_analyst</text>
+      <text x="1388" y="432">đo hiệu năng truy vấn</text>
+    </g>
+  </g>
+
+  <!-- ================= DATA FLOW (solid) ================= -->
+  <g stroke="#333" stroke-width="2" fill="none" marker-end="url(#a-k)">
+    <path d="M280 435H338"/>                                   <!-- mock_oltp -> ETL -->
+    <path d="M570 435H605V285H653"/>                           <!-- ETL -> Raw -->
+    <path d="M1245 285H1328"/>                                 <!-- Mart -> SQL Analyst -->
+    <path d="M1245 285H1295V155H1328"/>                        <!-- Mart -> Streamlit -->
+    <path d="M1027 365V492H1295V415H1328"/>                    <!-- Data Warehouse -> Benchmark -->
+  </g>
+
+  <!-- ================= AUDIT ================= -->
+  <g filter="url(#sh)">
+    <rect x="450" y="565" width="800" height="80" rx="12" fill="#EAF2FF" stroke="#7FA6EE" stroke-width="1.8"/>
+  </g>
+  <use href="#i-shield" x="480" y="590" width="34" height="34" style="color:#1F5FD6"/>
+  <text x="850" y="598" font-size="17" font-weight="700" text-anchor="middle" fill="#1F4DB0">Audit &amp; Data Quality</text>
+  <text x="850" y="622" font-size="13" text-anchor="middle" fill="#555">batch_log · quarantine · dq_result · reconciliation</text>
+
+  <g stroke="#1F5FD6" stroke-width="2" stroke-dasharray="6 4" fill="none">
+    <path d="M480 475V563" marker-start="url(#a-b)" marker-end="url(#a-b)"/>
+    <path d="M1250 605H1600V155H1562" marker-start="url(#a-b)" marker-end="url(#a-b)"/>
+  </g>
+
+  <!-- ================= LEGEND ================= -->
+  <rect x="420" y="700" width="800" height="70" rx="12" fill="#FFFFFF" stroke="#D0D5DD" stroke-width="1.5"/>
+  <g font-size="13" fill="#333">
+    <path d="M445 735H488" stroke="#333" stroke-width="2" marker-end="url(#a-k)"/>
+    <text x="498" y="740">Data flow</text>
+    <path d="M590 735H633" stroke="#1F5FD6" stroke-width="2" stroke-dasharray="6 4" marker-start="url(#a-b)" marker-end="url(#a-b)"/>
+    <text x="643" y="740">Audit / Log flow</text>
+    <path d="M785 735H828" stroke="#5B9BF0" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a-l)"/>
+    <text x="838" y="740">Trigger / Control flow</text>
+    <text x="1010" y="740" fill="#666">ETL: Extract - Transform - Load</text>
+  </g>
+</svg>

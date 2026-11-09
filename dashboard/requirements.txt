@@ -1,0 +1,6 @@
+# Dashboard (PLAN 6.3) — cài vào .venv của repo (WSL):
+#   ~/.local/bin/uv pip install --python .venv/bin/python -r dashboard/requirements.txt
+streamlit==1.50.0
+plotly==6.3.0
+pandas==2.3.2
+psycopg[binary]>=3.2

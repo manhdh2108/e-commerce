@@ -1,0 +1,75 @@
+{
+ "env": {
+  "server_version": "15.19",
+  "shared_buffers": "128MB",
+  "work_mem": "4MB",
+  "effective_cache_size": "4GB",
+  "max_parallel_workers_per_gather": "2",
+  "jit": "on",
+  "random_page_cost": "4",
+  "enable_partition_pruning": "on",
+  "maintenance_work_mem": "64MB",
+  "synchronous_commit": "off",
+  "cpu": "16",
+  "mem_kb": "7820964",
+  "objects": {
+   "foi_noidx": {
+    "rows": 2007600,
+    "mb": 431.11
+   },
+   "foi_idx_seller": {
+    "rows": 2007600,
+    "mb": 431.11
+   },
+   "ix_foi_seller": {
+    "rows": null,
+    "mb": 13.5
+   },
+   "foi_idx_seller_date": {
+    "rows": 2007600,
+    "mb": 431.11
+   },
+   "ix_foi_seller_date": {
+    "rows": null,
+    "mb": 16.86
+   },
+   "foi_idx_date_seller": {
+    "rows": 2007600,
+    "mb": 431.11
+   },
+   "ix_foi_date_seller": {
+    "rows": null,
+    "mb": 16.86
+   },
+   "foi_part": {
+    "rows": 2007600,
+    "mb": 431.59
+   },
+   "inv_plain": {
+    "rows": 6572010,
+    "mb": 826.09
+   },
+   "inv_part": {
+    "rows": 6572010,
+    "mb": 825.89
+   },
+   "mv_sales_month_category_scaled": {
+    "rows": 516,
+    "mb": 0.11
+   },
+   "mv_inventory_month_category_scaled": {
+    "rows": 528,
+    "mb": 0.1
+   }
+  }
+ },
+ "params": {
+  "rounds": 15,
+  "warmup": 3,
+  "seed": 42,
+  "seller_key": 129,
+  "only": null,
+  "copies_foi": 1680,
+  "copies_inv": 30
+ }
+}

@@ -1,0 +1,15 @@
+base batch 4; customer A=1, B=10361; seller S=1 (Normal→Mall→Preferred); product P=380290
+X1: {'dim_product': {'read': 3532, 'new': 0, 'scd1_keys': 1, 'scd1_rows': 1, 'scd2_new_version': 1, 'scd2_closed': 1, 'scd2_same_day': 0, 'late_quarantined': 0}, 'dim_seller': {'read': 481, 'new': 0, 'scd1_keys': 0, 'scd1_rows': 0, 'scd2_new_version': 1, 'scd2_closed': 1, 'scd2_same_day': 0, 'late_quarantined': 0}, 'dim_customer': {'read': 10361, 'new': 0, 'scd1_keys': 1, 'scd1_rows': 1, 'scd2_new_version': 1, 'scd2_closed': 1, 'scd2_same_day': 0, 'late_quarantined': 0}, 't3': {'new': 0, 'tier_changed': 1}}
+PASS SCD2 customer: đổi tỉnh → 2 phiên bản, 1 current, bản cũ đóng 2026-02-01  [(2, 1, datetime.date(2026, 2, 1), datetime.date(2026, 2, 1), 'an-giang')]
+PASS SCD1 customer: đổi tên → vẫn 1 phiên bản, tên mới  [(1, 'Hoàng Nhật Minh (đổi tên)')]
+PASS SCD2 seller: đổi hạng → 2 phiên bản  [(2, 'Mall', 'Normal')]
+PASS SCD3 seller: current/previous/tier_changed_on  [('Mall', 'Normal', datetime.date(2026, 2, 1))]
+PASS SCD2+SCD1 product: 2 phiên bản giá, tên mới ghi đè CẢ hai phiên bản  [(2, 2, True)]
+PASS Tra cứu theo thời điểm: 15/01 và 05/02 ra 2 khóa khác nhau  [15/01→(3533, Decimal('135000.00')), 05/02→(7066, Decimal('148500.00'))]
+PASS Số phiên bản tăng đúng 1 mỗi dimension (chỉ các khóa đổi SCD2)  [{'dim_product': 3534, 'dim_seller': 483, 'dim_customer': 10363} → {'dim_product': 3535, 'dim_seller': 484, 'dim_customer': 10364}]
+X2: {'dim_product': {'read': 3532, 'new': 0, 'scd1_keys': 0, 'scd1_rows': 0, 'scd2_new_version': 0, 'scd2_closed': 0, 'scd2_same_day': 0, 'late_quarantined': 0}, 'dim_seller': {'read': 481, 'new': 0, 'scd1_keys': 0, 'scd1_rows': 0, 'scd2_new_version': 0, 'scd2_closed': 0, 'scd2_same_day': 1, 'late_quarantined': 0}, 'dim_customer': {'read': 10361, 'new': 0, 'scd1_keys': 0, 'scd1_rows': 0, 'scd2_new_version': 0, 'scd2_closed': 0, 'scd2_same_day': 0, 'late_quarantined': 1}, 't3': {'new': 0, 'tier_changed': 1}}
+PASS Cùng ngày hiệu lực: sửa tại chỗ phiên bản current, không thêm phiên bản  [(2, 'Preferred')]
+PASS Đến muộn: cách ly DQ-23, không sửa hồi tố  [(2, 'an-giang'), quarantine=1]
+PASS SCD-01/02 sau kịch bản: không chồng lấn, đúng 1 current  [SCD-01 dim_product=0; SCD-02 dim_product=0; SCD-01 dim_seller=0; SCD-02 dim_seller=0; SCD-01 dim_customer=0; SCD-02 dim_customer=0]
+
+10/10 PASS — đã ROLLBACK, kho không thay đổi

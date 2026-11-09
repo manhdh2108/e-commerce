@@ -1,0 +1,19 @@
+Chuyển lượt Mock đang chạy sang kịch bản SCD, ngày 08/11/2026 (script: D:/PTIT/mock_run/switch_scd.py)
+Bản sao lưu kế hoạch cũ: D:/PTIT/mock_run/backup_plan_435e2d2a-cf60-4999-aeea-25bbb81345e5.json
+
+17:48:21 job 7afa944a-b534-4aba-942b-e1054f888832 plan 435e2d2a-cf60-4999-aeea-25bbb81345e5 day 2026-01-24
+17:48:22 pipeline stopped
+17:48:56 job PAUSED, day 2026-01-24 done 112379 last_day 2026-01-23
+17:49:01 backup /mnt/d/PTIT/mock_run/backup_plan_435e2d2a-cf60-4999-aeea-25bbb81345e5.json 401870 bytes
+written /mnt/d/PTIT/mock_run/docs/mock-design/examples/scenarios/dw-scd-2026.json
+17:49:01 config DW 2026 · SCD + quảng cáo đa kênh (áp dụng từ 25/01)
+17:49:18 preflight OK, plan thử 6e8322aa-9b32-43cb-9e4b-e93112665fb8 (không chạy)
+17:49:18 hành động khác nhau: ['ADS-01', 'CUS-02', 'MGR-01', 'MGR-02', 'MKT-01', 'SEL-01', 'SEL-03', 'SYS-03']
+17:49:18 SYS-03 ngày 2026-01-25 = 25
+17:49:18 CUS-02 ngày 2026-01-25 = 3
+17:49:18 MGR-01 ngày 2026-01-25 = 1
+17:49:18 SEL-03 ngày 2026-01-25 = 1
+17:49:18 plan updated, verify OK
+17:49:18 resume + pipeline started
+17:49:56 job RUNNING day 2026-01-24 done 112379 Đã tạm dừng an toàn
+17:50:06 RUNNING 2026-01-24 done 112388 CAR-01 · Lấy hàng

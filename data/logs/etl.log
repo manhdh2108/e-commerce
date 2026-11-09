@@ -219,3 +219,301 @@ RuntimeError: Tỷ lệ cách ly ad_spend_daily = 50.0% vượt ngưỡng 5%
 {"ts": "2026-11-07 23:07:18", "event": "dq_table_check", "rule": "DQ-18", "checked": 219067, "failed": 0}
 {"ts": "2026-11-07 23:07:18", "event": "transformed", "entity": "ad_spend_daily", "read": 8, "valid": 8, "warn": 0, "quarantined": 0, "dedup": 0, "written": 8, "balanced": true, "sec": 0.03}
 {"ts": "2026-11-07 23:07:18", "event": "batch_transformed", "batch_id": 1, "read": 253303, "written": 253303, "quarantined": 0, "dedup": 0, "sec": 10.0}
+{"ts": "2026-11-08 10:43:59", "event": "batch_start", "batch_id": 4, "watermark_from": "2025-12-31", "watermark_to": "2026-01-12", "mock_last_day": "2026-01-12"}
+{"ts": "2026-11-08 10:44:00", "event": "extracted", "table": "products", "mode": "FULL", "rows": 3532, "checksum": "1b01e893faa9", "sec": 0.63, "purpose": "Dim_Product (SCD)"}
+{"ts": "2026-11-08 10:44:00", "event": "extracted", "table": "categories", "mode": "FULL", "rows": 49, "checksum": "5192a25948f3", "sec": 0.05, "purpose": "Dim_Category"}
+{"ts": "2026-11-08 10:44:00", "event": "extracted", "table": "sellers", "mode": "FULL", "rows": 481, "checksum": "ca50a85f1264", "sec": 0.11, "purpose": "Dim_Seller (SCD)"}
+{"ts": "2026-11-08 10:44:01", "event": "extracted", "table": "customers", "mode": "FULL", "rows": 10361, "checksum": "803afa1d4203", "sec": 1.02, "purpose": "Dim_Customer (SCD)"}
+{"ts": "2026-11-08 10:44:01", "event": "extracted", "table": "channels", "mode": "FULL", "rows": 3, "checksum": "cdcbb47a3a9c", "sec": 0.04, "purpose": "Dim_Channel"}
+{"ts": "2026-11-08 10:44:01", "event": "extracted", "table": "payment_methods", "mode": "FULL", "rows": 5, "checksum": "d2c4203d8ca1", "sec": 0.04, "purpose": "Dim_Payment_Method"}
+{"ts": "2026-11-08 10:44:01", "event": "extracted", "table": "warehouses", "mode": "FULL", "rows": 6, "checksum": "fc0b7aff40cb", "sec": 0.04, "purpose": "Dim_Warehouse"}
+{"ts": "2026-11-08 10:44:01", "event": "extracted", "table": "marketing_campaigns", "mode": "FULL", "rows": 1, "checksum": "debd27472e78", "sec": 0.04, "purpose": "Dim_Campaign"}
+{"ts": "2026-11-08 10:44:01", "event": "extracted", "table": "promotions", "mode": "FULL", "rows": 3, "checksum": "3c3941181e1e", "sec": 0.05, "purpose": "Dim_Promotion"}
+{"ts": "2026-11-08 10:44:01", "event": "extracted", "table": "seller_commission_rates", "mode": "FULL", "rows": 132, "checksum": "771b648b3360", "sec": 0.05, "purpose": "Hoa hồng theo thời gian"}
+{"ts": "2026-11-08 10:44:01", "event": "extracted", "table": "orders", "mode": "WINDOW", "rows": 1382, "checksum": "f4c89276f67e", "sec": 0.22, "purpose": "Fact_Order_Item"}
+{"ts": "2026-11-08 10:44:02", "event": "extracted", "table": "order_items", "mode": "PARENT", "rows": 1586, "checksum": "08403b0ee738", "sec": 0.19, "purpose": "Fact_Order_Item (grain)"}
+{"ts": "2026-11-08 10:44:02", "event": "extracted", "table": "payments", "mode": "PARENT", "rows": 1280, "checksum": "0b97be5e8770", "sec": 0.15, "purpose": "Phương thức thanh toán"}
+{"ts": "2026-11-08 10:44:02", "event": "extracted", "table": "order_item_promotions", "mode": "PARENT", "rows": 188, "checksum": "b1003d813deb", "sec": 0.05, "purpose": "Bridge khuyến mãi"}
+{"ts": "2026-11-08 10:44:02", "event": "extracted", "table": "returns", "mode": "WINDOW", "rows": 6, "checksum": "c26b13f03837", "sec": 0.03, "purpose": "is_returned"}
+{"ts": "2026-11-08 10:44:27", "event": "extracted", "table": "inventory_daily_balance", "mode": "WINDOW", "rows": 219067, "checksum": "2d5fda90ade9", "sec": 25.26, "purpose": "Fact_Inventory_Snapshot"}
+{"ts": "2026-11-08 10:44:30", "event": "extracted", "table": "inventory_movements", "mode": "WINDOW", "rows": 19668, "checksum": "053f07315467", "sec": 2.64, "purpose": "Nhập/bán/điều chỉnh"}
+{"ts": "2026-11-08 10:44:30", "event": "extracted", "table": "ad_spend_logs", "mode": "WINDOW", "rows": 8, "checksum": "f1dcbf37aa9f", "sec": 0.04, "purpose": "Fact_Ad_Spend"}
+{"ts": "2026-11-08 10:44:35", "event": "extracted", "table": "tiki_product_category", "mode": "FULL", "rows": 3532, "checksum": "ed6e6d93e3db", "purpose": "Cây danh mục (IR-04)"}
+{"ts": "2026-11-08 10:44:42", "event": "batch_extracted", "batch_id": 4, "sec": 42.7}
+{"ts": "2026-11-08 10:44:59", "event": "transform_start", "batch_id": 4, "watermark_to": "2026-01-12"}
+{"ts": "2026-11-08 10:45:03", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-08 10:45:03", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.47}
+{"ts": "2026-11-08 10:45:04", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 1.14}
+{"ts": "2026-11-08 10:45:04", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.13}
+{"ts": "2026-11-08 10:45:07", "event": "transformed", "entity": "customer", "read": 10361, "valid": 10361, "warn": 0, "quarantined": 0, "dedup": 0, "written": 10361, "balanced": true, "sec": 2.15}
+{"ts": "2026-11-08 10:45:07", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.06}
+{"ts": "2026-11-08 10:45:07", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.05}
+{"ts": "2026-11-08 10:45:07", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-08 10:45:07", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-08 10:45:07", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-08 10:45:07", "event": "transformed", "entity": "order_item_promotion", "read": 188, "valid": 188, "warn": 0, "quarantined": 0, "dedup": 0, "written": 188, "balanced": true, "sec": 0.05}
+{"ts": "2026-11-08 10:45:07", "event": "transformed", "entity": "order_item_sales", "read": 1195, "valid": 1195, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1195, "balanced": true, "sec": 0.33}
+{"ts": "2026-11-08 10:45:17", "event": "transformed", "entity": "inventory_daily", "read": 219067, "valid": 219067, "warn": 0, "quarantined": 0, "dedup": 0, "written": 219067, "balanced": true, "sec": 9.97}
+{"ts": "2026-11-08 10:45:19", "event": "dq_table_check", "rule": "DQ-18", "checked": 200810, "failed": 0}
+{"ts": "2026-11-08 10:45:19", "event": "transformed", "entity": "ad_spend_daily", "read": 8, "valid": 8, "warn": 0, "quarantined": 0, "dedup": 0, "written": 8, "balanced": true, "sec": 0.05}
+{"ts": "2026-11-08 10:45:19", "event": "batch_transformed", "batch_id": 4, "read": 234927, "written": 234927, "quarantined": 0, "dedup": 0, "sec": 19.8}
+{"ts": "2026-11-08 10:53:09", "event": "load_start", "batch_id": 4, "reload": false}
+{"ts": "2026-11-08 10:53:10", "event": "dimensions_loaded", "batch_id": 4, "sec": 1.02, "dim_category": {"read": 77, "written": 154, "closure_rows": 219}, "dim_channel": {"read": 3, "written": 3}, "dim_payment_method": {"read": 5, "written": 5}, "dim_warehouse": {"read": 6, "written": 6}, "dim_promotion": {"read": 3, "written": 3}, "dim_campaign": {"read": 1, "written": 1}, "dim_product": {"read": 3532, "new": 3532, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.39}, "dim_seller": {"read": 481, "new": 481, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.05}, "dim_customer": {"read": 10361, "new": 10361, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.47}, "dim_seller_tier_t3": {"new": 481, "tier_changed": 0}}
+{"ts": "2026-11-08 10:53:10", "event": "load_failed", "batch_id": 4, "error": "cannot retrieve a system column in this context"}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/load.py", line 532, in <module>
+    main()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/load.py", line 506, in main
+    stats, rc = run_load(cur, b)
+                ^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/load.py", line 435, in run_load
+    stats["fact_order_item"] = load_order_item(cur, b)
+                               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/load.py", line 298, in load_order_item
+    ins, upd = upsert(cur, "fact_order_item", FOI_COLS, "date_key, source_system, order_id, line_number",
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/dw/etl/load.py", line 229, in upsert
+    r = cur.execute(f"""WITH ins AS (
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.FeatureNotSupported: cannot retrieve a system column in this context
+{"ts": "2026-11-08 10:53:25", "event": "load_start", "batch_id": 4, "reload": false}
+{"ts": "2026-11-08 10:53:26", "event": "dimensions_loaded", "batch_id": 4, "sec": 0.92, "dim_category": {"read": 77, "written": 154, "closure_rows": 219}, "dim_channel": {"read": 3, "written": 3}, "dim_payment_method": {"read": 5, "written": 5}, "dim_warehouse": {"read": 6, "written": 6}, "dim_promotion": {"read": 3, "written": 3}, "dim_campaign": {"read": 1, "written": 1}, "dim_product": {"read": 3532, "new": 3532, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.3}, "dim_seller": {"read": 481, "new": 481, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.06}, "dim_customer": {"read": 10361, "new": 10361, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.51}, "dim_seller_tier_t3": {"new": 481, "tier_changed": 0}}
+{"ts": "2026-11-08 10:53:27", "event": "fact_loaded", "table": "fact_order_item", "read": 1195, "inserted": 1195, "updated": 0, "profile_set": 550, "new_promotion_groups": 1, "bridge_rows": 1, "sec": 1.13}
+{"ts": "2026-11-08 10:54:37", "event": "fact_loaded", "table": "fact_inventory_snapshot", "read": 219067, "inserted": 219067, "updated": 0, "sec": 69.97}
+{"ts": "2026-11-08 10:54:37", "event": "fact_loaded", "table": "fact_ad_spend", "read": 8, "months": 1, "replaced": 0, "written": 1, "sec": 0.03}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "RC-01", "source": "858670245.00", "target": "858670245.00", "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "RC-02", "source": 1195, "target": 1195, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "RC-03a", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "RC-03b", "source": "3040000.00", "target": "3040000.00", "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "RC-04", "source": 219067, "target": 219067, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "RC-05", "source": "2932996.00", "target": "2932996.00", "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "RC-06", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "RC-06i", "source": null, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "SCD-01 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "SCD-02 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "SCD-01 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "SCD-02 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "SCD-01 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "reconciliation", "check": "SCD-02 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:54:39", "event": "batch_success", "batch_id": 4, "sec": 73.6}
+{"ts": "2026-11-08 10:54:50", "event": "load_start", "batch_id": 4, "reload": true}
+{"ts": "2026-11-08 10:54:51", "event": "dimensions_loaded", "batch_id": 4, "sec": 0.94, "dim_category": {"read": 77, "written": 0, "closure_rows": 219}, "dim_channel": {"read": 3, "written": 0}, "dim_payment_method": {"read": 5, "written": 0}, "dim_warehouse": {"read": 6, "written": 0}, "dim_promotion": {"read": 3, "written": 0}, "dim_campaign": {"read": 1, "written": 0}, "dim_product": {"read": 3532, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.23}, "dim_seller": {"read": 481, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.06}, "dim_customer": {"read": 10361, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.56}, "dim_seller_tier_t3": {"new": 0, "tier_changed": 0}}
+{"ts": "2026-11-08 10:54:52", "event": "fact_loaded", "table": "fact_order_item", "read": 1195, "inserted": 0, "updated": 1195, "profile_set": 550, "new_promotion_groups": 0, "bridge_rows": 0, "sec": 1.07}
+{"ts": "2026-11-08 10:55:21", "event": "fact_loaded", "table": "fact_inventory_snapshot", "read": 219067, "inserted": 0, "updated": 219067, "sec": 28.64}
+{"ts": "2026-11-08 10:55:21", "event": "fact_loaded", "table": "fact_ad_spend", "read": 8, "months": 1, "replaced": 1, "written": 1, "sec": 0.03}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "RC-01", "source": "858670245.00", "target": "858670245.00", "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "RC-02", "source": 1195, "target": 1195, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "RC-03a", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "RC-03b", "source": "3040000.00", "target": "3040000.00", "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "RC-04", "source": 219067, "target": 219067, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "RC-05", "source": "2932996.00", "target": "2932996.00", "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "RC-06", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "RC-06i", "source": null, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "SCD-01 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "SCD-02 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "SCD-01 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "SCD-02 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "SCD-01 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "reconciliation", "check": "SCD-02 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:55:22", "event": "batch_success", "batch_id": 4, "sec": 31.7}
+{"ts": "2026-11-08 10:57:00", "event": "load_start", "batch_id": 4, "reload": true}
+{"ts": "2026-11-08 10:57:02", "event": "dimensions_loaded", "batch_id": 4, "sec": 1.7, "dim_category": {"read": 77, "written": 0, "closure_rows": 219}, "dim_channel": {"read": 3, "written": 0}, "dim_payment_method": {"read": 5, "written": 0}, "dim_warehouse": {"read": 6, "written": 0}, "dim_promotion": {"read": 3, "written": 0}, "dim_campaign": {"read": 1, "written": 0}, "dim_product": {"read": 3532, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.32}, "dim_seller": {"read": 481, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.12}, "dim_customer": {"read": 10361, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 1.06}, "dim_seller_tier_t3": {"new": 0, "tier_changed": 0}}
+{"ts": "2026-11-08 10:57:04", "event": "fact_loaded", "table": "fact_order_item", "read": 1195, "inserted": 0, "updated": 1195, "profile_set": 550, "new_promotion_groups": 0, "bridge_rows": 0, "sec": 2.13}
+{"ts": "2026-11-08 10:57:36", "event": "fact_loaded", "table": "fact_inventory_snapshot", "read": 219067, "inserted": 0, "updated": 219067, "sec": 32.19}
+{"ts": "2026-11-08 10:57:36", "event": "fact_loaded", "table": "fact_ad_spend", "read": 8, "months": 1, "replaced": 1, "written": 1, "sec": 0.04}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "RC-01", "source": "858670245.00", "target": "858670245.00", "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "RC-02", "source": 1195, "target": 1195, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "RC-03a", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "RC-03b", "source": "3040000.00", "target": "3040000.00", "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "RC-04", "source": 219067, "target": 219067, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "RC-05", "source": "2932996.00", "target": "2932996.00", "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "RC-06", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "RC-06i", "source": null, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "SCD-01 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "SCD-02 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "SCD-01 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "SCD-02 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "SCD-01 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "reconciliation", "check": "SCD-02 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 10:57:37", "event": "batch_success", "batch_id": 4, "sec": 37.1}
+{"ts": "2026-11-08 19:41:02", "event": "batch_start", "batch_id": 5, "watermark_from": "2026-01-12", "watermark_to": "2026-01-25", "mock_last_day": "2026-01-25"}
+{"ts": "2026-11-08 19:41:03", "event": "extracted", "table": "products", "mode": "FULL", "rows": 3532, "checksum": "1b01e893faa9", "sec": 1.01, "purpose": "Dim_Product (SCD)"}
+{"ts": "2026-11-08 19:41:03", "event": "extracted", "table": "categories", "mode": "FULL", "rows": 49, "checksum": "5192a25948f3", "sec": 0.1, "purpose": "Dim_Category"}
+{"ts": "2026-11-08 19:41:03", "event": "extracted", "table": "sellers", "mode": "FULL", "rows": 481, "checksum": "19239112cfea", "sec": 0.16, "purpose": "Dim_Seller (SCD)"}
+{"ts": "2026-11-08 19:41:04", "event": "extracted", "table": "customers", "mode": "FULL", "rows": 10678, "checksum": "74c54575a4bc", "sec": 1.41, "purpose": "Dim_Customer (SCD)"}
+{"ts": "2026-11-08 19:41:04", "event": "extracted", "table": "channels", "mode": "FULL", "rows": 3, "checksum": "cdcbb47a3a9c", "sec": 0.04, "purpose": "Dim_Channel"}
+{"ts": "2026-11-08 19:41:04", "event": "extracted", "table": "payment_methods", "mode": "FULL", "rows": 5, "checksum": "d2c4203d8ca1", "sec": 0.03, "purpose": "Dim_Payment_Method"}
+{"ts": "2026-11-08 19:41:04", "event": "extracted", "table": "warehouses", "mode": "FULL", "rows": 6, "checksum": "fc0b7aff40cb", "sec": 0.04, "purpose": "Dim_Warehouse"}
+{"ts": "2026-11-08 19:41:04", "event": "extracted", "table": "marketing_campaigns", "mode": "FULL", "rows": 1, "checksum": "debd27472e78", "sec": 0.04, "purpose": "Dim_Campaign"}
+{"ts": "2026-11-08 19:41:05", "event": "extracted", "table": "promotions", "mode": "FULL", "rows": 3, "checksum": "3c3941181e1e", "sec": 0.05, "purpose": "Dim_Promotion"}
+{"ts": "2026-11-08 19:41:05", "event": "extracted", "table": "seller_commission_rates", "mode": "FULL", "rows": 132, "checksum": "771b648b3360", "sec": 0.06, "purpose": "Hoa hồng theo thời gian"}
+{"ts": "2026-11-08 19:41:05", "event": "extracted", "table": "orders", "mode": "WINDOW", "rows": 1776, "checksum": "6579c49976a3", "sec": 0.32, "purpose": "Fact_Order_Item"}
+{"ts": "2026-11-08 19:41:05", "event": "extracted", "table": "order_items", "mode": "PARENT", "rows": 2024, "checksum": "5dabfd73c805", "sec": 0.28, "purpose": "Fact_Order_Item (grain)"}
+{"ts": "2026-11-08 19:41:05", "event": "extracted", "table": "payments", "mode": "PARENT", "rows": 1603, "checksum": "85ca0ef7a5b6", "sec": 0.21, "purpose": "Phương thức thanh toán"}
+{"ts": "2026-11-08 19:41:05", "event": "extracted", "table": "order_item_promotions", "mode": "PARENT", "rows": 4, "checksum": "2ad402994396", "sec": 0.08, "purpose": "Bridge khuyến mãi"}
+{"ts": "2026-11-08 19:41:06", "event": "extracted", "table": "returns", "mode": "WINDOW", "rows": 43, "checksum": "9fc73ca33cc2", "sec": 0.05, "purpose": "is_returned"}
+{"ts": "2026-11-08 19:41:30", "event": "extracted", "table": "inventory_daily_balance", "mode": "WINDOW", "rows": 237355, "checksum": "0fa7efd2e165", "sec": 24.65, "purpose": "Fact_Inventory_Snapshot"}
+{"ts": "2026-11-08 19:41:30", "event": "extracted", "table": "inventory_movements", "mode": "WINDOW", "rows": 1597, "checksum": "d5e3f82a8341", "sec": 0.24, "purpose": "Nhập/bán/điều chỉnh"}
+{"ts": "2026-11-08 19:41:30", "event": "extracted", "table": "ad_spend_logs", "mode": "WINDOW", "rows": 0, "checksum": "d41d8cd98f00", "sec": 0.04, "purpose": "Fact_Ad_Spend"}
+{"ts": "2026-11-08 19:41:35", "event": "extracted", "table": "tiki_product_category", "mode": "FULL", "rows": 3532, "checksum": "ed6e6d93e3db", "purpose": "Cây danh mục (IR-04)"}
+{"ts": "2026-11-08 19:41:40", "event": "batch_extracted", "batch_id": 5, "sec": 38.0}
+{"ts": "2026-11-08 19:41:44", "event": "transform_start", "batch_id": 5, "watermark_to": "2026-01-25"}
+{"ts": "2026-11-08 19:41:48", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-08 19:41:48", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.51}
+{"ts": "2026-11-08 19:41:50", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 1.15}
+{"ts": "2026-11-08 19:41:50", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.16}
+{"ts": "2026-11-08 19:41:52", "event": "transformed", "entity": "customer", "read": 10678, "valid": 10678, "warn": 0, "quarantined": 0, "dedup": 0, "written": 10678, "balanced": true, "sec": 2.12}
+{"ts": "2026-11-08 19:41:52", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.05}
+{"ts": "2026-11-08 19:41:52", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.06}
+{"ts": "2026-11-08 19:41:52", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.05}
+{"ts": "2026-11-08 19:41:52", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.06}
+{"ts": "2026-11-08 19:41:52", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-08 19:41:52", "event": "transformed", "entity": "order_item_promotion", "read": 4, "valid": 4, "warn": 0, "quarantined": 0, "dedup": 0, "written": 4, "balanced": true, "sec": 0.06}
+{"ts": "2026-11-08 19:41:53", "event": "transformed", "entity": "order_item_sales", "read": 1525, "valid": 1525, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1525, "balanced": true, "sec": 0.35}
+{"ts": "2026-11-08 19:42:01", "event": "transformed", "entity": "inventory_daily", "read": 237355, "valid": 237355, "warn": 0, "quarantined": 0, "dedup": 0, "written": 237355, "balanced": true, "sec": 8.22}
+{"ts": "2026-11-08 19:42:03", "event": "dq_table_check", "rule": "DQ-18", "checked": 219095, "failed": 0}
+{"ts": "2026-11-08 19:42:03", "event": "transformed", "entity": "ad_spend_daily", "read": 0, "valid": 0, "warn": 0, "quarantined": 0, "dedup": 0, "written": 0, "balanced": true, "sec": 0.05}
+{"ts": "2026-11-08 19:42:03", "event": "batch_transformed", "batch_id": 5, "read": 253670, "written": 253670, "quarantined": 0, "dedup": 0, "sec": 19.5}
+{"ts": "2026-11-08 19:42:07", "event": "load_start", "batch_id": 5, "reload": false}
+{"ts": "2026-11-08 19:42:08", "event": "dimensions_loaded", "batch_id": 5, "sec": 1.2, "dim_category": {"read": 77, "written": 0, "closure_rows": 219}, "dim_channel": {"read": 3, "written": 0}, "dim_payment_method": {"read": 5, "written": 0}, "dim_warehouse": {"read": 6, "written": 0}, "dim_promotion": {"read": 3, "written": 0}, "dim_campaign": {"read": 1, "written": 0}, "dim_product": {"read": 3532, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.27}, "dim_seller": {"read": 481, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 2, "scd2_closed": 2, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.08}, "dim_customer": {"read": 10678, "new": 317, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 3, "scd2_closed": 3, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.72}, "dim_seller_tier_t3": {"new": 0, "tier_changed": 1}}
+{"ts": "2026-11-08 19:42:10", "event": "fact_loaded", "table": "fact_order_item", "read": 1525, "inserted": 1511, "updated": 14, "profile_set": 689, "new_promotion_groups": 0, "bridge_rows": 0, "sec": 2.33}
+{"ts": "2026-11-08 19:43:54", "event": "fact_loaded", "table": "fact_inventory_snapshot", "read": 237355, "inserted": 237355, "updated": 0, "sec": 103.96}
+{"ts": "2026-11-08 19:43:54", "event": "fact_loaded", "table": "fact_ad_spend", "read": 0, "months": 0, "replaced": 0, "written": 0, "sec": 0.03}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "RC-01", "source": "1279663285.00", "target": "1279663285.00", "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "RC-02", "source": 1525, "target": 1525, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "RC-03a", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "RC-03b", "source": "40000.00", "target": "40000.00", "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "RC-04", "source": 237355, "target": 237355, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "RC-05", "source": "0", "target": "0", "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "RC-06", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "RC-06i", "source": null, "target": 0, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "SCD-01 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "SCD-02 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "SCD-01 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "SCD-02 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "SCD-01 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "reconciliation", "check": "SCD-02 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 19:43:57", "event": "batch_success", "batch_id": 5, "sec": 110.5}
+{"ts": "2026-11-08 19:44:05", "event": "mart_refreshed", "batch_id": 5, "sec": 7.7, "mvs": {"mv_sales_day_product": 2346, "mv_sales_month_category": 84, "mv_sales_month_channel": 2, "mv_sales_month_seller_tier": 346, "mv_sales_month_customer_region": 5, "mv_inventory_month_product": 18260, "mv_ads_month_channel": 1, "mv_promotion_month": 1}}
+{"ts": "2026-11-08 23:24:03", "event": "batch_start", "batch_id": 6, "watermark_from": "2026-01-25", "watermark_to": "2026-01-29", "mock_last_day": "2026-01-29"}
+{"ts": "2026-11-08 23:24:05", "event": "extracted", "table": "products", "mode": "FULL", "rows": 3532, "checksum": "ad9f2670d64c", "sec": 1.94, "purpose": "Dim_Product (SCD)"}
+{"ts": "2026-11-08 23:24:05", "event": "extracted", "table": "categories", "mode": "FULL", "rows": 49, "checksum": "5192a25948f3", "sec": 0.15, "purpose": "Dim_Category"}
+{"ts": "2026-11-08 23:24:05", "event": "extracted", "table": "sellers", "mode": "FULL", "rows": 481, "checksum": "ba302a746489", "sec": 0.27, "purpose": "Dim_Seller (SCD)"}
+{"ts": "2026-11-08 23:24:08", "event": "extracted", "table": "customers", "mode": "FULL", "rows": 10774, "checksum": "00ed6743cef0", "sec": 2.82, "purpose": "Dim_Customer (SCD)"}
+{"ts": "2026-11-08 23:24:08", "event": "extracted", "table": "channels", "mode": "FULL", "rows": 3, "checksum": "cdcbb47a3a9c", "sec": 0.12, "purpose": "Dim_Channel"}
+{"ts": "2026-11-08 23:24:08", "event": "extracted", "table": "payment_methods", "mode": "FULL", "rows": 5, "checksum": "d2c4203d8ca1", "sec": 0.15, "purpose": "Dim_Payment_Method"}
+{"ts": "2026-11-08 23:24:08", "event": "extracted", "table": "warehouses", "mode": "FULL", "rows": 6, "checksum": "fc0b7aff40cb", "sec": 0.1, "purpose": "Dim_Warehouse"}
+{"ts": "2026-11-08 23:24:08", "event": "extracted", "table": "marketing_campaigns", "mode": "FULL", "rows": 1, "checksum": "debd27472e78", "sec": 0.09, "purpose": "Dim_Campaign"}
+{"ts": "2026-11-08 23:24:08", "event": "extracted", "table": "promotions", "mode": "FULL", "rows": 3, "checksum": "3c3941181e1e", "sec": 0.08, "purpose": "Dim_Promotion"}
+{"ts": "2026-11-08 23:24:09", "event": "extracted", "table": "seller_commission_rates", "mode": "FULL", "rows": 132, "checksum": "771b648b3360", "sec": 0.07, "purpose": "Hoa hồng theo thời gian"}
+{"ts": "2026-11-08 23:24:09", "event": "extracted", "table": "orders", "mode": "WINDOW", "rows": 825, "checksum": "f7dab852a7e4", "sec": 0.41, "purpose": "Fact_Order_Item"}
+{"ts": "2026-11-08 23:24:09", "event": "extracted", "table": "order_items", "mode": "PARENT", "rows": 944, "checksum": "0f538a634cf5", "sec": 0.34, "purpose": "Fact_Order_Item (grain)"}
+{"ts": "2026-11-08 23:24:09", "event": "extracted", "table": "payments", "mode": "PARENT", "rows": 697, "checksum": "cc2d6190f6a6", "sec": 0.22, "purpose": "Phương thức thanh toán"}
+{"ts": "2026-11-08 23:24:10", "event": "extracted", "table": "order_item_promotions", "mode": "PARENT", "rows": 0, "checksum": "d41d8cd98f00", "sec": 0.07, "purpose": "Bridge khuyến mãi"}
+{"ts": "2026-11-08 23:24:10", "event": "extracted", "table": "returns", "mode": "WINDOW", "rows": 34, "checksum": "5405c3a61fa4", "sec": 0.07, "purpose": "is_returned"}
+{"ts": "2026-11-08 23:24:19", "event": "extracted", "table": "inventory_daily_balance", "mode": "WINDOW", "rows": 73040, "checksum": "0d0a43d2e764", "sec": 9.72, "purpose": "Fact_Inventory_Snapshot"}
+{"ts": "2026-11-08 23:24:20", "event": "extracted", "table": "inventory_movements", "mode": "WINDOW", "rows": 577, "checksum": "f87bae2a136f", "sec": 0.21, "purpose": "Nhập/bán/điều chỉnh"}
+{"ts": "2026-11-08 23:24:20", "event": "extracted", "table": "ad_spend_logs", "mode": "WINDOW", "rows": 0, "checksum": "d41d8cd98f00", "sec": 0.07, "purpose": "Fact_Ad_Spend"}
+{"ts": "2026-11-08 23:24:26", "event": "extracted", "table": "tiki_product_category", "mode": "FULL", "rows": 3532, "checksum": "ed6e6d93e3db", "purpose": "Cây danh mục (IR-04)"}
+{"ts": "2026-11-08 23:24:34", "event": "batch_extracted", "batch_id": 6, "sec": 31.3}
+{"ts": "2026-11-08 23:24:41", "event": "transform_start", "batch_id": 6, "watermark_to": "2026-01-29"}
+{"ts": "2026-11-08 23:24:45", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-08 23:24:45", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.66}
+{"ts": "2026-11-08 23:24:47", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 1.47}
+{"ts": "2026-11-08 23:24:47", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.36}
+{"ts": "2026-11-08 23:24:52", "event": "transformed", "entity": "customer", "read": 10774, "valid": 10774, "warn": 0, "quarantined": 0, "dedup": 0, "written": 10774, "balanced": true, "sec": 4.5}
+{"ts": "2026-11-08 23:24:52", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.1}
+{"ts": "2026-11-08 23:24:52", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.08}
+{"ts": "2026-11-08 23:24:52", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.11}
+{"ts": "2026-11-08 23:24:52", "event": "transformed", "entity": "promotion", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.06}
+{"ts": "2026-11-08 23:24:52", "event": "transformed", "entity": "campaign", "read": 1, "valid": 1, "warn": 0, "quarantined": 0, "dedup": 0, "written": 1, "balanced": true, "sec": 0.14}
+{"ts": "2026-11-08 23:24:52", "event": "transformed", "entity": "order_item_promotion", "read": 0, "valid": 0, "warn": 0, "quarantined": 0, "dedup": 0, "written": 0, "balanced": true, "sec": 0.18}
+{"ts": "2026-11-08 23:24:53", "event": "transformed", "entity": "order_item_sales", "read": 536, "valid": 533, "warn": 3, "quarantined": 0, "dedup": 0, "written": 536, "balanced": true, "sec": 0.71}
+{"ts": "2026-11-08 23:25:06", "event": "transformed", "entity": "inventory_daily", "read": 73040, "valid": 73040, "warn": 0, "quarantined": 0, "dedup": 0, "written": 73040, "balanced": true, "sec": 12.39}
+{"ts": "2026-11-08 23:25:06", "event": "dq_table_check", "rule": "DQ-18", "checked": 54780, "failed": 0}
+{"ts": "2026-11-08 23:25:06", "event": "transformed", "entity": "ad_spend_daily", "read": 0, "valid": 0, "warn": 0, "quarantined": 0, "dedup": 0, "written": 0, "balanced": true, "sec": 0.04}
+{"ts": "2026-11-08 23:25:06", "event": "batch_transformed", "batch_id": 6, "read": 88458, "written": 88458, "quarantined": 0, "dedup": 0, "sec": 25.4}
+{"ts": "2026-11-08 23:25:10", "event": "load_start", "batch_id": 6, "reload": false}
+{"ts": "2026-11-08 23:25:13", "event": "dimensions_loaded", "batch_id": 6, "sec": 2.68, "dim_category": {"read": 77, "written": 0, "closure_rows": 219}, "dim_channel": {"read": 3, "written": 0}, "dim_payment_method": {"read": 5, "written": 0}, "dim_warehouse": {"read": 6, "written": 0}, "dim_promotion": {"read": 3, "written": 0}, "dim_campaign": {"read": 1, "written": 0}, "dim_product": {"read": 3532, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 8, "scd2_closed": 8, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.87}, "dim_seller": {"read": 481, "new": 0, "scd1_keys": 1, "scd1_rows": 1, "scd2_new_version": 5, "scd2_closed": 5, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.24}, "dim_customer": {"read": 10774, "new": 96, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 8, "scd2_closed": 8, "scd2_same_day": 0, "late_quarantined": 0, "sec": 1.27}, "dim_seller_tier_t3": {"new": 0, "tier_changed": 3}}
+{"ts": "2026-11-08 23:25:17", "event": "fact_loaded", "table": "fact_order_item", "read": 536, "inserted": 495, "updated": 41, "profile_set": 213, "new_promotion_groups": 0, "bridge_rows": 0, "sec": 3.73}
+{"ts": "2026-11-08 23:26:09", "event": "fact_loaded", "table": "fact_inventory_snapshot", "read": 73040, "inserted": 73040, "updated": 0, "sec": 52.3}
+{"ts": "2026-11-08 23:26:09", "event": "fact_loaded", "table": "fact_ad_spend", "read": 0, "months": 0, "replaced": 0, "written": 0, "sec": 0.05}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "RC-01", "source": "360007075.00", "target": "360007075.00", "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "RC-02", "source": 536, "target": 536, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "RC-03a", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "RC-03b", "source": "0", "target": "0.00", "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "RC-04", "source": 73040, "target": 73040, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "RC-05", "source": "0", "target": "0", "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "RC-06", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "RC-06i", "source": null, "target": 3, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "SCD-01 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "SCD-02 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "SCD-01 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "SCD-02 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "SCD-01 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 23:26:27", "event": "reconciliation", "check": "SCD-02 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-08 23:26:28", "event": "batch_success", "batch_id": 6, "sec": 77.2}
+{"ts": "2026-11-08 23:26:40", "event": "mart_refreshed", "batch_id": 6, "sec": 12.5, "mvs": {"mv_sales_day_product": 2775, "mv_sales_month_category": 85, "mv_sales_month_channel": 2, "mv_sales_month_seller_tier": 374, "mv_sales_month_customer_region": 6, "mv_inventory_month_product": 18260, "mv_ads_month_channel": 1, "mv_promotion_month": 1}}
+{"ts": "2026-11-09 14:19:02", "event": "batch_start", "batch_id": 7, "watermark_from": "2026-01-29", "watermark_to": "2026-01-31", "mock_last_day": "2026-01-31"}
+{"ts": "2026-11-09 14:19:02", "event": "extracted", "table": "products", "mode": "FULL", "rows": 3532, "checksum": "ad9f2670d64c", "sec": 0.39, "purpose": "Dim_Product (SCD)"}
+{"ts": "2026-11-09 14:19:02", "event": "extracted", "table": "categories", "mode": "FULL", "rows": 49, "checksum": "5192a25948f3", "sec": 0.04, "purpose": "Dim_Category"}
+{"ts": "2026-11-09 14:19:02", "event": "extracted", "table": "sellers", "mode": "FULL", "rows": 481, "checksum": "1a893920ebac", "sec": 0.06, "purpose": "Dim_Seller (SCD)"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "customers", "mode": "FULL", "rows": 10844, "checksum": "464d06a00ea4", "sec": 0.78, "purpose": "Dim_Customer (SCD)"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "channels", "mode": "FULL", "rows": 3, "checksum": "cdcbb47a3a9c", "sec": 0.02, "purpose": "Dim_Channel"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "payment_methods", "mode": "FULL", "rows": 5, "checksum": "d2c4203d8ca1", "sec": 0.02, "purpose": "Dim_Payment_Method"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "warehouses", "mode": "FULL", "rows": 6, "checksum": "fc0b7aff40cb", "sec": 0.02, "purpose": "Dim_Warehouse"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "marketing_campaigns", "mode": "FULL", "rows": 4, "checksum": "643db4c143aa", "sec": 0.02, "purpose": "Dim_Campaign"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "promotions", "mode": "FULL", "rows": 6, "checksum": "d96c700023dd", "sec": 0.03, "purpose": "Dim_Promotion"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "seller_commission_rates", "mode": "FULL", "rows": 132, "checksum": "771b648b3360", "sec": 0.03, "purpose": "Hoa hồng theo thời gian"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "orders", "mode": "WINDOW", "rows": 397, "checksum": "3f65a2182d20", "sec": 0.08, "purpose": "Fact_Order_Item"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "order_items", "mode": "PARENT", "rows": 442, "checksum": "2cc3e2b067aa", "sec": 0.06, "purpose": "Fact_Order_Item (grain)"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "payments", "mode": "PARENT", "rows": 314, "checksum": "5ba9c72fb3a7", "sec": 0.04, "purpose": "Phương thức thanh toán"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "order_item_promotions", "mode": "PARENT", "rows": 0, "checksum": "d41d8cd98f00", "sec": 0.02, "purpose": "Bridge khuyến mãi"}
+{"ts": "2026-11-09 14:19:03", "event": "extracted", "table": "returns", "mode": "WINDOW", "rows": 7, "checksum": "7f2fc299a188", "sec": 0.02, "purpose": "is_returned"}
+{"ts": "2026-11-09 14:19:05", "event": "extracted", "table": "inventory_daily_balance", "mode": "WINDOW", "rows": 36520, "checksum": "5b9c37dfaacd", "sec": 1.95, "purpose": "Fact_Inventory_Snapshot"}
+{"ts": "2026-11-09 14:19:05", "event": "extracted", "table": "inventory_movements", "mode": "WINDOW", "rows": 218, "checksum": "e74414e35844", "sec": 0.04, "purpose": "Nhập/bán/điều chỉnh"}
+{"ts": "2026-11-09 14:19:05", "event": "extracted", "table": "ad_spend_logs", "mode": "WINDOW", "rows": 0, "checksum": "d41d8cd98f00", "sec": 0.02, "purpose": "Fact_Ad_Spend"}
+{"ts": "2026-11-09 14:19:08", "event": "extracted", "table": "tiki_product_category", "mode": "FULL", "rows": 3532, "checksum": "ed6e6d93e3db", "purpose": "Cây danh mục (IR-04)"}
+{"ts": "2026-11-09 14:19:12", "event": "batch_extracted", "batch_id": 7, "sec": 10.1}
+{"ts": "2026-11-09 14:19:14", "event": "transform_start", "batch_id": 7, "watermark_to": "2026-01-31"}
+{"ts": "2026-11-09 14:19:17", "event": "mappings_loaded", "map_channel": 8, "map_province": 57, "map_gender": 4, "map_cost_ratio": 27}
+{"ts": "2026-11-09 14:19:17", "event": "transformed", "entity": "category", "read": 77, "valid": 49, "warn": 28, "quarantined": 0, "dedup": 0, "written": 77, "balanced": true, "sec": 0.24}
+{"ts": "2026-11-09 14:19:18", "event": "transformed", "entity": "product", "read": 3532, "valid": 3532, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3532, "balanced": true, "sec": 0.62}
+{"ts": "2026-11-09 14:19:18", "event": "transformed", "entity": "seller", "read": 481, "valid": 481, "warn": 0, "quarantined": 0, "dedup": 0, "written": 481, "balanced": true, "sec": 0.09}
+{"ts": "2026-11-09 14:19:20", "event": "transformed", "entity": "customer", "read": 10844, "valid": 10844, "warn": 0, "quarantined": 0, "dedup": 0, "written": 10844, "balanced": true, "sec": 1.79}
+{"ts": "2026-11-09 14:19:20", "event": "transformed", "entity": "channel", "read": 3, "valid": 3, "warn": 0, "quarantined": 0, "dedup": 0, "written": 3, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-09 14:19:20", "event": "transformed", "entity": "payment_method", "read": 5, "valid": 5, "warn": 0, "quarantined": 0, "dedup": 0, "written": 5, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-09 14:19:20", "event": "transformed", "entity": "warehouse", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-09 14:19:20", "event": "transformed", "entity": "promotion", "read": 6, "valid": 6, "warn": 0, "quarantined": 0, "dedup": 0, "written": 6, "balanced": true, "sec": 0.02}
+{"ts": "2026-11-09 14:19:21", "event": "transformed", "entity": "campaign", "read": 4, "valid": 4, "warn": 0, "quarantined": 0, "dedup": 0, "written": 4, "balanced": true, "sec": 1.19}
+{"ts": "2026-11-09 14:19:21", "event": "transformed", "entity": "order_item_promotion", "read": 0, "valid": 0, "warn": 0, "quarantined": 0, "dedup": 0, "written": 0, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-09 14:19:21", "event": "transformed", "entity": "order_item_sales", "read": 230, "valid": 225, "warn": 5, "quarantined": 0, "dedup": 0, "written": 230, "balanced": true, "sec": 0.21}
+{"ts": "2026-11-09 14:19:23", "event": "transformed", "entity": "inventory_daily", "read": 36520, "valid": 36520, "warn": 0, "quarantined": 0, "dedup": 0, "written": 36520, "balanced": true, "sec": 1.35}
+{"ts": "2026-11-09 14:19:23", "event": "dq_table_check", "rule": "DQ-18", "checked": 18260, "failed": 0}
+{"ts": "2026-11-09 14:19:23", "event": "transformed", "entity": "ad_spend_daily", "read": 0, "valid": 0, "warn": 0, "quarantined": 0, "dedup": 0, "written": 0, "balanced": true, "sec": 0.03}
+{"ts": "2026-11-09 14:19:23", "event": "batch_transformed", "batch_id": 7, "read": 51708, "written": 51708, "quarantined": 0, "dedup": 0, "sec": 8.3}
+{"ts": "2026-11-09 14:19:25", "event": "load_start", "batch_id": 7, "reload": false}
+{"ts": "2026-11-09 14:19:25", "event": "dimensions_loaded", "batch_id": 7, "sec": 0.66, "dim_category": {"read": 77, "written": 0, "closure_rows": 219}, "dim_channel": {"read": 3, "written": 0}, "dim_payment_method": {"read": 5, "written": 0}, "dim_warehouse": {"read": 6, "written": 0}, "dim_promotion": {"read": 6, "written": 3}, "dim_campaign": {"read": 4, "written": 3}, "dim_product": {"read": 3532, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 0, "scd2_closed": 0, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.16}, "dim_seller": {"read": 481, "new": 0, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 1, "scd2_closed": 1, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.05}, "dim_customer": {"read": 10844, "new": 70, "scd1_keys": 0, "scd1_rows": 0, "scd2_new_version": 3, "scd2_closed": 3, "scd2_same_day": 0, "late_quarantined": 0, "sec": 0.38}, "dim_seller_tier_t3": {"new": 0, "tier_changed": 1}}
+{"ts": "2026-11-09 14:19:26", "event": "fact_loaded", "table": "fact_order_item", "read": 230, "inserted": 218, "updated": 12, "profile_set": 97, "new_promotion_groups": 0, "bridge_rows": 0, "sec": 0.54}
+{"ts": "2026-11-09 14:19:36", "event": "fact_loaded", "table": "fact_inventory_snapshot", "read": 36520, "inserted": 36520, "updated": 0, "sec": 9.86}
+{"ts": "2026-11-09 14:19:36", "event": "fact_loaded", "table": "fact_ad_spend", "read": 0, "months": 0, "replaced": 0, "written": 0, "sec": 0.01}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "RC-01", "source": "111713093.00", "target": "111713093.00", "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "RC-02", "source": 230, "target": 230, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "RC-03a", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "RC-03b", "source": "0", "target": "0.00", "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "RC-04", "source": 36520, "target": 36520, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "RC-05", "source": "0", "target": "0", "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "RC-06", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "RC-06i", "source": null, "target": 5, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "SCD-01 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "SCD-02 dim_product", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "SCD-01 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "SCD-02 dim_seller", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "SCD-01 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "reconciliation", "check": "SCD-02 dim_customer", "source": 0, "target": 0, "passed": true}
+{"ts": "2026-11-09 14:19:37", "event": "batch_success", "batch_id": 7, "sec": 12.3}
+{"ts": "2026-11-09 14:19:40", "event": "mart_refreshed", "batch_id": 7, "sec": 2.9, "mvs": {"mv_sales_day_product": 2974, "mv_sales_month_category": 85, "mv_sales_month_channel": 2, "mv_sales_month_seller_tier": 381, "mv_sales_month_customer_region": 6, "mv_inventory_month_product": 18260, "mv_ads_month_channel": 1, "mv_promotion_month": 1}}

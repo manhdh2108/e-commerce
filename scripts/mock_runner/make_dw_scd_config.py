@@ -1,6 +1,6 @@
 """Build docs/mock-design/examples/scenarios/dw-scd-2026.json from dw-lite-2026.json.
 
-Purpose (DW plan step 1.0): from 2026-01-30 on, generate dimension changes for SCD 1/2/3
+Purpose (DW plan step 1.0): from 2026-01-25 on, generate dimension changes for SCD 1/2/3
 and multi-channel ad spend. Engine code is unchanged; only the scenario config differs.
 Deterministic: no randomness here; the engine's seeded RNG picks targets.
 
@@ -12,7 +12,7 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 SCEN = ROOT / "docs/mock-design/examples/scenarios"
-SWITCH = dt.date(2026, 1, 30)  # first day simulated with this config
+SWITCH = dt.date(2026, 1, 25)  # first day simulated with this config
 END = dt.date(2026, 12, 31)
 
 src = json.loads((SCEN / "dw-lite-2026.json").read_text(encoding="utf-8"))
@@ -62,11 +62,11 @@ enable("MGR-01", "catalog-team-3", count=1, params={"reason": "Xét hạng đị
     v("Lên Mall", 2, tier="Mall")])
 enable("SEL-03", "sellers", special={d: 1 for d in days(4)}, variants=PROVINCES)
 enable("MGR-02", "catalog-team-3",
-       special={d: 1 for d in ["2026-03-16", "2026-06-15", "2026-09-15", "2026-12-15"]},
+       special={d: 1 for d in ["2026-01-27", "2026-03-16", "2026-06-15", "2026-09-15", "2026-12-15"]},
        params={"reason": "Vi phạm chính sách mô phỏng"})
 
 # --- SCD1 seller: đổi tên shop (tên tự sinh), giữ SEL-02 (liên hệ) đang có ------------
-enable("SEL-01", "sellers", special={d: 1 for d in days(10, 3)})
+enable("SEL-01", "sellers", special={d: 1 for d in days(10, 1)})
 
 # --- Quảng cáo đa kênh: 3 chiến dịch (WEB/APP/LIVESTREAM) mỗi đợt, ngân sách đủ 31 ngày --
 mkt = cfg["MKT-01"]
@@ -83,7 +83,7 @@ mkt["variants"] = [
 mkt["special"] = {d: 3 for d, n in mkt.get("special", {}).items() if n and d >= SWITCH.isoformat()}
 cfg["ADS-01"]["count"] = 4  # mỗi chiến dịch đang chạy tối đa 1 báo cáo/ngày
 
-src["name"] = "DW 2026 · SCD + quảng cáo đa kênh (áp dụng từ 30/01)"
+src["name"] = "DW 2026 · SCD + quảng cáo đa kênh (áp dụng từ 25/01)"
 out = SCEN / "dw-scd-2026.json"
 out.write_text(json.dumps(src, ensure_ascii=False, indent=2), encoding="utf-8")
 print("written", out)

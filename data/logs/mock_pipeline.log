@@ -67,3 +67,4 @@
 2026-11-07 23:21:36 run RUNNING day 2026-01-01 done 179 rejected 10 CUS-WEB-01 · Bắt đầu phiên truy cập
 2026-11-08 00:01:41 run RUNNING day 2026-01-02 done 11082 rejected 67 CUS-WEB-01 · Bắt đầu phiên truy cập
 2026-11-08 00:15:31 run RUNNING day 2026-01-03 done 14984 rejected 140 CUS-WEB-01 · Bắt đầu phiên truy cập
+nohup: failed to run command '.venv/bin/python'$'\r': No such file or directory

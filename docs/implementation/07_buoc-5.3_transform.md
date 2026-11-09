@@ -161,3 +161,22 @@ Kiểm tra mức bảng: DQ-14 0 chu trình; DQ-18 **219.067 cặp ngày liên t
   - nạp fact và bridge (tra khóa theo thời điểm, −1/0, upsert theo khóa nghiệp vụ);
   - đối soát RC-01..07;
   - batch 1 → `SUCCESS`.
+
+## 9. Chạy lại cho batch 4 (08/11/2026 10:45)
+
+**Lệnh:** `bash dw/etl/run.sh transform --batch 4`. Phải ghi rõ `--batch`, vì batch 2 cũ cũng đang ở trạng thái EXTRACTED.
+
+**Kết quả:** batch 4 → `TRANSFORMED` trong 19,8 s. Đọc 234.927 dòng, ghi 234.927 dòng, 0 dòng bị loại hoặc cách ly, 0 trùng lặp; mọi thực thể đều cân (`balanced=true`).
+
+| Thực thể | Đọc | Hợp lệ | WARN |
+|---|---:|---:|---:|
+| category | 77 | 49 | 28 (DQ-12: node chưa có tên, vẫn giữ) |
+| product / seller / customer | 3.532 / 481 / 10.361 | toàn bộ | 0 |
+| order_item_sales | 1.195 | 1.195 | 0 |
+| order_item_promotion | 188 | 188 | 0 |
+| inventory_daily | 219.067 | 219.067 | 0 (DQ-18 kiểm 200.810 dòng, 0 lỗi) |
+| ad_spend_daily | 8 | 8 | 0 |
+
+So với batch 1 (cửa sổ đến 13/01): số dòng ít hơn vì cửa sổ ngắn hơn 1 ngày; không còn 9 cảnh báo DQ-15. `audit.quarantine` có 28 bản ghi mức WARN của DQ-12, chỉ để truy vết, không loại khỏi kho.
+
+**Tiếp theo:** bước 08, Load (5.4–5.6) cho batch 4 → `SUCCESS`; các batch sau chạy tăng dần theo `last_day`.

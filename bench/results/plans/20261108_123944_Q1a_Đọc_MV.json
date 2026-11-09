@@ -1,0 +1,77 @@
+[
+ {
+  "Plan": {
+   "Node Type": "Sort",
+   "Parallel Aware": false,
+   "Async Capable": false,
+   "Startup Cost": 33.41,
+   "Total Cost": 34.7,
+   "Plan Rows": 516,
+   "Plan Width": 32,
+   "Actual Startup Time": 0.422,
+   "Actual Total Time": 0.469,
+   "Actual Rows": 516,
+   "Actual Loops": 1,
+   "Sort Key": [
+    "month_key",
+    "category_key"
+   ],
+   "Sort Method": "quicksort",
+   "Sort Space Used": 64,
+   "Sort Space Type": "Memory",
+   "Shared Hit Blocks": 0,
+   "Shared Read Blocks": 5,
+   "Shared Dirtied Blocks": 0,
+   "Shared Written Blocks": 0,
+   "Local Hit Blocks": 0,
+   "Local Read Blocks": 0,
+   "Local Dirtied Blocks": 0,
+   "Local Written Blocks": 0,
+   "Temp Read Blocks": 0,
+   "Temp Written Blocks": 0,
+   "Plans": [
+    {
+     "Node Type": "Seq Scan",
+     "Parent Relationship": "Outer",
+     "Parallel Aware": false,
+     "Async Capable": false,
+     "Relation Name": "mv_sales_month_category_scaled",
+     "Alias": "mv_sales_month_category_scaled",
+     "Startup Cost": 0.0,
+     "Total Cost": 10.16,
+     "Plan Rows": 516,
+     "Plan Width": 32,
+     "Actual Startup Time": 0.046,
+     "Actual Total Time": 0.265,
+     "Actual Rows": 516,
+     "Actual Loops": 1,
+     "Shared Hit Blocks": 0,
+     "Shared Read Blocks": 5,
+     "Shared Dirtied Blocks": 0,
+     "Shared Written Blocks": 0,
+     "Local Hit Blocks": 0,
+     "Local Read Blocks": 0,
+     "Local Dirtied Blocks": 0,
+     "Local Written Blocks": 0,
+     "Temp Read Blocks": 0,
+     "Temp Written Blocks": 0
+    }
+   ]
+  },
+  "Planning": {
+   "Shared Hit Blocks": 0,
+   "Shared Read Blocks": 0,
+   "Shared Dirtied Blocks": 0,
+   "Shared Written Blocks": 0,
+   "Local Hit Blocks": 0,
+   "Local Read Blocks": 0,
+   "Local Dirtied Blocks": 0,
+   "Local Written Blocks": 0,
+   "Temp Read Blocks": 0,
+   "Temp Written Blocks": 0
+  },
+  "Planning Time": 0.1,
+  "Triggers": [],
+  "Execution Time": 0.571
+ }
+]

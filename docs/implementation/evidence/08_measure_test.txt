@@ -1,0 +1,97 @@
+Cửa sổ kiểm: dữ liệu hoàn tất đến hết 2026-01-12
+
+== A. So từng dòng kết quả: OLTP gốc (tính lại) vs kho
+OK   FOI rows|1195
+OK   FOI orders|1037
+OK   FOI md5 (keys + 20 cot / dong)|7630b5483a4d4489fefb3b34cb18f1ce
+OK   FOI sum qty|list|gross|disc|net|comm|1400|933563412.00|861710245.00|3040000.00|858670245.00|50336826.42
+OK   FOI net theo ngay|20260103|4207200.00
+OK   FOI net theo ngay|20260104|148103809.00
+OK   FOI net theo ngay|20260105|74280470.00
+OK   FOI net theo ngay|20260106|203300848.00
+OK   FOI net theo ngay|20260107|64234750.00
+OK   FOI net theo ngay|20260108|106943524.00
+OK   FOI net theo ngay|20260109|108398322.00
+OK   FOI net theo ngay|20260110|37800450.00
+OK   FOI net theo ngay|20260111|51836204.00
+OK   FOI net theo ngay|20260112|59564668.00
+OK   PROMO disc by promotion_id|1|3040000.00
+OK   INV rows|219067
+OK   INV md5 (sku,kho,ngay + 6 measure)|8df9b69b8d96b3e91d87ab0854aa7e22
+OK   INV sum onhand|reserved|imp|sold|ret|adj|68038406|2821|5671280|1589|1|-21
+OK   INV movement khong co dong ton|0
+OK   AD month|campaign|channel|cost|imp|clicks|days|202601|1|WEB|2932996.00|284450|3205|8
+→ 0 khác biệt
+
+== B. Quy tắc measure trên kho
+== 1. Fact_Order_Item: số dòng VI PHẠM công thức (kỳ vọng 0)
+ dong | gross | list_amount | list_disc | net | commission | seller_net | margin | disc_range | comm_range | cost_null 
+------+-------+-------------+-----------+-----+------------+------------+--------+------------+------------+-----------
+ 1195 |     0 |           0 |         0 |   0 |          0 |          0 |      0 |          0 |          0 |         0
+(1 row)
+
+-- thông tin: dòng có giá niêm yết < giá bán (DQ-11 WARN), dòng lãi gộp ước tính âm
+ list_lt_unit | margin_am 
+--------------+-----------
+            0 |         0
+(1 row)
+
+== 2. cost_amount_est = quantity × unit_cost_est của ĐÚNG phiên bản sản phẩm tại ngày hoàn tất (kỳ vọng 0)
+ mismatch 
+----------
+        0
+(1 row)
+
+== 3. unit_cost_est = round_1000(giá × cost_ratio nhóm danh mục) (PLAN 4.5) (kỳ vọng 0)
+ mismatch 
+----------
+        0
+(1 row)
+
+== 4. Bridge: Σ phân bổ = Σ discount dòng có voucher; dòng không voucher không có giảm giá; Σ weight = 1
+     phan_bo      | discount_dong_co_voucher | discount_dong_khong_voucher | nhom_sai_weight 
+------------------+--------------------------+-----------------------------+-----------------
+ 3040000.00000000 |               3040000.00 |                        0.00 |               0
+(1 row)
+
+== 5. Fact_Inventory_Snapshot: công thức (kỳ vọng 0)
+  dong  | available | stockout | dong_chay_am 
+--------+-----------+----------+--------------
+ 219067 |         0 |        0 |            0
+(1 row)
+
+ inventory_value_mismatch 
+--------------------------
+                        0
+(1 row)
+
+-- tính liên tục: tồn(d) = tồn(d-1) + nhập − bán + trả + điều chỉnh (kỳ vọng broken = 0)
+ checked | broken 
+---------+--------
+  200810 |      0
+(1 row)
+
+== 6. Semi-additive: tồn cuối kỳ = ngày cuối kỳ, KHÁC SUM qua ngày
+ ton_cuoi_ky_dung | sum_qua_ngay_sai 
+------------------+------------------
+          5669671 |         68038406
+(1 row)
+
+== 7. Non-additive: tính lại từ tử/mẫu ở cấp ngày = tính trực tiếp từ atomic; trung bình của tỷ lệ là SAI
+ aov_tu_tong_ngay | aov_atomic | aov_tb_cac_ngay_sai | hoa_hong_hieu_dung | avg_rate_sai 
+------------------+------------+---------------------+--------------------+--------------
+        828033.02 |  828033.02 |           784419.96 |           0.058622 |     0.056946
+(1 row)
+
+== 8. Fact_Ad_Spend: ràng buộc và KPI
+ imp_lt_clicks | days_bad |   ctr    |  cpc   |   cpm    
+---------------+----------+----------+--------+----------
+             0 |        0 | 0.011267 | 915.13 | 10311.11
+(1 row)
+
+== 9. Hai mốc thời gian bán hàng (kỳ vọng KHÁC nhau, PLAN 4.8.3): xuất kho theo ngày vs số món hoàn tất
+ xuat_kho_sale | so_mon_hoan_tat 
+---------------+-----------------
+          1589 |            1400
+(1 row)
+

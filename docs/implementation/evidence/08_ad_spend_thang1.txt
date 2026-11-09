@@ -1,0 +1,78 @@
+Kiểm tra fact_ad_spend sau batch 7 (dữ liệu đến 31/01/2026), 09/11/2026 14:19
+Nguồn: D:/PTIT/mock_run/etl_jan.sh, etl_jan.sql, etl_jan_src.sql
+
+start 14:15:13
+last_day=2026-01-31 at 14:18:59
+{"ts": "2026-11-09 14:19:12", "event": "batch_extracted", "batch_id": 7, "sec": 10.1}
+batch 7
+{"ts": "2026-11-09 14:19:23", "event": "batch_transformed", "batch_id": 7, "read": 51708, "written": 51708, "quarantined": 0, "dedup": 0, "sec": 8.3}
+{"ts": "2026-11-09 14:19:37", "event": "batch_success", "batch_id": 7, "sec": 12.3}
+{"ts": "2026-11-09 14:19:40", "event": "mart_refreshed", "batch_id": 7, "sec": 2.9, "mvs": {"mv_sales_day_product": 2974, "mv_sales_month_category": 85, "mv_sales_month_channel": 2, "mv_sales_month_seller_tier": 381, "mv
+Pager usage is off.
+===== A. dwh: fact_ad_spend
+ month_key |  campaign_code  |  campaign_type  | channel_name | cost_amount | impressions | clicks | active_days | batch_id 
+-----------+-----------------+-----------------+--------------+-------------+-------------+--------+-------------+----------
+    202601 | CMPd001962285cf | Brand Awareness | Web          |  2932996.00 |      284450 |   3205 |           8 |        4
+(1 row)
+
+===== B. dwh: doi soat batch moi nhat
+ batch_id | status  | watermark_from | watermark_to 
+----------+---------+----------------+--------------
+        7 | SUCCESS | 2026-01-29     | 2026-01-31
+(1 row)
+
+ check_code | source_value | target_value | passed 
+------------+--------------+--------------+--------
+ RC-05      |            0 |            0 | t
+ RC-06      |            0 |            0 | t
+ RC-07      |        51708 |        51708 | t
+(3 rows)
+
+ rule_code | severity | count 
+-----------+----------+-------
+ DQ-12     | WARN     |    28
+ DQ-15     | WARN     |     5
+(2 rows)
+
+===== C. dwh: staging ngay (chi phi theo ngay)
+ min | max | count | days | cost | imp | clk 
+-----+-----+-------+------+------+-----+-----
+     |     |     0 |    0 |      |     |    
+(1 row)
+
+===== D. dwh: fact_ad_spend vs fact_order_item thang 1 (drill-across)
+ month_key | month_label | channel_key | channel_name | marketing_code |  net_revenue  | orders | campaign_net_revenue | cost_amount | impressions | clicks | revenue_per_ad_cost |   ctr    |  cpc   | missing_sales | missing_ads 
+-----------+-------------+-------------+--------------+----------------+---------------+--------+----------------------+-------------+-------------+--------+---------------------+----------+--------+---------------+-------------
+    202601 | T01/2026    |           1 | Web          | WEB            | 2070991883.00 |   2193 |         735684275.00 |  2932996.00 |      284450 |   3205 |              706.10 | 0.011267 | 915.13 | f             | f
+    202601 | T01/2026    |           2 | App          | APP            |  519946374.00 |    803 |                    0 |             |             |        |                     |          |        | f             | t
+(2 rows)
+
+===== E. rang buoc: du lieu khong hop le (ky vong 0)
+ imp_lt_clk | neg_cost | days_gt_31 | unknown_keys 
+------------+----------+------------+--------------
+          0 |        0 |          0 |            0
+(1 row)
+
+Pager usage is off.
+===== F. mock_oltp: ad_spend_logs goc, thang 1
+ campaign_id | channel_code |   m    | rows | days | first_day  |  last_day  |      cost      |  imp   | clk  
+-------------+--------------+--------+------+------+------------+------------+----------------+--------+------
+           1 | WEB          | 202601 |    8 |    8 | 2026-01-01 | 2026-01-10 | 2932996.000000 | 284450 | 3205
+(1 row)
+
+===== G. mock_oltp: chien dich
+ id |  campaign_code  |  campaign_type  | target_channel_code |  budget_amount  | start_date |  end_date  
+----+-----------------+-----------------+---------------------+-----------------+------------+------------
+  1 | CMPd001962285cf | Brand Awareness | WEB                 |  3000000.000000 | 2026-01-01 | 2026-02-01
+  2 | CMP4126c1405e30 | Brand Awareness | WEB                 | 12000000.000000 | 2026-02-01 | 2026-03-04
+  3 | CMP3004360477f5 | Retargeting     | APP                 | 12000000.000000 | 2026-02-01 | 2026-03-04
+  4 | CMPb06bc1e6a85b | Livestream Show | LIVESTREAM          | 12000000.000000 | 2026-02-01 | 2026-03-04
+(4 rows)
+
+===== H. mock_oltp: don trong thang 1 theo campaign
+ orders_with_campaign 
+----------------------
+                  726
+(1 row)
+
+done 14:19:40

@@ -1,0 +1,599 @@
+Kho dwh — batch SUCCESS mới nhất: #7 (dữ liệu đến hết 2026-01-31)
+
+
+=== T1 ===
+PASS T1.1   fact_order_item có khóa chính
+            → PRIMARY KEY (date_key, source_system, order_id, line_number)
+PASS T1.1   fact_inventory_snapshot có khóa chính
+            → PRIMARY KEY (date_key, product_key, warehouse_key)
+PASS T1.1   fact_ad_spend có khóa chính
+            → PRIMARY KEY (month_key, campaign_key, channel_key)
+PASS T1.2   fact_order_item: mọi cột *_key (11) có FK tới dimension
+            → campaign_key→dim_campaign, category_key→dim_category, channel_key→dim_channel, customer_key→dim_customer, customer_profile_key→dim_customer_profile, date_key→dim_date, order_date_key→dim_date, payment_method_key→dim_payment_method, product_key→dim_product, promotion_group_key→dim_promotion_group, seller_key→dim_seller
+PASS T1.2   fact_inventory_snapshot: mọi cột *_key (4) có FK tới dimension
+            → category_key→dim_category, date_key→dim_date, product_key→dim_product, warehouse_key→dim_warehouse
+PASS T1.2   fact_ad_spend: mọi cột *_key (3) có FK tới dimension
+            → campaign_key→dim_campaign, channel_key→dim_channel, month_key→dim_month
+PASS T1.3   Grain fact_order_item: count(*) = count(distinct khóa nghiệp vụ (source_system, order_id, line_number))
+            → 3419 = 3419
+PASS T1.3   Grain fact_inventory_snapshot: 1 dòng / (ngày, sản phẩm nghiệp vụ, kho)
+            → 565982 = 565982
+PASS T1.3   Grain fact_ad_spend: 1 dòng / (tháng, chiến dịch, kênh)
+            → 1 = 1
+PASS T1.4   Từ điển dữ liệu phủ 100% cột của schema dw (không tính partition con)
+            → 200/200 cột có mô tả
+PASS T1.5   Mọi dimension và bridge có khóa chính
+PASS T1.6   Mọi FK trong dw đã được validate
+            → 0 FK chưa validate
+PASS T1.7   Bridge khuyến mãi: Σ weighting_factor = 1 trên từng promotion_group
+            → 0 nhóm sai
+PASS T1.7   Bridge khuyến mãi: Σ giảm giá phân bổ = Σ discount_amount của dòng có voucher
+            → 3040000.00000000 vs 3040000.00
+
+=== T2 ===
+PASS T2.1   Batch 4: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 5: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 6: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 7: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.2   Mọi dòng cách ly có reason, rule_code, source_table và payload
+            → 224 dòng cách ly, 0 thiếu thông tin
+PASS T2.3   0 dòng fact có khóa ngoại mồ côi (truy vấn độc lập với RC-06)
+            → 0 dòng
+PASS T2.4   Khóa 0 (chưa xác định) được đếm đúng và hiển thị trên màn hình Chất lượng dữ liệu
+            → đếm độc lập 5 = mart.v_unknown_keys 5; dashboard truy vấn view: True
+PASS T2.5   Tỷ lệ cách ly của mọi bảng ở các batch SUCCESS ≤ 5% (ngưỡng cấu hình)
+            → cao nhất: batch 4 bảng category = 0.00%
+PASS T2.6   Batch 3 (cùng dữ liệu batch 1 + lỗi chèn có chủ đích) bị cách ly nhiều hơn batch 1 — lỗi nguồn được bắt
+            → batch 1: 37 dòng; batch 3: 67 dòng
+PASS T2.7   RC-07 theo bảng: đọc = hợp lệ + cảnh báo + cách ly + trùng bị loại (mọi batch, mọi bảng)
+            → 0 dòng log lệch
+
+=== T3 ===
+SKIP T3     Nạp lại batch (idempotent) và giả lập lỗi giữa batch
+            → bỏ qua (--quick)
+
+=== T4 ===
+PASS T4.1   dim_product: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 3542 phiên bản, 8 phiên bản thêm do thay đổi SCD2
+PASS T4.1   dim_seller: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 491 phiên bản, 8 phiên bản thêm do thay đổi SCD2
+PASS T4.1   dim_customer: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 10860 phiên bản, 14 phiên bản thêm do thay đổi SCD2
+PASS T4.2   Mọi dòng fact_order_item gắn seller_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_order_item gắn product_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_order_item gắn customer_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_inventory_snapshot gắn product_key đúng phiên bản tại ngày snapshot
+            → 0 dòng sai phiên bản
+PASS T4.3   Ca cụ thể: seller đã đổi hạng — fact trước ngày đổi gắn phiên bản cũ, từ ngày đổi gắn phiên bản mới
+            → seller 9455: Normal (13 dòng, đến 20260124) → Mall từ 2026-01-25 (3 dòng, từ 20260129); seller 332670: Normal (33 dòng, đến 20260126) → Mall từ 2026-01-28 (2 dòng, từ 20260129)
+PASS T4.4   SCD3 dim_seller_tier_t3 khớp lịch sử SCD2 (current_tier = phiên bản hiện hành; previous_tier = hạng của phiên bản ngay trước ngày đổi)
+            → current sai 0, previous sai 0
+SKIP T4.5   Kịch bản có kiểm soát SCD1/SCD2/SCD3 + đến muộn (test_scd_load, rollback)
+            → bỏ qua (--quick)
+
+=== T5 ===
+FAIL T5.1   Mart = truy vấn độc lập trên fact atomic (test_mart.sql)
+            → 19/21 PASS; sai: ['MV tồn kho: Σ tồn cuối tháng (ngày snapshot cuối)', 'Khóa 0 trên fact (thông tin)']
+PASS T5.2   Drill-across bán hàng – quảng cáo giữ nhóm chỉ có một phía và không nhân đôi doanh thu/chi phí
+            → 2 nhóm (tháng,kênh): 1 chỉ có bán, 0 chỉ có QC; Σ doanh thu 2590938257.00 = fact 2590938257.00; Σ chi phí 2932996.00 = fact 2932996.00
+PASS T5.3   Semi-additive: tồn kho cuối kỳ = tồn ngày cuối kỳ (mart = độc lập), KHÔNG bằng tổng qua các ngày
+            → cuối kỳ (ngày 20260131): 5669223; mart: 5669223; SUM qua ngày (sai): 175754845
+PASS T5.4   Non-additive: AOV tính lại từ tử/mẫu = AOV atomic; trung bình các AOV ngày (sai) cho giá trị khác
+            → từ tổng 864799.15 = atomic 864799.15; trung bình ngày (sai) 833167.40
+PASS T5.5   Cây danh mục: không chu trình, không tự làm cha
+            → tự làm cha 0, chu trình 0
+PASS T5.6   Cây danh mục: doanh thu cây con qua bridge = tính độc lập theo path_ids; Σ các nút gốc = tổng (không cộng lặp)
+            → 77 nút so sánh, 0 lệch; Σ nút gốc 2590938257.00 = tổng fact 2590938257.00
+PASS T5.7   Mini-dimension: hồ sơ khách tính theo trạng thái TRƯỚC giao dịch (tính lại độc lập; dòng ngày mua đầu tiên → 'Chưa mua / 0 đơn')
+            → 1513 dòng, 0 lệch; ngày mua đầu tiên: 1320/1320 dòng ở bucket 'Chưa mua'
+SKIP T5.8   Dashboard: 5 màn hình chạy không lỗi, KPI = SQL độc lập (test_app.py)
+            → bỏ qua (--quick)
+SKIP T5.9   File CSV xuất ra = bảng hiển thị trên từng màn hình
+            → bỏ qua (--quick)
+
+=== T6 ===
+PASS T6.1   Đủ BM01, BM02, BM03 trong lần đo mới nhất
+            → 26 cấu hình đo, lần đo 20261108_123944
+PASS T6.2   Kết quả mọi biến thể trùng hash với baseline (kết quả tương đương trước khi đo)
+            → 26/26 trùng
+PASS T6.3   Có plan EXPLAIN JSON, lượt đo thô CSV và kích thước đối tượng
+            → 26 plan JSON, 390 lượt đo thô, 12 đối tượng có kích thước
+PASS T6.4   p95 ≤ 3 s trên ~2 triệu dòng ở phương án tối ưu của MỌI truy vấn (baseline vượt 3 s được MV/index/partition xử lý)
+            → p95 tốt nhất theo truy vấn (ms): {'Q1a': 2.8, 'Q1b': 2.3, 'Q1c': 3.2, 'Q2a': 187.4, 'Q2b': 14.9, 'Q2c': 121.3, 'Q2d': 800.8, 'Q3a': 1.9, 'Q3b': 12.8, 'Q3c': 48.7}; baseline vượt 3 s: ['Q1a']
+PASS T6.5   Quy mô dữ liệu đo ≥ 2 triệu dòng (bảng nhân bản có seed, ghi rõ không phục vụ báo cáo)
+            → bench.foi_noidx = 2007600 dòng
+
+=== T7 ===
+FAIL T7.1   README.md nêu seed, phiên bản cấu hình mock, settings, lệnh chạy mock, lệnh ETL, kiểm thử, log batch
+            → thiếu: ['seed 42', 'dw-scd-2026', 'medium-ecommerce', 'start_all.sh', 'run.sh extract', 'run.sh transform', 'run.sh load', 'run_tests', 'batch_log', 'etl.log', 'docker']
+FAIL T7.2   Mọi đường dẫn tệp nêu trong README đều tồn tại
+            → 0 đường dẫn
+PASS T7.3   Mỗi batch SUCCESS ghi mốc nguồn (source_snapshot) và thời gian từng bước vào batch_log
+            → #4: mock last_day=2026-01-12; #5: mock last_day=2026-01-25; #6: mock last_day=2026-01-29; #7: mock last_day=2026-01-31
+PASS T7.4   Tái lập Extract: nạp lại cùng mốc (batch 1 và batch 2) cho checksum trùng ở mọi bảng
+            → 19/19 bảng trùng checksum
+PASS T7.5   Mỗi bước có ghi chép triển khai trong docs/implementation (đủ 8 mục) và bằng chứng chạy thật
+            → 14 tệp ghi chép, 12 tệp bằng chứng
+
+=== TỔNG KẾT ===
+T1: 14 PASS, 0 FAIL, 0 SKIP  / 14
+T2: 10 PASS, 0 FAIL, 0 SKIP  / 10
+T3: 0 PASS, 0 FAIL, 1 SKIP  / 1
+T4: 9 PASS, 0 FAIL, 1 SKIP  / 10
+T5: 6 PASS, 1 FAIL, 2 SKIP  / 9
+T6: 5 PASS, 0 FAIL, 0 SKIP  / 5
+T7: 3 PASS, 2 FAIL, 0 SKIP  / 5
+
+Tổng: 47 PASS, 3 FAIL, 4 SKIP — 141 s
+Kho dwh — batch SUCCESS mới nhất: #7 (dữ liệu đến hết 2026-01-31)
+
+
+=== T1 ===
+PASS T1.1   fact_order_item có khóa chính
+            → PRIMARY KEY (date_key, source_system, order_id, line_number)
+PASS T1.1   fact_inventory_snapshot có khóa chính
+            → PRIMARY KEY (date_key, product_key, warehouse_key)
+PASS T1.1   fact_ad_spend có khóa chính
+            → PRIMARY KEY (month_key, campaign_key, channel_key)
+PASS T1.2   fact_order_item: mọi cột *_key (11) có FK tới dimension
+            → campaign_key→dim_campaign, category_key→dim_category, channel_key→dim_channel, customer_key→dim_customer, customer_profile_key→dim_customer_profile, date_key→dim_date, order_date_key→dim_date, payment_method_key→dim_payment_method, product_key→dim_product, promotion_group_key→dim_promotion_group, seller_key→dim_seller
+PASS T1.2   fact_inventory_snapshot: mọi cột *_key (4) có FK tới dimension
+            → category_key→dim_category, date_key→dim_date, product_key→dim_product, warehouse_key→dim_warehouse
+PASS T1.2   fact_ad_spend: mọi cột *_key (3) có FK tới dimension
+            → campaign_key→dim_campaign, channel_key→dim_channel, month_key→dim_month
+PASS T1.3   Grain fact_order_item: count(*) = count(distinct khóa nghiệp vụ (source_system, order_id, line_number))
+            → 3419 = 3419
+PASS T1.3   Grain fact_inventory_snapshot: 1 dòng / (ngày, sản phẩm nghiệp vụ, kho)
+            → 565982 = 565982
+PASS T1.3   Grain fact_ad_spend: 1 dòng / (tháng, chiến dịch, kênh)
+            → 1 = 1
+PASS T1.4   Từ điển dữ liệu phủ 100% cột của schema dw (không tính partition con)
+            → 200/200 cột có mô tả
+PASS T1.5   Mọi dimension và bridge có khóa chính
+PASS T1.6   Mọi FK trong dw đã được validate
+            → 0 FK chưa validate
+PASS T1.7   Bridge khuyến mãi: Σ weighting_factor = 1 trên từng promotion_group
+            → 0 nhóm sai
+PASS T1.7   Bridge khuyến mãi: Σ giảm giá phân bổ = Σ discount_amount của dòng có voucher
+            → 3040000.00000000 vs 3040000.00
+
+=== T2 ===
+PASS T2.1   Batch 4: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 5: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 6: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 7: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.2   Mọi dòng cách ly có reason, rule_code, source_table và payload
+            → 224 dòng cách ly, 0 thiếu thông tin
+PASS T2.3   0 dòng fact có khóa ngoại mồ côi (truy vấn độc lập với RC-06)
+            → 0 dòng
+PASS T2.4   Khóa 0 (chưa xác định) được đếm đúng và hiển thị trên màn hình Chất lượng dữ liệu
+            → đếm độc lập 5 = mart.v_unknown_keys 5; dashboard truy vấn view: True
+PASS T2.5   Tỷ lệ cách ly của mọi bảng ở các batch SUCCESS ≤ 5% (ngưỡng cấu hình)
+            → cao nhất: batch 4 bảng category = 0.00%
+PASS T2.6   Batch 3 (cùng dữ liệu batch 1 + lỗi chèn có chủ đích) bị cách ly nhiều hơn batch 1 — lỗi nguồn được bắt
+            → batch 1: 37 dòng; batch 3: 67 dòng
+PASS T2.7   RC-07 theo bảng: đọc = hợp lệ + cảnh báo + cách ly + trùng bị loại (mọi batch, mọi bảng)
+            → 0 dòng log lệch
+
+=== T3 ===
+PASS T3.1   Nạp lại batch 7 (--reload) lần 1: số dòng, Σ tiền và băm nội dung không đổi
+            → mã thoát 0, 14.0 s; fact_order_item 3419 dòng, Σ net 2590938257.00, md5 85eae95dbb24…
+PASS T3.1   Nạp lại batch 7 (--reload) lần 2: số dòng, Σ tiền và băm nội dung không đổi
+            → mã thoát 0, 10.6 s; fact_order_item 3419 dòng, Σ net 2590938257.00, md5 85eae95dbb24…
+PASS T3.2   Sau 2 lần nạp lại: batch 7 vẫn SUCCESS và mọi đối soát đạt
+            → status=SUCCESS, đối soát đạt=True
+PASS T3.3   Giả lập lỗi giữa batch (sau khi nạp dimension + fact): ROLLBACK, dw không đổi
+            → lỗi bắt được: 'giả lập lỗi giữa batch (T3)'; khác biệt: []
+PASS T3.4   Giả lập lỗi giữa batch: mart không được refresh và không đổi, batch SUCCESS giữ nguyên
+            → mart_batch/refreshed_at trước=(7, datetime.datetime(2026, 11, 9, 15, 1, 36, 155850)) sau=(7, datetime.datetime(2026, 11, 9, 15, 1, 36, 155850)); status=SUCCESS
+
+=== T4 ===
+PASS T4.1   dim_product: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 3542 phiên bản, 8 phiên bản thêm do thay đổi SCD2
+PASS T4.1   dim_seller: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 491 phiên bản, 8 phiên bản thêm do thay đổi SCD2
+PASS T4.1   dim_customer: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 10860 phiên bản, 14 phiên bản thêm do thay đổi SCD2
+PASS T4.2   Mọi dòng fact_order_item gắn seller_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_order_item gắn product_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_order_item gắn customer_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_inventory_snapshot gắn product_key đúng phiên bản tại ngày snapshot
+            → 0 dòng sai phiên bản
+PASS T4.3   Ca cụ thể: seller đã đổi hạng — fact trước ngày đổi gắn phiên bản cũ, từ ngày đổi gắn phiên bản mới
+            → seller 9455: Normal (13 dòng, đến 20260124) → Mall từ 2026-01-25 (3 dòng, từ 20260129); seller 332670: Normal (33 dòng, đến 20260126) → Mall từ 2026-01-28 (2 dòng, từ 20260129)
+PASS T4.4   SCD3 dim_seller_tier_t3 khớp lịch sử SCD2 (current_tier = phiên bản hiện hành; previous_tier = hạng của phiên bản ngay trước ngày đổi)
+            → current sai 0, previous sai 0
+PASS T4.5   Kịch bản có kiểm soát: SCD1 không tăng phiên bản, SCD2 đóng/mở, SCD3, cùng ngày sửa tại chỗ, đến muộn → DQ-23 (rollback)
+            → 10/10 PASS; kho không đổi
+
+=== T5 ===
+PASS T5.1   Mart = truy vấn độc lập trên fact atomic (test_mart.sql)
+            → 20/20 PASS; thông tin: ['Khóa 0 trên fact (thông tin) = 5']
+PASS T5.2   Drill-across bán hàng – quảng cáo giữ nhóm chỉ có một phía và không nhân đôi doanh thu/chi phí
+            → 2 nhóm (tháng,kênh): 1 chỉ có bán, 0 chỉ có QC; Σ doanh thu 2590938257.00 = fact 2590938257.00; Σ chi phí 2932996.00 = fact 2932996.00
+PASS T5.3   Semi-additive: tồn kho cuối kỳ = tồn ngày cuối kỳ (mart = độc lập), KHÔNG bằng tổng qua các ngày
+            → cuối kỳ (ngày 20260131): 5669223; mart: 5669223; SUM qua ngày (sai): 175754845
+PASS T5.4   Non-additive: AOV tính lại từ tử/mẫu = AOV atomic; trung bình các AOV ngày (sai) cho giá trị khác
+            → từ tổng 864799.15 = atomic 864799.15; trung bình ngày (sai) 833167.40
+PASS T5.5   Cây danh mục: không chu trình, không tự làm cha
+            → tự làm cha 0, chu trình 0
+PASS T5.6   Cây danh mục: doanh thu cây con qua bridge = tính độc lập theo path_ids; Σ các nút gốc = tổng (không cộng lặp)
+            → 77 nút so sánh, 0 lệch; Σ nút gốc 2590938257.00 = tổng fact 2590938257.00
+PASS T5.7   Mini-dimension: hồ sơ khách tính theo trạng thái TRƯỚC giao dịch (tính lại độc lập; dòng ngày mua đầu tiên → 'Chưa mua / 0 đơn')
+            → 1513 dòng, 0 lệch; ngày mua đầu tiên: 1320/1320 dòng ở bucket 'Chưa mua'
+PASS T5.8   Dashboard: 5 màn hình chạy không lỗi, KPI hiển thị và bộ lọc = SQL độc lập (test_app.py)
+            → 9 kiểm tra PASS
+2026-11-09 15:02:52.979 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:02:52.980 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:03:07.805 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:03:07.806 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:03:08.570 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:03:08.570 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:03:09.174 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:03:09.174 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:03:10.071 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:03:10.071 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+PASS T5.9   File CSV xuất ra có đúng cột, đúng số dòng của bảng hiển thị (mọi nút xuất CSV trên 5 màn hình)
+            → 24/24 nút CSV khớp bảng
+
+=== T6 ===
+PASS T6.1   Đủ BM01, BM02, BM03 trong lần đo mới nhất
+            → 26 cấu hình đo, lần đo 20261108_123944
+PASS T6.2   Kết quả mọi biến thể trùng hash với baseline (kết quả tương đương trước khi đo)
+            → 26/26 trùng
+PASS T6.3   Có plan EXPLAIN JSON, lượt đo thô CSV và kích thước đối tượng
+            → 26 plan JSON, 390 lượt đo thô, 12 đối tượng có kích thước
+PASS T6.4   p95 ≤ 3 s trên ~2 triệu dòng ở phương án tối ưu của MỌI truy vấn (baseline vượt 3 s được MV/index/partition xử lý)
+            → p95 tốt nhất theo truy vấn (ms): {'Q1a': 2.8, 'Q1b': 2.3, 'Q1c': 3.2, 'Q2a': 187.4, 'Q2b': 14.9, 'Q2c': 121.3, 'Q2d': 800.8, 'Q3a': 1.9, 'Q3b': 12.8, 'Q3c': 48.7}; baseline vượt 3 s: ['Q1a']
+PASS T6.5   Quy mô dữ liệu đo ≥ 2 triệu dòng (bảng nhân bản có seed, ghi rõ không phục vụ báo cáo)
+            → bench.foi_noidx = 2007600 dòng
+
+=== T7 ===
+FAIL T7.1   README.md nêu seed, phiên bản cấu hình mock, settings, lệnh chạy mock, lệnh ETL, kiểm thử, log batch
+            → thiếu: ['seed 42']
+FAIL T7.2   Mọi đường dẫn tệp nêu trong README đều tồn tại
+            → 12 đường dẫn; không thấy: ['config.py', 'extract.py', 'inject_test_errors.py', 'load.py', 'run_tests.py', 'test_mart.sql', 'test_scd_load.py', 'transform.py']
+PASS T7.3   Mỗi batch SUCCESS ghi mốc nguồn (source_snapshot) và thời gian từng bước vào batch_log
+            → #4: mock last_day=2026-01-12; #5: mock last_day=2026-01-25; #6: mock last_day=2026-01-29; #7: mock last_day=2026-01-31
+PASS T7.4   Tái lập Extract: nạp lại cùng mốc (batch 1 và batch 2) cho checksum trùng ở mọi bảng
+            → 19/19 bảng trùng checksum
+PASS T7.5   Mỗi bước có ghi chép triển khai trong docs/implementation (đủ 8 mục) và bằng chứng chạy thật
+            → 14 tệp ghi chép, 13 tệp bằng chứng
+
+=== TỔNG KẾT ===
+T1: 14 PASS, 0 FAIL, 0 SKIP  / 14
+T2: 10 PASS, 0 FAIL, 0 SKIP  / 10
+T3: 5 PASS, 0 FAIL, 0 SKIP  / 5
+T4: 10 PASS, 0 FAIL, 0 SKIP  / 10
+T5: 9 PASS, 0 FAIL, 0 SKIP  / 9
+T6: 5 PASS, 0 FAIL, 0 SKIP  / 5
+T7: 3 PASS, 2 FAIL, 0 SKIP  / 5
+
+Tổng: 56 PASS, 2 FAIL, 0 SKIP — 137 s
+Kho dwh — batch SUCCESS mới nhất: #7 (dữ liệu đến hết 2026-01-31)
+
+
+=== T7 ===
+PASS T7.1   README.md nêu seed, phiên bản cấu hình mock, settings, lệnh chạy mock, lệnh ETL, kiểm thử, log batch
+            → đủ 11 mục
+PASS T7.2   Mọi đường dẫn tệp nêu trong README đều tồn tại
+            → 12 đường dẫn
+PASS T7.3   Mỗi batch SUCCESS ghi mốc nguồn (source_snapshot) và thời gian từng bước vào batch_log
+            → #4: mock last_day=2026-01-12; #5: mock last_day=2026-01-25; #6: mock last_day=2026-01-29; #7: mock last_day=2026-01-31
+PASS T7.4   Tái lập Extract: nạp lại cùng mốc (batch 1 và batch 2) cho checksum trùng ở mọi bảng
+            → 19/19 bảng trùng checksum
+PASS T7.5   Mỗi bước có ghi chép triển khai trong docs/implementation (đủ 8 mục) và bằng chứng chạy thật
+            → 14 tệp ghi chép, 13 tệp bằng chứng
+
+=== TỔNG KẾT ===
+T7: 5 PASS, 0 FAIL, 0 SKIP  / 5
+
+Tổng: 5 PASS, 0 FAIL, 0 SKIP — 0 s
+Kho dwh — batch SUCCESS mới nhất: #7 (dữ liệu đến hết 2026-01-31)
+
+
+=== T1 ===
+PASS T1.1   fact_order_item có khóa chính
+            → PRIMARY KEY (date_key, source_system, order_id, line_number)
+PASS T1.1   fact_inventory_snapshot có khóa chính
+            → PRIMARY KEY (date_key, product_key, warehouse_key)
+PASS T1.1   fact_ad_spend có khóa chính
+            → PRIMARY KEY (month_key, campaign_key, channel_key)
+PASS T1.2   fact_order_item: mọi cột *_key (11) có FK tới dimension
+            → campaign_key→dim_campaign, category_key→dim_category, channel_key→dim_channel, customer_key→dim_customer, customer_profile_key→dim_customer_profile, date_key→dim_date, order_date_key→dim_date, payment_method_key→dim_payment_method, product_key→dim_product, promotion_group_key→dim_promotion_group, seller_key→dim_seller
+PASS T1.2   fact_inventory_snapshot: mọi cột *_key (4) có FK tới dimension
+            → category_key→dim_category, date_key→dim_date, product_key→dim_product, warehouse_key→dim_warehouse
+PASS T1.2   fact_ad_spend: mọi cột *_key (3) có FK tới dimension
+            → campaign_key→dim_campaign, channel_key→dim_channel, month_key→dim_month
+PASS T1.3   Grain fact_order_item: count(*) = count(distinct khóa nghiệp vụ (source_system, order_id, line_number))
+            → 3419 = 3419
+PASS T1.3   Grain fact_inventory_snapshot: 1 dòng / (ngày, sản phẩm nghiệp vụ, kho)
+            → 565982 = 565982
+PASS T1.3   Grain fact_ad_spend: 1 dòng / (tháng, chiến dịch, kênh)
+            → 1 = 1
+PASS T1.4   Từ điển dữ liệu phủ 100% cột của schema dw (không tính partition con)
+            → 200/200 cột có mô tả
+PASS T1.5   Mọi dimension và bridge có khóa chính
+PASS T1.6   Mọi FK trong dw đã được validate
+            → 0 FK chưa validate
+PASS T1.7   Bridge khuyến mãi: Σ weighting_factor = 1 trên từng promotion_group
+            → 0 nhóm sai
+PASS T1.7   Bridge khuyến mãi: Σ giảm giá phân bổ = Σ discount_amount của dòng có voucher
+            → 3040000.00000000 vs 3040000.00
+
+=== T2 ===
+PASS T2.1   Batch 4: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 5: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 6: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 7: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.2   Mọi dòng cách ly có reason, rule_code, source_table và payload
+            → 224 dòng cách ly, 0 thiếu thông tin
+PASS T2.3   0 dòng fact có khóa ngoại mồ côi (truy vấn độc lập với RC-06)
+            → 0 dòng
+PASS T2.4   Khóa 0 (chưa xác định) được đếm đúng và hiển thị trên màn hình Chất lượng dữ liệu
+            → đếm độc lập 5 = mart.v_unknown_keys 5; dashboard truy vấn view: True
+PASS T2.5   Tỷ lệ cách ly của mọi bảng ở các batch SUCCESS ≤ 5% (ngưỡng cấu hình)
+            → cao nhất: batch 4 bảng category = 0.00%
+PASS T2.6   Batch 3 (cùng dữ liệu batch 1 + lỗi chèn có chủ đích) bị cách ly nhiều hơn batch 1 — lỗi nguồn được bắt
+            → batch 1: 37 dòng; batch 3: 67 dòng
+PASS T2.7   RC-07 theo bảng: đọc = hợp lệ + cảnh báo + cách ly + trùng bị loại (mọi batch, mọi bảng)
+            → 0 dòng log lệch
+
+=== T3 ===
+PASS T3.1   Nạp lại batch 7 (--reload) lần 1: số dòng, Σ tiền và băm nội dung không đổi
+            → mã thoát 0, 11.3 s; fact_order_item 3419 dòng, Σ net 2590938257.00, md5 85eae95dbb24…
+PASS T3.1   Nạp lại batch 7 (--reload) lần 2: số dòng, Σ tiền và băm nội dung không đổi
+            → mã thoát 0, 13.1 s; fact_order_item 3419 dòng, Σ net 2590938257.00, md5 85eae95dbb24…
+PASS T3.2   Sau 2 lần nạp lại: batch 7 vẫn SUCCESS và mọi đối soát đạt
+            → status=SUCCESS, đối soát đạt=True
+PASS T3.3   Giả lập lỗi giữa batch (sau khi nạp dimension + fact): ROLLBACK, dw không đổi
+            → lỗi bắt được: 'giả lập lỗi giữa batch (T3)'; khác biệt: []
+PASS T3.4   Giả lập lỗi giữa batch: mart không được refresh và không đổi, batch SUCCESS giữ nguyên
+            → mart_batch/refreshed_at trước=(7, datetime.datetime(2026, 11, 9, 15, 5, 42, 445775)) sau=(7, datetime.datetime(2026, 11, 9, 15, 5, 42, 445775)); status=SUCCESS
+
+=== T4 ===
+PASS T4.1   dim_product: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 3542 phiên bản, 8 phiên bản thêm do thay đổi SCD2
+PASS T4.1   dim_seller: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 491 phiên bản, 8 phiên bản thêm do thay đổi SCD2
+PASS T4.1   dim_customer: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 10860 phiên bản, 14 phiên bản thêm do thay đổi SCD2
+PASS T4.2   Mọi dòng fact_order_item gắn seller_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_order_item gắn product_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_order_item gắn customer_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_inventory_snapshot gắn product_key đúng phiên bản tại ngày snapshot
+            → 0 dòng sai phiên bản
+PASS T4.3   Ca cụ thể: seller đã đổi hạng — fact trước ngày đổi gắn phiên bản cũ, từ ngày đổi gắn phiên bản mới
+            → seller 9455: Normal (13 dòng, đến 20260124) → Mall từ 2026-01-25 (3 dòng, từ 20260129); seller 332670: Normal (33 dòng, đến 20260126) → Mall từ 2026-01-28 (2 dòng, từ 20260129)
+PASS T4.4   SCD3 dim_seller_tier_t3 khớp lịch sử SCD2 (current_tier = phiên bản hiện hành; previous_tier = hạng của phiên bản ngay trước ngày đổi)
+            → current sai 0, previous sai 0
+PASS T4.5   Kịch bản có kiểm soát: SCD1 không tăng phiên bản, SCD2 đóng/mở, SCD3, cùng ngày sửa tại chỗ, đến muộn → DQ-23 (rollback)
+            → 10/10 PASS; kho không đổi
+
+=== T5 ===
+PASS T5.1   Mart = truy vấn độc lập trên fact atomic (test_mart.sql)
+            → 20/20 PASS; thông tin: ['Khóa 0 trên fact (thông tin) = 5']
+PASS T5.2   Drill-across bán hàng – quảng cáo giữ nhóm chỉ có một phía và không nhân đôi doanh thu/chi phí
+            → 2 nhóm (tháng,kênh): 1 chỉ có bán, 0 chỉ có QC; Σ doanh thu 2590938257.00 = fact 2590938257.00; Σ chi phí 2932996.00 = fact 2932996.00
+PASS T5.3   Semi-additive: tồn kho cuối kỳ = tồn ngày cuối kỳ (mart = độc lập), KHÔNG bằng tổng qua các ngày
+            → cuối kỳ (ngày 20260131): 5669223; mart: 5669223; SUM qua ngày (sai): 175754845
+PASS T5.4   Non-additive: AOV tính lại từ tử/mẫu = AOV atomic; trung bình các AOV ngày (sai) cho giá trị khác
+            → từ tổng 864799.15 = atomic 864799.15; trung bình ngày (sai) 833167.40
+PASS T5.5   Cây danh mục: không chu trình, không tự làm cha
+            → tự làm cha 0, chu trình 0
+PASS T5.6   Cây danh mục: doanh thu cây con qua bridge = tính độc lập theo path_ids; Σ các nút gốc = tổng (không cộng lặp)
+            → 77 nút so sánh, 0 lệch; Σ nút gốc 2590938257.00 = tổng fact 2590938257.00
+PASS T5.7   Mini-dimension: hồ sơ khách tính theo trạng thái TRƯỚC giao dịch (tính lại độc lập; dòng ngày mua đầu tiên → 'Chưa mua / 0 đơn')
+            → 1513 dòng, 0 lệch; ngày mua đầu tiên: 1320/1320 dòng ở bucket 'Chưa mua'
+PASS T5.8   Dashboard: 5 màn hình chạy không lỗi, KPI hiển thị và bộ lọc = SQL độc lập (test_app.py)
+            → 9 kiểm tra PASS
+2026-11-09 15:07:01.627 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:07:01.627 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:07:18.683 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:07:18.683 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:07:19.518 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:07:19.519 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:07:20.196 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:07:20.196 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:07:21.114 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-11-09 15:07:21.114 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+PASS T5.9   File CSV xuất ra có đúng cột, đúng số dòng của bảng hiển thị (mọi nút xuất CSV trên 5 màn hình)
+            → 24/24 nút CSV khớp bảng
+
+=== T6 ===
+PASS T6.1   Đủ BM01, BM02, BM03 trong lần đo mới nhất
+            → 26 cấu hình đo, lần đo 20261108_123944
+PASS T6.2   Kết quả mọi biến thể trùng hash với baseline (kết quả tương đương trước khi đo)
+            → 26/26 trùng
+PASS T6.3   Có plan EXPLAIN JSON, lượt đo thô CSV và kích thước đối tượng
+            → 26 plan JSON, 390 lượt đo thô, 12 đối tượng có kích thước
+PASS T6.4   p95 ≤ 3 s trên ~2 triệu dòng ở phương án tối ưu của MỌI truy vấn (baseline vượt 3 s được MV/index/partition xử lý)
+            → p95 tốt nhất theo truy vấn (ms): {'Q1a': 2.8, 'Q1b': 2.3, 'Q1c': 3.2, 'Q2a': 187.4, 'Q2b': 14.9, 'Q2c': 121.3, 'Q2d': 800.8, 'Q3a': 1.9, 'Q3b': 12.8, 'Q3c': 48.7}; baseline vượt 3 s: ['Q1a']
+PASS T6.5   Quy mô dữ liệu đo ≥ 2 triệu dòng (bảng nhân bản có seed, ghi rõ không phục vụ báo cáo)
+            → bench.foi_noidx = 2007600 dòng
+
+=== T7 ===
+PASS T7.1   README.md nêu seed, phiên bản cấu hình mock, settings, lệnh chạy mock, lệnh ETL, kiểm thử, log batch
+            → đủ 11 mục
+PASS T7.2   Mọi đường dẫn tệp nêu trong README đều tồn tại
+            → 12 đường dẫn
+PASS T7.3   Mỗi batch SUCCESS ghi mốc nguồn (source_snapshot) và thời gian từng bước vào batch_log
+            → #4: mock last_day=2026-01-12; #5: mock last_day=2026-01-25; #6: mock last_day=2026-01-29; #7: mock last_day=2026-01-31
+PASS T7.4   Tái lập Extract: nạp lại cùng mốc (batch 1 và batch 2) cho checksum trùng ở mọi bảng
+            → 19/19 bảng trùng checksum
+PASS T7.5   Mỗi bước có ghi chép triển khai trong docs/implementation (đủ 8 mục) và bằng chứng chạy thật
+            → 15 tệp ghi chép, 13 tệp bằng chứng
+
+=== TỔNG KẾT ===
+T1: 14 PASS, 0 FAIL, 0 SKIP  / 14
+T2: 10 PASS, 0 FAIL, 0 SKIP  / 10
+T3: 5 PASS, 0 FAIL, 0 SKIP  / 5
+T4: 10 PASS, 0 FAIL, 0 SKIP  / 10
+T5: 9 PASS, 0 FAIL, 0 SKIP  / 9
+T6: 5 PASS, 0 FAIL, 0 SKIP  / 5
+T7: 5 PASS, 0 FAIL, 0 SKIP  / 5
+
+Tổng: 58 PASS, 0 FAIL, 0 SKIP — 142 s
+Kho dwh — batch SUCCESS mới nhất: #7 (dữ liệu đến hết 2026-01-31)
+
+
+=== T1 ===
+PASS T1.1   fact_order_item có khóa chính
+            → PRIMARY KEY (date_key, source_system, order_id, line_number)
+PASS T1.1   fact_inventory_snapshot có khóa chính
+            → PRIMARY KEY (date_key, product_key, warehouse_key)
+PASS T1.1   fact_ad_spend có khóa chính
+            → PRIMARY KEY (month_key, campaign_key, channel_key)
+PASS T1.2   fact_order_item: mọi cột *_key (11) có FK tới dimension
+            → campaign_key→dim_campaign, category_key→dim_category, channel_key→dim_channel, customer_key→dim_customer, customer_profile_key→dim_customer_profile, date_key→dim_date, order_date_key→dim_date, payment_method_key→dim_payment_method, product_key→dim_product, promotion_group_key→dim_promotion_group, seller_key→dim_seller
+PASS T1.2   fact_inventory_snapshot: mọi cột *_key (4) có FK tới dimension
+            → category_key→dim_category, date_key→dim_date, product_key→dim_product, warehouse_key→dim_warehouse
+PASS T1.2   fact_ad_spend: mọi cột *_key (3) có FK tới dimension
+            → campaign_key→dim_campaign, channel_key→dim_channel, month_key→dim_month
+PASS T1.3   Grain fact_order_item: count(*) = count(distinct khóa nghiệp vụ (source_system, order_id, line_number))
+            → 3419 = 3419
+PASS T1.3   Grain fact_inventory_snapshot: 1 dòng / (ngày, sản phẩm nghiệp vụ, kho)
+            → 565982 = 565982
+PASS T1.3   Grain fact_ad_spend: 1 dòng / (tháng, chiến dịch, kênh)
+            → 1 = 1
+PASS T1.4   Từ điển dữ liệu phủ 100% cột của schema dw (không tính partition con)
+            → 200/200 cột có mô tả
+PASS T1.5   Mọi dimension và bridge có khóa chính
+PASS T1.6   Mọi FK trong dw đã được validate
+            → 0 FK chưa validate
+PASS T1.7   Bridge khuyến mãi: Σ weighting_factor = 1 trên từng promotion_group
+            → 0 nhóm sai
+PASS T1.7   Bridge khuyến mãi: Σ giảm giá phân bổ = Σ discount_amount của dòng có voucher
+            → 3040000.00000000 vs 3040000.00
+
+=== T2 ===
+PASS T2.1   Batch 4: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 5: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 6: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.1   Batch 7: RC-01..07 (+SCD-01/02) đều có và đạt
+            → 15 kiểm tra
+PASS T2.2   Mọi dòng cách ly có reason, rule_code, source_table và payload
+            → 224 dòng cách ly, 0 thiếu thông tin
+PASS T2.3   0 dòng fact có khóa ngoại mồ côi (truy vấn độc lập với RC-06)
+            → 0 dòng
+PASS T2.4   Khóa 0 (chưa xác định) được đếm đúng và hiển thị trên màn hình Chất lượng dữ liệu
+            → đếm độc lập 5 = mart.v_unknown_keys 5; dashboard truy vấn view: True
+PASS T2.5   Tỷ lệ cách ly của mọi bảng ở các batch SUCCESS ≤ 5% (ngưỡng cấu hình)
+            → cao nhất: batch 4 bảng category = 0.00%
+PASS T2.6   Batch 3 (cùng dữ liệu batch 1 + lỗi chèn có chủ đích) bị cách ly nhiều hơn batch 1 — lỗi nguồn được bắt
+            → batch 1: 37 dòng; batch 3: 67 dòng
+PASS T2.7   RC-07 theo bảng: đọc = hợp lệ + cảnh báo + cách ly + trùng bị loại (mọi batch, mọi bảng)
+            → 0 dòng log lệch
+
+=== T3 ===
+PASS T3.1   Nạp lại batch 7 (--reload) lần 1: số dòng, Σ tiền và băm nội dung không đổi
+            → mã thoát 0, 12.4 s; fact_order_item 3419 dòng, Σ net 2590938257.00, md5 85eae95dbb24…
+PASS T3.1   Nạp lại batch 7 (--reload) lần 2: số dòng, Σ tiền và băm nội dung không đổi
+            → mã thoát 0, 11.5 s; fact_order_item 3419 dòng, Σ net 2590938257.00, md5 85eae95dbb24…
+PASS T3.2   Sau 2 lần nạp lại: batch 7 vẫn SUCCESS và mọi đối soát đạt
+            → status=SUCCESS, đối soát đạt=True
+PASS T3.3   Giả lập lỗi giữa batch (sau khi nạp dimension + fact): ROLLBACK, dw không đổi
+            → lỗi bắt được: 'giả lập lỗi giữa batch (T3)'; khác biệt: []
+PASS T3.4   Giả lập lỗi giữa batch: mart không được refresh và không đổi, batch SUCCESS giữ nguyên
+            → mart_batch/refreshed_at trước=(7, datetime.datetime(2026, 11, 9, 15, 9, 6, 981241)) sau=(7, datetime.datetime(2026, 11, 9, 15, 9, 6, 981241)); status=SUCCESS
+
+=== T4 ===
+PASS T4.1   dim_product: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 3542 phiên bản, 8 phiên bản thêm do thay đổi SCD2
+PASS T4.1   dim_seller: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 491 phiên bản, 8 phiên bản thêm do thay đổi SCD2
+PASS T4.1   dim_customer: không chồng lấn [valid_from, valid_to), không hở, đúng 1 current/khóa
+            → chồng lấn 0, khóa sai current 0, hở 0; 10860 phiên bản, 14 phiên bản thêm do thay đổi SCD2
+PASS T4.2   Mọi dòng fact_order_item gắn seller_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_order_item gắn product_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_order_item gắn customer_key của phiên bản có hiệu lực tại ngày hoàn tất
+            → 0 dòng sai phiên bản
+PASS T4.2   Mọi dòng fact_inventory_snapshot gắn product_key đúng phiên bản tại ngày snapshot
+            → 0 dòng sai phiên bản
+PASS T4.3   Ca cụ thể: seller đã đổi hạng — fact trước ngày đổi gắn phiên bản cũ, từ ngày đổi gắn phiên bản mới
+            → seller 9455: Normal (13 dòng, đến 20260124) → Mall từ 2026-01-25 (3 dòng, từ 20260129); seller 332670: Normal (33 dòng, đến 20260126) → Mall từ 2026-01-28 (2 dòng, từ 20260129)
+PASS T4.4   SCD3 dim_seller_tier_t3 khớp lịch sử SCD2 (current_tier = phiên bản hiện hành; previous_tier = hạng của phiên bản ngay trước ngày đổi)
+            → current sai 0, previous sai 0
+PASS T4.5   Kịch bản có kiểm soát: SCD1 không tăng phiên bản, SCD2 đóng/mở, SCD3, cùng ngày sửa tại chỗ, đến muộn → DQ-23 (rollback)
+            → 10/10 PASS; kho không đổi
+
+=== T5 ===
+PASS T5.1   Mart = truy vấn độc lập trên fact atomic (test_mart.sql)
+            → 20/20 PASS; thông tin: ['Khóa 0 trên fact (thông tin) = 5']
+PASS T5.2   Drill-across bán hàng – quảng cáo giữ nhóm chỉ có một phía và không nhân đôi doanh thu/chi phí
+            → 2 nhóm (tháng,kênh): 1 chỉ có bán, 0 chỉ có QC; Σ doanh thu 2590938257.00 = fact 2590938257.00; Σ chi phí 2932996.00 = fact 2932996.00
+PASS T5.3   Semi-additive: tồn kho cuối kỳ = tồn ngày cuối kỳ (mart = độc lập), KHÔNG bằng tổng qua các ngày
+            → cuối kỳ (ngày 20260131): 5669223; mart: 5669223; SUM qua ngày (sai): 175754845
+PASS T5.4   Non-additive: AOV tính lại từ tử/mẫu = AOV atomic; trung bình các AOV ngày (sai) cho giá trị khác
+            → từ tổng 864799.15 = atomic 864799.15; trung bình ngày (sai) 833167.40
+PASS T5.5   Cây danh mục: không chu trình, không tự làm cha
+            → tự làm cha 0, chu trình 0
+PASS T5.6   Cây danh mục: doanh thu cây con qua bridge = tính độc lập theo path_ids; Σ các nút gốc = tổng (không cộng lặp)
+            → 77 nút so sánh, 0 lệch; Σ nút gốc 2590938257.00 = tổng fact 2590938257.00
+PASS T5.7   Mini-dimension: hồ sơ khách tính theo trạng thái TRƯỚC giao dịch (tính lại độc lập; dòng ngày mua đầu tiên → 'Chưa mua / 0 đơn')
+            → 1513 dòng, 0 lệch; ngày mua đầu tiên: 1320/1320 dòng ở bucket 'Chưa mua'
+PASS T5.8   Dashboard: 5 màn hình chạy không lỗi, KPI hiển thị và bộ lọc = SQL độc lập (test_app.py)
+            → 9 kiểm tra PASS
+PASS T5.9   File CSV xuất ra có đúng cột, đúng số dòng của bảng hiển thị (mọi nút xuất CSV trên 5 màn hình)
+            → 24/24 nút CSV khớp bảng
+
+=== T6 ===
+PASS T6.1   Đủ BM01, BM02, BM03 trong lần đo mới nhất
+            → 26 cấu hình đo, lần đo 20261108_123944
+PASS T6.2   Kết quả mọi biến thể trùng hash với baseline (kết quả tương đương trước khi đo)
+            → 26/26 trùng
+PASS T6.3   Có plan EXPLAIN JSON, lượt đo thô CSV và kích thước đối tượng
+            → 26 plan JSON, 390 lượt đo thô, 12 đối tượng có kích thước
+PASS T6.4   p95 ≤ 3 s trên ~2 triệu dòng ở phương án tối ưu của MỌI truy vấn (baseline vượt 3 s được MV/index/partition xử lý)
+            → p95 tốt nhất theo truy vấn (ms): {'Q1a': 2.8, 'Q1b': 2.3, 'Q1c': 3.2, 'Q2a': 187.4, 'Q2b': 14.9, 'Q2c': 121.3, 'Q2d': 800.8, 'Q3a': 1.9, 'Q3b': 12.8, 'Q3c': 48.7}; baseline vượt 3 s: ['Q1a']
+PASS T6.5   Quy mô dữ liệu đo ≥ 2 triệu dòng (bảng nhân bản có seed, ghi rõ không phục vụ báo cáo)
+            → bench.foi_noidx = 2007600 dòng
+
+=== T7 ===
+PASS T7.1   README.md nêu seed, phiên bản cấu hình mock, settings, lệnh chạy mock, lệnh ETL, kiểm thử, log batch
+            → đủ 11 mục
+PASS T7.2   Mọi đường dẫn tệp nêu trong README đều tồn tại
+            → 12 đường dẫn
+PASS T7.3   Mỗi batch SUCCESS ghi mốc nguồn (source_snapshot) và thời gian từng bước vào batch_log
+            → #4: mock last_day=2026-01-12; #5: mock last_day=2026-01-25; #6: mock last_day=2026-01-29; #7: mock last_day=2026-01-31
+PASS T7.4   Tái lập Extract: nạp lại cùng mốc (batch 1 và batch 2) cho checksum trùng ở mọi bảng
+            → 19/19 bảng trùng checksum
+PASS T7.5   Mỗi bước có ghi chép triển khai trong docs/implementation (đủ 8 mục) và bằng chứng chạy thật
+            → 16 tệp ghi chép, 13 tệp bằng chứng
+
+=== TỔNG KẾT ===
+T1: 14 PASS, 0 FAIL, 0 SKIP  / 14
+T2: 10 PASS, 0 FAIL, 0 SKIP  / 10
+T3: 5 PASS, 0 FAIL, 0 SKIP  / 5
+T4: 10 PASS, 0 FAIL, 0 SKIP  / 10
+T5: 9 PASS, 0 FAIL, 0 SKIP  / 9
+T6: 5 PASS, 0 FAIL, 0 SKIP  / 5
+T7: 5 PASS, 0 FAIL, 0 SKIP  / 5
+
+Tổng: 58 PASS, 0 FAIL, 0 SKIP — 145 s

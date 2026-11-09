@@ -11,8 +11,8 @@ EX = REPO / "docs/mock-design/examples"
 SRC = str(REPO / "data/tiki_crawl_share.db")
 SETTINGS, END, LIMIT = "medium-ecommerce.json", "2026-12-31", 95000
 # Scenario schedule: (first simulated day, scenario file). A chunk never crosses a switch day.
-# 2026-01-30: DW plan step 1.0 (docs/implementation/01_buoc-1.0_cau-hinh-mock-scd.md).
-SCHEDULE = [("2026-01-01", "dw-lite-2026.json"), ("2026-01-30", "dw-scd-2026.json")]
+# 2026-01-25: DW plan step 1.0 (docs/implementation/01_buoc-1.0_cau-hinh-mock-scd.md).
+SCHEDULE = [("2026-01-01", "dw-lite-2026.json"), ("2026-01-25", "dw-scd-2026.json")]
 
 
 def log(*a):

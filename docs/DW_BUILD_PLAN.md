@@ -726,6 +726,8 @@ from checked where err is not null;
 
 ### 5.4. Nạp dimension và SCD (B3)
 
+> ✅ Đã làm 08/11/2026 (5.4–5.6) — [dw/etl/load.py](../dw/etl/load.py), kiểm thử SCD [dw/tests/test_scd_load.py](../dw/tests/test_scd_load.py); ghi chép [08_buoc-5.4-5.6_load.md](implementation/08_buoc-5.4-5.6_load.md). Batch 4 SUCCESS, đối soát 15/15, idempotent (T3) và SCD có kiểm soát (T4) đạt. Bổ sung khi làm: phiên bản đầu `valid_from = 1900-01-01`; thay đổi cùng ngày hiệu lực sửa tại chỗ; đến muộn cách ly mã **DQ-23**; Load chỉ nhận batch nối tiếp mốc SUCCESS.
+
 Thuật toán snapshot-diff cho mỗi dimension SCD2 (Product, Seller, Customer):
 
 1. So `stg.<dim>_snapshot` (batch hiện tại) với phiên bản `is_current` trong `dw`, theo khóa nghiệp vụ.
@@ -775,6 +777,7 @@ Kiểm tra sau nạp: không chồng lấn khoảng hiệu lực; mỗi khóa ng
 ---
 
 ## 6. Lớp báo cáo và dashboard
+> ✅ Đã làm 08/11/2026 — [dw/sql/40_mart/401_mart.sql](../dw/sql/40_mart/401_mart.sql) (24 KPI, 8 MV refresh CONCURRENTLY, view drill-across, `refresh_all` gọi ở B6 của `load.py`), [dashboard/app.py](../dashboard/app.py) (5 màn hình, xuất CSV; chạy `bash dashboard/run.sh` → http://localhost:8501); ghi chép [09_buoc-6_mart-dashboard.md](implementation/09_buoc-6_mart-dashboard.md). Mart 21/21 = truy vấn độc lập; KPI dashboard = SQL. Bổ sung: `mv_sales_month_customer_region`, `mv_promotion_month`, `v_kpi_period` (GROUPING SETS năm/quý/tháng).
 
 ### 6.1. Mart và KPI dùng chung
 
@@ -811,6 +814,7 @@ Mọi màn hình có nút **xuất CSV** và hiển thị đơn vị tiền, kho
 ---
 
 ## 7. Milestone 5.1 — Thí nghiệm hiệu năng
+> ✅ Đã làm 08/11/2026 — [bench/run_bench.py](../bench/run_bench.py) (`bash bench/run.sh`: tạm dừng mock bằng SIGSTOP → dựng dữ liệu nhân bản → đo → chạy lại mock); ghi chép [10_buoc-7_thi-nghiem-hieu-nang.md](implementation/10_buoc-7_thi-nghiem-hieu-nang.md). BM01 MV ×2.481 (refresh 10 s); BM02 partition ×2,96 khi không index, ×0,84 khi quét cả năm; BM03 `(seller_key, date_key)` ×189, `(date_key, seller_key)` duy nhất phục vụ lọc theo ngày (×6,4). Điều chỉnh: dữ liệu bán nhân 1.680 lần (~2 triệu dòng, thay vì x50 vì fact thật mới 12 ngày); tồn kho nhân 30 lần (6,6 triệu dòng).
 
 ### 7.1. Chuẩn bị dữ liệu thí nghiệm
 
@@ -843,8 +847,9 @@ Mọi màn hình có nút **xuất CSV** và hiển thị đơn vị tiền, kho
 ---
 
 ## 8. Kiểm thử theo tiêu chí T1–T7
+> ✅ Đã làm 09/11/2026 — [dw/tests/run_tests.py](../dw/tests/run_tests.py) (`bash dw/tests/run_tests.sh [--quick] [--only T4,T6]`; gom `test_scd_load.py`, `test_mart.sql`, `dashboard/test_app.py`, `bench.bm_result` và bổ sung phần còn thiếu); **58/58 PASS** (T1 14, T2 10, T3 5, T4 10, T5 9, T6 5, T7 5); báo cáo [BAO_CAO_KIEM_THU_T1_T7.md](BAO_CAO_KIEM_THU_T1_T7.md), ghi chép [11_buoc-8_kiem-thu.md](implementation/11_buoc-8_kiem-thu.md), bằng chứng [11_kiem_thu_T1-T7.txt](implementation/evidence/11_kiem_thu_T1-T7.txt). Điều chỉnh khi làm: kiểm thử đặt ở `dw/tests/` (không phải `sql/90_tests`) vì các bộ kiểm thử trước đó đã nằm ở đây; sửa công thức độc lập của `test_mart.sql` (gom tồn cuối tháng theo `product_id`, lỗi lộ ra khi có SCD2 thật); khóa 0 do payment đến muộn là dòng thông tin (INFO), không phải FAIL; thêm `README.md` (T7).
 
-| Mã | Kiểm thử cụ thể (`sql/90_tests`) |
+| Mã | Kiểm thử cụ thể (`dw/tests/run_tests.py`) |
 |---|---|
 | T1 Mô hình | Mọi fact có PK, FK tới dimension; grain đúng: `count(*) = count(distinct khóa nghiệp vụ)`; từ điển phủ 100% cột |
 | T2 Dữ liệu | RC-01..07 đạt; mọi dòng cách ly có `reason`; 0 FK mồ côi; key `0` được đếm và hiển thị |
@@ -864,6 +869,7 @@ Thêm kiểm thử đặc thù kỹ năng nâng cao:
 ---
 
 ## 9. Milestone 5.2 — Master Blueprint và mở rộng vòng xoắn ốc
+> ✅ Đã làm 09/11/2026 — [MASTER_BLUEPRINT.md](MASTER_BLUEPRINT.md) (đủ 11 nội dung của 9.1, bảng kỹ năng mục 12, phụ lục cấu trúc và lệnh tái lập; mục 11 là vòng xoắn ốc 9.2); ghi chép [12_buoc-9_master-blueprint.md](implementation/12_buoc-9_master-blueprint.md). Còn lại của 5.2: slide và demo (15–16/11), nộp 17/11.
 
 ### 9.1. Nội dung Blueprint
 

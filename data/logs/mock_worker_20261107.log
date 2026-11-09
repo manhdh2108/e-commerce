@@ -1,0 +1,992 @@
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 646, in tick
+    else self.run(jid, job)
+         ^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 552, in run
+    result = self.transact(key, apply)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 107, in transact
+    result = callback(u) or {}
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/application/worker.py", line 529, in apply
+    engine.execute()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 293, in execute
+    return self.finance()
+           ^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/domain.py", line 1224, in finance
+    return FinanceWorkflow(self).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/engine/finance.py", line 161, in execute
+    payout = self.u.add(
+             ^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/scripts/mock_platform/infrastructure/storage.py", line 448, in add
+    self.conn.execute(insert(t).values(**values))
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1494, in execute
+    return meth(
+           ^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 534, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1714, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1868, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1996, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1977, in _exec_single_context
+    self.dialect.do_execute(
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 1192, in do_execute
+    cursor.execute(statement, parameters)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.UniqueViolation) duplicate key value violates unique constraint "seller_payouts_seller_id_period_start_period_end_key"
+DETAIL:  Key (seller_id, period_start, period_end)=(1, 2026-01-04, 2026-01-14) already exists.
+[SQL: INSERT INTO seller_payouts (id, seller_id, period_start, period_end, gross_sales, refund_amount, commission_amount, payout_amount, payout_status) VALUES (%(id)s::BIGINT, %(seller_id)s::BIGINT, %(period_start)s::DATE, %(period_end)s::DATE, %(gross_sales)s, %(refund_amount)s, %(commission_amount)s, %(payout_amount)s, %(payout_status)s::VARCHAR)]
+[parameters: {'id': 39, 'seller_id': 1, 'period_start': datetime.date(2026, 1, 4), 'period_end': datetime.date(2026, 1, 14), 'gross_sales': 0, 'refund_amount': 0, 'commission_amount': 0, 'payout_amount': 0, 'payout_status': 'Pending'}]
+(Background on this error at: https://sqlalche.me/e/21/gkpj)

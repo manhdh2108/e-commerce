@@ -1,0 +1,80 @@
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://0.0.0.0:8501
+
+2026-11-08 11:50:50.278 MediaFileHandler: Missing file 0b3e2fd4b9737d5a3f91cea069f6098e918677c676df29f4f7581dbe.csv
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 140, in get_file
+    return self._files_by_id[file_id]
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: '0b3e2fd4b9737d5a3f91cea069f6098e918677c676df29f4f7581dbe'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/web/server/media_file_handler.py", line 95, in validate_absolute_path
+    self._storage.get_file(absolute_path)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
+    raise MediaFileStorageError(
+streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename '0b3e2fd4b9737d5a3f91cea069f6098e918677c676df29f4f7581dbe.csv'. (No media file with id '0b3e2fd4b9737d5a3f91cea069f6098e918677c676df29f4f7581dbe')
+2026-11-08 11:50:50.342 MediaFileHandler: Missing file 4eac7ccb33931fdee232df564af52ff095d88292fd1c763180c7db42.csv
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 140, in get_file
+    return self._files_by_id[file_id]
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: '4eac7ccb33931fdee232df564af52ff095d88292fd1c763180c7db42'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/web/server/media_file_handler.py", line 95, in validate_absolute_path
+    self._storage.get_file(absolute_path)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
+    raise MediaFileStorageError(
+streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename '4eac7ccb33931fdee232df564af52ff095d88292fd1c763180c7db42.csv'. (No media file with id '4eac7ccb33931fdee232df564af52ff095d88292fd1c763180c7db42')
+2026-11-08 11:50:50.609 MediaFileHandler: Missing file 5e43ca75a759e38e71f0a6e3d9652b23124645a1c544bf9ba4cb08dc.csv
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 140, in get_file
+    return self._files_by_id[file_id]
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: '5e43ca75a759e38e71f0a6e3d9652b23124645a1c544bf9ba4cb08dc'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/web/server/media_file_handler.py", line 95, in validate_absolute_path
+    self._storage.get_file(absolute_path)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
+    raise MediaFileStorageError(
+streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename '5e43ca75a759e38e71f0a6e3d9652b23124645a1c544bf9ba4cb08dc.csv'. (No media file with id '5e43ca75a759e38e71f0a6e3d9652b23124645a1c544bf9ba4cb08dc')
+2026-11-08 12:46:17.662 MediaFileHandler: Missing file 370ddb8303bea26880959c53df228beb944c6a301cdbeb1a2032505e.csv
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 140, in get_file
+    return self._files_by_id[file_id]
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: '370ddb8303bea26880959c53df228beb944c6a301cdbeb1a2032505e'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/web/server/media_file_handler.py", line 95, in validate_absolute_path
+    self._storage.get_file(absolute_path)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
+    raise MediaFileStorageError(
+streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename '370ddb8303bea26880959c53df228beb944c6a301cdbeb1a2032505e.csv'. (No media file with id '370ddb8303bea26880959c53df228beb944c6a301cdbeb1a2032505e')
+2026-11-08 12:46:17.866 MediaFileHandler: Missing file bf07cbeab92499e778dd3bae6ccd55d86b859c57bd72a936ae37f959.csv
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 140, in get_file
+    return self._files_by_id[file_id]
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'bf07cbeab92499e778dd3bae6ccd55d86b859c57bd72a936ae37f959'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/web/server/media_file_handler.py", line 95, in validate_absolute_path
+    self._storage.get_file(absolute_path)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/streamlit/runtime/memory_media_file_storage.py", line 142, in get_file
+    raise MediaFileStorageError(
+streamlit.runtime.media_file_storage.MediaFileStorageError: Bad filename 'bf07cbeab92499e778dd3bae6ccd55d86b859c57bd72a936ae37f959.csv'. (No media file with id 'bf07cbeab92499e778dd3bae6ccd55d86b859c57bd72a936ae37f959')

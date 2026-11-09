@@ -1,0 +1,76 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/bench/run_bench.py", line 361, in <module>
+    main()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/bench/run_bench.py", line 355, in main
+    setup()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/bench/run_bench.py", line 198, in setup
+    cur.execute(s)
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.DuplicateColumn: column "?column?" specified more than once
+{"ts": "2026-11-08 12:22:01", "event": "built", "object": "foi_noidx", "kind": "table", "rows": 2007600, "size_mb": 431.11, "sec": 39.78}
+{"ts": "2026-11-08 12:23:07", "event": "built", "object": "foi_idx_seller", "kind": "table+index", "rows": 2007600, "size_mb": 431.11, "sec": 63.52}
+{"ts": "2026-11-08 12:23:09", "event": "built", "object": "ix_foi_seller", "kind": "index", "rows": null, "size_mb": "13.50", "sec": 2.34}
+{"ts": "2026-11-08 12:23:40", "event": "built", "object": "foi_idx_seller_date", "kind": "table+index", "rows": 2007600, "size_mb": 431.11, "sec": 27.25}
+{"ts": "2026-11-08 12:23:46", "event": "built", "object": "ix_foi_seller_date", "kind": "index", "rows": null, "size_mb": "16.86", "sec": 6.3}
+{"ts": "2026-11-08 12:24:27", "event": "built", "object": "foi_idx_date_seller", "kind": "table+index", "rows": 2007600, "size_mb": 431.11, "sec": 37.91}
+{"ts": "2026-11-08 12:24:31", "event": "built", "object": "ix_foi_date_seller", "kind": "index", "rows": null, "size_mb": "16.86", "sec": 4.47}
+{"ts": "2026-11-08 12:26:09", "event": "built", "object": "foi_part", "kind": "partitioned", "rows": 2007600, "size_mb": 431.59, "sec": 78.19}
+{"ts": "2026-11-08 12:26:21", "event": "built", "object": "mv_sales_month_category_scaled", "kind": "matview", "rows": 516, "size_mb": 0.11, "sec": 12.82}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/bench/run_bench.py", line 362, in <module>
+    main()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/bench/run_bench.py", line 356, in main
+    setup()
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/bench/run_bench.py", line 203, in setup
+    cur.execute(f"VACUUM ANALYZE bench.{name}")  # visibility map + thống kê (index-only scan, planner)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/PTIT/KÌ 1 năm 4/DATA WAREHOUSE/e-commerce/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.DiskFull: could not resize shared memory segment "/PostgreSQL.856639682" to 130414720 bytes: No space left on device
+{"ts": "2026-11-08 12:30:54", "event": "built", "object": "foi_noidx", "kind": "table", "rows": 2007600, "size_mb": 431.11, "sec": 108.51}
+{"ts": "2026-11-08 12:31:04", "event": "built", "object": "foi_idx_seller", "kind": "table+index", "rows": 2007600, "size_mb": 431.11, "sec": 6.86}
+{"ts": "2026-11-08 12:31:11", "event": "built", "object": "ix_foi_seller", "kind": "index", "rows": null, "size_mb": "13.50", "sec": 6.27}
+{"ts": "2026-11-08 12:32:12", "event": "built", "object": "foi_idx_seller_date", "kind": "table+index", "rows": 2007600, "size_mb": 431.11, "sec": 58.64}
+{"ts": "2026-11-08 12:32:19", "event": "built", "object": "ix_foi_seller_date", "kind": "index", "rows": null, "size_mb": "16.86", "sec": 6.78}
+{"ts": "2026-11-08 12:33:21", "event": "built", "object": "foi_idx_date_seller", "kind": "table+index", "rows": 2007600, "size_mb": 431.11, "sec": 58.01}
+{"ts": "2026-11-08 12:33:38", "event": "built", "object": "ix_foi_date_seller", "kind": "index", "rows": null, "size_mb": "16.86", "sec": 16.98}
+{"ts": "2026-11-08 12:34:59", "event": "built", "object": "foi_part", "kind": "partitioned", "rows": 2007600, "size_mb": 431.59, "sec": 65.43}
+{"ts": "2026-11-08 12:35:05", "event": "built", "object": "mv_sales_month_category_scaled", "kind": "matview", "rows": 516, "size_mb": 0.11, "sec": 6.36}
+{"ts": "2026-11-08 12:36:48", "event": "built", "object": "inv_plain", "kind": "table", "rows": 6572010, "size_mb": 826.09, "sec": 99.32}
+{"ts": "2026-11-08 12:39:08", "event": "built", "object": "inv_part", "kind": "partitioned", "rows": 6572010, "size_mb": 825.89, "sec": 95.2}
+{"ts": "2026-11-08 12:39:12", "event": "built", "object": "mv_inventory_month_category_scaled", "kind": "matview", "rows": 528, "size_mb": 0.1, "sec": 3.55}
+{"ts": "2026-11-08 12:39:22", "event": "refreshed", "mv": "mv_sales_month_category_scaled", "sec": 10.0}
+{"ts": "2026-11-08 12:39:24", "event": "refreshed", "mv": "mv_inventory_month_category_scaled", "sec": 2.7}
+{"ts": "2026-11-08 12:39:49", "event": "run_start", "run_id": "20261108_123944", "seller_key": 129, "server_version": "15.19", "shared_buffers": "128MB", "jit": "on"}
+{"ts": "2026-11-08 12:41:55", "event": "measured", "exp": "BM01", "q": "Q1a", "variant": "Tổng hợp trực tiếp fact", "median_ms": 6170.03, "p95_ms": 6949.28, "speedup": 1.0, "hash_match": true, "rels": 2, "hit": 0, "read": 55176, "idx": null}
+{"ts": "2026-11-08 12:41:55", "event": "measured", "exp": "BM01", "q": "Q1a", "variant": "Đọc MV", "median_ms": 2.49, "p95_ms": 2.77, "speedup": 2481.32, "hash_match": true, "rels": 1, "hit": 0, "read": 5, "idx": null}
+{"ts": "2026-11-08 12:41:56", "event": "measured", "exp": "BM01", "q": "Q1b", "variant": "Tổng hợp trực tiếp fact", "median_ms": 4.42, "p95_ms": 10.86, "speedup": 1.0, "hash_match": true, "rels": 38, "hit": 118, "read": 0, "idx": "dim_date_pkey"}
+{"ts": "2026-11-08 12:41:56", "event": "measured", "exp": "BM01", "q": "Q1b", "variant": "Đọc MV mart (gộp kênh)", "median_ms": 1.05, "p95_ms": 2.26, "speedup": 4.21, "hash_match": true, "rels": 1, "hit": 2, "read": 0, "idx": null}
+{"ts": "2026-11-08 12:42:39", "event": "measured", "exp": "BM01", "q": "Q1c", "variant": "Tổng hợp trực tiếp fact", "median_ms": 2011.57, "p95_ms": 2179.51, "speedup": 1.0, "hash_match": true, "rels": 2, "hit": 95, "read": 74640, "idx": null}
+{"ts": "2026-11-08 12:42:39", "event": "measured", "exp": "BM01", "q": "Q1c", "variant": "Đọc MV", "median_ms": 2.54, "p95_ms": 3.21, "speedup": 792.77, "hash_match": true, "rels": 1, "hit": 0, "read": 4, "idx": null}
+{"ts": "2026-11-08 12:42:47", "event": "measured", "exp": "BM02", "q": "Q2a", "variant": "Bảng thường", "median_ms": 208.29, "p95_ms": 261.33, "speedup": 1.0, "hash_match": true, "rels": 1, "hit": 8340, "read": 0, "idx": "inv_plain_pkey"}
+{"ts": "2026-11-08 12:42:47", "event": "measured", "exp": "BM02", "q": "Q2a", "variant": "Partition tháng", "median_ms": 154.45, "p95_ms": 187.4, "speedup": 1.35, "hash_match": true, "rels": 1, "hit": 1838, "read": 4400, "idx": null}
+{"ts": "2026-11-08 12:42:47", "event": "measured", "exp": "BM02", "q": "Q2b", "variant": "Bảng thường", "median_ms": 10.62, "p95_ms": 14.91, "speedup": 1.0, "hash_match": true, "rels": 1, "hit": 281, "read": 0, "idx": "inv_plain_pkey"}
+{"ts": "2026-11-08 12:42:47", "event": "measured", "exp": "BM02", "q": "Q2b", "variant": "Partition tháng", "median_ms": 11.23, "p95_ms": 16.53, "speedup": 0.95, "hash_match": true, "rels": 1, "hit": 281, "read": 0, "idx": "inv_part_202606_pkey"}
+{"ts": "2026-11-08 12:42:56", "event": "measured", "exp": "BM02", "q": "Q2c", "variant": "Bảng thường", "median_ms": 315.47, "p95_ms": 386.0, "speedup": 1.0, "hash_match": true, "rels": 1, "hit": 1550, "read": 53627, "idx": null}
+{"ts": "2026-11-08 12:42:56", "event": "measured", "exp": "BM02", "q": "Q2c", "variant": "Partition tháng", "median_ms": 106.57, "p95_ms": 121.32, "speedup": 2.96, "hash_match": true, "rels": 1, "hit": 1566, "read": 3078, "idx": null}
+{"ts": "2026-11-08 12:43:27", "event": "measured", "exp": "BM02", "q": "Q2d", "variant": "Bảng thường", "median_ms": 700.64, "p95_ms": 800.84, "speedup": 1.0, "hash_match": true, "rels": 1, "hit": 1129, "read": 73553, "idx": null}
+{"ts": "2026-11-08 12:43:28", "event": "measured", "exp": "BM02", "q": "Q2d", "variant": "Partition tháng", "median_ms": 836.45, "p95_ms": 951.28, "speedup": 0.84, "hash_match": true, "rels": 13, "hit": 4545, "read": 70140, "idx": null}
+{"ts": "2026-11-08 12:43:35", "event": "measured", "exp": "BM03", "q": "Q3a", "variant": "Không index", "median_ms": 286.22, "p95_ms": 403.23, "speedup": 1.0, "hash_match": true, "rels": 1, "hit": 1728, "read": 53435, "idx": null}
+{"ts": "2026-11-08 12:43:35", "event": "measured", "exp": "BM03", "q": "Q3a", "variant": "Index (seller_key)", "median_ms": 8.11, "p95_ms": 12.06, "speedup": 35.29, "hash_match": true, "rels": 1, "hit": 2931, "read": 0, "idx": "ix_foi_seller"}
+{"ts": "2026-11-08 12:43:35", "event": "measured", "exp": "BM03", "q": "Q3a", "variant": "Index (seller_key, date_key)", "median_ms": 1.51, "p95_ms": 1.88, "speedup": 189.26, "hash_match": true, "rels": 1, "hit": 244, "read": 0, "idx": "ix_foi_seller_date"}
+{"ts": "2026-11-08 12:43:35", "event": "measured", "exp": "BM03", "q": "Q3a", "variant": "Index (date_key, seller_key)", "median_ms": 2.61, "p95_ms": 5.22, "speedup": 109.81, "hash_match": true, "rels": 1, "hit": 421, "read": 0, "idx": "ix_foi_date_seller"}
+{"ts": "2026-11-08 12:43:43", "event": "measured", "exp": "BM03", "q": "Q3b", "variant": "Không index", "median_ms": 276.06, "p95_ms": 365.33, "speedup": 1.0, "hash_match": true, "rels": 1, "hit": 744, "read": 54419, "idx": null}
+{"ts": "2026-11-08 12:43:43", "event": "measured", "exp": "BM03", "q": "Q3b", "variant": "Index (seller_key)", "median_ms": 9.45, "p95_ms": 12.77, "speedup": 29.21, "hash_match": true, "rels": 1, "hit": 2931, "read": 0, "idx": "ix_foi_seller"}
+{"ts": "2026-11-08 12:43:43", "event": "measured", "exp": "BM03", "q": "Q3b", "variant": "Index (seller_key, date_key)", "median_ms": 9.34, "p95_ms": 15.17, "speedup": 29.57, "hash_match": true, "rels": 1, "hit": 2933, "read": 0, "idx": "ix_foi_seller_date"}
+{"ts": "2026-11-08 12:43:43", "event": "measured", "exp": "BM03", "q": "Q3b", "variant": "Index (date_key, seller_key)", "median_ms": 14.02, "p95_ms": 18.21, "speedup": 19.69, "hash_match": true, "rels": 1, "hit": 5075, "read": 0, "idx": "ix_foi_date_seller"}
+{"ts": "2026-11-08 12:44:02", "event": "measured", "exp": "BM03", "q": "Q3c", "variant": "Không index", "median_ms": 259.4, "p95_ms": 361.04, "speedup": 1.0, "hash_match": true, "rels": 1, "hit": 1502, "read": 53661, "idx": null}
+{"ts": "2026-11-08 12:44:03", "event": "measured", "exp": "BM03", "q": "Q3c", "variant": "Index (seller_key)", "median_ms": 269.8, "p95_ms": 305.67, "speedup": 0.96, "hash_match": true, "rels": 1, "hit": 4437, "read": 50726, "idx": null}
+{"ts": "2026-11-08 12:44:03", "event": "measured", "exp": "BM03", "q": "Q3c", "variant": "Index (seller_key, date_key)", "median_ms": 276.52, "p95_ms": 319.55, "speedup": 0.94, "hash_match": true, "rels": 1, "hit": 2824, "read": 52339, "idx": null}
+{"ts": "2026-11-08 12:44:03", "event": "measured", "exp": "BM03", "q": "Q3c", "variant": "Index (date_key, seller_key)", "median_ms": 40.53, "p95_ms": 48.68, "speedup": 6.4, "hash_match": true, "rels": 1, "hit": 27604, "read": 0, "idx": "ix_foi_date_seller"}
+{"ts": "2026-11-08 12:44:03", "event": "run_done", "run_id": "20261108_123944", "measurements": 390}

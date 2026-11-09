@@ -1,0 +1,86 @@
+Pager usage is off.
+== bench.bm_run
+     run_id      |         started_at         |        finished_at         |                                                     params                                                     
+-----------------+----------------------------+----------------------------+----------------------------------------------------------------------------------------------------------------
+ 20261108_123944 | 2026-11-08 12:39:49.192654 | 2026-11-08 12:44:03.820009 | {"only": null, "seed": 42, "rounds": 15, "warmup": 3, "copies_foi": 1680, "copies_inv": 30, "seller_key": 129}
+(1 row)
+
+== bench.bm_object (kích thước, thời gian dựng)
+            object_name             |    kind     | row_count | size_mb | build_seconds |                 note                  
+------------------------------------+-------------+-----------+---------+---------------+---------------------------------------
+ ix_foi_date_seller                 | index       |           |   16.86 |        16.983 | thời gian = CREATE INDEX
+ ix_foi_seller                      | index       |           |   13.50 |         6.274 | thời gian = CREATE INDEX
+ ix_foi_seller_date                 | index       |           |   16.86 |         6.784 | thời gian = CREATE INDEX
+ mv_inventory_month_category_scaled | matview     |       528 |    0.10 |         3.548 | VACUUM ANALYZE 0.0 s; REFRESH 2.70 s
+ mv_sales_month_category_scaled     | matview     |       516 |    0.11 |         6.361 | VACUUM ANALYZE 0.0 s; REFRESH 10.00 s
+ foi_part                           | partitioned |   2007600 |  431.59 |        65.432 | VACUUM ANALYZE 15.3 s
+ inv_part                           | partitioned |   6572010 |  825.89 |        95.202 | VACUUM ANALYZE 43.7 s
+ foi_noidx                          | table       |   2007600 |  431.11 |       108.507 | VACUUM ANALYZE 2.5 s
+ inv_plain                          | table       |   6572010 |  826.09 |        99.316 | VACUUM ANALYZE 2.3 s
+ foi_idx_date_seller                | table+index |   2007600 |  431.11 |        58.008 | VACUUM ANALYZE 3.1 s
+ foi_idx_seller                     | table+index |   2007600 |  431.11 |         6.861 | VACUUM ANALYZE 2.4 s
+ foi_idx_seller_date                | table+index |   2007600 |  431.11 |        58.643 | VACUUM ANALYZE 2.4 s
+(12 rows)
+
+== bench.bm_result (median/p95 ms, speedup = median baseline / median biến thể)
+ exp  |  q  |           variant            | median_ms | p95_ms  | speedup | ok | rels | scan_rows |  hit  | read  | plan_root |         idx          
+------+-----+------------------------------+-----------+---------+---------+----+------+-----------+-------+-------+-----------+----------------------
+ BM01 | Q1a | Tổng hợp trực tiếp fact      |   6170.04 | 6949.29 |    1.00 | t  |    2 |   2008695 |     0 | 55176 | Aggregate | 
+ BM01 | Q1a | Đọc MV                       |      2.49 |    2.77 | 2481.32 | t  |    1 |       516 |     0 |     5 | Sort      | 
+ BM01 | Q1b | Tổng hợp trực tiếp fact      |      4.42 |   10.86 |    1.00 | t  |   38 |      1205 |   118 |     0 | Aggregate | dim_date_pkey
+ BM01 | Q1b | Đọc MV mart (gộp kênh)       |      1.05 |    2.26 |    4.21 | t  |    1 |        81 |     2 |     0 | Sort      | 
+ BM01 | Q1c | Tổng hợp trực tiếp fact      |   2011.57 | 2179.51 |    1.00 | t  |    2 |   6591135 |    95 | 74640 | Aggregate | 
+ BM01 | Q1c | Đọc MV                       |      2.54 |    3.21 |  792.77 | t  |    1 |       528 |     0 |     4 | Sort      | 
+ BM02 | Q2a | Bảng thường                  |    208.29 |  261.33 |    1.00 | t  |    1 |   1095337 |  8340 |     0 | Aggregate | inv_plain_pkey
+ BM02 | Q2a | Partition tháng              |    154.45 |  187.40 |    1.35 | t  |    1 |    547668 |  1838 |  4400 | Aggregate | 
+ BM02 | Q2b | Bảng thường                  |     10.62 |   14.91 |    1.00 | t  |    1 |     18256 |   281 |     0 | Sort      | inv_plain_pkey
+ BM02 | Q2b | Partition tháng              |     11.24 |   16.54 |    0.95 | t  |    1 |     36512 |   281 |     0 | Sort      | inv_part_202606_pkey
+ BM02 | Q2c | Bảng thường                  |    315.47 |  386.00 |    1.00 | t  |    1 |    168495 |  1550 | 53627 | Aggregate | 
+ BM02 | Q2c | Partition tháng              |    106.57 |  121.32 |    2.96 | t  |    1 |    168495 |  1566 |  3078 | Aggregate | 
+ BM02 | Q2d | Bảng thường                  |    700.64 |  800.84 |    1.00 | t  |    1 |   6572010 |  1129 | 73553 | Aggregate | 
+ BM02 | Q2d | Partition tháng              |    836.45 |  951.28 |    0.84 | t  |   13 |   6572009 |  4545 | 70140 | Aggregate | 
+ BM03 | Q3a | Không index                  |    286.22 |  403.23 |    1.00 | t  |    1 |       315 |  1728 | 53435 | Aggregate | 
+ BM03 | Q3a | Index (seller_key, date_key) |      1.51 |    1.88 |  189.26 | t  |    1 |       632 |   244 |     0 | Aggregate | ix_foi_seller_date
+ BM03 | Q3a | Index (date_key, seller_key) |      2.61 |    5.22 |  109.81 | t  |    1 |       316 |   421 |     0 | Aggregate | ix_foi_date_seller
+ BM03 | Q3a | Index (seller_key)           |      8.11 |   12.06 |   35.29 | t  |    1 |      4485 |  2931 |     0 | Aggregate | ix_foi_seller
+ BM03 | Q3b | Không index                  |    276.06 |  365.33 |    1.00 | t  |    1 |      4170 |   744 | 54419 | Aggregate | 
+ BM03 | Q3b | Index (seller_key, date_key) |      9.34 |   15.17 |   29.57 | t  |    1 |      8338 |  2933 |     0 | Aggregate | ix_foi_seller_date
+ BM03 | Q3b | Index (seller_key)           |      9.45 |   12.77 |   29.21 | t  |    1 |      8338 |  2931 |     0 | Aggregate | ix_foi_seller
+ BM03 | Q3b | Index (date_key, seller_key) |     14.02 |   18.21 |   19.69 | t  |    1 |      4169 |  5075 |     0 | Aggregate | ix_foi_date_seller
+ BM03 | Q3c | Không index                  |    259.40 |  361.04 |    1.00 | t  |    1 |     39904 |  1502 | 53661 | Aggregate | 
+ BM03 | Q3c | Index (date_key, seller_key) |     40.53 |   48.68 |    6.40 | t  |    1 |     39903 | 27604 |     0 | Aggregate | ix_foi_date_seller
+ BM03 | Q3c | Index (seller_key)           |    269.80 |  305.67 |    0.96 | t  |    1 |     39904 |  4437 | 50726 | Aggregate | 
+ BM03 | Q3c | Index (seller_key, date_key) |    276.52 |  319.55 |    0.94 | t  |    1 |     39904 |  2824 | 52339 | Aggregate | 
+(26 rows)
+
+== nút scan trong plan
+  q  |           variant            |                                                                                            scan_nodes                                                                                             
+-----+------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Q1a | Tổng hợp trực tiếp fact      | Seq Scan dim_date; Seq Scan foi_noidx
+ Q1a | Đọc MV                       | Seq Scan mv_sales_month_category_scaled
+ Q1b | Tổng hợp trực tiếp fact      | Index Scan dim_date; Seq Scan fact_order_item_202501; Seq Scan fact_order_item_202502; Seq Scan fact_order_item_202503; Seq Scan fact_order_item_202504; Seq Scan fact_order_item_202505; … (+32)
+ Q1b | Đọc MV mart (gộp kênh)       | Seq Scan mv_sales_month_category
+ Q1c | Tổng hợp trực tiếp fact      | Seq Scan dim_date; Seq Scan inv_plain; Subquery Scan
+ Q1c | Đọc MV                       | Seq Scan mv_inventory_month_category_scaled
+ Q2a | Bảng thường                  | Bitmap Heap Scan inv_plain; Bitmap Index Scan
+ Q2a | Partition tháng              | Seq Scan inv_part_202606
+ Q2b | Bảng thường                  | Index Scan inv_plain
+ Q2b | Partition tháng              | Bitmap Heap Scan inv_part_202606; Bitmap Index Scan
+ Q2c | Bảng thường                  | Seq Scan foi_noidx
+ Q2c | Partition tháng              | Seq Scan foi_part_202606
+ Q2d | Bảng thường                  | Seq Scan inv_plain
+ Q2d | Partition tháng              | Seq Scan inv_part_202601; Seq Scan inv_part_202602; Seq Scan inv_part_202603; Seq Scan inv_part_202604; Seq Scan inv_part_202605; Seq Scan inv_part_202606; … (+7)
+ Q3a | Index (date_key, seller_key) | Index Scan foi_idx_date_seller
+ Q3a | Index (seller_key)           | Bitmap Heap Scan foi_idx_seller; Bitmap Index Scan
+ Q3a | Index (seller_key, date_key) | Bitmap Heap Scan foi_idx_seller_date; Bitmap Index Scan
+ Q3a | Không index                  | Seq Scan foi_noidx
+ Q3b | Index (date_key, seller_key) | Index Scan foi_idx_date_seller
+ Q3b | Index (seller_key)           | Bitmap Heap Scan foi_idx_seller; Bitmap Index Scan
+ Q3b | Index (seller_key, date_key) | Bitmap Heap Scan foi_idx_seller_date; Bitmap Index Scan
+ Q3b | Không index                  | Seq Scan foi_noidx
+ Q3c | Index (date_key, seller_key) | Index Scan foi_idx_date_seller
+ Q3c | Index (seller_key)           | Seq Scan foi_idx_seller
+ Q3c | Index (seller_key, date_key) | Seq Scan foi_idx_seller_date
+ Q3c | Không index                  | Seq Scan foi_noidx
+(26 rows)
+
