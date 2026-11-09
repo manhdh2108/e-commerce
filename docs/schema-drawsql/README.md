@@ -100,3 +100,9 @@ File `panels_manifest.json` ghi tập bảng từng phần và FK liên phần; 
 - Đã kiểm tra trên trình duyệt: 19 thẻ bảng, 200 cột, 7 nhóm, 26 đường FK; chọn `fact_order_item.order_date_key` trả đúng `dim_date.date_key`; hộp hướng dẫn mở/đóng được.
 
 Tái tạo bằng `python3 docs/schema-drawsql/build_dw_single_view.py` (thư viện chuẩn Python; dùng template tương tác của `build_single_view.py` và `dw_metadata.json`). Metadata đã được tái sinh trong thư mục tạm và so khớp với DDL hiện tại. Các cột composite PK được hiển thị NOT NULL đúng ngữ nghĩa PostgreSQL.
+
+### Giải thích khi rê chuột (OLTP và DW)
+
+Cả hai HTML có khung giải thích ở góc dưới bên phải. Rê vào nền/tiêu đề nhóm hoặc nút nhóm để đọc vai trò nhóm; rê vào bất kỳ phần nào của bảng để đọc ý nghĩa bảng. Khung đổi màu theo nhóm, giữ nội dung gần nhất để đọc/cuộn và có nút đóng; rê vào đối tượng khác sẽ mở lại. Nút nhóm cũng hỗ trợ focus bàn phím; trên màn hình cảm ứng có thể chạm đối tượng. Di chuyển trong khung giải thích không kéo hoặc zoom sơ đồ.
+
+Nội dung bao phủ 33 bảng / 6 nhóm OLTP và 19 bảng / 7 nhóm DW. `hover_explanations.py` cung cấp nội dung và phần tương tác chung; hai builder nhúng trực tiếp vào HTML nên khi chia sẻ chỉ cần file HTML.

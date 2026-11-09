@@ -39,5 +39,6 @@ view.addEventListener('pointerup',()=>{drag=null;view.classList.remove('panning'
 window.schemaSummary={tables:Object.keys(tableModel).length,groups:groupModel.length,columns:Object.values(tableModel).reduce((a,m)=>a+m.t.columns.length,0),fks:paths.length};
 })();
 </script></html>'''
-(P/'OLTP_33_TABLES_6_SYSTEMS.html').write_text(template.replace('__DATA__',json.dumps(DATA,ensure_ascii=False).replace('</','<\\/')))
+from hover_explanations import enhance_hover
+(P/'OLTP_33_TABLES_6_SYSTEMS.html').write_text(enhance_hover(template.replace('__DATA__',json.dumps(DATA,ensure_ascii=False).replace('</','<\\/')), DATA, 'oltp'))
 print(P/'OLTP_33_TABLES_6_SYSTEMS.html')
