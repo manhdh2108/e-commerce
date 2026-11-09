@@ -106,3 +106,7 @@ Tái tạo bằng `python3 docs/schema-drawsql/build_dw_single_view.py` (thư vi
 Cả hai HTML có khung giải thích ở góc dưới bên phải. Rê vào nền/tiêu đề nhóm hoặc nút nhóm để đọc vai trò nhóm; rê vào bất kỳ phần nào của bảng để đọc ý nghĩa bảng. Khung đổi màu theo nhóm, giữ nội dung gần nhất để đọc/cuộn và có nút đóng; rê vào đối tượng khác sẽ mở lại. Nút nhóm cũng hỗ trợ focus bàn phím; trên màn hình cảm ứng có thể chạm đối tượng. Di chuyển trong khung giải thích không kéo hoặc zoom sơ đồ.
 
 Nội dung bao phủ 33 bảng / 6 nhóm OLTP và 19 bảng / 7 nhóm DW. `hover_explanations.py` cung cấp nội dung và phần tương tác chung; hai builder nhúng trực tiếp vào HTML nên khi chia sẻ chỉ cần file HTML.
+
+### Rà soát ngữ nghĩa theo code (10/11/2026)
+
+[Báo cáo đối chiếu giải thích](BAO_CAO_RA_SOAT_GIAI_THICH.md) ghi các nội dung đã sửa, bằng chứng và giới hạn giữa snapshot OLTP 33 bảng với schema code 27 bảng. Hai HTML đã được cập nhật theo báo cáo; không coi đây là chứng nhận chạy tích hợp mock/ETL.

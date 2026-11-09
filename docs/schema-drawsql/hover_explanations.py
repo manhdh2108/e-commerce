@@ -28,7 +28,7 @@ OLTP_TABLES = {
 'product_reviews':'Đánh giá sau mua gắn dòng đơn, sản phẩm và khách: điểm, bình luận và thời gian. Lưu phản hồi của khách về sản phẩm đã mua.',
 'warehouses':'Danh mục kho vật lý, mã, tên và địa chỉ. Là điểm tham chiếu của tồn kho, vận chuyển và nhận trả hàng.',
 'carriers':'Danh mục đơn vị vận chuyển. Vận đơn tham chiếu để xác định đơn vị phụ trách giao nhận.',
-'inventory_levels':'Trạng thái tồn hiện tại theo kho và SKU: số lượng có sẵn trong kho và số lượng đang giữ. Thay đổi khi giữ/nhả hàng hoặc phát sinh biến động; không phải lịch sử cuối ngày.',
+'inventory_levels':'Trạng thái tồn hiện tại theo kho và SKU: quantity_on_hand là tồn vật lý, quantity_reserved là phần đang giữ; lượng có thể bán = on_hand − reserved. Thay đổi khi giữ/nhả hàng hoặc phát sinh biến động; không phải lịch sử cuối ngày.',
 'inventory_movements':'Nhật ký biến động tồn theo kho–SKU, gồm loại biến động, lượng tăng/giảm, mã tham chiếu và thời điểm. Giải thích vì sao tồn thay đổi; DW tổng hợp nhập/bán/trả/điều chỉnh từ nguồn này.',
 'inventory_daily_balance':'Số dư tồn cuối ngày theo ngày–kho–SKU, gồm tồn và lượng giữ. Đây là nguồn snapshot của Fact_Inventory_Snapshot; SKU phải được ánh xạ sang product_id khi nạp DW.',
 'shipments':'Vận đơn theo order_code: kho xuất, hãng vận chuyển, tracking, trạng thái, chi phí và các mốc giao nhận. order_code là liên hệ nghiệp vụ với orders; không tự suy diễn thành FK nếu DDL không khai báo.',
@@ -42,15 +42,19 @@ OLTP_TABLES = {
 'cart_items':'Mục giỏ hàng theo phiên/khách và sản phẩm: số lượng, trạng thái, thời điểm thêm/đóng. checkout_lines truy vết mục giỏ nào đã chuyển sang dòng đơn.',
 'seller_commission_rates':'Chính sách tỷ lệ hoa hồng theo danh mục và hạng người bán trong khoảng hiệu lực. Dòng đơn giữ thông tin hoa hồng áp dụng tại giao dịch để phục vụ tính tiền và đối soát.',
 'seller_payouts':'Tổng đối soát/chi trả của một người bán trong kỳ: doanh số, hoàn tiền, hoa hồng, số tiền chi và trạng thái thanh toán.',
-'seller_payout_items':'Chi tiết các dòng đơn thuộc một kỳ chi trả, gồm tiền hàng, hoàn, hoa hồng và tiền ròng. Nối đầu kỳ payout với giao dịch để truy vết số tổng.'
+'seller_payout_items':'Chi tiết các dòng đơn thuộc một kỳ chi trả, gồm tiền hàng, hoàn, hoa hồng và tiền ròng. Trong FinanceWorkflow, gross_amount cộng lại phần voucher do sàn tài trợ vào net_amount; hoàn tính theo tỷ lệ lượng trả, hoa hồng tính trên phần còn lại. Không đồng nhất với measure seller_net_amount trong DW.'
 }
+SNAPSHOT_ONLY_TABLES = {'checkouts', 'checkout_lines', 'delivery_attempts', 'promotion_usages', 'refunds', 'seller_payout_items'}
+for name in SNAPSHOT_ONLY_TABLES:
+    OLTP_TABLES[name] += ' Bảng có trong snapshot OLTP dùng vẽ; business_schema.json của checkout mã nguồn hiện tại chưa định nghĩa bảng này, nên mô tả không xác nhận luồng này đang chạy được từ checkout đó.'
+
 DW_GROUPS = [
 'Ba fact của ba quy trình: bán hàng ở grain dòng đơn hoàn tất, tồn kho ở grain sản phẩm–kho–ngày, quảng cáo ở grain chiến dịch–kênh–tháng. Đây là nơi lưu measure để phân tích; không JOIN trực tiếp fact với fact.',
 'Dimension thời gian và kênh dùng chung. Date có hai vai trò trong bán hàng (đặt/hoàn tất), Month phục vụ quảng cáo; Channel chuẩn hóa kênh để so sánh doanh thu và chi phí ở cùng grain.',
-'Dimension sản phẩm có lịch sử SCD2 và cây danh mục cùng closure bridge. Giúp phân tích theo phiên bản sản phẩm, danh mục lá hoặc cả cây con mà vẫn giữ đúng ngữ cảnh lịch sử.',
+'Dimension sản phẩm có lịch sử SCD2 và cây danh mục cùng closure bridge. Giúp phân tích theo phiên bản sản phẩm, danh mục lá hoặc cả cây con. Cấu trúc/tên cây danh mục là SCD1 hiện tại, không lưu lịch sử thay đổi cây.',
 'Lưu người bán theo phiên bản SCD2 và bảng hạng gần nhất SCD3. Cho phép so sánh hạng/vùng lúc bán với hiện tại, đồng thời xem lần đổi hạng gần nhất. Hai bảng liên hệ logic bằng seller_id.',
 'Dimension khách hàng lưu lịch sử địa bàn; mini-dimension tách các tổ hợp hạng–chi tiêu–tần suất. Fact tham chiếu riêng hai dimension để phân tích khách theo ngữ cảnh giao dịch.',
-'Chiến dịch dùng chung giữa bán hàng và quảng cáo; voucher qua nhóm và bridge nhiều–nhiều. Trọng số phân bổ ngăn cộng lặp doanh thu/giảm giá khi một dòng hàng liên quan nhiều voucher.',
+'Chiến dịch dùng chung giữa bán hàng và quảng cáo; voucher qua nhóm và bridge nhiều–nhiều. Muốn tránh cộng lặp tiền khi JOIN bridge phải nhân doanh thu/giảm giá với weighting_factor; chỉ JOIN rồi SUM nguyên tiền vẫn gây lặp.',
 'Dimension danh mục nhỏ cho kho và phương thức thanh toán. Warehouse mô tả nơi giữ hàng cho fact tồn kho; Payment method mô tả cách thanh toán cho fact bán hàng.'
 ]
 
